@@ -1,0 +1,194 @@
+---
+title: Truth Tables
+prerequisites:
+  - math/foundations/logic/propositional-logic/propositions-and-connectives
+---
+
+## What is a Truth Table?
+
+A truth table is a **systematic way** to figure out when a statement is true or false.
+
+> It lists **every possible combination** of truth values, and shows what the whole statement evaluates to.
+
+---
+
+## Why Do We Need Them?
+
+With simple statements like $p \land q$, you can reason it out in your head.
+
+But what about something like this?
+
+$$\neg(p \land q) \lor r$$
+
+When is this true? When is it false?
+
+*A truth table answers this systematically - no guessing required.*
+
+---
+
+## How Many Rows?
+
+Each variable can be **true** or **false** (2 options).
+
+So with $n$ variables, you need $2^n$ rows to cover every case.
+
+| Variables | Rows needed |
+|-----------|-------------|
+| 1 (just $p$) | $2^1 = 2$ |
+| 2 ($p$ and $q$) | $2^2 = 4$ |
+| 3 ($p$, $q$, $r$) | $2^3 = 8$ |
+| 4 variables | $2^4 = 16$ |
+
+> **Pattern:** Every new variable *doubles* the number of rows.
+
+---
+
+## Building a Truth Table
+
+Let's work through an example step by step.
+
+**Statement:** $\neg p \lor q$
+
+*"NOT p, OR q"*
+
+---
+
+### Step 1: List All Combinations
+
+We have 2 variables, so we need $2^2 = 4$ rows.
+
+| $p$ | $q$ |
+|-----|-----|
+| T | T |
+| T | F |
+| F | T |
+| F | F |
+
+---
+
+### How to Fill the Columns
+
+There's a shortcut. Start from the **rightmost column** and work left.
+
+- **Rightmost column**: alternate every row (T, F, T, F...)
+- **Each column to the left**: double the block size
+
+That's it. The pattern is: **1, 2, 4, 8, 16...**
+
+::truth-table-pattern
+
+> Start with blocks of 1, then double each time you move left.
+
+---
+
+### Step 2: Evaluate Intermediate Steps
+
+Before we can compute $\neg p \lor q$, we need to know $\neg p$.
+
+| $p$ | $q$ | $\neg p$ |
+|-----|-----|----------|
+| T | T | F |
+| T | F | F |
+| F | T | T |
+| F | F | T |
+
+*Just flip each value of $p$.*
+
+---
+
+### Step 3: Evaluate the Final Expression
+
+Now compute $\neg p \lor q$.
+
+Remember: OR is true when **at least one** is true.
+
+| $p$ | $q$ | $\neg p$ | $\neg p \lor q$ |
+|-----|-----|----------|-----------------|
+| T | T | F | **T** |
+| T | F | F | **F** |
+| F | T | T | **T** |
+| F | F | T | **T** |
+
+---
+
+### Step 4: Read the Result
+
+Look at the final column. $\neg p \lor q$ is:
+
+- **True** in 3 cases (rows 1, 3, 4)
+- **False** in only 1 case (row 2)
+
+> **When does it fail?** Only when $p$ is true AND $q$ is false.
+
+---
+
+## A More Complex Example
+
+**Statement:** $(p \land q) \to r$
+
+*"If (p AND q), then r"*
+
+We have 3 variables, so we need $2^3 = 8$ rows.
+
+| $p$ | $q$ | $r$ | $p \land q$ | $(p \land q) \to r$ |
+|-----|-----|-----|-------------|---------------------|
+| T | T | T | T | **T** |
+| T | T | F | T | **F** |
+| T | F | T | F | **T** |
+| T | F | F | F | **T** |
+| F | T | T | F | **T** |
+| F | T | F | F | **T** |
+| F | F | T | F | **T** |
+| F | F | F | F | **T** |
+
+---
+
+### Reading This Table
+
+The statement $(p \land q) \to r$ is:
+
+- **True** in 7 out of 8 cases
+- **False** in only 1 case
+
+> **When does it fail?** Only when $p$ AND $q$ are both true, but $r$ is false.
+
+**In plain English:** *"If both conditions are met, then the result must follow."*
+
+---
+
+## The Process
+
+To build any truth table:
+
+1. **Count variables** $\to$ you need $2^n$ rows
+2. **List all combinations** of T/F for each variable
+3. **Work inside out** - evaluate parentheses first
+4. **Add columns** for each intermediate step
+5. **Final column** is your answer
+
+> **Key insight:** Truth tables are *mechanical*. Follow the steps, and you'll always get the right answer.
+
+---
+
+## Common Patterns to Recognize
+
+After building enough truth tables, you'll notice patterns:
+
+| Final column | What it means |
+|--------------|---------------|
+| All T's | **Tautology** - always true, no matter what |
+| All F's | **Contradiction** - always false, no matter what |
+| Mix of T's and F's | **Contingent** - depends on the inputs |
+
+---
+
+## Summary
+
+- Truth tables list **every possible case**
+- With $n$ variables, you need $2^n$ rows
+- Work **inside out** (parentheses first)
+- The final column tells you when the statement is **true** or **false**
+
+> Truth tables are the **brute force** method of logic - slow but always works.
+
+*Next: We'll use truth tables to discover when two different statements mean the same thing.*
