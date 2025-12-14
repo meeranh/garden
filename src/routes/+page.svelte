@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { site } from '$lib/config/site';
 	import { tree } from '$lib/content/tree';
+	import GardenIcon from '$lib/components/GardenIcon.svelte';
 </script>
 
 <svelte:head>
@@ -10,6 +11,9 @@
 
 <main class="landing">
 	<header>
+		<div class="icon">
+			<GardenIcon size={128} />
+		</div>
 		<h1>{site.name}</h1>
 		<p class="description">{site.description}</p>
 	</header>
@@ -36,6 +40,10 @@
 	header {
 		text-align: center;
 		margin-bottom: 3rem;
+	}
+
+	.icon {
+		margin-bottom: 1.5rem;
 	}
 
 	h1 {
