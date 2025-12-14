@@ -1,0 +1,254 @@
+---
+title: Propositions and Logical Connectives
+---
+
+## Why Logic?
+
+Every time you make a decision, you use logic:
+
+> "If it's raining, I'll take an umbrella."
+
+> "I can pay with cash *or* card."
+
+> "The form is valid only if *all* fields are filled."
+
+Logic gives us a **precise way to think** about these statements. Instead of relying on intuition, we can:
+
+1. Analyze statements systematically
+2. Know for certain whether our reasoning is correct
+3. Build complex arguments from simple pieces
+
+*This is the foundation of mathematics, programming, and clear thinking.*
+
+---
+
+## What is a Proposition?
+
+> A **proposition** is a statement that is either **true** or **false**.
+
+That's it. Not "maybe true" or "sometimes false" - it must be *definitively* one or the other.
+
+**These ARE propositions:**
+
+| Statement | True or False? |
+|-----------|----------------|
+| "The sky is blue" | True |
+| "2 + 2 = 5" | False |
+| "It rained yesterday" | *One or the other* (you may not know, but it definitely is one) |
+
+**These are NOT propositions:**
+
+| Statement | Why not? |
+|-----------|----------|
+| "What time is it?" | It's a *question*, not a statement |
+| "Close the door" | It's a *command* |
+| "x is greater than 5" | *Depends* on what x is |
+
+> **Key insight:** A proposition must have a definite truth value, *even if you don't know what it is*.
+
+**Example:** "There is life on other planets"
+
+- Is this a proposition? **Yes.**
+- Do we know if it's true? **No.**
+- But is it *definitely* true or false? **Yes.**
+
+---
+
+## Why Use Letters?
+
+Writing full sentences gets tedious. So we use letters like $p$, $q$, $r$ to represent propositions.
+
+**Instead of writing:**
+
+> "If it is raining then I will take an umbrella"
+
+**We write:**
+
+- Let $p$ = "It is raining"
+- Let $q$ = "I will take an umbrella"
+- Then: $p \to q$
+
+*This lets us focus on the **structure** of reasoning, not the specific words.*
+
+---
+
+## Logical Connectives
+
+Now we can **combine** propositions to make more complex statements.
+
+The tools for combining them are called **connectives**.
+
+There are **five** basic connectives:
+
+1. **NOT** - negation
+2. **AND** - conjunction
+3. **OR** - disjunction
+4. **IF-THEN** - implication
+5. **IF AND ONLY IF** - biconditional
+
+Let's go through each one.
+
+---
+
+### NOT (Negation) - $\neg$
+
+> The simplest connective. It **flips** the truth value.
+
+- If something is *true*, NOT makes it *false*
+- If something is *false*, NOT makes it *true*
+
+**Example:**
+
+- $p$ = "The door is open"
+- $\neg p$ = "The door is **not** open"
+
+| $p$ | $\neg p$ |
+|-----|----------|
+| true | false |
+| false | true |
+
+*That's all there is to NOT.*
+
+---
+
+### AND (Conjunction) - $\land$
+
+> The result is true only when **both** are true.
+
+Think of it like a checklist - *every item must be checked*.
+
+**Example:** Nuclear launch system
+
+A nuclear launch requires **two officers** to turn their keys *simultaneously*.
+
+- $p$ = "Officer A turns key"
+- $q$ = "Officer B turns key"
+- Launch happens when: $p \land q$
+
+| $p$ | $q$ | $p \land q$ |
+|-----|-----|-------------|
+| true | true | **true** |
+| true | false | false |
+| false | true | false |
+| false | false | false |
+
+> **Only the first row is true.** One officer alone cannot launch. *Both must act together.*
+
+**Real-world AND:**
+
+- Multi-factor authentication (*password AND phone code*)
+- Safety systems (*two-person rule*)
+- Form validation (*all required fields filled*)
+
+---
+
+### OR (Disjunction) - $\lor$
+
+> The result is true when **at least one** is true.
+
+Think of it as having options - *any one will do*.
+
+**Example:** Payment at a store
+
+- $p$ = "You have cash"
+- $q$ = "You have card"
+- Payment accepted when: $p \lor q$
+
+| $p$ | $q$ | $p \lor q$ |
+|-----|-----|------------|
+| true | true | true |
+| true | false | true |
+| false | true | true |
+| false | false | **false** |
+
+> **Only the last row is false.** No cash AND no card = can't pay.
+
+**Note:** This is *inclusive* or - having **both** cash and card still counts as true.
+
+---
+
+### IF-THEN (Implication) - $\to$
+
+> This is the **trickiest** one. It connects a *condition* to a *result*.
+
+$p \to q$ means: *"If $p$ happens, then $q$ must happen."*
+
+**How to evaluate it:**
+
+> **"Did $p$ happen?"**
+>
+> - **Yes** $\to$ "Did $q$ happen?" $\to$ *that's your answer*
+> - **No** $\to$ *you're good* (automatically true)
+
+| $p$ | $q$ | $p \to q$ |
+|-----|-----|-----------|
+| true | true | true |
+| true | false | **false** |
+| false | true | true |
+| false | false | true |
+
+> **Key insight:** IF-THEN is only false when $p$ happens but $q$ doesn't.
+
+When $p$ doesn't happen, the rule was never triggered, so it's *automatically true*.
+
+**Example:** Gender form validation
+
+A form asks for gender: *Male, Female, Other*
+
+The rule: **"If user selects 'Other', they must fill the specify box."**
+
+- $p$ = User selected 'Other'
+- $q$ = User filled the specify box
+
+| Selected 'Other'? | Filled box? | Form valid? |
+|-------------------|-------------|-------------|
+| Yes | Yes | **Yes** |
+| Yes | No | **No** |
+| No | Yes | Yes |
+| No | No | Yes |
+
+> The form is **only invalid** when someone picks "Other" but *doesn't specify*.
+
+::if-then
+
+---
+
+### IF AND ONLY IF (Biconditional) - $\leftrightarrow$
+
+> Both sides must **match**. Either *both true*, or *both false*.
+
+**How to evaluate it:**
+
+> **"Are $p$ and $q$ the same?"**
+>
+> - **Same** $\to$ true
+> - **Different** $\to$ false
+
+| $p$ | $q$ | $p \leftrightarrow q$ |
+|-----|-----|----------------------|
+| true | true | **true** |
+| true | false | false |
+| false | true | false |
+| false | false | **true** |
+
+**Example:** Light switch
+
+> "The light is on **if and only if** the switch is up."
+
+- Switch up, light on = **good**
+- Switch down, light off = **good**
+- They don't match = *something is broken*
+
+---
+
+## Summary
+
+| Connective | Symbol | Meaning | True when... |
+|------------|--------|---------|--------------|
+| NOT | $\neg p$ | "not p" | $p$ is false |
+| AND | $p \land q$ | "p and q" | **both** are true |
+| OR | $p \lor q$ | "p or q" | **at least one** is true |
+| IF-THEN | $p \to q$ | "if p then q" | $p$ is false, or both are true |
+| IFF | $p \leftrightarrow q$ | "p iff q" | both are **same** |
+
+> These five connectives are the **building blocks** of all logical reasoning.
