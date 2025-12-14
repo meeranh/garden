@@ -1,50 +1,69 @@
 <script lang="ts">
-	import { site } from '$lib/config/site';
+	import GardenIcon from './GardenIcon.svelte';
 
 	type Crumb = { path: string; title: string };
 	let { crumbs }: { crumbs: Crumb[] } = $props();
+
+	function truncate(text: string, max: number = 18): string {
+		return text.length > max ? text.slice(0, max) + '...' : text;
+	}
 </script>
 
-<nav class="breadcrumbs">
-	<a href="/" class="crumb">{site.name}</a>
+<nav class="bar">
+	<div class="inner">
+		<a href="/" class="item home">
+			<GardenIcon size={32} />
+		</a>
 
-	{#each crumbs as crumb, i}
-		<span class="separator">{site.separator}</span>
-
-		{#if i === crumbs.length - 1}
-			<span class="crumb current">{crumb.title}</span>
-		{:else}
-			<a href="/{crumb.path}" class="crumb">{crumb.title}</a>
-		{/if}
-	{/each}
+		{#each crumbs as crumb, i}
+			<span class="sep">/</span>
+			{#if i === crumbs.length - 1}
+				<span class="item current">{truncate(crumb.title)}</span>
+			{:else}
+				<a href="/{crumb.path}" class="item">{truncate(crumb.title)}</a>
+			{/if}
+		{/each}
+	</div>
 </nav>
 
 <style>
-	.breadcrumbs {
+	.bar {
+		background: #0d0e0f;
+		padding: 0.4rem 1rem;
+		font-size: 0.8rem;
+		border-bottom: 1px solid #282828;
+	}
+
+	.inner {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		gap: 0.5rem;
-		font-size: 0.875rem;
-		margin-bottom: 2rem;
-		flex-wrap: wrap;
 	}
 
-	.crumb {
-		color: var(--color-fg-muted);
-		transition: color var(--transition-fast);
+	.sep {
+		color: #504945;
 	}
 
-	.crumb:hover {
-		color: var(--color-accent);
+	.item {
+		color: #83a598;
+		transition: color 0.1s ease;
 	}
 
-	.crumb.current {
-		color: var(--color-fg);
+	.item:hover {
+		color: #8ec07c;
 	}
 
-	.separator {
-		color: var(--color-fg-muted);
-		opacity: 0.5;
-		user-select: none;
+	.item.home {
+		display: flex;
+		align-items: center;
+	}
+
+	.item.home:hover {
+		color: #fb4934;
+	}
+
+	.item.current {
+		color: #fabd2f;
 	}
 </style>

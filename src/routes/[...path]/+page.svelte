@@ -13,9 +13,9 @@
 	<title>{data.node.title} - {site.name}</title>
 </svelte:head>
 
-<main class="page">
-	<Breadcrumbs crumbs={data.breadcrumbs} />
+<Breadcrumbs crumbs={data.breadcrumbs} />
 
+<main class="page">
 	<header>
 		<h1>{data.node.title}</h1>
 		<div class="divider"></div>
@@ -42,10 +42,10 @@
 
 <style>
 	.page {
-		min-height: 100vh;
+		min-height: calc(100vh - 52px);
 		max-width: var(--max-width);
 		margin: 0 auto;
-		padding: 3rem 1.5rem;
+		padding: 2rem 1.5rem;
 	}
 
 	header {
@@ -105,14 +105,102 @@
 		margin: 1rem 0;
 	}
 
-	.content :global(ul),
-	.content :global(ol) {
+	.content :global(ul) {
 		margin-bottom: 1rem;
 		padding-left: 1.5rem;
 		color: var(--color-fg-muted);
+		list-style: none;
+	}
+
+	.content :global(ul > li) {
+		position: relative;
+		padding-left: 1rem;
+	}
+
+	.content :global(ul > li)::before {
+		content: '•';
+		position: absolute;
+		left: -0.5rem;
+		color: var(--color-accent);
+		font-weight: bold;
+	}
+
+	.content :global(ol) {
+		margin-bottom: 1rem;
+		padding-left: 0;
+		color: var(--color-fg-muted);
+		list-style: none;
+		counter-reset: item;
+	}
+
+	.content :global(ol > li) {
+		position: relative;
+		padding-left: 2rem;
+		counter-increment: item;
+	}
+
+	.content :global(ol > li)::before {
+		content: counter(item) '.';
+		position: absolute;
+		left: 0;
+		color: var(--color-math);
+		font-weight: bold;
 	}
 
 	.content :global(li) {
 		margin-bottom: 0.5rem;
+	}
+
+	.content :global(blockquote) {
+		border-left: 3px solid var(--color-accent);
+		background: var(--color-bg-card);
+		margin: 1rem 0;
+		padding: 0.75rem 1rem;
+	}
+
+	.content :global(blockquote p) {
+		margin-bottom: 0.5rem;
+	}
+
+	.content :global(blockquote p:last-child) {
+		margin-bottom: 0;
+	}
+
+	.content :global(em) {
+		color: #d3869b;
+		font-style: italic;
+	}
+
+	.content :global(hr) {
+		border: none;
+		height: 1px;
+		background: var(--color-border);
+		margin: 2rem 0;
+	}
+
+	.content :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1rem 0;
+	}
+
+	.content :global(th),
+	.content :global(td) {
+		border: 1px solid #665c54;
+		padding: 0.5rem 0.75rem;
+		text-align: left;
+	}
+
+	.content :global(th) {
+		background: var(--color-bg-card);
+		color: var(--color-fg);
+	}
+
+	.content :global(td) {
+		color: var(--color-fg-muted);
+	}
+
+	.content :global(tr:hover) {
+		background: var(--color-bg-card);
 	}
 </style>

@@ -5,8 +5,8 @@
 @theme {
 	--color-bg: #1d2021;
 	--color-bg-card: #282828;
-	--color-fg: #ebdbb2;
-	--color-fg-muted: #a89984;
+	--color-fg: #fbf1c7;
+	--color-fg-muted: #d5c4a1;
 	--color-border: #3c3836;
 	--color-accent: #8ec07c;
 	--color-math: #fabd2f;
@@ -21,7 +21,7 @@ html {
 	background: var(--color-bg);
 	color: var(--color-fg);
 	font-family: var(--font-mono);
-	font-size: 20px;
+	font-size: 18px;
 }
 
 body {
