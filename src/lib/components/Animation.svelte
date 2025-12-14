@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import AnimationWrapper, { type AnimationController } from './AnimationWrapper.svelte';
 
 	let { name, dir, ...props }: { name: string; dir: string; [key: string]: unknown } = $props();
 
@@ -31,7 +32,11 @@
 {#if error}
 	<div class="animation-error">{error}</div>
 {:else if Component}
-	<Component {...props} />
+	<AnimationWrapper>
+		{#snippet children({ register })}
+			<Component {...props} {register} />
+		{/snippet}
+	</AnimationWrapper>
 {:else}
 	<div class="animation-loading"></div>
 {/if}
