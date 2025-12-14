@@ -1,0 +1,211 @@
+---
+title: Logical Equivalences
+prerequisites:
+  - math/foundations/logic/propositional-logic/truth-tables
+---
+
+## What is Logical Equivalence?
+
+Two statements are **logically equivalent** if they're just *different ways of saying the same thing*.
+
+> They look different, but they mean the same thing.
+
+---
+
+## A Simple Example
+
+**Statement A:** "I'm not NOT hungry"
+
+**Statement B:** "I'm hungry"
+
+These look different, but think about it:
+
+- When A is true, B is *also* true
+- When A is false, B is *also* false
+
+They **always match**. So they're equivalent.
+
+> *Same meaning, different words.*
+
+---
+
+## How to Check Equivalence
+
+Build a truth table for both statements. If the final columns are **identical**, they're equivalent.
+
+---
+
+**Example:** Is $\neg(p \land q)$ the same as $\neg p \lor \neg q$?
+
+- $p$ = "it's cheap"
+- $q$ = "it's good"
+
+Is *"not both cheap and good"* the same as *"not cheap, or not good"*?
+
+| $p$ | $q$ | $p \land q$ | $\neg(p \land q)$ | $\neg p$ | $\neg q$ | $\neg p \lor \neg q$ |
+|-----|-----|-------------|-------------------|----------|----------|----------------------|
+| T | T | T | **F** | F | F | **F** |
+| T | F | F | **T** | F | T | **T** |
+| F | T | F | **T** | T | F | **T** |
+| F | F | F | **T** | T | T | **T** |
+
+The columns match. **They're equivalent.**
+
+> If every row matches, they mean the same thing.
+
+---
+
+## Why Does This Matter?
+
+If two statements are equivalent, you can **swap one for the other**.
+
+*Sometimes one form is easier to work with or understand.*
+
+---
+
+## The Important Equivalences
+
+These are **shortcuts**. Once you know them, you don't need to build a truth table every time.
+
+---
+
+### 1. Double Negation
+
+$$\neg(\neg p) \equiv p$$
+
+- $p$ = "I'm hungry"
+
+*"I'm not NOT hungry"* = *"I'm hungry"*
+
+> **Two negatives cancel out.**
+
+---
+
+### 2. De Morgan's Laws
+
+There are two of them. They tell you how **NOT** interacts with **AND/OR**.
+
+---
+
+**De Morgan's Law (AND version):**
+
+$$\neg(p \land q) \equiv \neg p \lor \neg q$$
+
+- $p$ = "I'm in New York"
+- $q$ = "I'm in LA"
+
+*"I'm not in New York and LA"* = *"I'm not in New York, or I'm not in LA"*
+
+> **When you push NOT inside, AND becomes OR.**
+
+---
+
+**De Morgan's Law (OR version):**
+
+$$\neg(p \lor q) \equiv \neg p \land \neg q$$
+
+- $p$ = "I eat meat"
+- $q$ = "I eat fish"
+
+*"I don't eat meat or fish"* = *"I don't eat meat and I don't eat fish"*
+
+> **When you push NOT inside, OR becomes AND.**
+
+---
+
+### 3. Implication
+
+$$p \to q \equiv \neg p \lor q$$
+
+- $p$ = "he's not at home"
+- $q$ = "he's at work"
+
+*"If he's not at home, he's at work"* = *"He's either at home or at work"*
+
+> **Both sentences mean the same thing** - he's in one of those two places.
+
+---
+
+### 4. Contrapositive
+
+$$p \to q \equiv \neg q \to \neg p$$
+
+- $p$ = "I study"
+- $q$ = "I pass"
+
+*"If I study, I pass"* = *"If I didn't pass, I didn't study"*
+
+> **Flip both sides and negate both.** The meaning stays the same.
+
+---
+
+### 5. Commutative Laws
+
+$$p \land q \equiv q \land p$$
+$$p \lor q \equiv q \lor p$$
+
+- $p$ = "I have a dog"
+- $q$ = "I have a cat"
+
+*"I have a dog and a cat"* = *"I have a cat and a dog"*
+
+> **Order doesn't matter** for AND and OR.
+
+---
+
+### 6. Associative Laws
+
+$$(p \land q) \land r \equiv p \land (q \land r)$$
+$$(p \lor q) \lor r \equiv p \lor (q \lor r)$$
+
+- $p$ = "I'm tired"
+- $q$ = "I'm hungry"
+- $r$ = "I'm cold"
+
+*"(I'm tired and hungry) and cold"* = *"I'm tired and (hungry and cold)"*
+
+> **Grouping doesn't matter** for AND and OR.
+
+---
+
+### 7. Distributive Law
+
+$$p \land (q \lor r) \equiv (p \land q) \lor (p \land r)$$
+
+- $p$ = "coffee"
+- $q$ = "cream"
+- $r$ = "sugar"
+
+*"Coffee with cream or sugar"* = *"(Coffee with cream) or (coffee with sugar)"*
+
+> **Either way, you're getting coffee** - just picking your add-on.
+
+---
+
+## Summary
+
+| Law | Equation | What it does |
+|-----|----------|--------------|
+| **Double Negation** | $\neg(\neg p) \equiv p$ | NOTs cancel |
+| **De Morgan's** | $\neg(p \land q) \equiv \neg p \lor \neg q$ | NOT flips AND/OR |
+| **Implication** | $p \to q \equiv \neg p \lor q$ | "if-then" → "or" |
+| **Contrapositive** | $p \to q \equiv \neg q \to \neg p$ | flip + negate |
+| **Commutative** | $p \land q \equiv q \land p$ | order irrelevant |
+| **Associative** | $(p \land q) \land r \equiv p \land (q \land r)$ | grouping irrelevant |
+| **Distributive** | $p \land (q \lor r) \equiv (p \land q) \lor (p \land r)$ | expand AND over OR |
+
+---
+
+## When to Use These
+
+You **don't need to memorize** all of these right now.
+
+If you're ever unsure whether two statements are equivalent, just **build a truth table** and check if the columns match.
+
+*These laws are just shortcuts for when you get comfortable.*
+
+> **Key insight:** Equivalent statements are *interchangeable*. Pick whichever form is easier to work with.
+
+---
+
+*Next: We'll learn how to construct valid logical arguments.*
