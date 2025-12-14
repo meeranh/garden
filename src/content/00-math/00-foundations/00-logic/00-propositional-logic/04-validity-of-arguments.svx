@@ -1,0 +1,187 @@
+---
+title: Validity of Arguments
+prerequisites:
+  - math/foundations/logic/propositional-logic/logical-equivalences
+---
+
+## What is an Argument?
+
+An argument is a set of **premises** (things you assume) that lead to a **conclusion** (what you claim follows).
+
+> Premises + Conclusion = Argument
+
+---
+
+## A Simple Example
+
+- $p$ = "it rains"
+- $q$ = "the ground gets wet"
+
+- Premise 1: $p \to q$ — "If it rains, the ground gets wet"
+- Premise 2: $p$ — "It rained"
+- Conclusion: $q$ — "The ground is wet"
+
+This *feels* right. But how do we know for sure?
+
+---
+
+## What Makes an Argument Valid?
+
+An argument is **valid** if: whenever ALL premises are true, the conclusion is ALSO true.
+
+> It's about the **structure**, not whether the premises are actually true in real life.
+
+---
+
+## How to Check Validity
+
+Use a truth table:
+
+1. Find all rows where **every premise is true**
+2. Check if the conclusion is **also true** in those rows
+3. If yes in ALL such rows → **valid**
+
+> If there's even ONE row where all premises are true but the conclusion is false → **invalid**
+
+---
+
+## Common Valid Forms
+
+These are patterns that **always work**. Once you recognize them, you don't need a truth table.
+
+---
+
+### 1. Modus Ponens
+
+$$p \to q, \; p \; \therefore q$$
+
+> **If p then q. p happened. So q happened.**
+
+- $p$ = "it rains"
+- $q$ = "I bring an umbrella"
+
+*"If it rains, I bring an umbrella. It rained. So I brought an umbrella."*
+
+---
+
+### 2. Modus Tollens
+
+$$p \to q, \; \neg q \; \therefore \neg p$$
+
+> **If p then q. q didn't happen. So p didn't happen.**
+
+- $p$ = "it rains"
+- $q$ = "I bring an umbrella"
+
+*"If it rains, I bring an umbrella. I didn't bring an umbrella. So it didn't rain."*
+
+---
+
+### 3. Hypothetical Syllogism
+
+$$p \to q, \; q \to r \; \therefore p \to r$$
+
+> **If p leads to q, and q leads to r, then p leads to r.**
+
+- $p$ = "I oversleep"
+- $q$ = "I miss the bus"
+- $r$ = "I'm late to work"
+
+*"If I oversleep, I miss the bus. If I miss the bus, I'm late to work. So if I oversleep, I'm late to work."*
+
+---
+
+### 4. Disjunctive Syllogism
+
+$$p \lor q, \; \neg p \; \therefore q$$
+
+> **Either p or q. p is false. So q must be true.**
+
+- $p$ = "he's at home"
+- $q$ = "he's at work"
+
+*"He's either at home or at work. He's not at home. So he's at work."*
+
+---
+
+## Common Fallacies
+
+These **look valid but aren't**. Don't fall for them.
+
+---
+
+### 1. Affirming the Consequent
+
+$$p \to q, \; q \; \therefore p$$ ✗ INVALID
+
+> **If p then q. q happened. So p happened?** No — q could have happened for other reasons.
+
+- $p$ = "it rains"
+- $q$ = "the ground is wet"
+
+*"If it rains, the ground is wet. The ground is wet. So it rained."* ← WRONG
+
+The ground could be wet from a sprinkler.
+
+---
+
+### 2. Denying the Antecedent
+
+$$p \to q, \; \neg p \; \therefore \neg q$$ ✗ INVALID
+
+> **If p then q. p didn't happen. So q didn't happen?** No — q could still happen for other reasons.
+
+- $p$ = "it rains"
+- $q$ = "the ground is wet"
+
+*"If it rains, the ground is wet. It didn't rain. So the ground isn't wet."* ← WRONG
+
+Sprinkler again.
+
+---
+
+## Valid vs Sound
+
+**Valid** = the logic is correct. IF the premises were true, the conclusion would HAVE to follow.
+
+**Sound** = valid + the premises are actually true in real life.
+
+---
+
+**Example of valid but NOT sound:**
+
+- $p$ = "you eat an apple a day"
+- $q$ = "you never get sick"
+
+*"If you eat an apple a day, you never get sick. You eat an apple a day. So you never get sick."*
+
+The **logic is perfect** — it's modus ponens. If the first statement were true, the conclusion would follow.
+
+But the first statement is **false** in real life. Eating apples doesn't make you immune to sickness.
+
+So: **Valid structure, but not sound** because we started with a lie.
+
+---
+
+**Why does this matter?**
+
+You can have flawless logic and still be wrong — if you start with bad premises.
+
+> **Valid** = your reasoning is correct. **Sound** = your reasoning is correct AND your starting points are true.
+
+---
+
+## Summary
+
+| Form | Pattern | Valid? |
+|------|---------|--------|
+| **Modus Ponens** | $p \to q, \; p \; \therefore q$ | ✓ |
+| **Modus Tollens** | $p \to q, \; \neg q \; \therefore \neg p$ | ✓ |
+| **Hypothetical Syllogism** | $p \to q, \; q \to r \; \therefore p \to r$ | ✓ |
+| **Disjunctive Syllogism** | $p \lor q, \; \neg p \; \therefore q$ | ✓ |
+| **Affirming the Consequent** | $p \to q, \; q \; \therefore p$ | ✗ |
+| **Denying the Antecedent** | $p \to q, \; \neg p \; \therefore \neg q$ | ✗ |
+
+---
+
+*Next: We'll move beyond true/false and learn about predicates and quantifiers.*
