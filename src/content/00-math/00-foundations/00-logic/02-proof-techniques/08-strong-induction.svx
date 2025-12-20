@@ -1,0 +1,223 @@
+---
+title: Strong Induction
+prerequisites:
+  - math/foundations/logic/proof-techniques/mathematical-induction
+---
+
+## What is Strong Induction?
+
+In regular induction, to prove step 5, you can only use step 4.
+
+In strong induction, to prove step 5, you can use **all previous steps**: 1, 2, 3, and 4.
+
+::strong-vs-regular
+
+---
+
+## When Do You Need It?
+
+Use strong induction when proving something about $n$ requires information about **values other than $n-1$**.
+
+---
+
+## Example 1: Breaking a Chocolate Bar
+
+You have a chocolate bar made of **$n$ squares**.
+
+You want to break it into individual squares.
+
+Each break splits one piece into two pieces.
+
+**Claim:** You need exactly **$n - 1$ breaks** to separate all $n$ squares.
+
+---
+
+**Check by hand:**
+
+| Squares | Breaks needed |
+|---------|---------------|
+| 1 | 0 |
+| 2 | 1 |
+| 3 | 2 |
+| 4 | 3 |
+| 5 | 4 |
+
+::chocolate-bar
+
+---
+
+**The Proof:**
+
+**Base case ($n = 1$):**
+
+- One square — already separated
+- Zero breaks needed
+- Formula: $1 - 1 = 0$
+
+> First domino falls.
+
+---
+
+**Inductive step:**
+
+Assume the formula works for **all bars smaller than $n$**.
+
+Consider a bar of $n$ squares:
+
+1. Make the first break
+2. This gives two pieces — call their sizes $a$ and $b$
+3. We know: $a + b = n$, and both $a$ and $b$ are smaller than $n$
+
+---
+
+By our assumption:
+
+- The piece with $a$ squares needs $a - 1$ breaks
+- The piece with $b$ squares needs $b - 1$ breaks
+
+> $1$ break to split the bar into two pieces.
+>
+> $(a - 1)$ breaks for the left piece.
+>
+> $(b - 1)$ breaks for the right piece.
+
+**Total breaks:**
+
+$$1 + (a - 1) + (b - 1)$$
+
+$$= 1 + a - 1 + b - 1$$
+
+$$= a + b - 1$$
+
+$$= n - 1$$
+
+Exactly what the formula predicts.
+
+> If domino $k$ falls, domino $k+1$ falls.
+
+---
+
+## Example 2: Prime Factorization
+
+Every integer can be broken down into prime numbers.
+
+| Number | Prime factorization |
+|--------|---------------------|
+| 6 | 2 × 3 |
+| 12 | 2 × 2 × 3 |
+| 30 | 2 × 3 × 5 |
+| 7 | 7 (already prime) |
+
+---
+
+**Claim:** Every integer $n \geq 2$ can be written as a product of primes.
+
+---
+
+**The Proof:**
+
+**Base case ($n = 2$):**
+
+- $2$ is prime
+- A prime by itself counts as a "product of primes"
+
+> The claim holds for $n = 2$.
+
+---
+
+**Inductive step:**
+
+Assume the claim is true for all integers from $2$ to $n-1$.
+
+Now we prove it for $n$.
+
+**Case 1:** $n$ is prime.
+
+Then $n$ is already a product of primes (itself). Done.
+
+**Case 2:** $n$ is not prime.
+
+Then $n$ can be written as:
+
+$$n = a \times b$$
+
+where $2 \leq a < n$ and $2 \leq b < n$.
+
+By our assumption:
+
+$$a = p_1 \times p_2 \times \ldots \times p_j \quad \text{(product of primes)}$$
+
+$$b = q_1 \times q_2 \times \ldots \times q_k \quad \text{(product of primes)}$$
+
+Therefore:
+
+$$n = a \times b = p_1 \times p_2 \times \ldots \times p_j \times q_1 \times q_2 \times \ldots \times q_k$$
+
+This is a product of primes.
+
+> If it works for all smaller numbers, it works for $n$.
+
+---
+
+## Example 3: Climbing Stairs
+
+You want to climb a staircase with **$n$ steps**.
+
+Each move, you can go up **1 step** or **2 steps**.
+
+**Question:** How many different ways can you reach the top?
+
+::staircase
+
+---
+
+**The formula:**
+
+$$W_n = W_{n-1} + W_{n-2}$$
+
+| Step | Ways | Calculation |
+|------|------|-------------|
+| 1 | 1 | base case |
+| 2 | 2 | base case |
+| 3 | 3 | $W_2 + W_1 = 2 + 1$ |
+| 4 | 5 | $W_3 + W_2 = 3 + 2$ |
+| 5 | 8 | $W_4 + W_3 = 5 + 3$ |
+
+---
+
+## Why Do These Need Strong Induction?
+
+In all three examples, proving something about $n$ required **more than just $n-1$**.
+
+---
+
+**Chocolate bar:**
+
+- Breaking a 5-square bar might give pieces of size $2$ and $3$
+- We needed the formula for **both** $2$ **and** $3$ — not just $4$
+
+---
+
+**Prime factorization:**
+
+- Factoring $12$ gives $3 \times 4$
+- We needed the theorem for **both** $3$ **and** $4$ — not just $11$
+
+---
+
+**Climbing stairs:**
+
+- Finding $W_5$ requires $W_4$ **and** $W_3$
+- Regular induction only gives $W_4$ — we wouldn't know $W_3$
+
+---
+
+**The pattern:**
+
+| Regular induction | Strong induction |
+|-------------------|------------------|
+| Only gives you $n-1$ | Gives you **all** values $1, 2, 3, \ldots, n-1$ |
+
+> **When you need more than just the previous value, use strong induction.**
+
+---
