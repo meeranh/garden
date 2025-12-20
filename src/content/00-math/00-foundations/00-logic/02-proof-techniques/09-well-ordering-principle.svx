@@ -1,0 +1,189 @@
+---
+title: Well-Ordering Principle
+prerequisites:
+  - math/foundations/logic/proof-techniques/strong-induction
+---
+
+## What is the Well-Ordering Principle?
+
+Every non-empty set of positive integers has a **smallest element**.
+
+---
+
+**Examples:**
+
+| Set | Smallest element |
+|-----|------------------|
+| $\{3, 7, 15, 2\}$ | $2$ |
+| All even numbers: $\{2, 4, 6, 8, \ldots\}$ | $2$ |
+| All primes: $\{2, 3, 5, 7, 11, \ldots\}$ | $2$ |
+| All numbers greater than $100$ | $101$ |
+
+No matter what collection of positive integers you pick, there's always a smallest one.
+
+---
+
+## Why is This Useful?
+
+It gives us a proof technique: **proof by minimal counterexample**.
+
+Instead of proving something is true directly, we:
+
+1. Assume it's **false** for some numbers
+2. By well-ordering, there's a **smallest** number where it fails
+3. Show this leads to a **contradiction**
+4. Conclude it must be true for all numbers
+
+> **Assume failure exists. Find the smallest failure. Show it's impossible.**
+
+---
+
+## Example 1: A Simple Example
+
+This example is obvious, but it shows how the technique works.
+
+**Claim:** Every positive integer is either $1$, or greater than $1$.
+
+---
+
+**Proof:**
+
+Suppose some positive integers are NOT "either $1$ or greater than $1$."
+
+By well-ordering, there's a smallest such number. Call it $n$.
+
+But wait:
+
+- If $n = 1$, then $n$ IS $1$. So it satisfies the claim.
+- If $n > 1$, then $n$ IS greater than $1$. So it satisfies the claim.
+
+There's no other option for a positive integer. Contradiction.
+
+So every positive integer is either $1$ or greater than $1$.
+
+---
+
+## Example 2: $\sqrt{2}$ is Irrational
+
+This is a famous proof. We'll use well-ordering to show $\sqrt{2}$ cannot be written as a fraction.
+
+**Claim:** There are no positive integers $a$ and $b$ such that $\frac{a}{b} = \sqrt{2}$.
+
+---
+
+**What does this mean?**
+
+If $\sqrt{2} = \frac{a}{b}$, then squaring both sides:
+
+$$2 = \frac{a^2}{b^2}$$
+
+$$a^2 = 2b^2$$
+
+So we're really proving: there are no positive integers where $a^2 = 2b^2$.
+
+---
+
+**Proof:**
+
+Suppose there ARE positive integers where $a^2 = 2b^2$.
+
+Consider the set of all such $a$ values. This is a non-empty set of positive integers.
+
+By well-ordering, there's a **smallest** such $a$. Call it $a_0$, with corresponding $b_0$.
+
+So: $a_0^2 = 2b_0^2$, and $a_0$ is the smallest $a$ that works.
+
+---
+
+**Now we find a contradiction.**
+
+From $a_0^2 = 2b_0^2$, we know $a_0^2$ is even.
+
+If $a_0^2$ is even, then $a_0$ is even. (We proved this in contrapositive.)
+
+So $a_0 = 2k$ for some integer $k$.
+
+---
+
+**Substitute back:**
+
+$$(2k)^2 = 2b_0^2$$
+
+$$4k^2 = 2b_0^2$$
+
+$$2k^2 = b_0^2$$
+
+So $b_0^2 = 2k^2$.
+
+This means $b_0^2$ is even, so $b_0$ is even.
+
+So $b_0 = 2m$ for some integer $m$.
+
+---
+
+**Now we have:**
+
+$$b_0^2 = 2k^2$$
+
+$$(2m)^2 = 2k^2$$
+
+$$4m^2 = 2k^2$$
+
+$$2m^2 = k^2$$
+
+So $k^2 = 2m^2$.
+
+---
+
+**What did we just find?**
+
+We found a new pair: $k$ and $m$, where $k^2 = 2m^2$.
+
+But $k < a_0$ (since $a_0 = 2k$).
+
+So $k$ is a **smaller** positive integer that satisfies $a^2 = 2b^2$.
+
+But we said $a_0$ was the **smallest**. Contradiction.
+
+---
+
+**Conclusion:**
+
+There is no smallest $a$ where $a^2 = 2b^2$.
+
+By well-ordering, if such $a$ values existed, there would be a smallest.
+
+So no such $a$ exists at all.
+
+Therefore $\sqrt{2}$ is irrational.
+
+---
+
+## The Technique: Infinite Descent
+
+This proof technique is called **infinite descent**. Fermat invented it.
+
+The pattern:
+
+1. Assume a solution exists
+2. Find the smallest solution (well-ordering)
+3. Construct an even **smaller** solution
+4. Contradiction — so no solution exists
+
+> **If you can always go smaller, but there must be a smallest, then nothing exists.**
+
+---
+
+## Well-Ordering vs Induction
+
+They're actually equivalent — two ways of thinking about the same thing.
+
+| Induction | Well-Ordering |
+|-----------|---------------|
+| Build up from the base case | Assume failure, find smallest failure |
+| "If it works for $k$, it works for $k+1$" | "The smallest failure can't exist" |
+| Constructive: prove it works | Contradiction: prove failure is impossible |
+
+Both are valid. Sometimes one is easier to think about than the other.
+
+---
