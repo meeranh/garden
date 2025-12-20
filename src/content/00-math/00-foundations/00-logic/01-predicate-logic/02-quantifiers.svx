@@ -1,0 +1,127 @@
+---
+title: Quantifiers
+prerequisites:
+  - math/foundations/logic/predicate-logic/predicates
+---
+
+## Quantifiers
+
+Quantifiers let you make statements about groups.
+
+There are two:
+
+| Symbol | Name | Meaning |
+|--------|------|---------|
+| $\forall$ | Universal | "for all" / "every" |
+| $\exists$ | Existential | "there exists" / "some" |
+
+---
+
+### Universal Quantifier — $\forall$
+
+$$\forall x \; P(x)$$
+
+> "**Every** x satisfies P."
+
+---
+
+**Example:**
+
+- P(x) = "x drinks water"
+- $\forall x \; P(x)$ = "Everyone drinks water"
+
+To check if this is true: look at **every** person.
+
+- Alice drinks water? Yes
+- Bob drinks water? Yes
+- Carol drinks water? Yes
+
+All yes? Then it's **true**.
+
+> **One "no" breaks it.** Universal claims need everyone to pass.
+
+---
+
+### Existential Quantifier — $\exists$
+
+$$\exists x \; P(x)$$
+
+> "**At least one** x satisfies P."
+
+---
+
+**Example:**
+
+- P(x) = "x likes coffee"
+- $\exists x \; P(x)$ = "Someone likes coffee"
+
+To check if this is true: find **one** person.
+
+- Alice likes coffee? Yes
+
+Found one? That's **enough**. It's **true**.
+
+> **One "yes" is enough.** Existential claims just need one.
+
+---
+
+## Order Matters
+
+Here's where it gets interesting.
+
+> $x$ = a person, $y$ = a drink, $L(x, y)$ = "x likes y"
+
+What's the difference between these?
+
+- $\forall x \; \exists y \; L(x, y)$ — "For every person, there's a drink they like"
+- $\exists y \; \forall x \; L(x, y)$ — "There's a drink that everyone likes"
+
+::quantifier-order
+
+---
+
+**$\forall x \; \exists y$** — Each person gets their own.
+
+- Alice likes coffee
+- Bob likes tea
+- Carol likes juice
+
+The drink can be **different** for each person. Everyone just needs *something*.
+
+---
+
+**$\exists y \; \forall x$** — One thing works for everyone.
+
+- Water — Alice, Bob, and Carol all like it
+
+The drink must be the **same** for all. One drink satisfies everyone.
+
+---
+
+> **The order changes the meaning completely.**
+
+---
+
+## The Domain Matters
+
+The **domain** is the set of values x can be.
+
+The same statement can be true or false depending on the domain.
+
+---
+
+**Example:**
+
+- P(x) = "x is positive"
+- $\forall x \; P(x)$ = "Every x is positive"
+
+| Domain | True? |
+|--------|-------|
+| Positive integers (1, 2, 3...) | **True** |
+| All integers (...-1, 0, 1...) | **False** |
+
+> **Always ask: what's the domain?**
+
+---
+
+*Next: Negating quantifiers — how to negate statements with quantifiers.*

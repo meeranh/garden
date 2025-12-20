@@ -1,0 +1,76 @@
+---
+title: Predicates
+prerequisites:
+  - math/foundations/logic/propositional-logic/propositions-and-connectives
+---
+
+## The Limitation of Propositions
+
+Remember what a proposition is?
+
+> A statement that is either **true** or **false**.
+
+But what about this:
+
+> "x is greater than 5"
+
+Is this true or false? **It depends on x.**
+
+- If x = 7, it's true
+- If x = 3, it's false
+
+This isn't a proposition yet. It has a **hole** in it.
+
+---
+
+## What is a Predicate?
+
+A **predicate** is a statement with a hole. Fill the hole, get a proposition.
+
+---
+
+**Example:**
+
+- P(x) = "x is greater than 5"
+
+| Fill with... | You get... | True? |
+|--------------|------------|-------|
+| P(7) | "7 is greater than 5" | true |
+| P(3) | "3 is greater than 5" | false |
+
+> **Predicate = proposition with a blank.** Fill the blank, get true or false.
+
+---
+
+## Predicates with Multiple Blanks
+
+Predicates can have more than one hole.
+
+---
+
+**Example:**
+
+- L(x, y) = "x likes y"
+
+| Fill with... | You get... |
+|--------------|------------|
+| L(Alice, coffee) | "Alice likes coffee" |
+| L(Bob, tea) | "Bob likes tea" |
+| L(Carol, Mondays) | "Carol likes Mondays" |
+
+> **More blanks = more things to specify.**
+
+---
+
+## The Problem
+
+What if you want to talk about **everyone** or **someone** without naming them?
+
+- "**Everyone** likes water"
+- "**Someone** likes coffee"
+
+You can't fill in every name one by one. We need a shortcut.
+
+---
+
+*Next: Quantifiers — making statements about groups.*

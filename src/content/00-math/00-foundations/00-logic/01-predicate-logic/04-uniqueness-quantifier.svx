@@ -1,0 +1,52 @@
+---
+title: Uniqueness Quantifier
+prerequisites:
+  - math/foundations/logic/predicate-logic/negating-quantifiers
+---
+
+## Uniqueness Quantifier
+
+Sometimes you want to say "there's **exactly one**."
+
+$$\exists! x \; P(x)$$
+
+> "There exists a **unique** x such that P(x)."
+
+---
+
+**Example:**
+
+- $\exists! x \; (x + 3 = 5)$ — "There's exactly one number that, added to 3, gives 5"
+- That number is 2. Only 2. No other.
+
+---
+
+## What it Really Means
+
+$\exists! x \; P(x)$ is shorthand for:
+
+$$\exists x \; (P(x) \land \forall y \; (P(y) \to y = x))$$
+
+Let's break this down:
+
+---
+
+**Part 1:** $\exists x \; P(x)$ — "At least one exists"
+
+Without this, there might be zero. We need at least one.
+
+---
+
+**Part 2:** $\forall y \; (P(y) \to y = x)$ — "No duplicates"
+
+If any other y also satisfies P, then y must be the same as x. This rules out having two different things that work.
+
+---
+
+**Together:** "There's one, and anything else that works is actually the same one."
+
+> **One exists, and it's the only one.**
+
+---
+
+*Next: Proof techniques — how to prove statements are true.*

@@ -1,0 +1,97 @@
+---
+title: Negating Quantifiers
+prerequisites:
+  - math/foundations/logic/predicate-logic/quantifiers
+---
+
+## Negating Quantifiers
+
+What's the opposite of "everyone passed"?
+
+It's NOT "everyone failed."
+
+It's **"someone didn't pass."**
+
+---
+
+### The Rule
+
+To negate a quantified statement, you do **two things**:
+
+1. **Flip the quantifier** — $\forall$ becomes $\exists$, and $\exists$ becomes $\forall$
+2. **Move the NOT ($\neg$) inside** — negate the predicate
+
+> **Flip and push $\neg$ inside.**
+
+---
+
+::negating-quantifiers
+
+---
+
+### Negating $\forall$ (Universal)
+
+$$\neg(\forall x \; P(x)) \equiv \exists x \; \neg P(x)$$
+
+| Step | What happens |
+|------|--------------|
+| Start | $\neg(\forall x \; P(x))$ — "NOT everyone passed" |
+| Flip $\forall$ to $\exists$ | $\exists x \; ...$ |
+| Negate predicate | $\exists x \; \neg P(x)$ — "Someone didn't pass" |
+
+> **"Not all" = "at least one doesn't"**
+
+---
+
+### Negating $\exists$ (Existential)
+
+$$\neg(\exists x \; P(x)) \equiv \forall x \; \neg P(x)$$
+
+| Step | What happens |
+|------|--------------|
+| Start | $\neg(\exists x \; P(x))$ — "NOT someone passed" (nobody) |
+| Flip $\exists$ to $\forall$ | $\forall x \; ...$ |
+| Negate predicate | $\forall x \; \neg P(x)$ — "Everyone didn't pass" |
+
+> **"None" = "all don't"**
+
+---
+
+## Negating Nested Quantifiers
+
+Same rule as before, but apply it to **each quantifier** from left to right.
+
+---
+
+**Example:**
+
+$$\neg(\forall x \; \exists y \; P(x, y)) \equiv \exists x \; \forall y \; \neg P(x, y)$$
+
+| Step | What happens |
+|------|--------------|
+| Start | $\neg(\forall x \; \exists y \; P(x, y))$ |
+| Flip first $\forall$ to $\exists$ | $\exists x \; \neg(\exists y \; P(x, y))$ |
+| Flip second $\exists$ to $\forall$ | $\exists x \; \forall y \; \neg P(x, y)$ |
+
+> **Flip each quantifier, negate the predicate at the end.**
+
+---
+
+## Three or More Quantifiers
+
+Same rule. Just keep flipping left to right.
+
+$$\neg(\forall x \; \exists y \; \forall z \; P(x, y, z)) \equiv \exists x \; \forall y \; \exists z \; \neg P(x, y, z)$$
+
+| Step | Result |
+|------|--------|
+| Start | $\neg(\forall x \; \exists y \; \forall z \; P)$ |
+| Flip $\forall$ to $\exists$ | $\exists x \; \neg(\exists y \; \forall z \; P)$ |
+| Flip $\exists$ to $\forall$ | $\exists x \; \forall y \; \neg(\forall z \; P)$ |
+| Flip $\forall$ to $\exists$ | $\exists x \; \forall y \; \exists z \; \neg P$ |
+
+> **No matter how many quantifiers, flip each one and negate at the end.**
+
+---
+
+*Next: The uniqueness quantifier — saying "exactly one."*
