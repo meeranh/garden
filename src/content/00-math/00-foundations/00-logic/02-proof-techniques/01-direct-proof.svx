@@ -104,4 +104,3 @@ Plug in the definition, do the algebra, show what you need.
 
 ---
 
-*Next: Proof by contrapositive — proving the "backwards" version.*

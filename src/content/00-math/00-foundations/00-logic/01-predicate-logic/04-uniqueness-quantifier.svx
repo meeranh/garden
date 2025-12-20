@@ -49,4 +49,3 @@ If any other y also satisfies P, then y must be the same as x. This rules out ha
 
 ---
 
-*Next: Proof techniques — how to prove statements are true.*

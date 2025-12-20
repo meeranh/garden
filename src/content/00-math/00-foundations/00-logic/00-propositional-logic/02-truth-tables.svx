@@ -191,4 +191,3 @@ After building enough truth tables, you'll notice patterns:
 
 > Truth tables are the **brute force** method of logic - slow but always works.
 
-*Next: We'll use truth tables to discover when two different statements mean the same thing.*

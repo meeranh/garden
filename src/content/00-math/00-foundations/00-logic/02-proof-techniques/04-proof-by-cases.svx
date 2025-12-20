@@ -130,4 +130,3 @@ Both cases give even. So $n(n+1)$ is always even.
 
 ---
 
-*Next: Existence and uniqueness proofs — proving something exists, and that it's the only one.*

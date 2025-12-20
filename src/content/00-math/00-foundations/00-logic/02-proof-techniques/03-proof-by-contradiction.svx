@@ -158,4 +158,3 @@ Contradiction works for **any statement**.
 
 ---
 
-*Next: Proof by cases — splitting into scenarios.*

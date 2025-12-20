@@ -94,4 +94,3 @@ $$\neg(\forall x \; \exists y \; \forall z \; P(x, y, z)) \equiv \exists x \; \f
 
 ---
 
-*Next: The uniqueness quantifier — saying "exactly one."*

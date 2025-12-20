@@ -184,4 +184,3 @@ You can have flawless logic and still be wrong — if you start with bad premise
 
 ---
 
-*Next: We'll move beyond true/false and learn about predicates and quantifiers.*

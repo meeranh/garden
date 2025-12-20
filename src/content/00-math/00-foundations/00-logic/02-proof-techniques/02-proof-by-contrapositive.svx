@@ -157,4 +157,3 @@ $$3n + 2 = 3(2k) + 2 = 6k + 2 = 2(3k + 1)$$
 
 ---
 
-*Next: Proof by contradiction — assuming the opposite and finding a problem.*

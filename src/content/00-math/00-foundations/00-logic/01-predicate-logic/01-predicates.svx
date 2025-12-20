@@ -73,4 +73,3 @@ You can't fill in every name one by one. We need a shortcut.
 
 ---
 
-*Next: Quantifiers — making statements about groups.*

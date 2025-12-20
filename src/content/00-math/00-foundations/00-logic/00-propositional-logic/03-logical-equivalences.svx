@@ -208,4 +208,3 @@ If you're ever unsure whether two statements are equivalent, just **build a trut
 
 ---
 
-*Next: We'll learn how to construct valid logical arguments.*

@@ -124,4 +124,3 @@ The same statement can be true or false depending on the domain.
 
 ---
 
-*Next: Negating quantifiers — how to negate statements with quantifiers.*
