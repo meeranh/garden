@@ -1,0 +1,197 @@
+---
+title: Mathematical Induction
+prerequisites:
+  - math/foundations/logic/proof-techniques/uniqueness-proofs
+---
+
+## What is Mathematical Induction?
+
+A technique for proving something is true for **all natural numbers**.
+
+Think of it like dominos.
+
+::domino-induction
+
+---
+
+## The Two Steps
+
+| Step | Dominos | Math |
+|------|---------|------|
+| **Base case** | First domino falls | True for n = 1 |
+| **Inductive step** | If domino k falls, domino k+1 falls | If true for k, then true for k+1 |
+
+If both steps work, **all dominos fall**.
+
+> **Prove the first. Prove the chain. Done.**
+
+---
+
+## The Method
+
+To prove a statement P(n) is true for all n:
+
+1. **Base case:** Show P(1) is true
+2. **Inductive step:**
+   - Assume P(k) is true for some k (this is the "inductive hypothesis")
+   - Prove P(k+1) is true
+3. **Conclusion:** P(n) is true for all n
+
+---
+
+## Example 1: Sum of First n Numbers
+
+**Claim:** $1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2}$
+
+---
+
+**Check by hand first:**
+
+| n | Left side | Right side |
+|---|-----------|------------|
+| 1 | 1 | $\frac{1(1+1)}{2} = \frac{2}{2} = 1$ |
+| 2 | 1 + 2 = 3 | $\frac{2(2+1)}{2} = \frac{6}{2} = 3$ |
+| 3 | 1 + 2 + 3 = 6 | $\frac{3(3+1)}{2} = \frac{12}{2} = 6$ |
+| 4 | 1 + 2 + 3 + 4 = 10 | $\frac{4(4+1)}{2} = \frac{20}{2} = 10$ |
+
+Pattern works! Now prove it.
+
+---
+
+**Base case (n = 1):**
+
+- Left: 1
+- Right: $\frac{1(2)}{2} = 1$
+- Equal
+
+> First domino falls.
+
+---
+
+**Inductive step:**
+
+Assume it works for k:
+
+$$1 + 2 + 3 + \ldots + k = \frac{k(k+1)}{2}$$
+
+Show it works for k + 1.
+
+Substitute $n = k + 1$ into the formula $\frac{n(n+1)}{2}$:
+
+$$\frac{(k+1)((k+1)+1)}{2} = \frac{(k+1)(k+2)}{2}$$
+
+So we need to show:
+
+$$1 + 2 + 3 + \ldots + k + (k+1) = \frac{(k+1)(k+2)}{2}$$
+
+---
+
+**Proof:**
+
+$$\underbrace{1 + 2 + 3 + \ldots + k}_{\frac{k(k+1)}{2}} + (k+1)$$
+
+$$= \frac{k(k+1)}{2} + (k+1)$$
+
+Rewrite $(k+1)$ with denominator 2:
+
+$$= \frac{k(k+1)}{2} + \frac{2(k+1)}{2}$$
+
+Combine the fractions:
+
+$$= \frac{k(k+1) + 2(k+1)}{2}$$
+
+Factor out $(k+1)$:
+
+$$= \frac{(k+1)(k + 2)}{2}$$
+
+---
+
+**Why does this complete the proof?**
+
+We needed to show:
+
+$$1 + 2 + \ldots + k + (k+1) = \frac{(k+1)(k+2)}{2}$$
+
+And we just showed the left side simplifies to exactly $\frac{(k+1)(k+2)}{2}$.
+
+So if the formula works for $k$, it works for $k+1$.
+
+> If domino k falls, domino k+1 falls.
+
+---
+
+## Example 2: Sum of First n Odd Numbers
+
+**Claim:** $1 + 3 + 5 + \ldots + (2n-1) = n^2$
+
+---
+
+**Check by hand:**
+
+| n | Left side | Right side |
+|---|-----------|------------|
+| 1 | 1 | $1^2 = 1$ |
+| 2 | 1 + 3 = 4 | $2^2 = 4$ |
+| 3 | 1 + 3 + 5 = 9 | $3^2 = 9$ |
+| 4 | 1 + 3 + 5 + 7 = 16 | $4^2 = 16$ |
+
+---
+
+**Base case (n = 1):**
+
+- Left: 1
+- Right: $1^2 = 1$
+- Equal
+
+---
+
+**Inductive step:**
+
+Assume it works for k:
+
+$$1 + 3 + 5 + \ldots + (2k-1) = k^2$$
+
+Show it works for k + 1.
+
+Substitute $n = k + 1$ into the formula $n^2$:
+
+$$(k+1)^2$$
+
+So we need to show:
+
+$$1 + 3 + 5 + \ldots + (2k-1) + (2k+1) = (k+1)^2$$
+
+---
+
+**Proof:**
+
+$$\underbrace{1 + 3 + 5 + \ldots + (2k-1)}_{k^2} + (2k+1)$$
+
+$$= k^2 + 2k + 1$$
+
+$$= (k+1)^2$$
+
+---
+
+**Why does this complete the proof?**
+
+We needed to show the left side equals $(k+1)^2$.
+
+And we just showed it simplifies to exactly $(k+1)^2$.
+
+So if the formula works for $k$, it works for $k+1$.
+
+> If domino k falls, domino k+1 falls.
+
+---
+
+## Summary
+
+| Step | What you do |
+|------|-------------|
+| **Base case** | Prove it works for n = 1 |
+| **Inductive step** | Assume for k, prove for k + 1 |
+
+> **The base case starts the chain. The inductive step keeps it going.**
+
+---
