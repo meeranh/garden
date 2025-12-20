@@ -1,0 +1,79 @@
+---
+title: Existence Proofs
+prerequisites:
+  - math/foundations/logic/proof-techniques/proof-by-cases
+---
+
+## What is an Existence Proof?
+
+**Claim:** "There exists an x such that..."
+
+**How to prove it:** Find one. Show it works.
+
+> **One example is enough.**
+
+---
+
+## The Method
+
+1. Find a candidate
+2. Verify it satisfies the condition
+3. Done
+
+That's it. No need to find all of them. Just one.
+
+---
+
+## Example 1: Even Prime
+
+**Claim:** There exists an even prime number.
+
+---
+
+**Proof:**
+
+- Consider 2
+- Is it even? Yes (divisible by 2)
+- Is it prime? Yes (only divisors are 1 and 2)
+
+Done. We found one.
+
+> **2 is even and prime. That's the proof.**
+
+---
+
+## Example 2: Sum of Two Primes
+
+**Claim:** There exists an even number greater than 2 that is the sum of two primes.
+
+---
+
+**Proof:**
+
+- Consider 4
+- 4 = 2 + 2
+- Both 2s are prime
+
+Done. Found one.
+
+> **Existence proofs are often short. Just find an example.**
+
+---
+
+## Example 3: Solution Exists
+
+**Claim:** There exists a real number $x$ such that $x^2 = 2$.
+
+---
+
+**Proof:**
+
+- Consider $x = \sqrt{2}$
+- $(\sqrt{2})^2 = 2$ ✓
+
+Done. A solution exists.
+
+> **We don't need to know the exact decimal. We just need to show it exists.**
+
+---
+

@@ -1,0 +1,121 @@
+---
+title: Uniqueness Proofs
+prerequisites:
+  - math/foundations/logic/proof-techniques/existence-proofs
+---
+
+## What is a Uniqueness Proof?
+
+**Claim:** "There is exactly one x such that..."
+
+**How to prove it:** Two steps.
+
+| Step | What you do |
+|------|-------------|
+| 1. Existence | Show at least one exists |
+| 2. Uniqueness | Show there can't be two different ones |
+
+> **Find one. Then prove no other can exist.**
+
+---
+
+## The Technique
+
+For the uniqueness step:
+
+1. Assume there are two: $a$ and $b$
+2. Use the conditions to show $a = b$
+3. Conclude: they're the same, so there's only one
+
+> **"Two" that are identical = one.**
+
+---
+
+## Example 1: Even Prime
+
+**Claim:** There is exactly one even prime number.
+
+---
+
+**Step 1: Existence**
+
+- 2 is even and prime ✓
+
+---
+
+**Step 2: Uniqueness**
+
+- Take any even number other than 2
+- It's divisible by 2
+- So it has 2 as a factor (besides 1 and itself)
+- So it's not prime
+
+Only 2 is both even and prime.
+
+> **Every other even number fails the prime test.**
+
+---
+
+## Example 2: Solving an Equation
+
+**Claim:** The equation $2x + 6 = 0$ has exactly one solution.
+
+---
+
+**Step 1: Existence**
+
+- Try $x = -3$
+- $2(-3) + 6 = -6 + 6 = 0$ ✓
+
+A solution exists.
+
+---
+
+**Step 2: Uniqueness**
+
+- Assume $a$ and $b$ are both solutions
+- $2a + 6 = 0 \Rightarrow a = -3$
+- $2b + 6 = 0 \Rightarrow b = -3$
+- So $a = b$
+
+There's only one solution.
+
+> **Assume two exist. Show they're the same.**
+
+---
+
+## Example 3: Unique Solution
+
+**Claim:** There is exactly one integer $n$ such that $n + 5 = 8$.
+
+---
+
+**Step 1: Existence**
+
+- Try $n = 3$
+- $3 + 5 = 8$ ✓
+
+---
+
+**Step 2: Uniqueness**
+
+- Assume $a$ and $b$ are both solutions
+- $a + 5 = 8 \Rightarrow a = 3$
+- $b + 5 = 8 \Rightarrow b = 3$
+- So $a = b$
+
+Only one solution: 3.
+
+> **Any two solutions turn out to be the same.**
+
+---
+
+## Summary
+
+| Proof Type | What to do |
+|------------|------------|
+| **Existence only** | Find one example |
+| **Uniqueness only** | Assume two, show they're equal |
+
+---
+
