@@ -1,0 +1,161 @@
+---
+title: Proof by Contradiction
+prerequisites:
+  - math/foundations/logic/proof-techniques/proof-by-contrapositive
+---
+
+## What is Proof by Contradiction?
+
+You want to prove something is true.
+
+Instead of proving it directly, you:
+
+1. **Assume** it's false
+2. **Show** that leads to something impossible
+3. **Conclude** it must be true
+
+> **Assume false. Find chaos. Conclude true.**
+
+---
+
+## The Logic
+
+If assuming "not P" leads to nonsense, then P must be true.
+
+There's no other option. Either P is true, or not P is true. If not P causes a contradiction, P wins.
+
+---
+
+## The Method
+
+To prove P:
+
+1. Assume $\neg P$ (the opposite)
+2. Use logic to derive something impossible
+3. The impossibility means $\neg P$ is false
+4. So P is true
+
+---
+
+## Example 1: No Largest Integer
+
+**Claim:** There is no largest integer.
+
+---
+
+**Proof:**
+
+- Assume there IS a largest integer. Call it $N$.
+- Consider $N + 1$
+- But $N + 1 > N$
+- So $N$ wasn't the largest after all
+- **Contradiction**
+
+Our assumption was wrong. There is no largest integer.
+
+> **Whatever "largest" you pick, you can always add 1.**
+
+---
+
+## Example 2: √2 is Irrational
+
+**Claim:** $\sqrt{2}$ cannot be written as a fraction.
+
+This is the classic contradiction proof.
+
+---
+
+**Proof:**
+
+- Assume $\sqrt{2}$ IS rational
+- So $\sqrt{2} = \frac{a}{b}$ where $a$ and $b$ have no common factors
+
+Square both sides:
+
+$$2 = \frac{a^2}{b^2}$$
+
+So:
+
+$$a^2 = 2b^2$$
+
+---
+
+**What does this tell us?**
+
+- $a^2 = 2b^2$ means $a^2$ is even
+- If $a^2$ is even, then $a$ is even (we proved this before)
+- So $a = 2k$ for some integer $k$
+
+---
+
+**Substitute back:**
+
+$$(2k)^2 = 2b^2$$
+$$4k^2 = 2b^2$$
+$$b^2 = 2k^2$$
+
+- So $b^2$ is even, which means $b$ is even
+
+---
+
+**The contradiction:**
+
+- $a$ is even
+- $b$ is even
+- But we said $a$ and $b$ have NO common factors
+- They both have a factor of 2 — **contradiction**
+
+Our assumption was wrong. $\sqrt{2}$ is irrational.
+
+> **The proof "traps" the assumption into an impossible corner.**
+
+---
+
+## Example 3: Rational + Irrational
+
+**Claim:** The sum of a rational and an irrational number is irrational.
+
+---
+
+**Setup:**
+
+- $r$ = rational (can be written as $\frac{a}{b}$)
+- $x$ = irrational (cannot be written as a fraction)
+- Prove: $r + x$ is irrational
+
+---
+
+**Proof:**
+
+- Assume $r + x$ IS rational
+- So $r + x = \frac{p}{q}$ for some integers $p, q$
+- Then $x = \frac{p}{q} - r$
+
+Since $r = \frac{a}{b}$:
+
+$$x = \frac{p}{q} - \frac{a}{b} = \frac{pb - aq}{qb}$$
+
+- That's a fraction — so $x$ is rational
+- But we said $x$ is irrational
+- **Contradiction**
+
+Our assumption was wrong. So $r + x$ is irrational.
+
+> **Rational + Irrational = Irrational. Always.**
+
+---
+
+## Contradiction vs Contrapositive
+
+| Method | What you do |
+|--------|-------------|
+| Contrapositive | Prove $\neg Q \to \neg P$ instead of $P \to Q$ |
+| Contradiction | Assume the whole thing is false, find a disaster |
+
+Contrapositive is for **implications** (if-then statements).
+
+Contradiction works for **any statement**.
+
+---
+
+*Next: Proof by cases — splitting into scenarios.*

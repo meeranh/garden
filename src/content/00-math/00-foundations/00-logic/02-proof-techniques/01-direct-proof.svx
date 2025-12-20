@@ -1,0 +1,107 @@
+---
+title: Direct Proof
+prerequisites:
+  - math/foundations/logic/predicate-logic/quantifiers
+---
+
+## What is a Direct Proof?
+
+The simplest kind of proof. You want to prove:
+
+$$P \to Q$$
+
+"If P, then Q."
+
+---
+
+## The Method
+
+1. **Assume** P is true
+2. **Use logic** to show Q must follow
+3. **Done**
+
+> **Start at P. Take logical steps. Arrive at Q.**
+
+---
+
+## Example 1: Even Squares
+
+**Claim:** If $n$ is even, then $n^2$ is even.
+
+---
+
+**Proof:**
+
+- Assume $n$ is even
+- By definition, $n = 2k$ for some integer $k$
+
+$$n^2 = (2k)^2 = 4k^2 = 2(2k^2)$$
+
+- This is $2 \times (\text{something})$, so $n^2$ is even
+
+> **We assumed even, we got even. Done.**
+
+---
+
+## Example 2: Sum of Odds
+
+**Claim:** The sum of two odd numbers is even.
+
+---
+
+**Proof:**
+
+- Assume $a$ and $b$ are both odd
+- By definition:
+  - $a = 2m + 1$ for some integer $m$
+  - $b = 2n + 1$ for some integer $n$
+
+$$a + b = (2m + 1) + (2n + 1) = 2m + 2n + 2 = 2(m + n + 1)$$
+
+- This is $2 \times (\text{something})$, so the sum is even
+
+> **Two odds always make an even.**
+
+---
+
+## Example 3: Consecutive Product
+
+**Claim:** If $n$ is an integer, then $n(n+1)$ is even.
+
+---
+
+**Proof:**
+
+- Assume $n$ is an integer
+- Either $n$ is even or $n$ is odd
+
+**Case 1:** $n$ is even
+- $n(n+1) = \text{even} \times \text{anything} = \text{even}$
+
+**Case 2:** $n$ is odd
+- Then $n+1$ is even
+- $n(n+1) = \text{anything} \times \text{even} = \text{even}$
+
+- Either way, the product is even
+
+> **Consecutive integers — one is always even.**
+
+---
+
+## The Pattern
+
+Direct proofs often rely on **definitions**.
+
+| Term | Definition |
+|------|------------|
+| Even | $n = 2k$ for some integer $k$ |
+| Odd | $n = 2k + 1$ for some integer $k$ |
+| Divisible by 3 | $n = 3k$ for some integer $k$ |
+
+Plug in the definition, do the algebra, show what you need.
+
+> **Definition in, result out.**
+
+---
+
+*Next: Proof by contrapositive — proving the "backwards" version.*

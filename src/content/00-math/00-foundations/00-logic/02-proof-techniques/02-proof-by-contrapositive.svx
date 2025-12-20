@@ -1,0 +1,160 @@
+---
+title: Proof by Contrapositive
+prerequisites:
+  - math/foundations/logic/proof-techniques/direct-proof
+---
+
+## What is Proof by Contrapositive?
+
+You want to prove: "If P, then Q."
+
+But sometimes the direct path is hard. So you prove the **backwards opposite** instead.
+
+---
+
+## The Key Idea
+
+Remember from logical equivalences:
+
+> $$P \to Q \equiv \neg Q \to \neg P$$
+>
+> **Negate both. Swap positions.** They mean the same thing.
+
+---
+
+**Example in plain English:**
+
+- Original: "If it's raining, the ground is wet."
+- Contrapositive: "If the ground is NOT wet, it's NOT raining."
+
+Same meaning. Proving one proves the other.
+
+---
+
+## The Method
+
+To prove $P \to Q$:
+
+1. **Rewrite** as the contrapositive: $\neg Q \to \neg P$
+2. **Assume** $\neg Q$ (the opposite of what you want to prove)
+3. **Show** $\neg P$ follows
+4. **Done** — the original is proven
+
+> **Can't go forward? Go backward.**
+
+---
+
+## When to Use It
+
+Use contrapositive when:
+
+- Direct proof gets stuck
+- The conclusion Q is hard to work with directly
+- The negation ¬Q gives you something concrete to start with
+
+---
+
+## Example 1: Even Squares
+
+**Claim:** If $n^2$ is even, then $n$ is even.
+
+---
+
+**Why is direct proof hard?**
+
+You'd start with "$n^2$ is even" and try to show "$n$ is even."
+
+But $n^2 = 2k$ doesn't easily tell you what $n$ is. Square roots get messy.
+
+---
+
+**Contrapositive approach:**
+
+| Original | Contrapositive |
+|----------|----------------|
+| $n^2$ is even $\to$ $n$ is even | $n$ is odd $\to$ $n^2$ is odd |
+
+---
+
+**Proof:**
+
+- Assume $n$ is odd
+- So $n = 2k + 1$ for some integer $k$
+
+$$n^2 = (2k + 1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1$$
+
+- That's $2(\text{something}) + 1$ — which is **odd**
+
+> **We proved odd → odd. So the original even → even is true.**
+
+---
+
+## Example 2: Odd Products
+
+**Claim:** If $a \times b$ is odd, then $a$ is odd.
+
+---
+
+**Why is direct proof hard?**
+
+Starting with "product is odd" doesn't easily tell you about $a$ alone.
+
+---
+
+**Contrapositive approach:**
+
+| Original | Contrapositive |
+|----------|----------------|
+| $ab$ is odd $\to$ $a$ is odd | $a$ is even $\to$ $ab$ is even |
+
+---
+
+**Proof:**
+
+- Assume $a$ is even
+- So $a = 2k$ for some integer $k$
+
+$$a \times b = 2k \times b = 2(kb)$$
+
+- That's $2 \times (\text{something})$ — which is **even**
+
+> **Even times anything is even. Simple.**
+
+---
+
+## Example 3: Trapped Variables
+
+**Claim:** If $3n + 2$ is odd, then $n$ is odd.
+
+---
+
+**Why is direct proof hard?**
+
+Starting with $3n + 2 = 2k + 1$ gives you $3n = 2k - 1$.
+
+Now what? Dividing by 3 is messy. The variable $n$ is "trapped."
+
+---
+
+**Contrapositive approach:**
+
+| Original | Contrapositive |
+|----------|----------------|
+| $3n + 2$ is odd $\to$ $n$ is odd | $n$ is even $\to$ $3n + 2$ is even |
+
+---
+
+**Proof:**
+
+- Assume $n$ is even
+- So $n = 2k$ for some integer $k$
+
+$$3n + 2 = 3(2k) + 2 = 6k + 2 = 2(3k + 1)$$
+
+- That's $2 \times (\text{something})$ — which is **even**
+
+> **Contrapositive "frees" the trapped variable. Start with n, not 3n + 2.**
+
+---
+
+*Next: Proof by contradiction — assuming the opposite and finding a problem.*
