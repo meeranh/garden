@@ -1,0 +1,101 @@
+---
+title: Intersection
+prerequisites:
+  - math/foundations/sets-functions-relations/sets/set-operations/union
+---
+
+## What is Intersection?
+
+You and your friend both have playlists. You want to find songs you **both** have.
+
+That's intersection — **only what's shared**.
+
+**Symbol:** $\cap$ — looks like a cap (the overlap).
+
+$$A \cap B$$
+
+This reads: "A intersect B"
+
+::venn-intersection
+
+---
+
+## Example
+
+$$A = \{1, 2, 3\}$$
+$$B = \{3, 4, 5\}$$
+
+**Find $A \cap B$:**
+
+Check each element — is it in **both** sets?
+
+- 1: in A, not in B → out
+- 2: in A, not in B → out
+- 3: in A, in B → **keep**
+- 4: not in A → out
+- 5: not in A → out
+
+$$A \cap B = \{3\}$$
+
+> **If it's not in both, it's out.**
+
+---
+
+## More Examples
+
+| $A$ | $B$ | $A \cap B$ | Why? |
+|-----|-----|------------|------|
+| $\{a, b, c\}$ | $\{b, c, d\}$ | $\{b, c\}$ | b and c are shared |
+| $\{1, 2\}$ | $\{3, 4\}$ | $\emptyset$ | Nothing in common |
+| $\{1, 2\}$ | $\{1, 2, 3\}$ | $\{1, 2\}$ | All of A is in B |
+| $\{1, 2, 3\}$ | $\emptyset$ | $\emptyset$ | Empty set shares nothing |
+
+---
+
+## Disjoint Sets
+
+When two sets share **nothing**, we call them **disjoint**.
+
+$$A \cap B = \emptyset$$
+
+Examples: even and odd numbers, $\{1, 2\}$ and $\{3, 4\}$.
+
+---
+
+## Properties
+
+**Intersection with itself:**
+
+$$A \cap A = A$$
+
+Everything in A is also in A, so you keep everything.
+
+**Intersection with empty set:**
+
+$$A \cap \emptyset = \emptyset$$
+
+The empty set has nothing to share.
+
+**Order doesn't matter (commutative):**
+
+$$A \cap B = B \cap A$$
+
+"What we both have" is the same from either perspective.
+
+**Grouping doesn't matter (associative):**
+
+$$(A \cap B) \cap C = A \cap (B \cap C)$$
+
+When finding what three sets share, the grouping doesn't matter.
+
+---
+
+## The Formal Definition
+
+$$A \cap B = \{x \mid x \in A \text{ and } x \in B\}$$
+
+This reads: "The set of all $x$ such that $x$ is in A **and** $x$ is in B."
+
+> **Intersection asks: is it in both sets?**
+
+---

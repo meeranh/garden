@@ -1,0 +1,145 @@
+---
+title: Cartesian Products
+prerequisites:
+  - math/foundations/sets-functions-relations/sets/subsets
+---
+
+## What is a Cartesian Product?
+
+You're ordering a meal. You pick one main and one drink.
+
+- **Mains:** burger, pizza
+- **Drinks:** cola, water
+
+What are all possible meals you could order?
+
+- (burger, cola)
+- (burger, water)
+- (pizza, cola)
+- (pizza, water)
+
+That's the Cartesian product — **every possible pairing**.
+
+---
+
+## The Notation
+
+$$A \times B$$
+
+This reads: "A cross B"
+
+It means: pair each element of A with each element of B.
+
+::cartesian-product
+
+---
+
+## Step-by-Step Example
+
+$$A = \{1, 2\}$$
+$$B = \{a, b, c\}$$
+
+**Find $A \times B$:**
+
+Take each element of A and pair it with every element of B:
+
+| From A | Paired with B | Pairs |
+|--------|---------------|-------|
+| 1 | a, b, c | (1, a), (1, b), (1, c) |
+| 2 | a, b, c | (2, a), (2, b), (2, c) |
+
+$$A \times B = \{(1, a), (1, b), (1, c), (2, a), (2, b), (2, c)\}$$
+
+> **Each element of A gets paired with every element of B.**
+
+---
+
+## Order Matters
+
+The pairs are **ordered pairs** — first element from A, second from B.
+
+$$(1, a) \neq (a, 1)$$
+
+These are different pairs. The order tells you which set each element came from.
+
+This also means:
+
+$$A \times B \neq B \times A$$
+
+**Example:**
+
+$$A = \{1\}, \quad B = \{a\}$$
+
+- $A \times B = \{(1, a)\}$
+- $B \times A = \{(a, 1)\}$
+
+Different results.
+
+---
+
+## How Many Pairs?
+
+If A has $m$ elements and B has $n$ elements:
+
+$$|A \times B| = m \times n$$
+
+That's why it's called the Cartesian **product** — you multiply the sizes.
+
+**Examples:**
+
+| A | B | Size of A × B |
+|---|---|---------------|
+| 2 elements | 3 elements | 2 × 3 = 6 pairs |
+| 4 elements | 5 elements | 4 × 5 = 20 pairs |
+| 10 elements | 10 elements | 10 × 10 = 100 pairs |
+
+---
+
+## The Coordinate Plane
+
+Here's why this matters.
+
+The x-y coordinate plane you've used since school? That's a Cartesian product.
+
+$$\mathbb{R} \times \mathbb{R} = \mathbb{R}^2$$
+
+Every point on the plane is a pair (x, y) where:
+- x comes from the real numbers (horizontal axis)
+- y comes from the real numbers (vertical axis)
+
+The point (3, 5) is just an element of $\mathbb{R} \times \mathbb{R}$.
+
+> **Named after René Descartes, who connected algebra and geometry this way.**
+
+---
+
+## Special Cases
+
+**Product with empty set:**
+
+$$A \times \emptyset = \emptyset$$
+
+If there's nothing to pair with, you get no pairs.
+
+**Product with itself:**
+
+$$A \times A = A^2$$
+
+This is common. $\mathbb{R}^2$ means $\mathbb{R} \times \mathbb{R}$.
+
+**Example:**
+
+$$A = \{0, 1\}$$
+$$A^2 = \{(0, 0), (0, 1), (1, 0), (1, 1)\}$$
+
+---
+
+## The Formal Definition
+
+$$A \times B = \{(a, b) \mid a \in A \text{ and } b \in B\}$$
+
+This reads: "The set of all ordered pairs (a, b) where a is in A and b is in B."
+
+> **Cartesian product builds all possible pairings.**
+
+---

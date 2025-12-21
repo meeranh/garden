@@ -1,0 +1,92 @@
+---
+title: Union
+prerequisites:
+  - math/foundations/sets-functions-relations/sets/set-notation
+---
+
+## What is Union?
+
+You have two playlists. You want to combine them into one.
+
+That's union — **everything from both sets, no duplicates**.
+
+**Symbol:** $\cup$ — looks like a cup that holds everything.
+
+$$A \cup B$$
+
+This reads: "A union B"
+
+::venn-union
+
+---
+
+## Example
+
+$$A = \{1, 2, 3\}$$
+$$B = \{3, 4, 5\}$$
+
+**Find $A \cup B$:**
+
+Start with A, then add anything from B that's not already there:
+
+- Start: $\{1, 2, 3\}$
+- 3 from B? Already have it
+- 4 from B? Add it
+- 5 from B? Add it
+
+$$A \cup B = \{1, 2, 3, 4, 5\}$$
+
+> **Duplicates are ignored. The 3 appears once.**
+
+---
+
+## More Examples
+
+| $A$ | $B$ | $A \cup B$ | Why? |
+|-----|-----|------------|------|
+| $\{a, b\}$ | $\{c, d\}$ | $\{a, b, c, d\}$ | No overlap, just combine |
+| $\{1, 2, 3\}$ | $\{1, 2, 3\}$ | $\{1, 2, 3\}$ | Identical sets |
+| $\{1, 2\}$ | $\{1, 2, 3, 4\}$ | $\{1, 2, 3, 4\}$ | A inside B, union is B |
+| $\{1, 2, 3\}$ | $\emptyset$ | $\{1, 2, 3\}$ | Empty set adds nothing |
+
+---
+
+## Properties
+
+**Union with itself:**
+
+$$A \cup A = A$$
+
+Combining something with itself doesn't add anything new.
+
+**Union with empty set:**
+
+$$A \cup \emptyset = A$$
+
+Adding nothing changes nothing.
+
+**Order doesn't matter (commutative):**
+
+$$A \cup B = B \cup A$$
+
+Combining A with B is the same as combining B with A.
+
+**Grouping doesn't matter (associative):**
+
+$$(A \cup B) \cup C = A \cup (B \cup C)$$
+
+When combining three sets, the grouping doesn't affect the result.
+
+---
+
+## The Formal Definition
+
+$$A \cup B = \{x \mid x \in A \text{ or } x \in B\}$$
+
+This reads: "The set of all $x$ such that $x$ is in A **or** $x$ is in B."
+
+In math, "or" includes "both" — if something is in both sets, it's included.
+
+> **Union asks: is it in either set?**
+
+---

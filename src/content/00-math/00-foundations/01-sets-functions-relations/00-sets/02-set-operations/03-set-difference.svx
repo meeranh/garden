@@ -1,0 +1,101 @@
+---
+title: Set Difference
+prerequisites:
+  - math/foundations/sets-functions-relations/sets/set-operations/intersection
+---
+
+## What is Set Difference?
+
+You have tasks. Your friend already did some of them.
+
+What's left? That's set difference — **what's in A but not in B**.
+
+**Symbol:** $\setminus$ or $-$
+
+$$A \setminus B$$
+
+This reads: "A minus B"
+
+::venn-difference
+
+---
+
+## Example
+
+$$A = \{1, 2, 3, 4\}$$
+$$B = \{3, 4, 5\}$$
+
+**Find $A \setminus B$:**
+
+Go through A — is it also in B? If so, remove it.
+
+- 1: not in B → **keep**
+- 2: not in B → **keep**
+- 3: in B → remove
+- 4: in B → remove
+
+$$A \setminus B = \{1, 2\}$$
+
+> **Keep what's only in A.**
+
+---
+
+## More Examples
+
+| $A$ | $B$ | $A \setminus B$ | Why? |
+|-----|-----|-----------------|------|
+| $\{a, b, c\}$ | $\{b, c, d\}$ | $\{a\}$ | Only a isn't in B |
+| $\{1, 2, 3\}$ | $\{4, 5\}$ | $\{1, 2, 3\}$ | Nothing to remove |
+| $\{1, 2\}$ | $\{1, 2, 3\}$ | $\emptyset$ | Everything removed |
+| $\{1, 2, 3\}$ | $\emptyset$ | $\{1, 2, 3\}$ | Empty set removes nothing |
+
+---
+
+## Order Matters
+
+Unlike union and intersection, **order matters** here.
+
+$$A \setminus B \neq B \setminus A$$
+
+**Example:**
+
+$$A = \{1, 2, 3\}, \quad B = \{3, 4, 5\}$$
+
+- $A \setminus B = \{1, 2\}$
+- $B \setminus A = \{4, 5\}$
+
+Different results. Think of it like subtraction: $5 - 3 \neq 3 - 5$.
+
+---
+
+## Properties
+
+**Difference with itself:**
+
+$$A \setminus A = \emptyset$$
+
+Remove everything, nothing left.
+
+**Difference with empty set:**
+
+$$A \setminus \emptyset = A$$
+
+Nothing to remove.
+
+**Empty set difference:**
+
+$$\emptyset \setminus A = \emptyset$$
+
+Start with nothing, end with nothing.
+
+---
+
+## The Formal Definition
+
+$$A \setminus B = \{x \mid x \in A \text{ and } x \notin B\}$$
+
+This reads: "The set of all $x$ such that $x$ is in A **and** $x$ is **not** in B."
+
+> **Set difference asks: is it only in A?**
+
+---

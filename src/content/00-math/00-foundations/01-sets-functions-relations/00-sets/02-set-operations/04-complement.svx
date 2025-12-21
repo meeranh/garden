@@ -1,0 +1,166 @@
+---
+title: Complement
+prerequisites:
+  - math/foundations/sets-functions-relations/sets/set-operations/set-difference
+---
+
+## What is Complement?
+
+Someone asks: "Which students **didn't** pass the test?"
+
+To answer, you need two things:
+1. The list of students who passed
+2. The list of **all** students
+
+Without knowing all the students, you can't figure out who didn't pass.
+
+That's the key idea: **complement means "everything else"** — but "everything else" only makes sense when you know what "everything" is.
+
+---
+
+## The Universal Set
+
+Before we can talk about complement, we need a **universal set**.
+
+**Symbol:** $U$
+
+The universal set is the "everything" we're working with. It defines the boundaries of our world.
+
+**Examples:**
+
+| Context | Universal Set $U$ |
+|---------|-------------------|
+| A classroom | All students in the class |
+| Days | $\{$Mon, Tue, Wed, Thu, Fri, Sat, Sun$\}$ |
+| Digits | $\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$ |
+| Playing cards | All 52 cards in a deck |
+
+The universal set changes depending on what you're working with. When talking about weekdays, you don't care about numbers. When talking about digits, you don't care about letters.
+
+> **The universal set sets the stage. Everything happens inside it.**
+
+---
+
+## The Complement
+
+The **complement** of A is everything in the universal set that's **not** in A.
+
+**Symbol:** $A^c$ (also written $\overline{A}$ or $A'$)
+
+::venn-complement
+
+---
+
+## Step-by-Step Example
+
+Let's say we're working with days of the week.
+
+$$U = \{\text{Mon, Tue, Wed, Thu, Fri, Sat, Sun}\}$$
+
+$$A = \{\text{Mon, Tue, Wed, Thu, Fri}\} \quad \text{(weekdays)}$$
+
+**Find $A^c$:**
+
+Go through each day in U. Is it in A?
+
+| Day | In A? | In $A^c$? |
+|-----|-------|-----------|
+| Mon | Yes | No |
+| Tue | Yes | No |
+| Wed | Yes | No |
+| Thu | Yes | No |
+| Fri | Yes | No |
+| Sat | No | **Yes** |
+| Sun | No | **Yes** |
+
+$$A^c = \{\text{Sat, Sun}\} \quad \text{(the weekend)}$$
+
+> **If you're not a weekday, you're a weekend day. There's no third option.**
+
+---
+
+## Properties
+
+**Together, they cover everything:**
+
+$$A \cup A^c = U$$
+
+Think about it: every element in U is either in A, or not in A. There's no third option. So when you combine A with "not A", you get everything.
+
+*Example:* Weekdays ∪ Weekends = All days of the week.
+
+**They never overlap:**
+
+$$A \cap A^c = \emptyset$$
+
+Nothing can be both in A and not in A at the same time. That would be a contradiction.
+
+*Example:* A day can't be both a weekday and a weekend day.
+
+**Double complement:**
+
+$$(A^c)^c = A$$
+
+The complement of "not A" is... A. Double negation cancels out.
+
+*Example:* "Not a non-weekday" = weekday.
+
+**Complement of the universe:**
+
+$$U^c = \emptyset$$
+
+Nothing is outside of everything.
+
+**Complement of empty set:**
+
+$$\emptyset^c = U$$
+
+Everything is outside of nothing.
+
+---
+
+## Connection to Set Difference
+
+Complement is just set difference with U:
+
+$$A^c = U \setminus A$$
+
+"Everything except A" is the same as "the universe minus A."
+
+This is why complement requires a universal set — without U, you can't compute the difference.
+
+---
+
+## De Morgan's Laws
+
+These are two powerful rules about how complement interacts with union and intersection.
+
+**First law:**
+
+$$(A \cup B)^c = A^c \cap B^c$$
+
+*In words:* "Not in A-or-B" is the same as "not in A **and** not in B."
+
+*Example:* You're not in the chess club or drama club. That means you're not in chess **and** you're not in drama.
+
+**Second law:**
+
+$$(A \cap B)^c = A^c \cup B^c$$
+
+*In words:* "Not in A-and-B" is the same as "not in A **or** not in B."
+
+*Example:* You're not taking both math and physics. That means you're missing at least one — either not taking math, or not taking physics (or neither).
+
+> **De Morgan's Laws:** When you complement, $\cup$ becomes $\cap$ and $\cap$ becomes $\cup$.
+
+---
+
+## The Formal Definition
+
+$$A^c = \{x \mid x \in U \text{ and } x \notin A\}$$
+
+This reads: "The set of all $x$ such that $x$ is in the universe **and** $x$ is **not** in A."
+
+> **Complement answers: "What's left?"**
+
+---

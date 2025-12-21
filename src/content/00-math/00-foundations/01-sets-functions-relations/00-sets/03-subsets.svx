@@ -1,0 +1,178 @@
+---
+title: Subsets
+prerequisites:
+  - math/foundations/sets-functions-relations/sets/set-operations/complement
+---
+
+## What is a Subset?
+
+A set A is a **subset** of B if every element of A is also in B.
+
+---
+
+**Symbol:** $\subseteq$
+
+---
+
+::subset-visual
+
+---
+
+## Definition
+
+$$A \subseteq B \iff \text{for all } x, \text{ if } x \in A \text{ then } x \in B$$
+
+> "A is a subset of B" means **every element of A is also in B**.
+
+---
+
+## Example
+
+$$A = \{1, 2\}$$
+$$B = \{1, 2, 3, 4\}$$
+
+Is A a subset of B?
+
+---
+
+**Check each element of A:**
+
+- Is 1 in B? Yes ✓
+- Is 2 in B? Yes ✓
+
+All elements of A are in B, so:
+
+$$A \subseteq B$$
+
+---
+
+## More Examples
+
+| $A$ | $B$ | $A \subseteq B$? |
+|-----|-----|------------------|
+| $\{1, 2\}$ | $\{1, 2, 3\}$ | Yes |
+| $\{1, 2, 3\}$ | $\{1, 2\}$ | No (3 is not in B) |
+| $\{a, b\}$ | $\{a, b\}$ | Yes |
+| $\emptyset$ | $\{1, 2, 3\}$ | Yes |
+| $\{1, 2\}$ | $\emptyset$ | No |
+
+---
+
+## Two Surprising Facts
+
+### 1. Every set is a subset of itself
+
+$$A \subseteq A$$
+
+**Why?** Every element of A is in A. Trivially true.
+
+---
+
+### 2. The empty set is a subset of every set
+
+$$\emptyset \subseteq A \text{ for any } A$$
+
+**Why?** There are no elements in $\emptyset$ that could fail to be in A.
+
+> This is called a **vacuously true** statement — true because there's nothing to contradict it.
+
+---
+
+## Proper Subsets
+
+Sometimes we want to say A is "strictly inside" B — not equal to B.
+
+---
+
+**Proper subset:** A is inside B, but A ≠ B.
+
+**Symbol:** $\subset$ (no line underneath)
+
+---
+
+**Examples:**
+
+| $A$ | $B$ | $A \subset B$? |
+|-----|-----|----------------|
+| $\{1, 2\}$ | $\{1, 2, 3\}$ | Yes |
+| $\{1, 2\}$ | $\{1, 2\}$ | No (they're equal) |
+| $\emptyset$ | $\{1\}$ | Yes |
+
+---
+
+**The difference:**
+
+- $A \subseteq B$ — A is inside B, **or** A equals B
+- $A \subset B$ — A is inside B, **and** A is smaller than B
+
+---
+
+## Subset vs Element
+
+Don't confuse $\in$ and $\subseteq$!
+
+---
+
+**Element ($\in$):** A single thing is in a set
+
+$$2 \in \{1, 2, 3\}$$
+
+---
+
+**Subset ($\subseteq$):** A whole set is inside another set
+
+$$\{2\} \subseteq \{1, 2, 3\}$$
+
+---
+
+**Common mistake:**
+
+- $\{2\} \in \{1, 2, 3\}$ — **FALSE** (the set {2} is not an element)
+- $2 \subseteq \{1, 2, 3\}$ — **Doesn't make sense** (2 is not a set)
+
+---
+
+## Properties
+
+**Reflexive:**
+
+$$A \subseteq A$$
+
+Every set is a subset of itself.
+
+---
+
+**Transitive:**
+
+$$\text{If } A \subseteq B \text{ and } B \subseteq C, \text{ then } A \subseteq C$$
+
+Subsets chain together.
+
+---
+
+**Antisymmetric:**
+
+$$\text{If } A \subseteq B \text{ and } B \subseteq A, \text{ then } A = B$$
+
+If they're subsets of each other, they're equal.
+
+---
+
+## Proving Set Equality
+
+To prove two sets are equal, prove **both directions**:
+
+1. Show $A \subseteq B$ (every element of A is in B)
+2. Show $B \subseteq A$ (every element of B is in A)
+
+If both are true, then $A = B$.
+
+---
+
+> **Summary:**
+> - $\subseteq$ means "is inside or equal to"
+> - $\subset$ means "is strictly inside"
+> - $\emptyset$ is a subset of everything
+> - Every set is a subset of itself
+
+---

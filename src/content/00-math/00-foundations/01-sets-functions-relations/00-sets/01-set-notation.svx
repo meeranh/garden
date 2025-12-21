@@ -1,0 +1,174 @@
+---
+title: Set Notation
+---
+
+## What is a Set?
+
+A **set** is a collection of distinct objects.
+
+---
+
+**Examples from everyday life:**
+
+- A bag of marbles — that's a set of marbles
+- Your playlist — that's a set of songs
+- Your contacts list — that's a set of people
+
+---
+
+## Writing Sets
+
+We use **curly braces** to write sets:
+
+$$\{1, 2, 3\}$$
+
+This is a set containing 1, 2, and 3.
+
+---
+
+**More examples:**
+
+| Set | Description |
+|-----|-------------|
+| $\{a, b, c\}$ | A set of letters |
+| $\{2, 4, 6, 8\}$ | A set of even numbers |
+| $\{\text{apple}, \text{banana}\}$ | A set of fruits |
+
+---
+
+## Two Important Rules
+
+::set-basics
+
+---
+
+### Rule 1: No Duplicates
+
+$$\{1, 1, 2, 2, 3\} = \{1, 2, 3\}$$
+
+Duplicates are ignored. Each element appears **only once**.
+
+> A set cares about *what's in it*, not *how many times* you wrote it.
+
+---
+
+### Rule 2: Order Doesn't Matter
+
+$$\{1, 2, 3\} = \{3, 1, 2\} = \{2, 3, 1\}$$
+
+A set is just a collection — there's no "first" or "last" element.
+
+> A set cares about *what's in it*, not *what order* you wrote it.
+
+---
+
+## Set Membership
+
+How do we say "this thing is in the set"?
+
+---
+
+**The symbol $\in$** means "is an element of" or "belongs to":
+
+$$2 \in \{1, 2, 3\}$$
+
+> This reads: "2 **is in** the set $\{1, 2, 3\}$"
+
+---
+
+**The symbol $\notin$** means "is NOT an element of":
+
+$$5 \notin \{1, 2, 3\}$$
+
+> This reads: "5 **is not in** the set $\{1, 2, 3\}$"
+
+---
+
+**Practice:**
+
+| Statement | True or False? |
+|-----------|----------------|
+| $3 \in \{1, 2, 3, 4\}$ | True |
+| $7 \in \{1, 2, 3, 4\}$ | False |
+| $a \in \{a, b, c\}$ | True |
+| $d \notin \{a, b, c\}$ | True |
+
+---
+
+## The Empty Set
+
+A set with **nothing in it** is called the **empty set**.
+
+---
+
+**Two ways to write it:**
+
+- $\{\}$ — curly braces with nothing inside
+- $\emptyset$ — the special empty set symbol
+
+---
+
+Think of it as an empty bag — still a bag, just nothing inside.
+
+---
+
+**Key facts about the empty set:**
+
+- $x \notin \emptyset$ is true for **any** $x$ (nothing is in it)
+- There is only **one** empty set (all empty sets are equal)
+
+---
+
+## Set-Builder Notation
+
+Sometimes listing every element is impossible or tedious.
+
+Instead, we describe a set by a **rule**:
+
+$$\{x \mid x \text{ is an even number}\}$$
+
+> This reads: "The set of all $x$ **such that** $x$ is an even number."
+
+---
+
+**The vertical bar** $\mid$ means "**such that**."
+
+Some books use a colon instead: $\{x : x > 0\}$
+
+---
+
+**Examples:**
+
+| Set-builder notation | Meaning | As a list |
+|---------------------|---------|-----------|
+| $\{x \mid x > 0\}$ | All positive numbers | $\{1, 2, 3, \ldots\}$ |
+| $\{x \mid x^2 = 4\}$ | Numbers whose square is 4 | $\{-2, 2\}$ |
+| $\{n \mid n \text{ is prime}\}$ | All prime numbers | $\{2, 3, 5, 7, 11, \ldots\}$ |
+
+---
+
+## Common Number Sets
+
+Some sets are used so often they have special symbols:
+
+| Symbol | Name | Elements |
+|--------|------|----------|
+| $\mathbb{N}$ | Natural numbers | $\{1, 2, 3, 4, \ldots\}$ |
+| $\mathbb{Z}$ | Integers | $\{\ldots, -2, -1, 0, 1, 2, \ldots\}$ |
+| $\mathbb{Q}$ | Rational numbers | All fractions $\frac{a}{b}$ where $b \neq 0$ |
+| $\mathbb{R}$ | Real numbers | All numbers on the number line |
+
+---
+
+**Why these letters?**
+
+- $\mathbb{N}$ — **N**atural
+- $\mathbb{Z}$ — **Z**ahlen (German for "numbers")
+- $\mathbb{Q}$ — **Q**uotient (fractions are quotients)
+- $\mathbb{R}$ — **R**eal
+
+---
+
+> **Note:** Some definitions include 0 in the natural numbers. We use $\mathbb{N} = \{1, 2, 3, \ldots\}$ here.
+
+---
