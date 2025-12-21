@@ -8,65 +8,43 @@
 	let isPlaying = $state(false);
 	let animationTimer: ReturnType<typeof setTimeout> | null = null;
 
-	const totalSteps = 6;
+	const totalSteps = 4;
 	const maxStep = totalSteps - 1;
 
 	// Steps:
 	// 0: Show B = {1, 2, 3, 4}
-	// 1: Show A = {1, 2} inside B
-	// 2: Check: is 1 in B? Yes
-	// 3: Check: is 2 in B? Yes
-	// 4: All elements of A are in B
-	// 5: Therefore A ⊆ B
+	// 1: Show A = {1, 2} nested inside B
+	// 2: Highlight A's elements - they're all in B
+	// 3: Therefore A ⊆ B
 
 	let display = $derived.by(() => {
 		if (currentStep === 0) {
 			return {
 				title: 'Set B = {1, 2, 3, 4}',
 				showA: false,
-				checking: null,
-				checkResult: null,
-				conclusion: null
+				highlightContainment: false,
+				showResult: false
 			};
 		} else if (currentStep === 1) {
 			return {
-				title: 'Set A = {1, 2}',
+				title: 'Set A = {1, 2} is inside B',
 				showA: true,
-				checking: null,
-				checkResult: null,
-				conclusion: null
+				highlightContainment: false,
+				showResult: false
 			};
 		} else if (currentStep === 2) {
 			return {
-				title: 'Is 1 in B?',
+				title: 'Every element of A is in B',
 				showA: true,
-				checking: 1,
-				checkResult: true,
-				conclusion: null
-			};
-		} else if (currentStep === 3) {
-			return {
-				title: 'Is 2 in B?',
-				showA: true,
-				checking: 2,
-				checkResult: true,
-				conclusion: null
-			};
-		} else if (currentStep === 4) {
-			return {
-				title: 'All elements of A are in B',
-				showA: true,
-				checking: null,
-				checkResult: null,
-				conclusion: 'checking'
+				highlightContainment: true,
+				showResult: false
 			};
 		} else {
 			return {
 				title: 'A ⊆ B',
 				showA: true,
-				checking: null,
-				checkResult: null,
-				conclusion: 'subset'
+				highlightContainment: true,
+				showResult: true
 			};
 		}
 	});
@@ -135,47 +113,64 @@
 <div class="container">
 	<div class="title">{display.title}</div>
 
-	<div class="sets-container">
-		<!-- Set B (outer) -->
-		<div class="set-b">
-			<div class="set-label">B</div>
+	<div class="venn-container">
+		<svg viewBox="0 0 300 180" class="venn">
+			<!-- Circle B (outer) -->
+			<circle
+				cx="150"
+				cy="100"
+				r="75"
+				class="circle-b"
+			/>
 
-			<!-- Set A (inner) -->
+			<!-- Circle A (inner, nested inside B) -->
 			{#if display.showA}
-				<div class="set-a">
-					<div class="set-label-a">A</div>
-					<div class="elements-a">
-						<span
-							class="element"
-							class:checking={display.checking === 1}
-							class:checked={display.checking === 2 || display.conclusion}
-						>1</span>
-						<span
-							class="element"
-							class:checking={display.checking === 2}
-							class:checked={display.conclusion}
-						>2</span>
-					</div>
-				</div>
+				<circle
+					cx="130"
+					cy="100"
+					r="35"
+					class="circle-a"
+					class:highlight={display.highlightContainment}
+				/>
 			{/if}
 
-			<!-- Elements only in B -->
-			<div class="elements-b-only">
-				<span class="element b-only">3</span>
-				<span class="element b-only">4</span>
-			</div>
-		</div>
+			<!-- Labels -->
+			<text x="215" y="22" class="label">B</text>
+			{#if display.showA}
+				<text x="80" y="100" class="label-a" class:highlight={display.highlightContainment}>A</text>
+			{/if}
+
+			<!-- Elements in A (also in B) -->
+			{#if display.showA}
+				<text
+					x="115"
+					y="95"
+					class="element"
+					class:highlight={display.highlightContainment}
+				>1</text>
+				<text
+					x="145"
+					y="110"
+					class="element"
+					class:highlight={display.highlightContainment}
+				>2</text>
+			{/if}
+
+			<!-- Elements only in B (outside A) -->
+			<text x="185" y="85" class="element b-only">3</text>
+			<text x="195" y="115" class="element b-only">4</text>
+
+			<!-- Elements 1, 2 shown in B before A appears -->
+			{#if !display.showA}
+				<text x="110" y="95" class="element b-only">1</text>
+				<text x="140" y="95" class="element b-only">2</text>
+			{/if}
+		</svg>
 	</div>
 
-	{#if display.checking && display.checkResult}
-		<div class="check-result">
-			{display.checking} ∈ B ✓
-		</div>
-	{/if}
-
-	{#if display.conclusion === 'subset'}
-		<div class="conclusion">
-			Every element of A is in B, so <strong>A ⊆ B</strong>
+	{#if display.showResult}
+		<div class="result">
+			A is entirely contained in B, so <strong>A ⊆ B</strong>
 		</div>
 	{/if}
 </div>
@@ -195,109 +190,71 @@
 		font-weight: 500;
 	}
 
-	.sets-container {
-		display: flex;
-		justify-content: center;
-		padding: 1rem;
+	.venn-container {
+		width: 100%;
+		max-width: 300px;
 	}
 
-	.set-b {
-		position: relative;
-		width: 200px;
-		height: 140px;
-		border: 2px solid var(--color-fg-muted);
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+	.venn {
+		width: 100%;
+		height: auto;
 	}
 
-	.set-label {
-		position: absolute;
-		top: -10px;
-		right: 20px;
-		background: var(--color-bg);
-		padding: 0 0.5rem;
-		color: var(--color-fg-muted);
-		font-weight: bold;
-	}
-
-	.set-a {
-		position: absolute;
-		left: 20px;
-		width: 90px;
-		height: 80px;
-		border: 2px solid var(--color-accent);
-		border-radius: 50%;
-		background: rgba(142, 192, 124, 0.1);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.set-label-a {
-		position: absolute;
-		top: -10px;
-		left: 15px;
-		background: var(--color-bg);
-		padding: 0 0.25rem;
-		color: var(--color-accent);
-		font-weight: bold;
-		font-size: 0.85rem;
-	}
-
-	.elements-a {
-		display: flex;
-		gap: 0.5rem;
-	}
-
-	.elements-b-only {
-		position: absolute;
-		right: 25px;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.element {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 1.75rem;
-		height: 1.75rem;
-		background: var(--color-bg-card);
-		border: 1px solid var(--color-border);
-		border-radius: 4px;
-		font-size: 0.85rem;
-		color: var(--color-fg);
+	.circle-b {
+		fill: transparent;
+		stroke: var(--color-fg-muted);
+		stroke-width: 2;
 		transition: all 0.3s ease;
 	}
 
-	.element.checking {
-		border-color: var(--color-math);
-		color: var(--color-math);
-		background: rgba(250, 189, 47, 0.15);
-		transform: scale(1.1);
+	.circle-a {
+		fill: transparent;
+		stroke: var(--color-fg-muted);
+		stroke-width: 2;
+		transition: all 0.3s ease;
 	}
 
-	.element.checked {
-		border-color: var(--color-accent);
-		color: var(--color-accent);
+	.circle-a.highlight {
+		fill: rgba(142, 192, 124, 0.2);
+		stroke: var(--color-accent);
+	}
+
+	.label {
+		fill: var(--color-fg-muted);
+		font-size: 1rem;
+		font-weight: bold;
+		text-anchor: middle;
+	}
+
+	.label-a {
+		fill: var(--color-fg-muted);
+		font-size: 0.9rem;
+		font-weight: bold;
+		text-anchor: middle;
+		transition: all 0.3s ease;
+	}
+
+	.label-a.highlight {
+		fill: var(--color-accent);
+	}
+
+	.element {
+		fill: var(--color-fg);
+		font-size: 0.85rem;
+		text-anchor: middle;
+		transition: all 0.3s ease;
+	}
+
+	.element.highlight {
+		fill: var(--color-accent);
+		font-weight: bold;
 	}
 
 	.element.b-only {
-		color: var(--color-fg-muted);
+		fill: var(--color-fg-muted);
 	}
 
-	.check-result {
-		padding: 0.5rem 1rem;
-		background: rgba(142, 192, 124, 0.1);
-		border: 1px solid var(--color-accent);
-		color: var(--color-accent);
-		font-size: 0.9rem;
-	}
-
-	.conclusion {
+	.result {
 		padding: 0.5rem 1rem;
 		background: var(--color-bg-card);
 		border: 1px solid var(--color-border);
@@ -305,7 +262,7 @@
 		color: var(--color-fg-muted);
 	}
 
-	.conclusion strong {
+	.result strong {
 		color: var(--color-accent);
 	}
 </style>

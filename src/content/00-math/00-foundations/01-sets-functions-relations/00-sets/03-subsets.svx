@@ -125,13 +125,6 @@ $$\{2\} \subseteq \{1, 2, 3\}$$
 
 ---
 
-**Common mistake:**
-
-- $\{2\} \in \{1, 2, 3\}$ — **FALSE** (the set {2} is not an element)
-- $2 \subseteq \{1, 2, 3\}$ — **Doesn't make sense** (2 is not a set)
-
----
-
 ## Properties
 
 **Reflexive:**
@@ -172,6 +165,7 @@ If both are true, then $A = B$.
 > **Summary:**
 > - $\subseteq$ means "is inside or equal to"
 > - $\subset$ means "is strictly inside"
+> - $\emptyset$ is the **empty set** — a set with no elements: $\emptyset = \{\}$
 > - $\emptyset$ is a subset of everything
 > - Every set is a subset of itself
 

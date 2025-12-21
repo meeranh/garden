@@ -131,13 +131,15 @@
 	<div class="title">{display.title}</div>
 
 	<div class="diagram">
-		<div class="set set-a">
+		<div class="set-wrapper">
 			<div class="set-label">A</div>
-			{#each setA as el}
-				<div class="element" class:highlight={display.highlightA === el}>
-					{el}
-				</div>
-			{/each}
+			<div class="set set-a">
+				{#each setA as el}
+					<div class="element" class:highlight={display.highlightA === el}>
+						{el}
+					</div>
+				{/each}
+			</div>
 		</div>
 
 		<div class="arrows">
@@ -148,13 +150,15 @@
 			{/each}
 		</div>
 
-		<div class="set set-b">
+		<div class="set-wrapper">
 			<div class="set-label">B</div>
-			{#each setB as el}
-				<div class="element">
-					{el}
-				</div>
-			{/each}
+			<div class="set set-b">
+				{#each setB as el}
+					<div class="element">
+						{el}
+					</div>
+				{/each}
+			</div>
 		</div>
 	</div>
 
@@ -189,12 +193,19 @@
 		width: 100%;
 	}
 
+	.set-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
 	.set {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: 0.5rem;
-		padding: 1rem;
+		padding: 0.75rem;
 		border: 1px solid var(--color-border);
 		border-radius: 8px;
 		min-width: 60px;
@@ -202,9 +213,8 @@
 
 	.set-label {
 		font-weight: bold;
-		color: var(--color-fg-muted);
-		font-size: 0.85rem;
-		margin-bottom: 0.25rem;
+		color: var(--color-math);
+		font-size: 0.9rem;
 	}
 
 	.element {

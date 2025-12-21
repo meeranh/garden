@@ -109,7 +109,7 @@ Every point on the plane is a pair (x, y) where:
 
 The point (3, 5) is just an element of $\mathbb{R} \times \mathbb{R}$.
 
-> **Named after René Descartes, who connected algebra and geometry this way.**
+> $\mathbb{R}$ is the set of all real numbers.
 
 ---
 
