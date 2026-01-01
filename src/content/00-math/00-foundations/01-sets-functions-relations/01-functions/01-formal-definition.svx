@@ -1,0 +1,77 @@
+---
+title: Formal Definition
+prerequisites:
+  - math/foundations/sets-functions-relations/sets/cartesian-products
+---
+
+## What is a Function?
+
+A function is a rule that assigns **each input exactly one output**.
+
+You've used functions before: $f(x) = x^2$. Put in 3, get out 9.
+
+But what's the formal definition?
+
+---
+
+## Notation
+
+$$f: A \to B$$
+
+This reads: "f is a function from A to B"
+
+- $A$ is the set of inputs
+- $B$ is the set of possible outputs
+
+---
+
+## A Function as a Set of Pairs
+
+Remember Cartesian products? $A \times B$ gives all possible input-output pairs.
+
+A function picks specific pairs from $A \times B$, following one rule:
+
+> **Each input appears exactly once.**
+
+::function-mapping
+
+---
+
+## Example
+
+$$A = \{1, 2\}, \quad B = \{a, b\}$$
+
+$$A \times B = \{(1,a), (1,b), (2,a), (2,b)\}$$
+
+**Valid functions:**
+
+- $\{(1, a), (2, b)\}$ — 1 maps to a, 2 maps to b
+- $\{(1, b), (2, b)\}$ — both map to b (that's fine)
+
+**Not a function:**
+
+- $\{(1, a), (1, b)\}$ — 1 maps to two outputs (ambiguous)
+- $\{(1, a)\}$ — 2 is missing (incomplete)
+
+---
+
+## The Two Rules
+
+For $f$ to be a function from $A$ to $B$:
+
+1. **Every** element of $A$ must have an output
+2. Each element of $A$ has **exactly one** output
+
+> Multiple inputs CAN map to the same output.
+
+> One input CANNOT map to multiple outputs.
+
+---
+
+## The Formal Definition
+
+A function $f: A \to B$ is a subset of $A \times B$ such that for every $a \in A$, there exists exactly one $b \in B$ where $(a, b) \in f$.
+
+We write $f(a) = b$ to mean $(a, b)$ is in $f$.
+
+---

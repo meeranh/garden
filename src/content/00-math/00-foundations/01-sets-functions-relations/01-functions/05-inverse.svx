@@ -1,0 +1,103 @@
+---
+title: Inverse
+prerequisites:
+  - math/foundations/sets-functions-relations/functions/composition
+---
+
+## What is an Inverse?
+
+An inverse **undoes** a function.
+
+If $f$ takes you from $a$ to $b$, then $f^{-1}$ takes you from $b$ back to $a$.
+
+$$f: A \to B, \quad f^{-1}: B \to A$$
+
+---
+
+## The Defining Property
+
+$$f^{-1}(f(a)) = a, \quad f(f^{-1}(b)) = b$$
+
+Applying $f$ then $f^{-1}$ (or vice versa) gets you back to where you started.
+
+In terms of composition:
+
+$$f^{-1} \circ f = \text{id}_A, \quad f \circ f^{-1} = \text{id}_B$$
+
+---
+
+## Example
+
+$$f(x) = x + 3, \quad f^{-1}(x) = x - 3$$
+
+**Check:**
+
+- $f(5) = 8$
+- $f^{-1}(8) = 5$
+
+Back to start.
+
+---
+
+## When Does an Inverse Exist?
+
+Only when $f$ is **bijective**.
+
+**Why not injective?**
+
+Two inputs map to the same output — you can't reverse it.
+
+::no-inverse-injective
+
+**Why not surjective?**
+
+Some output is never hit — $f^{-1}$ has nowhere to send it.
+
+::no-inverse-surjective
+
+> **Bijective = invertible.**
+
+::bijective-inverse
+
+---
+
+## Example: No Inverse
+
+$$f(x) = x^2 \text{ where } f: \mathbb{R} \to \mathbb{R}$$
+
+This is not injective:
+
+- $f(3) = 9$
+- $f(-3) = 9$
+
+So $f^{-1}(9)$ is undefined — two possible answers.
+
+**Fix:** Restrict the domain to $\mathbb{R} \geq 0$. Then $f^{-1}(x) = \sqrt{x}$ works.
+
+---
+
+## Finding an Inverse
+
+To find $f^{-1}$:
+
+1. Write $y = f(x)$
+2. Solve for $x$ in terms of $y$
+3. Swap $x$ and $y$
+
+**Example:**
+
+$f(x) = 2x + 1$
+
+1. $y = 2x + 1$
+2. $x = \frac{y - 1}{2}$
+3. $f^{-1}(x) = \frac{x - 1}{2}$
+
+---
+
+## Key Facts
+
+- Only bijective functions have inverses
+- $(f^{-1})^{-1} = f$ (inverse of inverse is original)
+- $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$ (reverse order)
+
+---

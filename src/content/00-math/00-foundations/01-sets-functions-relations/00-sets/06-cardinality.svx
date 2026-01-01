@@ -1,0 +1,103 @@
+---
+title: Cardinality
+prerequisites:
+  - math/foundations/sets-functions-relations/sets/power-sets
+---
+
+## What is Cardinality?
+
+Cardinality is just **how many elements** are in a set.
+
+**Notation:** $|A|$
+
+This reads: "the cardinality of A" or "the size of A"
+
+---
+
+## Examples
+
+| Set | Cardinality |
+|-----|-------------|
+| $\{1, 2, 3\}$ | $3$ |
+| $\{a, b\}$ | $2$ |
+| $\{apple\}$ | $1$ |
+| $\emptyset$ | $0$ |
+
+> The empty set has cardinality 0.
+
+---
+
+## Cardinality of Union
+
+$$|A \cup B| = |A| + |B| - |A \cap B|$$
+
+**Why subtract the intersection?** Elements in both sets get counted twice if you just add.
+
+**Example:**
+
+$$A = \{1, 2, 3\}, \quad B = \{2, 3, 4\}$$
+
+- $|A| = 3$
+- $|B| = 3$
+- $A \cap B = \{2, 3\}$, so $|A \cap B| = 2$
+
+$$|A \cup B| = 3 + 3 - 2 = 4$$
+
+Check: $A \cup B = \{1, 2, 3, 4\}$ — yes, 4 elements.
+
+---
+
+## Disjoint Sets
+
+If two sets have no overlap:
+
+$$A \cap B = \emptyset$$
+
+Then:
+
+$$|A \cup B| = |A| + |B|$$
+
+> No need to subtract — nothing is counted twice.
+
+---
+
+## Cardinality of Cartesian Product
+
+$$|A \times B| = |A| \times |B|$$
+
+Multiply the sizes.
+
+**Example:**
+
+$$A = \{1, 2\}, \quad B = \{a, b, c\}$$
+
+$$|A \times B| = 2 \times 3 = 6$$
+
+---
+
+## Cardinality of Power Set
+
+$$|\mathcal{P}(A)| = 2^{|A|}$$
+
+A set with $n$ elements has $2^n$ subsets.
+
+**Example:**
+
+$$A = \{1, 2, 3\}$$
+
+$$|\mathcal{P}(A)| = 2^3 = 8$$
+
+---
+
+## Summary
+
+| Operation | Cardinality |
+|-----------|-------------|
+| $A \cup B$ | $\|A\| + \|B\| - \|A \cap B\|$ |
+| $A \cup B$ (disjoint) | $\|A\| + \|B\|$ |
+| $A \times B$ | $\|A\| \times \|B\|$ |
+| $\mathcal{P}(A)$ | $2^{\|A\|}$ |
+
+> **Cardinality = counting elements.**
+
+---

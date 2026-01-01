@@ -1,0 +1,75 @@
+---
+title: Domain, Codomain, Range
+prerequisites:
+  - math/foundations/sets-functions-relations/functions/formal-definition
+---
+
+## The Three Parts of a Function
+
+Every function $f: A \to B$ has three important sets:
+
+- **Domain** — the set of inputs
+- **Codomain** — the set of *possible* outputs
+- **Range** — the set of outputs that *actually get used*
+
+::domain-codomain-range
+
+---
+
+## Definitions
+
+$$f: A \to B$$
+
+**Domain** = $A$ = all inputs
+
+> Everything that goes into the function.
+
+**Codomain** = $B$ = all possible outputs
+
+> Everything that *could* come out.
+
+**Range** = outputs that actually occur
+
+> Everything that *does* come out.
+
+---
+
+## Example
+
+$$f: \{1, 2, 3\} \to \{a, b, c, d\}$$
+
+$$f = \{(1, a), (2, a), (3, b)\}$$
+
+| Part | Value | Why? |
+|------|-------|------|
+| Domain | $\{1, 2, 3\}$ | All the inputs |
+| Codomain | $\{a, b, c, d\}$ | All possible outputs |
+| Range | $\{a, b\}$ | Only a and b get hit |
+
+Notice: $c$ and $d$ are in the codomain but nothing maps to them.
+
+---
+
+## Range vs Codomain
+
+The range is always a subset of the codomain:
+
+$$\text{Range} \subseteq \text{Codomain}$$
+
+Sometimes they're equal — every possible output gets used.
+
+Sometimes the range is smaller — some outputs go unused.
+
+---
+
+## Another Example
+
+$$f(x) = x^2 \text{ where } f: \mathbb{R} \to \mathbb{R}$$
+
+- **Domain** = $\mathbb{R}$ (all real numbers can be squared)
+- **Codomain** = $\mathbb{R}$ (we declared outputs are real numbers)
+- **Range** = $\mathbb{R} \geq 0$ (only non-negative numbers come out)
+
+Why? Squaring never gives a negative result. So $-5$ is in the codomain, but no input maps to it.
+
+---

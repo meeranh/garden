@@ -1,0 +1,115 @@
+---
+title: Power Sets
+prerequisites:
+  - math/foundations/sets-functions-relations/sets/subsets
+---
+
+## What is a Power Set?
+
+You have a set. What are **all the possible subsets** you could make from it?
+
+Collect them all into one set — that's the power set.
+
+**Symbol:** $\mathcal{P}(A)$ or $2^A$
+
+::power-set
+
+---
+
+## Example
+
+$$A = \{1, 2\}$$
+
+**List all subsets of A:**
+
+- $\emptyset$ (empty set — always a subset)
+- $\{1\}$
+- $\{2\}$
+- $\{1, 2\}$ (the set itself — always a subset)
+
+**The power set collects them all:**
+
+$$\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}$$
+
+> The power set is a **set of sets**.
+
+---
+
+## How Many Subsets?
+
+For a set with $n$ elements:
+
+$$|\mathcal{P}(A)| = 2^n$$
+
+**Why?** For each element, you have 2 choices: include it or don't.
+
+| Set | Elements | Subsets |
+|-----|----------|---------|
+| $\{a\}$ | 1 | $2^1 = 2$ |
+| $\{a, b\}$ | 2 | $2^2 = 4$ |
+| $\{a, b, c\}$ | 3 | $2^3 = 8$ |
+| $\{1, 2, 3, 4\}$ | 4 | $2^4 = 16$ |
+
+> This is why the notation $2^A$ makes sense — the size is $2^n$.
+
+---
+
+## Larger Example
+
+$$A = \{a, b, c\}$$
+
+**All 8 subsets:**
+
+| Size 0 | Size 1 | Size 2 | Size 3 |
+|--------|--------|--------|--------|
+| $\emptyset$ | $\{a\}$ | $\{a, b\}$ | $\{a, b, c\}$ |
+| | $\{b\}$ | $\{a, c\}$ | |
+| | $\{c\}$ | $\{b, c\}$ | |
+
+$$\mathcal{P}(A) = \{\emptyset, \{a\}, \{b\}, \{c\}, \{a,b\}, \{a,c\}, \{b,c\}, \{a,b,c\}\}$$
+
+---
+
+## Special Cases
+
+**Power set of empty set:**
+
+$$\mathcal{P}(\emptyset) = \{\emptyset\}$$
+
+The empty set has one subset: itself. That's $2^0 = 1$.
+
+**Power set of a singleton:**
+
+$$\mathcal{P}(\{x\}) = \{\emptyset, \{x\}\}$$
+
+Two subsets: empty set and the set itself.
+
+---
+
+## Key Facts
+
+Every power set contains:
+- $\emptyset$ (the empty set is a subset of everything)
+- $A$ itself (every set is a subset of itself)
+
+So for any non-empty set A:
+
+$$\emptyset \in \mathcal{P}(A)$$
+
+> The empty set is a subset of A, so it's in the power set.
+
+$$A \in \mathcal{P}(A)$$
+
+> A is a subset of itself, so it's in the power set.
+
+---
+
+## The Formal Definition
+
+$$\mathcal{P}(A) = \{S \mid S \subseteq A\}$$
+
+This reads: "The set of all S such that S is a subset of A."
+
+> **Power set = all possible subsets collected into one set.**
+
+---

@@ -1,0 +1,85 @@
+---
+title: Composition
+prerequisites:
+  - math/foundations/sets-functions-relations/functions/injective-surjective-bijective
+---
+
+## What is Composition?
+
+You have two functions. You chain them — the output of the first becomes the input to the second.
+
+$$f: A \to B, \quad g: B \to C$$
+
+**Composition:** $g \circ f$
+
+This reads: "g of f" or "g after f"
+
+---
+
+## How It Works
+
+$$(g \circ f)(x) = g(f(x))$$
+
+First apply $f$, then apply $g$ to the result.
+
+---
+
+## Example
+
+$$f(x) = x + 1$$
+$$g(x) = x^2$$
+
+**Find $(g \circ f)(2)$:**
+
+1. First: $f(2) = 2 + 1 = 3$
+2. Then: $g(3) = 3^2 = 9$
+
+$$(g \circ f)(2) = 9$$
+
+---
+
+## Order Matters
+
+$$g \circ f \neq f \circ g$$
+
+**Same functions, different order:**
+
+$(g \circ f)(2) = g(f(2)) = g(3) = 9$
+
+$(f \circ g)(2) = f(g(2)) = f(4) = 5$
+
+Different results.
+
+> Always apply the **inner** function first.
+
+---
+
+## Domain Requirements
+
+For $g \circ f$ to exist:
+
+- The codomain of $f$ must match the domain of $g$
+- Otherwise, outputs of $f$ can't be inputs to $g$
+
+$$f: A \to B, \quad g: B \to C, \quad g \circ f: A \to C$$
+
+---
+
+## Properties
+
+**Associativity:**
+
+$$(h \circ g) \circ f = h \circ (g \circ f)$$
+
+Grouping doesn't matter when composing three functions.
+
+**Identity function:**
+
+$$\text{id}_A(x) = x$$
+
+$$f \circ \text{id}_A = f$$
+$$\text{id}_B \circ f = f$$
+
+Composing with identity changes nothing.
+
+---

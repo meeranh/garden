@@ -1,0 +1,125 @@
+---
+title: Image and Preimage
+prerequisites:
+  - math/foundations/sets-functions-relations/functions/domain-codomain-range
+---
+
+## The Two Directions
+
+A function has arrows going from inputs to outputs.
+
+You can ask two questions:
+
+> **Forward:** Where does this input go?
+
+> **Backward:** What input(s) produced this output?
+
+---
+
+## Image: Following Arrows Forward
+
+Pick an input. Follow its arrow. Where does it land?
+
+That's the **image**.
+
+::image
+
+---
+
+## Image of a Set
+
+You can also ask: where does a **group of inputs** land?
+
+Collect all their outputs. That's the image of the set.
+
+**Example:**
+
+$$f(x) = x^2$$
+
+| Input Set | Image |
+|-----------|-------|
+| $\{3\}$ | $\{9\}$ |
+| $\{-2, 3\}$ | $\{4, 9\}$ |
+| $\{-2, 2\}$ | $\{4\}$ |
+
+Notice the last one: two inputs, but only one output (both square to 4).
+
+---
+
+## Preimage: Tracing Arrows Backward
+
+Pick an output. Trace all arrows pointing to it. Where did they come from?
+
+Those inputs are the **preimage**.
+
+::preimage
+
+---
+
+## Preimage Can Be Empty, One, or Many
+
+This is the key insight:
+
+| Case | Example | Meaning |
+|------|---------|---------|
+| **Empty** | Nothing maps here | No solution exists |
+| **One** | Exactly one input | Unique solution |
+| **Many** | Multiple inputs | Multiple solutions |
+
+---
+
+## Solving Equations = Finding Preimages
+
+Here's WHY this matters:
+
+> **Solving an equation IS finding a preimage.**
+
+$$\text{Solve } x^2 = 9$$
+
+You're asking: what inputs produce output 9?
+
+$$\text{Preimage of 9} = \{-3, 3\}$$
+
+You've been finding preimages your whole life — just didn't call it that.
+
+---
+
+## More Examples
+
+$$f(x) = x^2$$
+
+| Equation | Preimage | Solutions |
+|----------|----------|-----------|
+| $x^2 = 9$ | $\{-3, 3\}$ | Two solutions |
+| $x^2 = 0$ | $\{0\}$ | One solution |
+| $x^2 = -1$ | $\{\}$ | No solution |
+
+The preimage tells you everything about solvability.
+
+---
+
+## Preimage Notation Looks Like Inverse
+
+$$f^{-1}(\{9\}) = \{-3, 3\}$$
+
+**Don't be confused!** This is NOT the inverse function.
+
+| | Inverse Function | Preimage |
+|---|---|---|
+| Exists? | Only if bijective | Always |
+| Returns | One element | A set |
+| Notation | $f^{-1}(y)$ | $f^{-1}(\{y\})$ |
+
+Preimage always exists. Inverse might not.
+
+---
+
+## Key Facts
+
+- **Image** = where inputs land (forward)
+- **Preimage** = where outputs came from (backward)
+- Preimage is always a **set** (empty, one, or many elements)
+- **Solving = finding preimages**
+- Image of entire domain = **range**
+
+---

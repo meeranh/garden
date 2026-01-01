@@ -1,0 +1,74 @@
+---
+title: Injective, Surjective, Bijective
+prerequisites:
+  - math/foundations/sets-functions-relations/functions/domain-codomain-range
+---
+
+## Three Types of Functions
+
+Functions can be classified by how inputs and outputs relate.
+
+- **Injective** — no output is hit more than once
+- **Surjective** — every output is hit at least once
+- **Bijective** — both injective and surjective
+
+---
+
+## Injective (One-to-One)
+
+A function is **injective** if different inputs always give different outputs.
+
+$$f(a) = f(b) \implies a = b$$
+
+> No two inputs share the same output.
+
+::injective
+
+---
+
+## Surjective (Onto)
+
+A function is **surjective** if every element in the codomain is hit by some input.
+
+$$\text{Range} = \text{Codomain}$$
+
+> Nothing in the codomain is left unused.
+
+::surjective
+
+---
+
+## Bijective (One-to-One and Onto)
+
+A function is **bijective** if it is both injective and surjective.
+
+- Each output is hit **exactly once**
+- Every output **is hit**
+
+> Perfect pairing — each input matches exactly one output, and vice versa.
+
+::bijective
+
+---
+
+## Summary
+
+| Type | Condition |
+|------|-----------|
+| Injective | No output hit more than once |
+| Surjective | Every output hit at least once |
+| Bijective | Every output hit exactly once |
+
+---
+
+## Why It Matters
+
+**Bijective functions have inverses.**
+
+If $f: A \to B$ is bijective, you can reverse it: $f^{-1}: B \to A$
+
+This works because:
+- Injective means no ambiguity going backwards
+- Surjective means every element in B came from somewhere
+
+---
