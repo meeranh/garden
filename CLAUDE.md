@@ -75,6 +75,91 @@ Adapt this pattern to fit the subject - not every topic needs all sections.
 
 ---
 
+## Formatting (Use Generously)
+
+Formatting adds visual rhythm and emphasis. Use it liberally.
+
+### Section Breaks (`---`)
+Use `---` frequently to create "slide-like" breaks. Almost every few paragraphs:
+```markdown
+A set is a collection of distinct objects.
+
+---
+
+**Examples from everyday life:**
+
+- A bag of marbles — that's a set of marbles
+- Your playlist — that's a set of songs
+
+---
+
+## Next Section
+```
+
+### Bold (`**...**`)
+Use for **key terms**, **emphasis**, and **labels**:
+```markdown
+A **set** is a collection of distinct objects.
+
+The result is true only when **both** are true.
+
+**Example:** Nuclear launch system
+
+There are **five** basic connectives:
+```
+
+### Italics (`*...*`)
+Use for *softer emphasis*, *asides*, and *contrast*:
+```markdown
+That's it. Not "maybe true" — it must be *definitively* one or the other.
+
+Think of it like a checklist — *every item must be checked*.
+
+A set cares about *what's in it*, not *how many times* you wrote it.
+
+*This lets us focus on the structure, not the specific words.*
+```
+
+### Blockquotes (`>`)
+Use for **definitions**, **key insights**, and **memorable takeaways**:
+```markdown
+> A **proposition** is a statement that is either **true** or **false**.
+
+> **Key insight:** IF-THEN is only false when the condition happens but the result doesn't.
+
+> This reads: "2 **is in** the set"
+
+> **When you need more than just the previous value, use strong induction.**
+```
+
+### Tables
+Use for comparisons, examples, and structured data:
+```markdown
+| Statement | True or False? |
+|-----------|----------------|
+| "The sky is blue" | True |
+| "2 + 2 = 5" | False |
+```
+
+### Combining Formats
+Layer emphasis for rhythm:
+```markdown
+> **Only the first row is true.** One officer alone cannot launch. *Both must act together.*
+
+The symbol $\in$ means "is an element of" or "belongs to":
+
+> This reads: "2 **is in** the set $\{1, 2, 3\}$"
+```
+
+### Formatting Patterns
+- **Bold** = punch words, key terms, labels
+- **Italics** = soft emphasis, qualifiers, asides
+- **Blockquotes** = definitions, insights, takeaways
+- **Tables** = comparisons, truth tables, examples
+- **`---`** = visual breathing room (use often!)
+
+---
+
 ## LaTeX
 
 **Inline:** `$x^2$` renders within text
