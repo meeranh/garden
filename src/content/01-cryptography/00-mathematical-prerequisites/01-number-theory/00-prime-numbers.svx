@@ -1,0 +1,67 @@
+---
+title: Prime Numbers
+---
+
+## What's a Prime?
+
+A **prime number** is a number that can only be divided evenly by **1 and itself**.
+
+---
+
+**Is 7 prime?**
+
+Try to divide it:
+
+- $7 \div 2$ = 3.5 (not even)
+- $7 \div 3$ = 2.33... (not even)
+- $7 \div 4$ = 1.75 (not even)
+- $7 \div 5$ = 1.4 (not even)
+- $7 \div 6$ = 1.16... (not even)
+
+Nothing works except 1 and 7. **Yes, 7 is prime.**
+
+---
+
+**Is 12 prime?**
+
+- $12 \div 2$ = 6 (even!)
+
+We found a divisor. **No, 12 is not prime.**
+
+---
+
+## The First Few Primes
+
+$$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31...$$
+
+Some patterns:
+
+- **2 is the only even prime.** Every other even number is divisible by 2.
+- **1 is not prime.** By definition, primes must be greater than 1.
+- **Primes get sparser** as numbers get bigger, but they never stop.
+
+---
+
+## Composite Numbers
+
+Numbers that *aren't* prime are called **composite**. They can be broken into smaller factors.
+
+| Number | Prime or Composite? | Why |
+|--------|---------------------|-----|
+| 7 | Prime | Only 1 × 7 |
+| 12 | Composite | 2 × 6, 3 × 4 |
+| 23 | Prime | Only 1 × 23 |
+| 15 | Composite | 3 × 5 |
+
+---
+
+## Prime Factorization
+
+Every composite number can be written as a product of primes.
+
+- $12 = 2 \times 2 \times 3$
+- $30 = 2 \times 3 \times 5$
+- $100 = 2 \times 2 \times 5 \times 5$
+
+> This breakdown is **unique**. There's only one way to factor a number into primes.
+

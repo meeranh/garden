@@ -10,6 +10,14 @@ When explaining things in the terminal:
 
 ---
 
+## Content Workflow
+
+**Teach me first, then write the chapter.**
+
+Before writing any content file, explain the concept to me in the terminal. Let me understand it, ask questions, and confirm I get it. Only then write the `.svx` file.
+
+---
+
 ## Content Philosophy
 
 **Teach simply, not simplistically.** We explain complex ideas through:
@@ -31,6 +39,9 @@ src/content/00-subject/00-section/01-topic-name.svx
 ```
 - Numeric prefixes (`00-`, `01-`) control ordering
 - Kebab-case names become URL slugs
+
+### Curriculum
+Subject curricula are in the `curriculum/` folder. Check these to see what topics to cover next.
 
 ### Structure
 ```markdown
@@ -72,6 +83,20 @@ Give the precise definition or formal statement.
 Each topic follows: **Why?** → **What is it?** → **Examples** → **Formal definition** → **Summary**
 
 Adapt this pattern to fit the subject - not every topic needs all sections.
+
+### Index Files
+Index files (`index.svx`) should contain **only the title frontmatter**. No content.
+```markdown
+---
+title: Section Name
+---
+```
+
+### Writing Style
+- **Never use em dashes** (—). Use "and", commas, or rephrase instead.
+- **No "Quick Practice" or "Summary" sections.** The content should stand on its own.
+- **Don't let examples break the flow.** One clear example per concept is enough. Too many examples interrupt the natural reading flow and make things harder to understand, not easier.
+- **No trailing `---` at end of files.** The system adds this automatically.
 
 ---
 
@@ -276,9 +301,9 @@ Place in `animations/` subdirectory alongside content:
 
 ### Animation Principles
 
-1. **Actual motion** - Elements should move, appear, transform. Not static diagrams flipping between states.
-2. **CSS transitions** - Add `transition: all 0.3s ease` to elements that change
-3. **Step-driven state** - Use `$derived.by()` to compute display from `currentStep`
+1. **Use D3.js** for smooth animations and transitions
+2. **Actual motion** - Elements should move, appear, transform. Not static diagrams flipping between states.
+3. **Step-driven state** - Animate through steps with clear labels showing what's happening
 4. **Progressive reveal** - Each step adds one piece of understanding
 
 ### Colors (never hardcode)

@@ -1,0 +1,117 @@
+---
+title: Modular Operations
+---
+
+## The Core Idea
+
+Addition, subtraction, and multiplication all work the same way:
+
+> **Do the operation, then take mod.**
+
+---
+
+## Addition
+
+$$(7 + 8) \mod 12 = 15 \mod 12 = 3$$
+
+Clock intuition: 7 o'clock plus 8 hours lands on **3 o'clock**.
+
+---
+
+## Subtraction
+
+$$(3 - 7) \mod 12 = -4 \mod 12 = 8$$
+
+Clock intuition: 3 o'clock minus 7 hours, go **backwards** to **8 o'clock**.
+
+---
+
+**What about negative results?**
+
+Mod always gives a result between $0$ and $n-1$, where $n$ is the modulus. Negative numbers aren't in that range.
+
+The fix: **add the modulus until positive**.
+
+---
+
+Think about the clock. What's $-1 \mod 12$?
+
+Go 1 step *backwards* from 0. You land on **11**.
+
+So $-1 \mod 12 = 11$. We get there by computing $-1 + 12 = 11$.
+
+---
+
+What about $-4 \mod 12$?
+
+Go 4 steps backwards from 0: $0 \to 11 \to 10 \to 9 \to 8$.
+
+So $-4 \mod 12 = 8$. Or just compute $-4 + 12 = 8$.
+
+---
+
+**More examples:**
+
+| Expression | Calculation | Result |
+|------------|-------------|--------|
+| $-3 \mod 7$ | $-3 + 7$ | **4** |
+| $-5 \mod 8$ | $-5 + 8$ | **3** |
+| $-13 \mod 5$ | $-13 + 5 + 5 + 5$ | **2** |
+
+If one addition isn't enough, keep adding until you're positive.
+
+---
+
+## Multiplication
+
+$$(5 \times 7) \mod 12 = 35 \mod 12 = 11$$
+
+Same pattern: multiply, then take the remainder.
+
+---
+
+## The Key Insight
+
+Here's something important:
+
+> Numbers with the **same remainder** are **interchangeable**.
+
+What does this mean? Since $17 \mod 12 = 5$, we can swap 17 for 5 in any mod 12 calculation.
+
+They're the same position on the clock. They behave identically.
+
+---
+
+## The Shortcut
+
+Since we can swap any number for its remainder, we can **simplify before computing**.
+
+Take $(17 \times 25) \mod 12$:
+
+**The hard way:** $17 \times 25 = 425$, then $425 \mod 12 = 5$
+
+**The easy way:** $17 \mod 12 = 5$ and $25 \mod 12 = 1$. Now $5 \times 1 = 5$.
+
+Same answer. Much smaller numbers.
+
+---
+
+This works for addition too.
+
+$(56 + 37) \mod 10$
+
+**The hard way:** $56 + 37 = 93$, then $93 \mod 10 = 3$
+
+**The easy way:** $56 \mod 10 = 6$ and $37 \mod 10 = 7$. Now $6 + 7 = 13$, and $13 \mod 10 = 3$.
+
+---
+
+## Why This Matters
+
+In cryptography, we compute things like:
+
+$$M^{65537} \mod n$$
+
+If you computed $M^{65537}$ first, you'd get a number with **millions of digits**.
+
+Instead, take mod after *each* multiplication. The numbers stay small throughout, and you get the same answer.

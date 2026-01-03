@@ -1,0 +1,76 @@
+---
+title: XOR Operation
+---
+
+## What is XOR?
+
+XOR stands for **exclusive or**.
+
+It compares two bits and asks: *are they different?*
+
+> **Different → 1.** Same → 0.
+
+---
+
+## The Rule
+
+| $A$ | $B$ | $A \oplus B$ |
+|---|---|---------|
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+
+Two 0s? Same → **0**
+
+Two 1s? Same → **0**
+
+One of each? Different → **1**
+
+---
+
+## XOR with Binary Numbers
+
+To XOR two binary numbers, compare each column:
+
+::xor-bits
+
+---
+
+## Key Properties
+
+**1. Anything XOR itself is 0**
+
+$$A \oplus A = 0$$
+
+Same bits cancel out.
+
+---
+
+**2. Anything XOR 0 is itself**
+
+$$A \oplus 0 = A$$
+
+XOR with 0 changes nothing.
+
+---
+
+**3. XOR twice cancels out**
+
+$$A \oplus B \oplus B = A$$
+
+This is the magic property.
+
+---
+
+## Why Cryptography Loves XOR
+
+That third property makes XOR perfect for encryption.
+
+- Take a message
+- XOR it with a key → get ciphertext
+- XOR ciphertext with the same key → get message back
+
+::xor-encrypt
+
+> Same operation encrypts *and* decrypts.

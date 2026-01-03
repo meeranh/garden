@@ -1,0 +1,140 @@
+---
+title: Greatest Common Divisor
+---
+
+## What is GCD?
+
+Sometimes two numbers share factors.
+
+- 12 and 18 are both divisible by 2
+- They're also both divisible by 3
+- And both divisible by 6
+
+The **Greatest Common Divisor** is the *biggest* number that divides both evenly.
+
+> GCD(12, 18) = 6
+
+---
+
+## Finding GCD: The Prime Factor Method
+
+Here's the idea: break each number into primes, see what they share.
+
+---
+
+**Example:** GCD(12, 18)
+
+First, find the prime factorization of each:
+
+$$12 = 2 \times 2 \times 3$$
+
+$$18 = 2 \times 3 \times 3$$
+
+What's common? One 2 and one 3. Multiply them:
+
+$$\gcd = 2 \times 3 = 6$$
+
+::gcd-factors
+
+---
+
+**Another example:** GCD(30, 45)
+
+$$30 = 2 \times 3 \times 5$$
+
+$$45 = 3 \times 3 \times 5$$
+
+What's common? One 3 and one 5. Multiply them:
+
+$$\gcd = 3 \times 5 = 15$$
+
+---
+
+## The Problem with Prime Factorization
+
+This method works, but there's a catch.
+
+> Factoring big numbers is *hard*.
+
+For small numbers like 12 or 45, it's easy. But what about GCD(1,234,567 and 7,654,321)?
+
+Finding the prime factors of those numbers would take a while.
+
+We need a faster method.
+
+---
+
+## The Euclidean Algorithm
+
+This 2,300-year-old algorithm finds the GCD *without* factoring.
+
+The idea is simple: **repeatedly divide and keep the remainder**.
+
+---
+
+**The steps:**
+
+1. Divide the bigger number by the smaller
+2. Keep the remainder
+3. Replace the bigger number with the smaller, and the smaller with the remainder
+4. Repeat until the remainder is 0
+
+> When you hit 0, the last non-zero remainder is the GCD.
+
+---
+
+**Example:** GCD(48, 18)
+
+Let's walk through it step by step.
+
+---
+
+**Step 1:** Divide 48 by 18
+
+$$48 \div 18 = 2$$ (remainder 12)
+
+Now we have a new pair: (18, 12)
+
+---
+
+**Step 2:** Divide 18 by 12
+
+$$18 \div 12 = 1$$ (remainder 6)
+
+New pair: (12, 6)
+
+---
+
+**Step 3:** Divide 12 by 6
+
+$$12 \div 6 = 2$$ (remainder 0)
+
+We hit 0. The last non-zero remainder was **6**.
+
+> GCD(48, 18) = **6**
+
+::gcd-euclidean
+
+---
+
+## Connection to Coprime
+
+Remember **coprime** numbers? Two numbers are coprime when they share *no* common factors.
+
+In GCD terms:
+
+> Two numbers are **coprime** when their GCD is 1.
+
+---
+
+$$\gcd(8, 15) = 1 \rightarrow \text{coprime}$$
+
+$$\gcd(12, 18) = 6 \rightarrow \text{not coprime}$$
+
+---
+
+**Why it makes sense:**
+
+- GCD = 1 means the only number that divides both is 1
+- That means no shared prime factors
+- That's exactly what coprime means

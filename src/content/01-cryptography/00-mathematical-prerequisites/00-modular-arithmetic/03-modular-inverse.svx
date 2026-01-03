@@ -1,0 +1,73 @@
+---
+title: Modular Inverse
+---
+
+## The Problem
+
+In regular math, every number has an inverse:
+
+$$5 \times \frac{1}{5} = 1$$
+
+The inverse of 5 is $\frac{1}{5}$. Multiply them, you get 1.
+
+---
+
+But in modular arithmetic, **there are no fractions**. Everything is whole numbers.
+
+So how do we "undo" multiplication?
+
+---
+
+## The Modular Inverse
+
+The **modular inverse** of $a$ (mod $n$) is a number $b$ such that:
+
+$$a \times b \equiv 1 \pmod{n}$$
+
+> When you multiply $a$ and $b$, then take mod $n$, you get **1**.
+
+---
+
+## Finding an Inverse
+
+**Example:** What's the inverse of 3 mod 7?
+
+We need a number that, when multiplied by 3, gives remainder 1.
+
+Let's try them all:
+
+| Try | Calculation | Result mod 7 | Is it 1? |
+|-----|-------------|--------------|----------|
+| $3 \times 1$ | $3$ | $3$ | ✗ |
+| $3 \times 2$ | $6$ | $6$ | ✗ |
+| $3 \times 3$ | $9$ | $2$ | ✗ |
+| $3 \times 4$ | $12$ | $5$ | ✗ |
+| $3 \times 5$ | $15$ | $1$ | ✓ |
+
+**Found it.** The inverse of 3 mod 7 is **5**.
+
+---
+
+We write this as:
+
+$$3^{-1} \equiv 5 \pmod{7}$$
+
+Check: $3 \times 5 = 15$, and $15 \mod 7 = 1$. ✓
+
+::inverse-search
+
+---
+
+## Why Do We Care?
+
+In regular math, division is just multiplying by the inverse:
+
+$$a \div b = a \times \frac{1}{b}$$
+
+Same in modular arithmetic. To "divide" by $b$, multiply by $b$'s inverse.
+
+---
+
+In RSA encryption, the private key $d$ is the modular inverse of the public exponent $e$.
+
+Finding that inverse is how you generate the key pair.

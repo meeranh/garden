@@ -1,0 +1,72 @@
+---
+title: Fermat's Little Theorem
+---
+
+## The Setup
+
+Pick any prime number $p$.
+
+Pick any number $a$ that's *not* divisible by $p$.
+
+---
+
+## The Theorem
+
+Raise $a$ to the power $(p - 1)$. Divide by $p$.
+
+> The remainder is always **1**.
+
+In notation:
+
+$$a^{p-1} \equiv 1 \pmod{p}$$
+
+---
+
+## Example
+
+Let $p = 7$ (prime) and $a = 3$.
+
+$$3^{7-1} = 3^6 = 729$$
+
+$$729 \div 7 = 104 \text{ remainder } 1$$
+
+> $3^6 \equiv 1 \pmod{7}$ ✓
+
+---
+
+## Another Example
+
+Let $p = 5$ and $a = 2$.
+
+$$2^{5-1} = 2^4 = 16$$
+
+$$16 \div 5 = 3 \text{ remainder } 1$$
+
+> $2^4 \equiv 1 \pmod{5}$ ✓
+
+---
+
+## Why It's Useful
+
+Imagine you need to compute $3^{100} \mod 7$.
+
+That's a huge number. But we know $3^6 \equiv 1 \pmod{7}$.
+
+---
+
+Rewrite the exponent:
+
+$$100 = 6 \times 16 + 4$$
+
+So:
+
+$$3^{100} = 3^{6 \times 16 + 4} = (3^6)^{16} \times 3^4$$
+
+Since $3^6 \equiv 1$:
+
+$$\equiv 1^{16} \times 3^4 = 81$$
+
+$$81 \mod 7 = 4$$
+
+> Instead of computing $3^{100}$, we only needed $3^4$.
+

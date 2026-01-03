@@ -93,7 +93,15 @@
 
 				<button
 					class="btn primary"
-					onclick={() => (isPlaying ? controller?.pause() : controller?.play())}
+					onclick={() => {
+						if (isPlaying) {
+							controller?.pause();
+						} else if (isAtEnd) {
+							controller?.replay();
+						} else {
+							controller?.play();
+						}
+					}}
 					title={isPlaying ? 'Pause' : 'Play'}
 				>
 					{#if isPlaying}

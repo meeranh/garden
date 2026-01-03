@@ -1,0 +1,85 @@
+---
+title: Coprime Numbers
+---
+
+## What's a Factor?
+
+A **factor** is a number that fits into another number evenly.
+
+---
+
+To find the factors of 12, find all the ways to multiply two numbers to get 12:
+
+- $12 = 1 \times 12$
+- $12 = 2 \times 6$
+- $12 = 3 \times 4$
+
+> **Factors of 12:** 1, 2, 3, 4, 6, 12
+
+---
+
+## Shared Factors
+
+Two numbers **share a factor** if the same number divides both evenly.
+
+---
+
+**Do 8 and 12 share any factors?**
+
+Factors of 8: 1, **2**, **4**, 8
+
+Factors of 12: 1, **2**, 3, **4**, 6, 12
+
+> **Shared factors:** 1, 2, 4
+
+---
+
+## Coprime
+
+Two numbers are **coprime** if they share **no factors except 1**.
+
+---
+
+| Numbers | Shared factors | Coprime? |
+|---------|----------------|----------|
+| 8 and 12 | 1, 2, 4 | **No** |
+| 9 and 14 | 1 only | **Yes** |
+| 4 and 8 | 1, 2, 4 | **No** |
+| 3 and 7 | 1 only | **Yes** |
+
+---
+
+## Why Coprime Matters
+
+Remember modular inverses? Not every number has one.
+
+> **The rule:** $a$ has an inverse mod $n$ **only if** $a$ and $n$ are coprime.
+
+---
+
+**Why?**
+
+Take **4 mod 8**. They share factor 4.
+
+Multiply 4 by anything: 4, 8, 12, 16, 20... every result is divisible by 4.
+
+Take mod 8: you get 4, 0, 4, 0, 4... only **0 and 4**. Never 1.
+
+> Shared factor → results stuck in multiples → can't reach 1 → **no inverse**.
+
+---
+
+**But 3 and 7 are coprime...**
+
+- $3 \times 5 = 15$
+- $15 \mod 7 = 1$ ✓
+
+We can reach 1. The inverse exists.
+
+> When numbers are coprime, you *can* reach 1. The inverse exists.
+
+---
+
+In RSA, certain numbers *must* be coprime for the math to work. We'll see exactly which ones when we get there.
+
+> **Coprime isn't just theory.** It's what makes RSA possible.

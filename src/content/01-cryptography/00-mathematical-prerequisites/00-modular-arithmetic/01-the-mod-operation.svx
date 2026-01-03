@@ -1,0 +1,98 @@
+---
+title: The Mod Operation
+---
+
+## What is Mod?
+
+The **mod** operation gives you the **remainder** after division.
+
+---
+
+**Example:**
+
+$$17 \div 5 = 3 \text{ remainder } 2$$
+
+So:
+
+$$17 \mod 5 = 2$$
+
+That's it. Mod = remainder.
+
+---
+
+## Reading Mod
+
+When you see $a \mod n$, ask yourself:
+
+> "If I divide $a$ by $n$, what's left over?"
+
+---
+
+**Examples:**
+
+| Expression | Division | Remainder |
+|------------|----------|-----------|
+| $10 \mod 3$ | $10 \div 3 = 3$ r **1** | 1 |
+| $15 \mod 5$ | $15 \div 5 = 3$ r **0** | 0 |
+| $7 \mod 10$ | $7 \div 10 = 0$ r **7** | 7 |
+| $23 \mod 7$ | $23 \div 7 = 3$ r **2** | 2 |
+
+---
+
+## The Clock Analogy
+
+Think of a **12-hour clock**.
+
+What time is it **15 hours** after 12 o'clock?
+
+$$15 \mod 12 = 3$$
+
+It's **3 o'clock**. The hour hand *wrapped around* past 12.
+
+---
+
+What about **27 hours** after 12?
+
+$$27 \mod 12 = 3$$
+
+Still **3 o'clock**. It wrapped around *twice*, but landed in the same spot.
+
+::mod-clock
+
+---
+
+## The Key Insight
+
+> Numbers that differ by the modulus land on the **same spot**.
+
+$3$, $15$, $27$, $39$ all give remainder $3$ when divided by $12$.
+
+We say these numbers are **congruent modulo 12**.
+
+---
+
+## The Range of Results
+
+The result of $x \mod n$ is always between $0$ and $n - 1$.
+
+| Modulus | Possible results |
+|---------|------------------|
+| $\mod 5$ | 0, 1, 2, 3, 4 |
+| $\mod 12$ | 0, 1, 2, 3, ..., 11 |
+| $\mod 2$ | 0, 1 |
+
+> **Mod keeps numbers in a fixed range.** They wrap around instead of growing forever.
+
+---
+
+## Why This Matters for Cryptography
+
+In cryptography, we work with **huge numbers**.
+
+RSA encryption computes things like:
+
+$$M^{65537} \mod n$$
+
+Without mod, that exponentiation would produce a number with *millions* of digits.
+
+With mod, the result stays manageable. Always less than $n$.

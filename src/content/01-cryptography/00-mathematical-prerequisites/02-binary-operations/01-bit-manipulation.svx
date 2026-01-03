@@ -1,0 +1,100 @@
+---
+title: Bit Manipulation Basics
+---
+
+## What is Bit Manipulation?
+
+Operating on individual bits inside binary numbers.
+
+You've already seen XOR. Here are the other common operations.
+
+---
+
+## AND
+
+Both bits must be 1 to get 1.
+
+| $A$ | $B$ | $A \land B$ |
+|---|---|---------|
+| 0 | 0 | 0 |
+| 0 | 1 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 1 |
+
+> Only 1 AND 1 gives 1. Everything else is 0.
+
+---
+
+**Example:**
+
+$$1011 \land 1100 = 1000$$
+
+Compare each column. Both 1? Keep it. Otherwise, 0.
+
+---
+
+## OR
+
+Either bit being 1 gives 1.
+
+| $A$ | $B$ | $A \lor B$ |
+|---|---|---------|
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 1 |
+
+> Only 0 OR 0 gives 0. Everything else is 1.
+
+---
+
+**Example:**
+
+$$1011 \lor 1100 = 1111$$
+
+---
+
+## NOT
+
+Flip every bit.
+
+$$\lnot 1011 = 0100$$
+
+1 becomes 0. 0 becomes 1.
+
+---
+
+## Left Shift
+
+Move all bits to the left. Fill the right with 0.
+
+$$1011 \ll 1 = 10110$$
+
+$$1011 \ll 2 = 101100$$
+
+> Each left shift **multiplies by 2**.
+
+---
+
+## Right Shift
+
+Move all bits to the right. Bits on the right fall off.
+
+$$1011 \gg 1 = 101$$
+
+$$1011 \gg 2 = 10$$
+
+> Each right shift **divides by 2** (drops remainder).
+
+---
+
+## Quick Reference
+
+| Operation | Symbol | What it does |
+|-----------|--------|--------------|
+| AND | $\land$ | 1 only if both are 1 |
+| OR | $\lor$ | 1 if either is 1 |
+| XOR | $\oplus$ | 1 if different |
+| NOT | $\lnot$ | Flip all bits |
+| Left shift | $\ll$ | Multiply by 2 |
+| Right shift | $\gg$ | Divide by 2 |
