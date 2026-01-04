@@ -1,0 +1,221 @@
+---
+title: Triple DES
+prerequisites:
+  - cryptography/symmetric-cryptography/des/rounds-and-keys
+---
+
+## The Problem with DES
+
+DES has a **56-bit key**.
+
+In 1977, that seemed like plenty. $2^{56}$ is about 72 quadrillion possible keys. Who could try them all?
+
+---
+
+By the late 1990s, computers had caught up.
+
+In 1998, the Electronic Frontier Foundation built a machine called **Deep Crack**. It cost $250,000 and could test 90 billion keys per second.
+
+**It broke DES in 56 hours.**
+
+---
+
+> A 56-bit key is no longer safe. We need something stronger.
+
+The question: how do we fix this *without* designing a whole new cipher?
+
+---
+
+## The Obvious Idea: Double DES
+
+What if we just encrypt twice?
+
+$$C = E_{K_2}(E_{K_1}(P))$$
+
+Use two different 56-bit keys. That's 112 bits total.
+
+To brute-force 112 bits, you'd need $2^{112}$ operations. That's... a lot. Problem solved?
+
+---
+
+**Not so fast.**
+
+There's a clever attack that breaks Double DES with far less work than you'd expect.
+
+---
+
+## The Intermediate Value
+
+Look at what happens inside Double DES:
+
+$$P \xrightarrow{E_{K_1}} M \xrightarrow{E_{K_2}} C$$
+
+**M** is the intermediate value, the result after the first encryption but before the second.
+
+Here's the key insight:
+
+> **M can be reached from both directions.**
+>
+> From the left: $M = E_{K_1}(P)$
+>
+> From the right: $M = D_{K_2}(C)$
+
+This is the weakness an attacker exploits.
+
+---
+
+## Meet-in-the-Middle Attack
+
+Say an attacker has captured one plaintext-ciphertext pair (P, C).
+
+Here's how they find the keys:
+
+---
+
+**Step 1: Attack from the left**
+
+Try every possible $K_1$ (all $2^{56}$ of them):
+
+| $K_1$ | $E_{K_1}(P) = M$ |
+|---------|-------------|
+| 0000...0000 | $M_0$ |
+| 0000...0001 | $M_1$ |
+| 0000...0010 | $M_2$ |
+| ... | ... |
+
+Store all these $(K_1, M)$ pairs in a giant lookup table.
+
+---
+
+**Step 2: Attack from the right**
+
+Now try every possible $K_2$:
+
+For each $K_2$, compute $D_{K_2}(C)$ and check if it's in the table.
+
+| $K_2$ | $D_{K_2}(C)$ | In table? |
+|---------|---------|-----------|
+| 0000...0000 | $M'_0$ | No |
+| 0000...0001 | $M'_1$ | No |
+| ... | ... | ... |
+| 1010...1101 | $M_{47}$ | **Yes!** |
+
+When you find a match, you've found both keys.
+
+---
+
+::meet-in-the-middle
+
+---
+
+## Why This Breaks Double DES
+
+**What we expected:** 2 keys with 56 bits each = 112 bits of security.
+
+To brute-force 112 bits, you'd need $2^{112}$ operations.
+
+---
+
+**What actually happens:**
+
+- Step 1: $2^{56}$ encryptions to build the table
+- Step 2: $2^{56}$ decryptions to search for matches
+- Total: $2^{56} + 2^{56} = 2^{57}$ operations
+
+You also need storage for the table (about $2^{56}$ entries), but that's manageable.
+
+---
+
+> $2^{57}$ is astronomically smaller than $2^{112}$.
+>
+> Double DES gives you **57 bits** of security, not 112.
+
+That's barely better than single DES. The "obvious" fix doesn't work.
+
+---
+
+## Triple DES: The Real Fix
+
+If two encryptions don't work, what about three?
+
+Triple DES runs **three** DES operations in sequence. The standard mode is called **EDE**:
+
+> **E**ncrypt → **D**ecrypt → **E**ncrypt
+
+$$C = E_{K_3}(D_{K_2}(E_{K_1}(P)))$$
+
+---
+
+**Why decrypt in the middle?**
+
+This seems odd. Why not just encrypt three times?
+
+The answer is **backwards compatibility**. If you use the same key for all three operations:
+
+$$E_K(D_K(E_K(P))) = E_K(P)$$
+
+The decrypt in the middle *cancels out* the first encrypt. You're left with single DES.
+
+> This lets Triple DES hardware talk to older single-DES systems. Just set all three keys equal.
+
+---
+
+## The Three Keying Modes
+
+Triple DES can use its keys in three different ways:
+
+---
+
+**Mode 1: Three Different Keys** *(most secure)*
+
+| Key | Value |
+|-----|-------|
+| $K_1$ | Key A |
+| $K_2$ | Key B |
+| $K_3$ | Key C |
+
+All three keys are independent. Total key material: **168 bits**.
+
+Effective security: **~112 bits**. Meet-in-the-middle still reduces it somewhat, but it's strong enough.
+
+---
+
+**Mode 2: Two Different Keys**
+
+| Key | Value |
+|-----|-------|
+| $K_1$ | Key A |
+| $K_2$ | Key B |
+| $K_3$ | Key A *(same as $K_1$)* |
+
+Only two unique keys. Total key material: **112 bits**.
+
+Effective security: **~80 bits**. This mode is now considered too weak.
+
+---
+
+**Mode 3: One Key** *(compatibility mode)*
+
+| Key | Value |
+|-----|-------|
+| $K_1$ | Key A |
+| $K_2$ | Key A |
+| $K_3$ | Key A |
+
+All three keys are identical. This is just **single DES** in disguise.
+
+Only used to communicate with legacy systems that don't support Triple DES.
+
+---
+
+## Why Triple DES is Deprecated
+
+Triple DES worked well for 20 years. But it has problems:
+
+1. **It's slow.** Three DES operations per block. On modern hardware, this is painfully slow compared to AES.
+
+2. **64-bit blocks are too small.** After encrypting $2^{32}$ blocks (about 32 GB), patterns start leaking. This is called the **birthday bound**.
+
+3. **AES exists.** AES is faster, uses 128-bit blocks, supports up to 256-bit keys, and was designed for modern hardware.
+
+> **NIST deprecated Triple DES in 2023.** For new systems, use AES.
