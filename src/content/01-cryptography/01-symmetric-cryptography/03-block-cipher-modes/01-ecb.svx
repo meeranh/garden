@@ -1,0 +1,86 @@
+---
+title: Electronic Codebook (ECB)
+prerequisites:
+  - cryptography/symmetric-cryptography/aes/key-expansion
+---
+
+## The Simplest Mode
+
+AES encrypts 16 bytes at a time. But what if your message is longer?
+
+**Block cipher modes** define how to handle multiple blocks. ECB is the simplest approach.
+
+---
+
+## How ECB Works
+
+Each block is encrypted independently with the same key.
+
+::ecb-encryption
+
+---
+
+## The Process
+
+1. Split plaintext into 16-byte blocks
+2. Encrypt each block separately with AES
+3. Concatenate the ciphertext blocks
+
+No block depends on any other. Each one stands alone.
+
+---
+
+## The Fatal Flaw
+
+**Identical plaintext blocks produce identical ciphertext blocks.**
+
+| Plaintext | Ciphertext |
+|-----------|------------|
+| Block A | Cipher X |
+| Block B | Cipher Y |
+| Block A | Cipher X |
+| Block A | Cipher X |
+
+See the pattern? An attacker can too.
+
+---
+
+## The Penguin Problem
+
+This is ECB's famous failure. Encrypt an image with ECB mode:
+
+::ecb-penguin
+
+The penguin is still visible. Same-colored regions encrypt to the same ciphertext.
+
+---
+
+## Why This Happens
+
+Images have **structure**. Large areas share the same pixel values.
+
+- White background blocks all encrypt to the same ciphertext
+- Black outline blocks all encrypt to the same ciphertext
+- The pattern survives encryption
+
+Any data with repeating patterns leaks information under ECB.
+
+---
+
+## When Is ECB Acceptable?
+
+Almost never. But there are edge cases:
+
+- Encrypting a single block (no pattern possible)
+- Random data with no structure
+- When you need parallelism and accept the risk
+
+For real-world encryption, use CBC or CTR instead.
+
+---
+
+## Why Learn ECB?
+
+It shows what **not** to do. Understanding ECB's weakness helps you appreciate why other modes exist.
+
+> **The lesson:** Encryption isn't just about scrambling data. It's about hiding patterns.
