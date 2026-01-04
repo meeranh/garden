@@ -1,0 +1,60 @@
+---
+title: AddRoundKey
+prerequisites:
+  - cryptography/symmetric-cryptography/aes/mix-columns
+---
+
+## The Key Step
+
+This is where the **key** actually gets used.
+
+AddRoundKey simply XORs each byte of the state with the corresponding byte of the round key.
+
+---
+
+## See It In Action
+
+::add-round-key
+
+---
+
+## Why XOR?
+
+XOR has useful properties for encryption:
+
+**Reversible:** XOR the same key again and you get the original back.
+
+$$A \oplus K \oplus K = A$$
+
+**Fast:** A single CPU instruction. No complex math.
+
+**Secure:** Without knowing the key, the output looks random.
+
+---
+
+## Round Keys
+
+AES doesn't use the same key every round. Your original key gets **expanded** into multiple round keys.
+
+| AES Version | Original Key | Round Keys |
+|-------------|--------------|------------|
+| AES-128 | 128 bits | 11 keys (K₀ - K₁₀) |
+| AES-192 | 192 bits | 13 keys (K₀ - K₁₂) |
+| AES-256 | 256 bits | 15 keys (K₀ - K₁₄) |
+
+Each round uses a different key. This is called the **Key Schedule**.
+
+---
+
+## When Does It Happen?
+
+AddRoundKey runs:
+
+- **Once before round 1** with K₀
+- **At the end of every round** with K₁, K₂, ... K₁₀
+
+It's the only operation that mixes in the key. The other three operations (SubBytes, ShiftRows, MixColumns) are the same for everyone.
+
+---
+
+Next, we'll look at how the round keys are generated from your original key.

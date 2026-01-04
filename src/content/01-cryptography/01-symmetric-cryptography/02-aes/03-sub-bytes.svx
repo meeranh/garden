@@ -1,0 +1,75 @@
+---
+title: SubBytes
+prerequisites:
+  - cryptography/symmetric-cryptography/aes/round-structure
+---
+
+## The Substitution Step
+
+SubBytes is simple: **replace each byte with a different byte** using a lookup table called the **S-box**.
+
+That's it. No complex math to understand. Just a table lookup.
+
+---
+
+## Why Do We Need This?
+
+The other three AES operations (ShiftRows, MixColumns, AddRoundKey) are all **linear**.
+
+Linear means predictable. If an attacker knows the math, they can write equations and solve backwards to find the key.
+
+---
+
+The S-box is **non-linear**.
+
+There's no simple formula that describes it. You can't reverse-engineer it with algebra.
+
+> This provides **confusion**, making the relationship between the key and ciphertext impossibly complex.
+
+---
+
+## How It Works
+
+Every byte has two hex digits. For example: **0x53**
+
+Split it:
+- First digit → **row** (5)
+- Second digit → **column** (3)
+
+Look up row 5, column 3 in the S-box table.
+
+The value at that intersection is the output: **0xED**
+
+---
+
+**That's the entire operation.** Do this for all 16 bytes in the state, independently.
+
+---
+
+## The S-box Lookup
+
+::sub-bytes
+
+---
+
+## The S-box Table
+
+The AES S-box has **256 entries** (16 rows × 16 columns).
+
+Each possible byte value (0x00 to 0xFF) maps to exactly one output byte.
+
+---
+
+Here's a portion of it:
+
+|   | 0 | 1 | 2 | 3 | ... |
+|---|---|---|---|---|-----|
+| **0** | 63 | 7C | 77 | 7B | ... |
+| **1** | CA | 82 | C9 | 7D | ... |
+| **2** | B7 | FD | 93 | 26 | ... |
+| **3** | 04 | C7 | 23 | C3 | ... |
+| **...** | ... | ... | ... | ... | ... |
+
+---
+
+Next, we'll look at ShiftRows, where bytes move to different positions in the state.

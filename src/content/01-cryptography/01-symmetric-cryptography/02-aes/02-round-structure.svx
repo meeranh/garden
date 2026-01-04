@@ -1,0 +1,64 @@
+---
+title: Round Structure
+prerequisites:
+  - cryptography/symmetric-cryptography/aes/structure
+---
+
+## How AES Encrypts
+
+AES processes your data in **rounds**. Each round scrambles the data further, making it harder to crack.
+
+For AES-128 (the most common version), there are **10 rounds**.
+
+---
+
+## The Encryption Flow
+
+::aes-structure
+
+---
+
+## Step by Step
+
+**Initial step:** XOR the plaintext with the first key ($K_0$). This is called AddRoundKey.
+
+**Rounds 1-9:** Apply all four operations: SubBytes, ShiftRows, MixColumns, AddRoundKey.
+
+**Round 10:** Same as above, but **skip MixColumns**.
+
+---
+
+## Why Skip MixColumns in the Final Round?
+
+It's a design choice that makes encryption and decryption symmetrical.
+
+Without this, you'd need extra steps when decrypting. The math works out cleaner this way.
+
+---
+
+## The Four Operations
+
+Each round applies these operations in order:
+
+| Operation | What it does |
+|-----------|--------------|
+| **SubBytes** | Replace each byte using a lookup table |
+| **ShiftRows** | Shift rows left by different amounts |
+| **MixColumns** | Mix bytes within each column |
+| **AddRoundKey** | XOR with the round key |
+
+---
+
+## Different Key Sizes, Different Rounds
+
+| Key Size | Rounds |
+|----------|--------|
+| 128 bits | **10** |
+| 192 bits | **12** |
+| 256 bits | **14** |
+
+More key bits means more rounds. This ensures every bit of the key influences the final output.
+
+---
+
+Next, we'll look at each operation in detail, starting with SubBytes.

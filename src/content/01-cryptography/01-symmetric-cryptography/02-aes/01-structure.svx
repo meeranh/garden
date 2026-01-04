@@ -1,0 +1,109 @@
+---
+title: Blocks, Keys, and Rounds
+prerequisites:
+  - cryptography/symmetric-cryptography/aes/history
+---
+
+## A Bigger Block
+
+DES encrypts **64 bits** at a time.
+
+AES encrypts **128 bits** at a time. That's 16 bytes, or 16 characters of text.
+
+> Larger blocks mean fewer encryption operations for the same amount of data, and better resistance to certain attacks.
+
+---
+
+## The State Matrix
+
+Here's where AES differs from DES.
+
+AES doesn't treat those 16 bytes as a long row of bits. Instead, it arranges them into a **4×4 grid** called the **state**.
+
+---
+
+If your 16 bytes are:
+
+$$b_0, b_1, b_2, b_3, b_4, b_5, b_6, b_7, b_8, b_9, b_{10}, b_{11}, b_{12}, b_{13}, b_{14}, b_{15}$$
+
+AES arranges them like this:
+
+| | Col 0 | Col 1 | Col 2 | Col 3 |
+|---|-------|-------|-------|-------|
+| **Row 0** | $b_0$ | $b_4$ | $b_8$ | $b_{12}$ |
+| **Row 1** | $b_1$ | $b_5$ | $b_9$ | $b_{13}$ |
+| **Row 2** | $b_2$ | $b_6$ | $b_{10}$ | $b_{14}$ |
+| **Row 3** | $b_3$ | $b_7$ | $b_{11}$ | $b_{15}$ |
+
+---
+
+**Notice:** the bytes fill in **column by column**, not row by row.
+
+This matters because AES operations work on rows and columns separately. The way bytes are arranged affects how they mix together.
+
+---
+
+## Three Key Sizes
+
+AES is flexible. You choose your security level:
+
+| Key Size | Bits of Security | Use Case |
+|----------|------------------|----------|
+| **128 bits** | 128 | Standard, fast |
+| **192 bits** | 192 | Higher security |
+| **256 bits** | 256 | Maximum security |
+
+> **128-bit AES is still unbroken.** 256-bit is often used when regulations or paranoia demand it.
+
+---
+
+## Rounds
+
+Each AES encryption runs multiple **rounds**. Each round scrambles the data further.
+
+**More key bits = more rounds:**
+
+| Key Size | Number of Rounds |
+|----------|------------------|
+| 128 bits | **10** rounds |
+| 192 bits | **12** rounds |
+| 256 bits | **14** rounds |
+
+---
+
+**Why more rounds for bigger keys?**
+
+A larger key has more bits of information. The cipher needs more mixing to ensure *every* key bit influences *every* output bit.
+
+If you used 256-bit keys with only 10 rounds, some key bits might not fully affect the output.
+
+---
+
+## What Happens Each Round
+
+Every round applies **four operations** to the state:
+
+| Step | Operation | What it does |
+|------|-----------|--------------|
+| 1 | **SubBytes** | Replace each byte using a lookup table |
+| 2 | **ShiftRows** | Shift rows left by different amounts |
+| 3 | **MixColumns** | Mix bytes within each column |
+| 4 | **AddRoundKey** | XOR with the round key |
+
+---
+
+**The final round is special.** It skips MixColumns.
+
+Why? It's a design choice that makes encryption and decryption more symmetrical. The math works out cleaner.
+
+---
+
+## Not a Feistel Cipher
+
+DES uses a **Feistel network**: split the block in half, process one half, swap, repeat.
+
+AES is different. It's a **substitution-permutation network**: transform the *entire* block every round.
+
+---
+
+Next, we'll look at a simplified version of AES that's small enough to compute by hand. Once you understand that, the full AES will make sense.

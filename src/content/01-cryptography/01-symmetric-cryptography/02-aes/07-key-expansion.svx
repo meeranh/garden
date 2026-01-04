@@ -1,0 +1,61 @@
+---
+title: Key Expansion
+prerequisites:
+  - cryptography/symmetric-cryptography/aes/add-round-key
+---
+
+## From One Key to Many
+
+You provide one key. AES needs **11 round keys** (for AES-128).
+
+The Key Schedule expands your 16-byte key into 176 bytes of round key material.
+
+---
+
+## The Process
+
+The original key becomes the first round key ($K_0$).
+
+Each new round key is built from the previous one using:
+
+1. **RotWord** — rotate 4 bytes upward
+2. **SubWord** — apply the S-box to each byte
+3. **XOR with Rcon** — add the round constant
+4. **XOR with previous columns**
+
+::key-expansion
+
+---
+
+## Round Constants
+
+The round constants are **powers of 2** in the AES finite field:
+
+$$\text{Rcon}[i] = 2^{i-1} \text{ in GF}(2^8)$$
+
+| Round | Rcon |
+|-------|------|
+| 1 | 01 |
+| 2 | 02 |
+| 3 | 04 |
+| 4 | 08 |
+| 5 | 10 |
+| 6 | 20 |
+| 7 | 40 |
+| 8 | 80 |
+| 9 | 1B |
+| 10 | 36 |
+
+> After $2^7 = \text{0x80}$, the values wrap around using the AES polynomial. That's why round 9 is **1B**, not 100.
+
+---
+
+## Why This Complexity?
+
+If round keys were too similar, attackers could exploit patterns.
+
+The rotations, S-box, and varying constants ensure each round key looks **completely different** from the others, even though they all came from your single key.
+
+---
+
+That completes the four AES operations and key schedule. Next, we can look at how decryption reverses everything.

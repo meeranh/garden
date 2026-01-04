@@ -1,0 +1,48 @@
+---
+title: ShiftRows
+prerequisites:
+  - cryptography/symmetric-cryptography/aes/sub-bytes
+---
+
+## Moving Bytes Around
+
+After SubBytes substitutes each byte, ShiftRows **rearranges** them.
+
+Each row of the state gets shifted left by a different amount:
+
+| Row | Shift Amount |
+|-----|--------------|
+| Row 0 | No shift |
+| Row 1 | Shift left by 1 |
+| Row 2 | Shift left by 2 |
+| Row 3 | Shift left by 3 |
+
+---
+
+The shifts are **circular**. Bytes that fall off the left side wrap around to the right.
+
+---
+
+## See It In Action
+
+::shift-rows
+
+---
+
+## Why Shift?
+
+SubBytes works on each byte **independently**. The bytes don't interact with each other.
+
+ShiftRows moves bytes into **different columns**.
+
+---
+
+This matters because MixColumns (the next operation) combines bytes **within each column**.
+
+After ShiftRows, bytes that started in different columns are now in the same column. When MixColumns combines them, it mixes bytes from across the original state.
+
+> This is called **diffusion**. Change one input byte, and it affects bytes in multiple columns.
+
+---
+
+Next, we'll look at MixColumns, where bytes within each column get combined.

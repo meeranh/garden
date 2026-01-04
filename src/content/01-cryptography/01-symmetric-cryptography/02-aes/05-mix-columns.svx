@@ -1,0 +1,62 @@
+---
+title: MixColumns
+prerequisites:
+  - cryptography/symmetric-cryptography/aes/shift-rows
+---
+
+## Mixing Within Columns
+
+ShiftRows moved bytes across columns. Now MixColumns **blends the bytes within each column**.
+
+Each column has 4 bytes. After MixColumns, every output byte is influenced by all 4 input bytes.
+
+---
+
+## See It In Action
+
+::mix-columns
+
+---
+
+## What Happens
+
+For each column:
+
+| Input | Output |
+|-------|--------|
+| 4 bytes | 4 new bytes |
+
+Every output byte is calculated from **all 4 input bytes** using a fixed formula.
+
+Change any one input → all 4 outputs change.
+
+---
+
+## The Fixed Matrix
+
+The mixing is done by multiplying each column by this matrix:
+
+$$
+\begin{bmatrix}
+2 & 3 & 1 & 1 \\
+1 & 2 & 3 & 1 \\
+1 & 1 & 2 & 3 \\
+3 & 1 & 1 & 2
+\end{bmatrix}
+$$
+
+The multiplication uses finite field arithmetic, not regular math. But the key point: this specific matrix guarantees **maximum mixing**.
+
+---
+
+## Why This Matrix?
+
+It's an **MDS matrix** (Maximum Distance Separable).
+
+This means: change any input byte, and **all** output bytes must change. Not some. All.
+
+> This gives AES the strongest possible diffusion within each column.
+
+---
+
+Next, we'll look at AddRoundKey, where the key gets XORed into the state.

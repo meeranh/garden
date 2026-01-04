@@ -1,0 +1,125 @@
+---
+title: The NIST Competition
+prerequisites:
+  - cryptography/symmetric-cryptography/des/triple-des
+---
+
+## DES Was Dying
+
+By the mid-1990s, DES was in trouble.
+
+Its **56-bit key** could be brute-forced. The EFF proved this in 1998 by cracking DES in under a day.
+
+Triple DES worked, but it was **three times slower** than single DES. Not ideal for a world moving online.
+
+---
+
+The cryptographic community needed something new. Something fast, secure, and built for modern hardware.
+
+> NIST decided to hold a **public competition** to find the next encryption standard.
+
+---
+
+## The Competition
+
+Unlike DES, which was designed behind closed doors by IBM and the NSA, this would be different.
+
+**Open. Transparent. Global.**
+
+Anyone could submit a cipher. Anyone could try to break the submissions.
+
+---
+
+**1997: NIST announces the requirements**
+
+| Requirement | Specification |
+|-------------|---------------|
+| Block size | 128 bits |
+| Key sizes | 128, 192, and 256 bits |
+| Performance | Fast in hardware *and* software |
+| License | Royalty-free worldwide |
+
+---
+
+**1998: Submissions close**
+
+**15 candidates** arrived from around the world.
+
+Ciphers from the USA, Europe, Asia, and beyond. Each claiming to be the future of encryption.
+
+---
+
+**1999: Five finalists**
+
+After a year of public analysis, NIST narrowed it down:
+
+| Cipher | Origin | Designers |
+|--------|--------|-----------|
+| **Rijndael** | Belgium | Rijmen, Daemen |
+| Serpent | UK/Israel/Norway | Anderson, Biham, Knudsen |
+| Twofish | USA | Schneier et al. |
+| RC6 | USA | Rivest et al. |
+| MARS | USA | IBM |
+
+---
+
+**2000: Rijndael wins**
+
+After three years of attacks, analysis, and debate, NIST made the call.
+
+**Rijndael** (pronounced "rain-doll") became the Advanced Encryption Standard.
+
+---
+
+## Why Rijndael?
+
+The cipher was created by two Belgian cryptographers:
+
+- **Vincent Rijmen**
+- **Joan Daemen**
+
+The name "Rijndael" combines their surnames.
+
+---
+
+**It won because of balance.**
+
+Serpent was arguably *more* secure, but slower.
+
+Twofish was fast, but more complex to implement.
+
+Rijndael hit the sweet spot:
+
+- **Fast** on everything from 8-bit smart cards to 64-bit servers
+- **Clean** mathematical structure, easy to analyze
+- **Simple** enough to implement correctly
+
+---
+
+## A New Era of Trust
+
+The DES era had a shadow of doubt. Designed in secret, with NSA involvement. Did it have backdoors?
+
+AES was different.
+
+> **Three years of open cryptanalysis.** Hundreds of researchers attacking all 15 candidates. Rijndael survived.
+
+---
+
+**The timeline:**
+
+| Year | Event |
+|------|-------|
+| 1997 | Competition announced |
+| 1998 | 15 candidates submitted |
+| 1999 | 5 finalists selected |
+| 2000 | Rijndael wins |
+| 2001 | Published as **FIPS 197**, officially named AES |
+
+---
+
+AES has been the global standard for over two decades.
+
+It encrypts your WiFi, your banking, your messages. No practical attack has ever broken it.
+
+Next, we'll look at *how* it works.
