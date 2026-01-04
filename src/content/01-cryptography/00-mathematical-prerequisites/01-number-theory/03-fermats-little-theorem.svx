@@ -18,7 +18,7 @@ Raise $a$ to the power $(p - 1)$. Divide by $p$.
 
 In notation:
 
-$$a^{p-1} \equiv 1 \pmod{p}$$
+$$a^{p-1} \mod p = 1$$
 
 ---
 
@@ -30,7 +30,7 @@ $$3^{7-1} = 3^6 = 729$$
 
 $$729 \div 7 = 104 \text{ remainder } 1$$
 
-> $3^6 \equiv 1 \pmod{7}$ ✓
+> $3^6 \mod 7 = 1$ ✓
 
 ---
 
@@ -42,7 +42,7 @@ $$2^{5-1} = 2^4 = 16$$
 
 $$16 \div 5 = 3 \text{ remainder } 1$$
 
-> $2^4 \equiv 1 \pmod{5}$ ✓
+> $2^4 \mod 5 = 1$ ✓
 
 ---
 
@@ -50,7 +50,7 @@ $$16 \div 5 = 3 \text{ remainder } 1$$
 
 Imagine you need to compute $3^{100} \mod 7$.
 
-That's a huge number. But we know $3^6 \equiv 1 \pmod{7}$.
+That's a huge number. But we know $3^6 \mod 7 = 1$.
 
 ---
 
@@ -62,9 +62,9 @@ So:
 
 $$3^{100} = 3^{6 \times 16 + 4} = (3^6)^{16} \times 3^4$$
 
-Since $3^6 \equiv 1$:
+Since $3^6 \mod 7 = 1$:
 
-$$\equiv 1^{16} \times 3^4 = 81$$
+$$= 1^{16} \times 3^4 = 81$$
 
 $$81 \mod 7 = 4$$
 
