@@ -22,9 +22,9 @@ So how do we "undo" multiplication?
 
 The **modular inverse** of $a$ (mod $n$) is a number $b$ such that:
 
-$$a \times b \equiv 1 \pmod{n}$$
+$$(a \times b) \mod n = 1$$
 
-> When you multiply $a$ and $b$, then take mod $n$, you get **1**.
+> Multiply $a$ and $b$, take mod $n$, get **1**.
 
 ---
 
