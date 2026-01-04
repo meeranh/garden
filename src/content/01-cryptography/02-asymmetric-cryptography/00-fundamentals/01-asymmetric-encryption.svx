@@ -1,0 +1,59 @@
+---
+title: Asymmetric Encryption
+---
+
+## The Idea
+
+Two keys instead of one.
+
+A **public key** and a **private key**.
+
+They're mathematically linked, but you can't figure out one from the other.
+
+---
+
+## How It Works
+
+**Public key:** Share it with everyone. Anyone can use it to encrypt messages *to* you.
+
+**Private key:** Keep it secret. Only you can decrypt those messages.
+
+---
+
+## Solving the Key Distribution Problem
+
+Remember the problem with symmetric encryption? Alice couldn't safely send Bob a key.
+
+With asymmetric encryption:
+
+1. Bob creates a key pair
+2. Bob publishes his public key (anyone can see it)
+3. Alice encrypts her message with Bob's public key
+4. Only Bob can decrypt it (he has the private key)
+
+::asymmetric-flow
+
+> Eve can see the public key. It doesn't help her. She can't decrypt anything.
+
+---
+
+## The Tradeoff
+
+Asymmetric encryption is *slow*. Much slower than symmetric.
+
+---
+
+So in practice, we use **both**:
+
+1. Use asymmetric encryption to securely share a symmetric key
+2. Use symmetric encryption for the actual data
+
+> Best of both worlds. Secure key exchange, fast encryption.
+
+---
+
+## Examples
+
+- **RSA** - the classic, based on prime factorization
+- **Diffie-Hellman** - key exchange protocol
+- **ECC** - elliptic curve cryptography, smaller keys, same security
