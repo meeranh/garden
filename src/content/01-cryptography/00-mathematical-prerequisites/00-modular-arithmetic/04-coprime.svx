@@ -2,84 +2,101 @@
 title: Coprime Numbers
 ---
 
-## What's a Factor?
+## Dividing Evenly
 
-A **factor** is a number that fits into another number evenly.
+Some divisions come out clean:
+
+$$12 \div 3 = 4$$
+
+No remainder. We say **3 divides 12 evenly**.
 
 ---
 
-To find the factors of 12, find all the ways to multiply two numbers to get 12:
+Some don't:
 
-- $12 = 1 \times 12$
-- $12 = 2 \times 6$
-- $12 = 3 \times 4$
+$$12 \div 5 = 2 \text{ remainder } 2$$
+
+5 does *not* divide 12 evenly.
+
+---
+
+## Factors
+
+A **factor** of a number is anything that divides it evenly.
+
+---
+
+**What are the factors of 12?**
+
+- $12 \div 1 = 12$ ✓
+- $12 \div 2 = 6$ ✓
+- $12 \div 3 = 4$ ✓
+- $12 \div 4 = 3$ ✓
+- $12 \div 6 = 2$ ✓
+- $12 \div 12 = 1$ ✓
 
 > **Factors of 12:** 1, 2, 3, 4, 6, 12
 
 ---
 
-## Shared Factors
+## Common Factors
 
-Two numbers **share a factor** if the same number divides both evenly.
+Sometimes two numbers share factors.
 
 ---
 
-**Do 8 and 12 share any factors?**
+**Factors of 8:** 1, 2, 4, 8
 
-Factors of 8: 1, **2**, **4**, 8
+**Factors of 12:** 1, 2, 3, 4, 6, 12
 
-Factors of 12: 1, **2**, 3, **4**, 6, 12
+What do they have in common? **1, 2, and 4**.
 
-> **Shared factors:** 1, 2, 4
+> These are called **common factors**.
 
 ---
 
 ## Coprime
 
-Two numbers are **coprime** if they share **no factors except 1**.
+Two numbers are **coprime** if their only common factor is 1.
 
 ---
 
-| Numbers | Shared factors | Coprime? |
-|---------|----------------|----------|
-| 8 and 12 | 1, 2, 4 | **No** |
-| 9 and 14 | 1 only | **Yes** |
-| 4 and 8 | 1, 2, 4 | **No** |
-| 3 and 7 | 1 only | **Yes** |
+**Are 8 and 15 coprime?**
+
+Factors of 8: 1, 2, 4, 8
+
+Factors of 15: 1, 3, 5, 15
+
+Common factors: just **1**.
+
+> 8 and 15 are **coprime**.
 
 ---
 
-## Why Coprime Matters
+**Are 8 and 12 coprime?**
 
-Remember modular inverses? Not every number has one.
+Common factors: 1, 2, 4.
 
-> **The rule:** $a$ has an inverse mod $n$ **only if** $a$ and $n$ are coprime.
+More than just 1.
 
----
-
-**Why?**
-
-Take **4 mod 8**. They share factor 4.
-
-Multiply 4 by anything: 4, 8, 12, 16, 20... every result is divisible by 4.
-
-Take mod 8: you get 4, 0, 4, 0, 4... only **0 and 4**. Never 1.
-
-> Shared factor → results stuck in multiples → can't reach 1 → **no inverse**.
+> 8 and 12 are **not coprime**.
 
 ---
 
-**But 3 and 7 are coprime...**
+## The Connection to Modular Inverse
 
-- $3 \times 5 = 15$
-- $15 \mod 7 = 1$ ✓
+Remember: the modular inverse of $a$ mod $n$ is a number $b$ where:
 
-We can reach 1. The inverse exists.
-
-> When numbers are coprime, you *can* reach 1. The inverse exists.
+$$(a \times b) \mod n = 1$$
 
 ---
 
-In RSA, certain numbers *must* be coprime for the math to work. We'll see exactly which ones when we get there.
+**Here's the key:**
 
-> **Coprime isn't just theory.** It's what makes RSA possible.
+> A modular inverse exists **only if** $a$ and $n$ are coprime.
+
+---
+
+If they share a factor, you can never reach 1. The inverse doesn't exist.
+
+If they're coprime, you can always find an inverse.
