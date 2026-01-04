@@ -1,0 +1,55 @@
+---
+title: Symmetric Encryption
+---
+
+## The Idea
+
+One key does everything.
+
+The same key that encrypts the message also decrypts it.
+
+---
+
+## How It Works
+
+1. Start with a message
+2. Encrypt it with a key → get unreadable ciphertext
+3. Decrypt the ciphertext with the *same key* → get the message back
+
+::symmetric-flow
+
+---
+
+## Why "Symmetric"?
+
+Both sides use the same key. Encrypt and decrypt are mirror images.
+
+> Same key in, same key out. Balanced. *Symmetric.*
+
+---
+
+## The Problem
+
+If both people need the same key, how do you share it safely?
+
+---
+
+You can't just send the key over the internet. Anyone watching would see it.
+
+And if they have the key, they can decrypt everything.
+
+::key-distribution
+
+> This is called the **key distribution problem**.
+
+---
+
+## Where It's Used
+
+Despite the key-sharing problem, symmetric encryption is *fast*.
+
+- **AES** encrypts your phone, your WiFi, your bank connection
+- **DES** was the old standard (now broken)
+- **XOR** is the simplest form (we already learned this)
+
+> For bulk data, symmetric encryption is the go-to choice.

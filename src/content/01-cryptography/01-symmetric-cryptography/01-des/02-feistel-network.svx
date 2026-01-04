@@ -1,0 +1,104 @@
+---
+title: Feistel Network
+---
+
+## The Problem
+
+To encrypt, you scramble data in a complex way.
+
+To decrypt, you *undo* that scrambling perfectly.
+
+Usually, this means your scrambling function must be **reversible**. That's hard to design.
+
+---
+
+## Feistel's Insight
+
+What if you could use a scrambling function that *doesn't* need to be reversible, but still build a fully reversible cipher?
+
+> That's the magic of the Feistel network.
+
+Named after **Horst Feistel**, who designed it at IBM.
+
+---
+
+## How It Works
+
+1. Split your data block into two halves: **Left (L)** and **Right (R)**
+
+2. Each round:
+   - Take R, run it through function F with a round key
+   - XOR the result with L
+   - Swap the halves
+
+3. Repeat for many rounds
+
+4. Join the halves back together
+
+---
+
+## One Round
+
+::feistel-round
+
+---
+
+**The swap is crucial.**
+
+After each round:
+- The old R becomes the new L
+- The XOR result becomes the new R
+
+This ensures both halves get scrambled over multiple rounds.
+
+---
+
+## Why It's Reversible
+
+Here's the clever part.
+
+XOR is its own inverse:
+
+$$A \oplus B \oplus B = A$$
+
+---
+
+To decrypt:
+
+- Take the output halves
+- Run the **same** process
+- But use the round keys in **reverse** order
+
+The F function never needs to be reversed. Only the XOR matters.
+
+> Same structure encrypts and decrypts.
+
+---
+
+## Why Multiple Rounds?
+
+One round doesn't mix things enough. Patterns might survive.
+
+But after 16 rounds? Every output bit depends on every input bit and every key bit.
+
+> More rounds = more confusion and diffusion.
+
+---
+
+## The Beauty
+
+- **Same hardware** can encrypt and decrypt
+- **F can be anything** - it doesn't need to be reversible
+- **Proven structure** - used in DES, Blowfish, Twofish, and many others
+
+---
+
+## In DES
+
+DES uses **16 rounds** of the Feistel structure:
+
+- 64-bit block split into two 32-bit halves
+- Each round uses a different 48-bit subkey
+- The F function includes expansion, substitution, and permutation
+
+> The Feistel structure is why DES can decrypt with the same circuit that encrypts.

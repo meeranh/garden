@@ -1,0 +1,130 @@
+---
+title: Confusion and Diffusion
+---
+
+## What Makes Encryption Strong?
+
+Two properties. Claude Shannon identified them in 1945.
+
+> **Diffusion**: A small change in input causes a *big* change in output.
+
+> **Confusion**: The relationship between the key and output is *complex*.
+
+Together, they make a cipher nearly impossible to break.
+
+---
+
+## Diffusion
+
+Imagine you encrypt a message. Then you change *one letter* and encrypt again.
+
+What happens to the output?
+
+---
+
+**Weak cipher:**
+
+- One letter changes in the output
+- The two ciphertexts look almost identical
+- *Patterns survive*
+
+---
+
+**Strong cipher:**
+
+- The *entire* output changes
+- The two ciphertexts look completely different
+- *Patterns are destroyed*
+
+::diffusion
+
+---
+
+This is called the **avalanche effect**.
+
+> One small change at the input *cascades* through the entire output.
+
+---
+
+## Why Diffusion Matters
+
+Languages have patterns.
+
+- In English, **'e'** is the most common letter
+- Words like **"the"** appear constantly
+- Certain letter pairs are predictable
+
+---
+
+Without diffusion, these patterns might survive encryption.
+
+An attacker could use **frequency analysis** to spot them, then work backwards to crack the cipher.
+
+---
+
+With strong diffusion?
+
+Even nearly identical messages produce *completely different* ciphertexts.
+
+> No patterns. Nothing to analyze.
+
+---
+
+## Confusion
+
+Now think about the key.
+
+If an attacker has your ciphertext, can they figure out the key?
+
+---
+
+**Weak cipher:**
+
+- The key affects the output in a *simple* way
+- Change one part of the key → one part of the output changes
+- Easy to trace backwards
+
+---
+
+**Strong cipher:**
+
+- The key affects the output in a *complex* way
+- Every part of the key influences *every* part of the output
+- Impossible to untangle
+
+::confusion
+
+---
+
+## Why Confusion Matters
+
+Think about the Caesar cipher.
+
+Key = 3 means shift every letter by 3:
+
+- A → D
+- B → E
+- C → F
+
+---
+
+An attacker sees **'D'** in the ciphertext.
+
+They know it probably came from **'A'**. The relationship is *obvious*.
+
+> One guess and they have the key.
+
+---
+
+A strong cipher mixes the key into the output so thoroughly that there's no pattern to exploit.
+
+Knowing the output tells you *nothing* about the key.
+
+---
+
+## Together
+
+1. **Diffusion** hides patterns in your message
+2. **Confusion** hides the key
+
+> Modern ciphers apply both, over and over. That's what makes them strong.

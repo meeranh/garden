@@ -1,0 +1,123 @@
+---
+title: 64-bit Block, 56-bit Key
+---
+
+## Block Cipher
+
+DES is a **block cipher**.
+
+It doesn't encrypt your whole message at once. It chops it into fixed-size pieces called **blocks**.
+
+Each block is exactly **64 bits** (8 bytes).
+
+---
+
+Think of it like a machine that only processes one chunk at a time:
+
+- Your message gets split into 64-bit pieces
+- Each piece goes through the cipher separately
+- The encrypted pieces are joined back together
+
+---
+
+## Why 64 bits?
+
+In the 1970s, 64 bits was a practical tradeoff:
+
+- **Small enough** to process quickly on slow hardware
+- **Large enough** to hide patterns within each block
+
+> Modern ciphers like AES use **128-bit blocks** because computers are faster now.
+
+---
+
+## The Key
+
+The key is the secret that controls *how* the encryption scrambles your data.
+
+- Same key encrypts
+- Same key decrypts
+- Lose the key, lose your data
+
+---
+
+## The 56-bit Controversy
+
+Here's where it gets interesting.
+
+The DES key is technically **64 bits** long.
+
+But only **56 bits** are actually used for encryption.
+
+---
+
+What happened to the other 8 bits?
+
+---
+
+## Parity Bits
+
+Every 8th bit is a **parity bit** used for error checking, not encryption.
+
+::parity-bits
+
+---
+
+Each byte contributes **7 bits** to the actual key.
+
+$$8 \text{ bytes} \times 7 \text{ bits} = 56 \text{ key bits}$$
+
+> The parity bits detect transmission errors. They add *zero* security.
+
+---
+
+## Why 56 Bits Matters
+
+56 bits means there are $2^{56}$ possible keys.
+
+That's about **72 quadrillion** combinations:
+
+$$72,057,594,037,927,936$$
+
+Sounds impossible to crack, right?
+
+---
+
+## The Math That Killed DES
+
+In 1977, trying all keys would take centuries.
+
+But computers get faster. *Exponentially* faster.
+
+::key-cracking
+
+---
+
+**Moore's Law** roughly states that computing power doubles every two years.
+
+What takes centuries today takes decades in 10 years, years in 20, days in 30...
+
+> 56 bits bought about 20 years. Then it collapsed.
+
+---
+
+## The Suspicion
+
+IBM's original Lucifer cipher used a **128-bit key**.
+
+The NSA made them cut it to **56 bits**.
+
+---
+
+Some believe the NSA wanted a key size that was:
+
+- **Strong enough** for businesses to trust
+- **Weak enough** for NSA supercomputers to crack
+
+> We still don't know for sure.
+
+---
+
+56 bits was the weakness that killed DES.
+
+> Today, **128 bits** is the minimum. 256 is preferred.

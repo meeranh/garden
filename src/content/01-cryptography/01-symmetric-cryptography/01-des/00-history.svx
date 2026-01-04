@@ -1,0 +1,109 @@
+---
+title: History and Development
+---
+
+## The Problem
+
+Before DES, there was no standard.
+
+Every company, every government agency used *different* encryption methods. If you wanted to communicate securely, you both had to agree on which cipher to use first.
+
+> No compatibility. No trust. Chaos.
+
+---
+
+## The Call for a Standard (1973)
+
+The **National Bureau of Standards** (now called NIST) put out a public call:
+
+*"We need ONE encryption standard for the entire US government."*
+
+---
+
+They wanted something:
+
+- **Strong enough** to protect sensitive data
+- **Fast enough** to run on 1970s hardware
+- **Open** for public review (no secret algorithms)
+
+---
+
+## IBM's Answer
+
+IBM had been working on a cipher called **Lucifer**, designed by cryptographer **Horst Feistel**.
+
+They submitted a modified version to NBS.
+
+- Block size: 64 bits
+- Key size: **128 bits**
+
+---
+
+## The NSA Gets Involved
+
+Here's where it gets controversial.
+
+The **NSA** reviewed IBM's submission and made changes:
+
+1. Reduced the key from **128 bits to 56 bits**
+2. Modified the internal substitution tables
+
+---
+
+Nobody explained why.
+
+People got suspicious.
+
+> *Was the government weakening it so they could crack it later?*
+
+---
+
+## Adoption (1977)
+
+Despite the controversy, DES became the official US encryption standard in **1977**.
+
+It spread everywhere:
+
+- Banks used it for **ATM transactions**
+- Businesses used it for **secure communication**
+- It became *the* global encryption standard for 20 years
+
+---
+
+## The Fall
+
+56 bits seemed fine in 1977. Computers were slow.
+
+But computers got faster. *Much* faster.
+
+---
+
+**1998**: A group called the EFF built a $250,000 machine that cracked DES in **56 hours**.
+
+**1999**: Combined with distributed computing, cracked in **22 hours**.
+
+> 56 bits was officially dead.
+
+---
+
+## The Aftermath
+
+- **3DES** (Triple DES) extended DES's life by applying it three times
+- **AES** replaced DES as the new standard in 2001
+- DES was officially **retired in 2005**
+
+---
+
+## The Twist
+
+Years later, researchers discovered something interesting about those NSA changes.
+
+The modifications to the substitution tables actually made DES *stronger* against a technique called **differential cryptanalysis**, an attack that wasn't publicly known until 1990.
+
+> The NSA knew about it decades earlier. They were *strengthening* DES, not weakening it.
+
+---
+
+The 56-bit key though?
+
+That part is still suspicious.

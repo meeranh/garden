@@ -1,0 +1,161 @@
+---
+title: 16 Rounds and Key Schedule
+---
+
+## The Complete Picture
+
+DES transforms your 64-bit block through three stages:
+
+1. **Initial Permutation (IP)** - rearrange the bits
+2. **16 Feistel Rounds** - the actual encryption
+3. **Final Permutation (FP)** - rearrange again (inverse of IP)
+
+---
+
+## Initial Permutation
+
+Before anything else, DES shuffles all 64 input bits according to a fixed table.
+
+> This adds **no security**. It was designed for 1970s hardware efficiency.
+
+The bits get rearranged into a specific order. That's it.
+
+---
+
+## Split and Round
+
+After IP, the 64 bits split into two **32-bit halves**:
+
+- **L₀** (left half)
+- **R₀** (right half)
+
+Then comes the heart of DES: **16 rounds** of Feistel operations.
+
+---
+
+## Each Round
+
+Every round does the same thing:
+
+$$L_i = R_{i-1}$$
+$$R_i = L_{i-1} \oplus F(R_{i-1}, K_i)$$
+
+In plain English:
+
+- The old **R becomes the new L** (straight copy)
+- The old **L gets XORed** with F's output to become the new R
+
+---
+
+> Each round uses a **different subkey** (K₁ through K₁₆).
+
+Where do these subkeys come from? That's the **key schedule**, which we'll cover shortly.
+
+---
+
+## The Full Flow
+
+::des-overview
+
+---
+
+## Final Permutation
+
+After 16 rounds, the halves combine and pass through the **Final Permutation**.
+
+FP is the exact inverse of IP. They cancel out.
+
+> Same hardware can run IP forward or backward. Another 1970s optimization.
+
+---
+
+## Now: The Key Schedule
+
+You have a 56-bit key. DES needs **16 different 48-bit subkeys**.
+
+How do you get 16 keys from 1 key?
+
+---
+
+## Step 1: Split the Key
+
+First, split your 56 key bits into two **28-bit halves**:
+
+- **C₀** - left 28 bits
+- **D₀** - right 28 bits
+
+---
+
+## Step 2: Rotate
+
+For each round, **rotate both halves left**.
+
+| Rounds | Shift |
+|--------|-------|
+| 1, 2, 9, 16 | 1 bit |
+| All others | 2 bits |
+
+After shifting: C₁, D₁ for round 1. Then C₂, D₂ for round 2. And so on.
+
+---
+
+**Why these specific shifts?**
+
+The total shifts add up to **28** (the size of each half).
+
+After all 16 rounds, C and D return to their original positions.
+
+> Every key bit gets used in multiple subkeys, but in different positions.
+
+---
+
+## Step 3: Compress
+
+After each shift, combine C and D (56 bits) and **compress to 48 bits**.
+
+This compression (called **PC-2**) selects 48 of the 56 bits and rearranges them.
+
+That's your subkey for this round.
+
+---
+
+::key-schedule
+
+---
+
+## Why 48 Bits?
+
+The F function needs a 48-bit key to XOR with the expanded R value.
+
+Remember: R is 32 bits, but gets **expanded to 48 bits** inside F.
+
+> The compression ensures each subkey uses a different subset of key bits.
+
+---
+
+## Decryption
+
+Here's the elegant part.
+
+To decrypt, run the **exact same algorithm** but use subkeys in **reverse order**:
+
+$$K_{16}, K_{15}, K_{14}, \ldots K_2, K_1$$
+
+The Feistel structure guarantees this works.
+
+> Same circuit encrypts and decrypts. Just reverse the key order.
+
+---
+
+## Summary
+
+**Encryption flow:**
+- IP → 16 Feistel rounds → FP
+
+**Key schedule:**
+- Split 56-bit key into C and D
+- Each round: rotate, then compress to 48 bits
+- Produces K₁ through K₁₆
+
+**Decryption:**
+- Same process, subkeys in reverse order
