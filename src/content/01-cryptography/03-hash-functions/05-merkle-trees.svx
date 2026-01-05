@@ -1,0 +1,154 @@
+---
+title: Merkle Trees
+prerequisites:
+  - cryptography/hash-functions/cryptographic-hash-functions
+---
+
+## The Problem
+
+You download a **4GB file**. How do you verify it's correct?
+
+---
+
+**Option 1:** Hash the whole file.
+
+- Wait for *entire* download to finish
+- If one byte is wrong → re-download *everything*
+
+*Not great.*
+
+---
+
+**Option 2:** Hash each chunk separately.
+
+- Verify chunks independently ✓
+- But now you have **thousands of hashes** to manage ✗
+
+*Better, but messy.*
+
+---
+
+**Option 3:** Merkle tree.
+
+> **Best of both worlds.**
+
+---
+
+## What's a Merkle Tree?
+
+A **tree of hashes**, built from the *bottom up*.
+
+::merkle-tree
+
+---
+
+## How It's Built
+
+1. **Split** data into chunks
+2. **Hash** each chunk → these are the *leaves*
+3. **Pair** hashes, combine them, hash again → *next level*
+4. **Repeat** until one hash remains → the **root**
+
+> Bottom to top. Many hashes become one.
+
+---
+
+## A Simple Example
+
+Four data chunks: **A**, **B**, **C**, **D**
+
+| Level | What happens |
+|-------|--------------|
+| *Leaves* | Hash(A), Hash(B), Hash(C), Hash(D) |
+| *Level 1* | Hash(AB), Hash(CD) |
+| *Root* | Hash(everything above) |
+
+> One root hash represents **all** the data.
+
+---
+
+## Why This Is Powerful
+
+---
+
+### 1. Tiny fingerprint for huge data
+
+A 4GB file → a single **256-bit hash**.
+
+Change *one byte* anywhere → root hash changes.
+
+---
+
+### 2. Verify any piece efficiently
+
+To verify chunk C, you **don't need the whole tree**.
+
+You only need:
+
+- **Hash(C)** → compute yourself
+- **Hash(D)** → *the sibling*
+- **Hash(AB)** → *the other branch*
+- **Root** → *compare against*
+
+That's **3 hashes** to verify 1 of 4 chunks!
+
+---
+
+### 3. Scales beautifully
+
+| Chunks | Hashes needed |
+|--------|---------------|
+| 4 | 2 |
+| 1,000 | 10 |
+| 1,000,000 | 20 |
+| 1,000,000,000 | **30** |
+
+It's **logarithmic**. *Double the data, add just one hash.*
+
+---
+
+### 4. Pinpoint corruption
+
+Verification failed?
+
+The path tells you *exactly* which chunk is bad.
+
+Re-download **only that chunk**, not the whole file.
+
+---
+
+## Real World Uses
+
+---
+
+**Bitcoin**
+
+Every block has a Merkle tree of transactions.
+
+- Root hash → goes in block header
+- Light wallets → verify transactions *without downloading everything*
+
+---
+
+**Git**
+
+- Commits are identified by hashes
+- Each commit hashes: *contents + parent commits*
+- Forms a **chain of hashes**
+
+---
+
+**BitTorrent**
+
+Downloaded pieces verified against a Merkle root.
+
+- Bad piece? → re-fetch *just that piece*
+- No need to re-download the whole file
+
+---
+
+## The Key Insight
+
+> Unlimited data collapses into **one small hash**, but you can still verify *any piece* independently.
+
+That's the magic of Merkle trees.
