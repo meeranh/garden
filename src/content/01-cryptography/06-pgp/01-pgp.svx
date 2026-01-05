@@ -1,0 +1,206 @@
+---
+title: Pretty Good Privacy
+---
+
+## The Cypherpunk's Gift
+
+**1991.** Phil Zimmermann releases PGP as **free software**.
+
+His goal: give *ordinary people* access to **military-grade encryption**. Email privacy for everyone.
+
+**The problem:** US export laws classified strong cryptography as **munitions**. Legally speaking, exporting PGP was equivalent to *exporting missiles*.
+
+---
+
+## The Legal Battle
+
+PGP spread globally via the internet. The US government opened a **criminal investigation** against Zimmermann.
+
+It lasted *three years*.
+
+**The clever workaround:** Zimmermann published the entire PGP source code as a *printed book*. Books are protected speech under the First Amendment.
+
+People overseas literally **scanned the book page by page** and recompiled it.
+
+**1996:** Investigation dropped. Export laws eventually relaxed.
+
+> PGP became a symbol of **cryptographic freedom**. The government wanted to control encryption. *They lost.*
+
+---
+
+## The Core Problem
+
+You want to send a **private**, **authenticated** message. You need:
+
+- **Confidentiality:** Only the recipient can read it
+- **Authentication:** Prove it's really from you
+- **Integrity:** Detect if anything was changed
+
+PGP combines *all three*.
+
+---
+
+## PGP for Confidentiality
+
+**The challenge:**
+
+- Public key encryption (RSA) is *slow*
+- Symmetric encryption (AES) is *fast* but requires a shared key
+
+**PGP's solution:** Hybrid encryption. *Best of both worlds.*
+
+::hybrid-encryption
+
+---
+
+**Step 1:** Generate a random **session key** (one-time symmetric key)
+
+**Step 2:** Encrypt the message with the session key (*fast*, AES)
+
+**Step 3:** Encrypt the session key with recipient's public key (*slow*, but the key is tiny)
+
+**Step 4:** Send both together
+
+$$\text{PGP Message} = E_{K_{pub}}(\text{session key}) \| E_{\text{session key}}(\text{message})$$
+
+---
+
+**Decryption:**
+
+1. Recipient uses their **private key** to decrypt the session key
+2. Uses the session key to decrypt the actual message
+
+> You get the **speed** of symmetric encryption with the **key distribution** benefits of public key crypto.
+
+---
+
+## PGP for Authentication
+
+**The goal:** Prove the message came from *you* and wasn't modified.
+
+**The approach:** Hash and sign.
+
+---
+
+**Step 1:** Hash the message to get a fixed-size digest
+
+**Step 2:** Sign the hash with your **private key**
+
+**Step 3:** Attach signature to message
+
+$$\text{Signed Message} = \text{message} \| \text{Sign}_{K_{priv}}(H(\text{message}))$$
+
+---
+
+**Verification:**
+
+1. Recipient hashes the message *themselves*
+2. Decrypts the signature using sender's **public key**
+3. Compares: *do they match?*
+
+| Result | Meaning |
+|--------|---------|
+| **Match** | Authentic and unmodified |
+| **No match** | Wrong sender *or* tampered |
+
+> If the signature verifies, you know **who** sent it and that **nothing changed**.
+
+---
+
+## Message Formats
+
+**Encrypted only:**
+
+```
+-----BEGIN PGP MESSAGE-----
+
+[encrypted session key + encrypted content]
+-----END PGP MESSAGE-----
+```
+
+*Completely opaque.* No one can read it without the private key.
+
+---
+
+**Signed only (cleartext):**
+
+```
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+This is the actual message content.
+Anyone can read it.
+
+-----BEGIN PGP SIGNATURE-----
+[signature bytes]
+-----END PGP SIGNATURE-----
+```
+
+The message is **readable**. The signature proves **authenticity**.
+
+---
+
+**Signed and encrypted:**
+
+Sign first, *then* encrypt the whole thing. Recipient decrypts, then verifies.
+
+> The signature is *hidden* inside the encryption. Only the recipient knows who signed it.
+
+---
+
+## Key Distribution
+
+How do you get someone's public key?
+
+| Method | How it works | Trust level |
+|--------|--------------|-------------|
+| **Manual** | USB stick, read fingerprint over phone | *Highest* |
+| **Email** | They email you their public key | *Low* (interception risk) |
+| **Key servers** | Public databases | *Medium* (anyone can upload) |
+
+---
+
+## The Key Server Problem
+
+Key servers like `keys.openpgp.org` are **public databases**. *Anyone* can upload a key.
+
+**The danger:** Someone uploads a fake key claiming to be `alice@example.com`.
+
+- You encrypt a message to "Alice"
+- But it's actually the *attacker's* key
+- They decrypt your message
+
+> Having a key isn't enough. You need to **verify** it belongs to the right person.
+
+---
+
+## Key Fingerprints
+
+Every PGP key has a unique **fingerprint**: a hash of the public key.
+
+```
+AB12 CD34 EF56 7890 1234  5678 90AB CDEF 1234 5678
+```
+
+**Verification process:**
+
+1. Get the key from *any* source
+2. Contact the owner through a **separate channel** (phone, in person)
+3. Read the fingerprint to each other
+4. If they match, you've **verified** the key
+
+> The fingerprint is *short enough* to read aloud, but *unique enough* to identify the key.
+
+---
+
+## Key Insight
+
+PGP solves the *cryptographic* problem beautifully:
+
+- **Hybrid encryption** for speed
+- **Digital signatures** for authentication
+- **Standard formats** for interoperability
+
+But it punts on the *trust* problem. How do you *know* a key is legitimate?
+
+> That's where the **Web of Trust** comes in.

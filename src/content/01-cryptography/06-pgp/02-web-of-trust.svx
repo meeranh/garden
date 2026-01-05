@@ -1,0 +1,222 @@
+---
+title: Web of Trust
+prerequisites:
+  - cryptography/pgp/pgp
+---
+
+## The Trust Problem
+
+You download Alice's public key from a key server.
+
+**How do you know it's really Alice's key?**
+
+*Anyone* can upload a key claiming to be *anyone*. The key server doesn't verify identities.
+
+> A key is just bytes. The hard part is **linking it to a person**.
+
+---
+
+## Two Approaches
+
+| Model | How trust works |
+|-------|-----------------|
+| **PKI (Certificates)** | Central authorities vouch for keys |
+| **Web of Trust** | Users vouch for *each other* |
+
+PGP chose the **decentralized** path. No single authority. No single point of failure.
+
+---
+
+## The Core Idea
+
+Instead of trusting a central authority, you trust *people*.
+
+1. You verify Bob's key **in person** (compare fingerprints)
+2. You **sign** Bob's public key with your private key
+3. Your signature says: *"I verified this is really Bob"*
+4. Others who trust **you** can now trust Bob's key
+
+> Trust flows through **human relationships**, not corporate hierarchies.
+
+::web-of-trust
+
+---
+
+## Signing Keys
+
+When you sign someone's key, you're making a **public statement**:
+
+> *"I have personally verified that this key belongs to this person."*
+
+Your signature gets attached to their key. *Anyone can see it.*
+
+---
+
+**What signing means:**
+
+- You checked their ID (or know them personally)
+- You verified the key fingerprint
+- You're willing to **stake your reputation** on it
+
+**What signing does NOT mean:**
+
+- You vouch for their *character*
+- You trust them to sign other keys well
+- You endorse their *opinions*
+
+> Signing a key is about **identity**, not **trustworthiness**.
+
+---
+
+## Trust Levels
+
+PGP distinguishes between two different things:
+
+| Concept | Question it answers |
+|---------|---------------------|
+| **Validity** | Is this key *really* Alice's? |
+| **Trust** | Do I trust Alice to verify *other* people's keys? |
+
+You might be **certain** a key belongs to Alice (*validity*), but **not trust** Alice to carefully verify others (*trust*).
+
+> These are independent judgments.
+
+---
+
+## How Trust Propagates
+
+**Direct verification:**
+
+$$\text{You} \xrightarrow{\text{verify}} \text{Bob's key}$$
+
+You checked Bob's fingerprint *yourself*. **Full confidence.**
+
+---
+
+**One hop:**
+
+$$\text{You} \xrightarrow{\text{trust}} \text{Alice} \xrightarrow{\text{signed}} \text{Bob's key}$$
+
+You trust Alice. Alice verified Bob. *You accept Bob's key.*
+
+---
+
+**The chain can extend:**
+
+$$\text{You} \xrightarrow{\text{trust}} \text{Alice} \xrightarrow{\text{trust}} \text{Carol} \xrightarrow{\text{signed}} \text{Dave's key}$$
+
+But PGP is **conservative**. By default, it only follows **one hop** of trust.
+
+> Longer chains mean more risk of a *weak link*.
+
+---
+
+## Marginal Trust
+
+What if you don't *fully* trust any single person?
+
+PGP supports **marginal trust**: *"I somewhat trust this person's verifications."*
+
+**The rule:** A key is valid if signed by:
+
+- **One** fully trusted introducer, *OR*
+- **Multiple** marginally trusted introducers (typically 2-3)
+
+> Aggregate *weak* trust into *strong* confidence.
+
+---
+
+## Key Signing Parties
+
+A social event where people verify each other's keys.
+
+**How it works:**
+
+1. Everyone brings their key fingerprint (on paper)
+2. Everyone brings government ID
+3. You check each person's ID against their fingerprint
+4. Later, you sign the keys you verified
+
+**Result:** Many new signatures. The web grows *denser*.
+
+> Building trust infrastructure through **human interaction**.
+
+---
+
+## Reading Key Server Output
+
+When you look up a key:
+
+```
+pub		rsa4096 2020-01-15 [SC] [expires: 2025-01-15]
+		AB12 CD34 EF56 7890 1234  5678 90AB CDEF 1234 5678
+uid		[full] Alice Smith <alice@example.com>
+uid		[full] Alice Smith <alice@work.com>
+sig		0x90ABCDEF12345678 2020-01-15  Alice Smith
+sig		0x1111222233334444 2020-02-20  Bob Jones <bob@example.com>
+sig		0x5555666677778888 2021-03-10  Carol White <carol@example.com>
+sub		rsa4096 2020-01-15 [E] [expires: 2025-01-15]
+```
+
+---
+
+**Breaking it down:**
+
+| Field | Meaning |
+|-------|---------|
+| `pub rsa4096` | Primary public key, RSA 4096-bit |
+| `[SC]` | Can **S**ign and **C**ertify other keys |
+| `[E]` | Subkey for **E**ncryption |
+| `fingerprint` | Unique key identifier (the long hex string) |
+| `uid` | User IDs (email addresses bound to key) |
+| `sig` | Signatures from others |
+| `sub` | Subkey (linked to primary) |
+
+---
+
+## Key IDs vs Fingerprints
+
+**Key ID:** Short reference (last 8 or 16 hex characters)
+
+```
+0x90ABCDEF12345678
+```
+
+**Fingerprint:** Full identifier (40 hex characters)
+
+```
+AB12 CD34 EF56 7890 1234  5678 90AB CDEF 1234 5678
+```
+
+| Use case | Which to use |
+|----------|--------------|
+| Quick reference | Key ID |
+| **Verification** | *Full fingerprint* |
+
+> Key IDs can **collide** (accidentally or maliciously). Always verify with the full fingerprint.
+
+---
+
+## The Self-Signature
+
+Every key has a **self-signature**: the owner signs their *own* key.
+
+This **binds** the user IDs (email addresses) to the key. Without it, anyone could claim *"this key belongs to alice@example.com."*
+
+> The self-signature says: *"I, the owner of this private key, declare these are my email addresses."*
+
+---
+
+## Certifications
+
+Other people's signatures on a key are called **certifications**.
+
+**More certifications = more confidence**, *assuming*:
+
+- You trust the signers
+- The signers verified properly
+
+A key with signatures from **10 strangers** is worth less than a key signed by **one person you trust**.
+
+> *Quality* of trust matters more than *quantity*.
+
