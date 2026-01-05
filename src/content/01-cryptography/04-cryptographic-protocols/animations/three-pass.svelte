@@ -133,7 +133,17 @@
   function pause() { isPlaying = false; clearTimeouts(); }
   function next() { pause(); if (currentStep < maxStep) { currentStep++; animateStep(currentStep); } }
   function prev() { pause(); if (currentStep > 0) { currentStep--; animateStep(currentStep); } }
-  function skip() { pause(); animateStep(maxStep); }
+  function applyFinalState() {
+    svgEl.select('.step-label').text(stepLabels[maxStep]);
+    svgEl.select('.package').attr('transform', `translate(${bobX}, ${centerY})`);
+    svgEl.select('.alice-lock').attr('opacity', 0);
+    svgEl.select('.bob-lock').attr('opacity', 0);
+    svgEl.select('.message-hidden').attr('opacity', 0);
+    svgEl.select('.message-revealed').attr('opacity', 1);
+    svgEl.select('.success-message').attr('opacity', 1);
+    currentStep = maxStep;
+  }
+  function skip() { pause(); applyFinalState(); }
   function replay() { pause(); currentStep = 0; animateStep(0); isPlaying = true; runAnimation(); }
   function getState() { return { isPlaying, currentStep, totalSteps: maxStep }; }
 

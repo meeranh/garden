@@ -106,7 +106,18 @@
   function pause() { isPlaying = false; clearTimeouts(); }
   function next() { pause(); if (currentStep < maxStep) { currentStep++; animateStep(currentStep); } }
   function prev() { pause(); if (currentStep > 0) { currentStep--; animateStep(currentStep); } }
-  function skip() { pause(); animateStep(maxStep); }
+  function applyFinalState() {
+    svgEl.select('.step-label').text(stepLabels[maxStep]);
+    svgEl.select('.msg1').attr('opacity', 1).attr('transform', `translate(${bobX - 150}, 130)`);
+    svgEl.select('.msg2').attr('opacity', 1).attr('transform', `translate(${aliceX + 70}, 175)`);
+    svgEl.select('.key-alice').attr('opacity', 1);
+    svgEl.select('.key-bob').attr('opacity', 1);
+    svgEl.select('.msg3').attr('opacity', 1).attr('transform', `translate(${aliceX + 70}, 255)`);
+    svgEl.select('.msg4').attr('opacity', 1).attr('transform', `translate(${bobX - 150}, 305)`);
+    svgEl.select('.final-note').attr('opacity', 1);
+    currentStep = maxStep;
+  }
+  function skip() { pause(); applyFinalState(); }
   function replay() { pause(); currentStep = 0; animateStep(0); isPlaying = true; runAnimation(); }
   function getState() { return { isPlaying, currentStep, totalSteps: maxStep }; }
 

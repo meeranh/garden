@@ -91,7 +91,16 @@
   function pause() { isPlaying = false; clearTimeouts(); }
   function next() { pause(); if (currentStep < maxStep) { currentStep++; animateStep(currentStep); } }
   function prev() { pause(); if (currentStep > 0) { currentStep--; animateStep(currentStep); } }
-  function skip() { pause(); animateStep(maxStep); }
+  function applyFinalState() {
+    svgEl.select('.step-label').text(stepLabels[maxStep]);
+    svgEl.select('.msg-to-right').attr('opacity', 1).attr('transform', `translate(${bobX - 160}, ${laneY - 30})`);
+    svgEl.select('.msg-to-left').attr('opacity', 1).attr('transform', `translate(${aliceX + 80}, ${laneY + 30})`);
+    svgEl.select('.verify-bob').attr('opacity', 1);
+    svgEl.select('.verify-alice').attr('opacity', 1);
+    svgEl.select('.shared-key').attr('opacity', 1);
+    currentStep = maxStep;
+  }
+  function skip() { pause(); applyFinalState(); }
   function replay() { pause(); currentStep = 0; animateStep(0); isPlaying = true; runAnimation(); }
   function getState() { return { isPlaying, currentStep, totalSteps: maxStep }; }
 
