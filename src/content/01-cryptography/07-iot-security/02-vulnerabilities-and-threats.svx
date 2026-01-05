@@ -1,0 +1,135 @@
+---
+title: Vulnerabilities and Threats
+prerequisites:
+  - cryptography/iot-security/what-is-iot
+---
+
+## The Vulnerabilities
+
+---
+
+### Increased Attack Surface
+
+Every device is an **entry point**.
+
+A corporate network might have:
+
+- 50 computers (managed, patched, monitored)
+- 500 IoT devices (unmanaged, unpatched, *forgotten*)
+
+**The weakest device is the way in.**
+
+> Attackers don't break through the front door. They find the forgotten window.
+
+---
+
+### Proliferation of Protocols
+
+No standards. Everyone invented their own thing.
+
+Zigbee, Z-Wave, Bluetooth LE, LoRa, MQTT, CoAP, proprietary protocols...
+
+Each protocol has its own security model. *Or lack of one.*
+
+- Different encryption schemes
+- Different authentication methods
+- Different vulnerabilities
+
+**Each needs different expertise to secure.** Most organizations have none.
+
+---
+
+### Lazy Consumers
+
+People don't change defaults:
+
+- **"admin/admin"** stays forever
+- **Never update** firmware
+- **Connect everything** to the same network
+- **Buy the cheapest** option (which has the worst security)
+
+Security requires effort. Most users won't make it.
+
+---
+
+### High Demands, Low Capability
+
+Security *requires*:
+
+- Encryption (needs CPU power)
+- Key storage (needs secure memory)
+- Updates (needs bandwidth and storage)
+- Authentication (needs infrastructure)
+
+**Cheap IoT devices have none of these.**
+
+The $5 sensor physically *cannot* do what your $1000 phone does.
+
+> The economics of IoT push toward insecurity.
+
+---
+
+## The Threats
+
+---
+
+### Loss of Data Ownership
+
+Your devices collect **intimate data**:
+
+- When you're home (and when you're not)
+- Your health metrics
+- Your conversations (smart speakers)
+- Your location patterns
+- Your daily routines
+
+**Where does that data go?** Who owns it?
+
+Usually: the manufacturer, forever, with no accountability.
+
+---
+
+### Hype Instead of Ripe
+
+Companies rush to market. *"We need a smart version!"*
+
+- Security is an **afterthought**
+- Features sell, security doesn't
+- "We'll patch it later" *(they won't)*
+- No security testing before launch
+
+**Immature technology deployed at massive scale.**
+
+> The first version ships. The secure version never comes.
+
+---
+
+### High Attack Impact
+
+IoT controls **physical things**. Attacks have **physical consequences**.
+
+| Target | Impact |
+|--------|--------|
+| Pacemaker | **Death** |
+| Car brakes | **Crash** |
+| Industrial valve | **Explosion** |
+| Power grid | **Blackout** |
+| Door lock | **Home invasion** |
+
+This isn't "your data gets leaked."
+
+> This is *"someone gets hurt."*
+
+---
+
+### Lack of Standards
+
+No agreed security baseline. Each manufacturer does their own thing:
+
+- Different encryption *(or none)*
+- Different authentication *(or none)*
+- Different update mechanisms *(or none)*
+
+**No way to compare.** No certification that actually matters.
+
+You can't tell a secure device from an insecure one by looking at the box.

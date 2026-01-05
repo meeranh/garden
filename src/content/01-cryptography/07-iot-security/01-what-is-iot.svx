@@ -1,0 +1,82 @@
+---
+title: What is IoT?
+---
+
+## The Internet of Things
+
+**Internet of Things:** Physical devices connected to the internet that collect and exchange data.
+
+Not computers or phones. Things that were *never* "smart" before.
+
+---
+
+| Category | Examples |
+|----------|----------|
+| **Smart Home** | Thermostats, door locks, cameras, light bulbs, fridges |
+| **Wearables** | Fitness trackers, smartwatches, medical monitors |
+| **Industrial** | Factory sensors, power grid monitors, pipelines |
+| **Medical** | Insulin pumps, pacemakers, hospital equipment |
+| **Vehicles** | Cars, fleet tracking, autonomous systems |
+| **Infrastructure** | Traffic lights, water systems, smart bridges |
+
+---
+
+**The scale is staggering.**
+
+There are more IoT devices on Earth than people. Billions of tiny computers, everywhere, connected to everything.
+
+> Every "smart" device is a computer. Every computer can be hacked.
+
+---
+
+## Why IoT Security is Hard
+
+Traditional computers have *decades* of security evolution. IoT throws all that out.
+
+---
+
+### Constrained Resources
+
+These aren't laptops. They're *tiny chips* with:
+
+- **Limited CPU:** Can't run complex cryptography
+- **Limited memory:** Can't store big keys or certificates
+- **Limited battery:** Crypto operations drain power
+
+You can't "install antivirus" on a light bulb.
+
+---
+
+### Long Lifecycles
+
+Your phone gets updates for 3-5 years. But IoT devices?
+
+- Thermostats deployed for **10-20 years**
+- Manufacturers go out of business
+- No one patches a device from 2015
+
+> The device you install today will still be running when you've forgotten it exists.
+
+---
+
+### Physical Access
+
+Attackers can *physically touch* IoT devices. They're in public spaces, in your home, everywhere.
+
+- Extract firmware from the chip
+- Probe debug ports
+- Clone the device entirely
+
+Traditional security assumes attackers are *remote*. IoT can't assume that.
+
+---
+
+### No User Interface
+
+How do you configure security on a light bulb? There's no screen. No keyboard.
+
+- Default passwords **stay default**
+- No way to see if something's wrong
+- Updates require technical knowledge most users don't have
+
+> The simpler the device, the harder it is to secure.

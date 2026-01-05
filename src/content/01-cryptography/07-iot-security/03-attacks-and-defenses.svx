@@ -1,0 +1,139 @@
+---
+title: Attacks and Defenses
+prerequisites:
+  - cryptography/iot-security/vulnerabilities-and-threats
+---
+
+## Real Attack Scenarios
+
+These aren't hypotheticals. They happened.
+
+---
+
+### Mirai Botnet (2016)
+
+Malware scanned the internet for IoT devices with **default passwords**.
+
+Found *hundreds of thousands*.
+
+Built a botnet. Launched a DDoS attack that took down:
+
+- Twitter
+- Netflix
+- Reddit
+- GitHub
+- Major news sites
+
+**Cause:** Devices shipped with `admin/admin`. Users never changed it.
+
+> Half a million compromised cameras and DVRs brought down the internet.
+
+---
+
+### Jeep Cherokee Hack (2015)
+
+Security researchers remotely hacked a Jeep through its **entertainment system**:
+
+- Took over steering
+- Disabled brakes
+- Controlled the vehicle *at highway speed*
+
+**1.4 million vehicles recalled.**
+
+The entertainment system was connected to the same network as critical vehicle controls.
+
+---
+
+### Casino Fish Tank (2017)
+
+Attackers compromised a casino through a **smart fish tank thermometer**.
+
+- Thermometer was on the corporate network
+- Pivoted from thermometer to database servers
+- Exfiltrated high-roller customer data
+
+**Entry point:** A device to monitor fish tank temperature.
+
+---
+
+### St. Jude Pacemakers (2017)
+
+The FDA confirmed vulnerabilities in implanted pacemakers:
+
+- Could **drain battery** remotely
+- Could **alter heart rhythm**
+
+**465,000 patients** told to visit their doctor for a firmware update.
+
+> The firmware update for a device *inside your chest*.
+
+---
+
+## Security Controls
+
+What can actually be done?
+
+---
+
+### Device Level
+
+- **Secure boot:** Verify firmware integrity on startup
+- **Hardware security modules:** Protect cryptographic keys
+- **Minimal attack surface:** Disable unused features and ports
+- **No default credentials:** Force password change on setup
+
+---
+
+### Network Level
+
+- **Segment IoT** onto a separate network (VLAN)
+- **Monitor traffic** for anomalies
+- **Firewall rules** restricting what IoT can communicate with
+- **Never expose** devices directly to the internet
+
+> Your smart thermostat doesn't need to talk to your file server.
+
+---
+
+### Update Mechanism
+
+- **Signed firmware:** Verify updates are legitimate
+- **Automatic updates:** Don't rely on users
+- **Secure delivery:** Encrypted update channel
+
+---
+
+### Data Protection
+
+- **Encrypt in transit:** TLS for all communications
+- **Encrypt at rest:** Where device resources allow
+- **Minimize collection:** Don't gather data you don't need
+- **Clear retention policies:** Delete what you no longer need
+
+---
+
+### Organizational
+
+- **Inventory everything:** Know what IoT devices you have
+- **Assess before deploying:** Security review for new devices
+- **Vendor requirements:** Demand security commitments
+- **Incident response:** Plan for IoT-specific breaches
+
+---
+
+## The Uncomfortable Reality
+
+IoT security is **mostly bad**. It's getting *slightly* better, but slowly.
+
+The economics work against security:
+
+- Race to the **cheapest price**
+- Features sell, **security doesn't**
+- **No liability** for manufacturers
+- Consumers **don't know or care**
+
+---
+
+Until regulations or major incidents force change, IoT remains the **soft underbelly** of every network.
+
+> Every smart device is a trade-off: convenience for risk. Know what you're trading.
