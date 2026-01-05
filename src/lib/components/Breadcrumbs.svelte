@@ -3,24 +3,20 @@
 
 	type Crumb = { path: string; title: string };
 	let { crumbs }: { crumbs: Crumb[] } = $props();
-
-	function truncate(text: string, max: number = 18): string {
-		return text.length > max ? text.slice(0, max) + '...' : text;
-	}
 </script>
 
 <nav class="bar">
 	<div class="inner">
 		<a href="/" class="item home">
-			<GardenIcon size={32} />
+			<GardenIcon size={28} />
 		</a>
 
 		{#each crumbs as crumb, i}
 			<span class="sep">/</span>
 			{#if i === crumbs.length - 1}
-				<span class="item current">{truncate(crumb.title)}</span>
+				<span class="item current">{crumb.title}</span>
 			{:else}
-				<a href="/{crumb.path}" class="item">{truncate(crumb.title)}</a>
+				<a href="/{crumb.path}" class="item">{crumb.title}</a>
 			{/if}
 		{/each}
 	</div>
@@ -29,9 +25,12 @@
 <style>
 	.bar {
 		background: #0d0e0f;
-		padding: 0.4rem 1rem;
-		font-size: 0.8rem;
+		padding: 0.25rem 1rem;
+		font-size: 0.75rem;
 		border-bottom: 1px solid #282828;
+		height: 32px;
+		display: flex;
+		align-items: center;
 	}
 
 	.inner {
@@ -39,15 +38,22 @@
 		align-items: center;
 		justify-content: center;
 		gap: 0.5rem;
+		width: 100%;
+		min-width: 0;
 	}
 
 	.sep {
 		color: #504945;
+		flex-shrink: 0;
 	}
 
 	.item {
 		color: #83a598;
 		transition: color 0.1s ease;
+		max-width: 200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.item:hover {
@@ -57,6 +63,11 @@
 	.item.home {
 		display: flex;
 		align-items: center;
+		justify-content: center;
+		max-width: none;
+		flex-shrink: 0;
+		line-height: 0;
+		margin-top: -4px;
 	}
 
 	.item.home:hover {
@@ -65,5 +76,17 @@
 
 	.item.current {
 		color: #fabd2f;
+	}
+
+	@media (max-width: 600px) {
+		.item {
+			max-width: 80px;
+		}
+	}
+
+	@media (max-width: 400px) {
+		.item {
+			max-width: 60px;
+		}
 	}
 </style>
