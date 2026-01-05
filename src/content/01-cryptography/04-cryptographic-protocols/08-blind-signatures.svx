@@ -1,0 +1,146 @@
+---
+title: Blind Signatures
+prerequisites:
+  - cryptography/asymmetric-cryptography/rsa
+---
+
+## The Problem
+
+You want someone to sign a document, but you don't want them to see what's in it.
+
+Why would you ever need this?
+
+---
+
+## The Voting Problem
+
+Imagine an election system:
+
+1. You write your vote on a ballot
+2. An official stamps it to make it valid
+3. You submit the stamped ballot
+
+**The issue:** The official *sees your vote* when they stamp it. Your ballot isn't secret.
+
+> We need signatures that work *without the signer seeing the message*.
+
+---
+
+## The Carbon Paper Analogy
+
+Think of signing through **carbon paper**:
+
+1. You write your message on paper
+2. You seal it in an envelope lined with carbon paper
+3. The signer signs the *outside* of the envelope
+4. The signature transfers through to your message inside
+5. You open the envelope and have a signed message
+
+**The signer never saw what they signed.** But the signature is perfectly valid.
+
+---
+
+## RSA Blind Signatures
+
+David Chaum invented this in 1982. It uses RSA in a clever way.
+
+**Setup:** Signer has RSA keys:
+
+- Public key: $(n, e)$
+- Private key: $d$
+- Normal signature: $s = m^d \mod n$
+
+The protocol has three steps: **blind**, **sign**, **unblind**.
+
+---
+
+## Step 1: Blind
+
+User has message $m$ and wants it signed.
+
+1. Pick a random *blinding factor* $r$
+2. Compute the blinded message: $m' = m \cdot r^e \mod n$
+3. Send $m'$ to the signer
+
+> The signer sees $m'$, which looks like random garbage. They learn **nothing** about $m$.
+
+---
+
+## Step 2: Sign
+
+Signer signs the blinded message:
+
+1. Compute $s' = (m')^d \mod n$
+2. Send $s'$ back to user
+
+The signer performs a normal RSA signature on $m'$. They have no idea what they're actually signing.
+
+---
+
+## Step 3: Unblind
+
+User removes the blinding:
+
+1. Compute $s = s' \cdot r^{-1} \mod n$
+2. Result: $s$ is a valid signature on the original message $m$
+
+> The blinding factor cancels out, leaving a clean signature on the real message.
+
+---
+
+## Why Does This Work: The Math (Optional)
+
+Trace through the math:
+
+$$m' = m \cdot r^e$$
+
+$$s' = (m')^d = (m \cdot r^e)^d = m^d \cdot r^{ed}$$
+
+Since $r^{ed} = r$ by RSA:
+
+$$s' = m^d \cdot r$$
+
+After unblinding:
+
+$$s = s' \cdot r^{-1} = m^d \cdot r \cdot r^{-1} = m^d$$
+
+And $m^d$ is exactly the RSA signature on $m$.
+
+> $r^{ed} = r$ because RSA's core property is $x^{ed} \mod n = x$ for any $x$.
+
+---
+
+## What the Signer Knows
+
+**During signing:**
+
+| Signer receives | What it reveals |
+|-----------------|-----------------|
+| $m' = m \cdot r^e$ | Nothing. Looks random. |
+
+**After signing:**
+
+| Signer produces | What they know |
+|-----------------|----------------|
+| $s' = (m')^d$ | They signed *something*, but not what. |
+
+The blinding factor $r$ is random and secret. The signer is *mathematically blind* to the actual message.
+
+---
+
+## Applications
+
+| Use case | How blind signatures help |
+|----------|--------------------------|
+| **Anonymous voting** | Authority certifies ballots without seeing votes. |
+| **Anonymous credentials** | Get credentials signed without revealing your identity. |
+
+---
+
+## Key Insight
+
+Regular signatures prove **who signed**.
+
+Blind signatures prove **that someone signed**, while hiding *what* they signed from them.
+
+> The signer authenticates without learning. Privacy and validity coexist.

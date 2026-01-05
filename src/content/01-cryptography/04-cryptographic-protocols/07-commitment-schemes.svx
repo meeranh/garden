@@ -1,0 +1,157 @@
+---
+title: Commitment Schemes
+prerequisites:
+  - cryptography/symmetric-cryptography/hash-functions
+---
+
+## The Cheating Problem
+
+Alice and Bob want to play "guess the coin flip" over the phone:
+
+1. Alice flips a coin
+2. Bob guesses heads or tails
+3. Alice reveals the result
+
+**The problem:** Alice can *cheat*. After hearing Bob's guess, she can simply lie about what she flipped.
+
+> We need a way for Alice to **lock in her answer** before Bob guesses, without revealing it yet.
+
+---
+
+## The Sealed Envelope
+
+Think of a commitment like a **sealed envelope**:
+
+1. Alice writes her answer on paper
+2. She seals it in an envelope
+3. She hands the sealed envelope to Bob
+4. Bob makes his guess
+5. Alice opens the envelope to reveal the answer
+
+**Why this works:**
+
+- Bob **can't peek** inside the sealed envelope
+- Alice **can't swap** the contents after handing it over
+
+*The envelope is both opaque and tamper-evident.*
+
+---
+
+## Two Phases
+
+Every commitment scheme has two phases:
+
+| Phase | What happens |
+|-------|--------------|
+| **Commit** | Lock in a value *without revealing it* |
+| **Reveal** | Open the commitment, *prove* what was inside |
+
+The commit phase produces a **commitment** (the sealed envelope). The reveal phase opens it.
+
+---
+
+## Two Properties
+
+A secure commitment scheme guarantees two things:
+
+**Hiding**: The commitment reveals *nothing* about the value.
+
+> Before the reveal phase, the receiver learns **zero information** about what's inside.
+
+**Binding**: The committer *cannot change* the value after committing.
+
+> Once committed, the sender is **bound** to that value. No take-backs.
+
+*Both properties are essential.* Without hiding, the receiver peeks. Without binding, the sender cheats.
+
+---
+
+## Building Commitments from Hashes
+
+The simplest construction uses a **hash function**.
+
+**To commit to message $m$:**
+
+1. Pick a random value $r$ (called a *nonce*)
+2. Compute $c = H(m \| r)$
+3. Send $c$ to the receiver
+
+> The symbol $\|$ denotes concatenation.
+
+**To reveal:**
+
+1. Send $m$ and $r$ to the receiver
+2. Receiver computes $H(m \| r)$
+3. If it matches $c$, the commitment is valid
+
+> The commitment $c$ is just a hash. Short, fixed-size, reveals nothing.
+
+---
+
+## Why It's Hiding
+
+Hash functions are **one-way**. Given $c = H(m \| r)$, you can't work backwards to find $m$.
+
+But there's a subtlety. What if $m$ is just "heads" or "tails"?
+
+Without the random $r$, the receiver could just compute $H(\text{"heads"})$ and $H(\text{"tails"})$, compare to $c$, and know the answer immediately.
+
+**The nonce $r$ prevents this.** Even if there are only two possible messages, each commitment looks completely random.
+
+> The randomness makes commitments to the *same message* look different every time.
+
+---
+
+## Why It's Binding
+
+To cheat, Alice would need to find $m'$ and $r'$ such that:
+
+$$H(m \| r) = H(m' \| r')$$
+
+where $m \neq m'$.
+
+This is a **hash collision**. For secure hash functions, finding collisions is computationally infeasible.
+
+> Binding relies on **collision resistance**. If you can't find collisions, you can't change your commitment.
+
+---
+
+## The Full Protocol
+
+**Setup:** Alice and Bob agree on a hash function $H$.
+
+**Commit phase:**
+1. Alice has secret value $m$
+2. Alice generates random nonce $r$
+3. Alice computes $c = H(m \| r)$
+4. Alice sends $c$ to Bob
+
+**Reveal phase:**
+1. Alice sends $(m, r)$ to Bob
+2. Bob computes $H(m \| r)$
+3. Bob checks: does it equal $c$?
+4. If yes, accept $m$ as the committed value
+
+---
+
+## Applications
+
+Commitments appear throughout cryptography:
+
+| Application | How commitments help |
+|-------------|---------------------|
+| **Sealed-bid auctions** | All bidders commit first, then reveal simultaneously |
+| **Zero-knowledge proofs** | Prover commits to values before verifier's challenge |
+| **Electronic voting** | Commit to votes, reveal only after polls close |
+
+> Anywhere you need *"I'll tell you later, but I'm locking in my answer now"*, that's a commitment scheme.
+
+---
+
+## Key Insight
+
+Commitments separate **when you decide** from **when you reveal**.
+
+This simple primitive enables fair protocols between parties who don't trust each other. Alice can't cheat because she's bound. Bob can't cheat because he can't peek.
+
+> A commitment is a **cryptographic promise**. The math ensures you keep it.
