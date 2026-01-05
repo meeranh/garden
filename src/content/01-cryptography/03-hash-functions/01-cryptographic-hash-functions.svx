@@ -1,0 +1,105 @@
+---
+title: Cryptographic Hash Functions
+---
+
+## What's a Hash Function?
+
+A hash function takes **any input** and produces a **fixed-size output**.
+
+A password, a file, an entire novel. Doesn't matter. The output is always the same size.
+
+---
+
+## Same Input, Same Output
+
+Hash functions are **deterministic**.
+
+- `"hello"` → `2cf24dba5fb0a30e...`
+- `"hello"` → `2cf24dba5fb0a30e...` *(same)*
+- `"hello "` → `8eb72a0d4c9b7d7c...` *(different!)*
+
+Change *one character*, and the entire hash changes.
+
+---
+
+## One-Way Street
+
+You can compute the hash from the input. But you **can't reverse it**.
+
+- `"hello"` → `2cf24dba...` *(easy)*
+- `2cf24dba...` → `???` *(impossible)*
+
+> Think of it like a fingerprint. You can take a fingerprint from a person, but you can't reconstruct the person from a fingerprint.
+
+---
+
+## The Three Security Properties
+
+A **cryptographic** hash function must satisfy three properties.
+
+---
+
+## 1. Pre-image Resistance
+
+Given a hash, you **can't find any input** that produces it.
+
+| Given | Find |
+|-------|------|
+| `a7f3b2c9...` | *Any* message that hashes to it |
+
+This should be *computationally impossible*.
+
+**Why it matters:** Password storage.
+
+- Databases store `hash(password)`, not the password
+- If stolen, attackers see only hashes
+- Without pre-image resistance → they reverse hashes → get passwords
+
+---
+
+## 2. Second Pre-image Resistance
+
+Given a message, you **can't find a different message** with the same hash.
+
+| Given | Find |
+|-------|------|
+| `"Pay Bob $100"` → `8f2a9c...` | A *different* message with hash `8f2a9c...` |
+
+This should be *computationally impossible*.
+
+**Why it matters:** Document integrity.
+
+- You sign a contract and publish its hash
+- No one can create a *different* contract with the same hash
+- If they could → they could swap your signed document
+
+---
+
+## 3. Collision Resistance
+
+You **can't find any two different messages** with the same hash.
+
+| Find |
+|------|
+| *Any* two messages where hash($m_1$) = hash($m_2$) |
+
+This should be *computationally impossible*.
+
+**Why it matters:** The swap attack.
+
+1. Attacker creates **two** contracts: one fair, one malicious
+2. Both have the **same hash** (a collision)
+3. You sign the fair one
+4. Attacker claims you signed the malicious one
+
+With collision resistance, step 2 is impossible.
+
+---
+
+## What Hashes Are Used For
+
+- **Password storage** — store `hash(password)`, verify by comparing
+- **File integrity** — publish a hash, others verify it wasn't tampered
+- **Digital signatures** — sign `hash(document)` instead of the whole thing
+- **Blockchain** — each block contains the hash of the previous block
+- **Commitments** — commit to a value without revealing it

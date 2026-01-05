@@ -1,0 +1,149 @@
+---
+title: The Birthday Attack
+prerequisites:
+  - cryptography/hash-functions/cryptographic-hash-functions
+---
+
+## A Surprising Question
+
+How many people need to be in a room before there's a **50% chance** that two share a birthday?
+
+Take a guess.
+
+---
+
+## The Wrong Answer
+
+Most people guess **183** (half of 365).
+
+But that answers a *different* question: "How many people until someone shares **my** birthday?"
+
+---
+
+## The Right Question
+
+We're asking: "Do **any two people** share **a** birthday?"
+
+This is much easier to achieve.
+
+---
+
+## Why? Let's Count Comparisons
+
+With **3 people** (Alice, Bob, Carol):
+
+- Does Alice match Bob?
+- Does Alice match Carol?
+- Does Bob match Carol?
+
+That's **3 comparisons**.
+
+---
+
+With **4 people**:
+
+- Person 1 vs 2, 3, 4 → 3 comparisons
+- Person 2 vs 3, 4 → 2 comparisons
+- Person 3 vs 4 → 1 comparison
+
+Total: **6 comparisons**.
+
+---
+
+With **5 people**: **10 comparisons**.
+
+With **10 people**: **45 comparisons**.
+
+With **23 people**: **253 comparisons**.
+
+> Each comparison is a chance for a match!
+
+---
+
+## The Formula
+
+With $n$ people, the number of comparisons is:
+
+$$\frac{n \times (n-1)}{2}$$
+
+**Why?** Each person compares with everyone who came after them.
+
+- Person 1 compares with $(n-1)$ others
+- Person 2 compares with $(n-2)$ others
+- And so on...
+
+Add them up: $(n-1) + (n-2) + \ldots + 1 = \frac{n(n-1)}{2}$
+
+For 23 people: $\frac{23 \times 22}{2} = 253$ comparisons.
+
+::birthday-paradox
+
+---
+
+## The Answer
+
+With **23 people**, you make **253 comparisons**.
+
+Each comparison has a small chance of matching (1 in 365).
+
+But with 253 chances, the probability adds up to **over 50%**.
+
+---
+
+## The Exact Math
+
+We calculate the chance of *no* match, then subtract from 1.
+
+- Person 1: any birthday → $\frac{365}{365}$
+- Person 2: avoid 1 birthday → $\frac{364}{365}$
+- Person 3: avoid 2 birthdays → $\frac{363}{365}$
+- ... and so on
+
+Multiply all these:
+
+$$P(\text{no match}) = \frac{365}{365} \times \frac{364}{365} \times \frac{363}{365} \times \cdots \times \frac{343}{365} \approx 0.493$$
+
+So $P(\text{match}) = 1 - 0.493 = 50.7\%$
+
+> That's the birthday paradox. It takes surprisingly few people because comparisons grow so fast.
+
+---
+
+## What This Means for Hashing
+
+Replace "people" with "hash inputs" and "birthdays" with "hash outputs."
+
+**Finding a collision:**
+- Generate random inputs
+- Hash each one
+- Compare all pairs of outputs
+
+The birthday paradox means you find a collision much sooner than expected.
+
+---
+
+## The Security Impact
+
+For a hash with $n$-bit output:
+
+| Attack | Work Required |
+|--------|---------------|
+| Find input for specific hash | $2^n$ |
+| Find **any** collision | $2^{n/2}$ |
+
+The square root! That's the birthday attack.
+
+---
+
+## Real Numbers
+
+| Hash | Output | Collision Security |
+|------|--------|-------------------|
+| MD5 | 128-bit | $2^{64}$ (broken) |
+| SHA-256 | 256-bit | $2^{128}$ (secure) |
+
+$2^{64}$ operations is achievable. That's why MD5 is broken.
+
+$2^{128}$ is still impossible. That's why SHA-256 is secure.
+
+> To resist birthday attacks, use hashes with at least **256 bits**.

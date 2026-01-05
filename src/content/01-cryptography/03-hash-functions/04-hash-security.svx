@@ -1,0 +1,89 @@
+---
+title: Hash Security
+prerequisites:
+  - cryptography/hash-functions/birthday-attack
+---
+
+## Output Length Matters
+
+A hash function's security depends on its **output size**.
+
+More bits = more possible outputs = harder to find collisions.
+
+---
+
+## The Numbers
+
+| Output Size | Possible Outputs | Pre-image Security | Collision Security |
+|-------------|------------------|--------------------|--------------------|
+| 128-bit | $2^{128}$ | $2^{128}$ | $2^{64}$ |
+| 256-bit | $2^{256}$ | $2^{256}$ | $2^{128}$ |
+| 512-bit | $2^{512}$ | $2^{512}$ | $2^{256}$ |
+
+> Collision security is always **half** the bit length (birthday attack).
+
+---
+
+## What's Achievable?
+
+| Operations | Feasibility |
+|------------|-------------|
+| $2^{40}$ | Laptop in hours |
+| $2^{56}$ | Cluster in days |
+| $2^{64}$ | Nation-state budget |
+| $2^{80}$ | Barely possible |
+| $2^{128}$ | **Impossible** |
+
+$2^{64}$ has been done. That's why **128-bit hashes are broken** for collision resistance.
+
+$2^{128}$ is beyond reach. That's why **256-bit hashes are secure**.
+
+---
+
+## The Rule
+
+For **$n$-bit security**, you need a **$2n$-bit hash**.
+
+- Want 128-bit collision security? Use SHA-256.
+- Want 256-bit collision security? Use SHA-512.
+
+---
+
+## Brute Force Attack
+
+The simplest attack: **try every possible input**.
+
+**Against pre-image resistance:**
+
+1. Pick random inputs
+2. Hash each one
+3. Check if it matches the target hash
+4. Repeat until found
+
+With a 256-bit hash, you'd need ~$2^{256}$ attempts.
+
+> The universe has ~$2^{265}$ atoms. You'd run out of time and energy.
+
+---
+
+## Why Brute Force Works (Eventually)
+
+Given enough attempts, you **will** find a match.
+
+But "enough" can mean *trillions of years*.
+
+| Hash Size | Attempts Needed | Time at $10^{12}$/sec |
+|-----------|-----------------|----------------------|
+| 64-bit | $2^{64}$ | ~5 hours |
+| 128-bit | $2^{128}$ | ~$10^{16}$ years |
+| 256-bit | $2^{256}$ | ~$10^{52}$ years |
+
+The universe is ~$10^{10}$ years old.
+
+---
+
+## The Takeaway
+
+- **Short hashes** (128-bit) are vulnerable to birthday attacks
+- **Long hashes** (256-bit+) resist brute force for the foreseeable future
+- Always use at least **SHA-256** for security applications
