@@ -1,0 +1,96 @@
+---
+title: Key Exchange
+prerequisites:
+  - cryptography/asymmetric-cryptography/asymmetric-encryption
+---
+
+## The Problem
+
+Alice and Bob want to communicate privately. They need a shared secret key to encrypt their messages.
+
+But they're on the internet. Eve is watching everything they send.
+
+How do they agree on a secret key without Eve learning it?
+
+---
+
+## Before 1976
+
+The only options were:
+
+- **Meet in person** and exchange the key
+- **Use a trusted courier** to deliver the key
+- **Pre-share keys** before you need them
+
+None of these work well for the internet. You can't meet everyone you want to talk to.
+
+---
+
+## The Breakthrough
+
+In 1976, Whitfield Diffie and Martin Hellman published a paper that changed everything.
+
+They showed that two people can create a shared secret by exchanging messages *in public*. Even if an attacker sees every message, they can't figure out the secret.
+
+> **Key exchange:** Creating a shared secret over an insecure channel.
+
+This was the birth of public-key cryptography.
+
+---
+
+## The Intuition
+
+Think of it like mixing paint.
+
+::diffie-hellman-paint
+
+---
+
+**Step 1:** Alice and Bob agree on a public color. Say, yellow. Everyone knows this.
+
+**Step 2:** Each picks a secret color. Alice picks red. Bob picks blue.
+
+**Step 3:** Each mixes the public color with their secret.
+- Alice: yellow + red = orange
+- Bob: yellow + blue = green
+
+---
+
+**Step 4:** They exchange their mixed colors publicly.
+
+Eve sees orange and green. But she can't "unmix" them to get the secrets.
+
+---
+
+**Step 5:** Each adds their secret to what they received.
+- Alice: green + red = brown
+- Bob: orange + blue = brown
+
+**They get the same final color!**
+
+---
+
+## Why It Works
+
+Both end up with: **public + Alice's secret + Bob's secret**
+
+The order of mixing doesn't matter. Both paths lead to the same result.
+
+Eve only sees:
+- The public color (yellow)
+- Alice's mix (orange = yellow + red)
+- Bob's mix (green = yellow + blue)
+
+She never sees the individual secrets. And she can't unmix paint.
+
+---
+
+## From Paint to Math
+
+Real Diffie-Hellman uses math instead of paint.
+
+The "mixing" operation is **modular exponentiation**: raising a number to a power, then taking the remainder.
+
+The "can't unmix" property comes from the **Discrete Logarithm Problem**: given the result, finding the exponent is extremely hard.
+
+> The next section shows the actual calculations.

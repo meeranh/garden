@@ -1,0 +1,117 @@
+---
+title: Man-in-the-Middle Attack
+prerequisites:
+  - cryptography/asymmetric-cryptography/diffie-hellman/calculations
+---
+
+## The Weakness
+
+Diffie-Hellman has a problem.
+
+Alice and Bob can create a shared secret. But how does Alice know she's actually talking to Bob?
+
+---
+
+## Enter Eve
+
+Eve isn't just listening. She's sitting *between* Alice and Bob.
+
+When Alice sends a message to Bob, it goes through Eve first. Same for Bob's messages to Alice.
+
+::diffie-hellman-mitm
+
+---
+
+## The Attack
+
+**Step 1:** Alice sends her public value $A$ to Bob.
+
+Eve intercepts it. She doesn't forward it.
+
+---
+
+**Step 2:** Eve generates her own secret $e$ and computes $E = g^e \mod p$.
+
+Eve sends $E$ to Bob, pretending to be Alice.
+
+---
+
+**Step 3:** Bob receives $E$ and thinks it came from Alice.
+
+Bob sends his public value $B$ back.
+
+Eve intercepts it. She doesn't forward it.
+
+---
+
+**Step 4:** Eve sends her $E$ to Alice, pretending to be Bob.
+
+Alice receives $E$ and thinks it came from Bob.
+
+---
+
+## The Result
+
+Now there are **two separate keys**:
+
+| Connection | Shared Key |
+|------------|------------|
+| Alice and Eve | $K_1 = E^a = A^e$ |
+| Eve and Bob | $K_2 = E^b = B^e$ |
+
+Alice thinks she's talking to Bob. Bob thinks he's talking to Alice.
+
+But Eve is in the middle, with access to both keys.
+
+---
+
+## What Eve Can Do
+
+1. Alice encrypts a message with $K_1$ and sends it
+2. Eve decrypts it with $K_1$ and **reads it**
+3. Eve re-encrypts it with $K_2$ and forwards to Bob
+4. Bob decrypts with $K_2$ and sees the message
+
+Neither Alice nor Bob notices anything wrong.
+
+> Eve can read, modify, or block any message.
+
+---
+
+## Why This Works
+
+Diffie-Hellman proves you're sharing a secret with *someone*.
+
+It doesn't prove *who* that someone is.
+
+There's no authentication built in.
+
+---
+
+## The Solution
+
+Authenticate the key exchange.
+
+**Option 1: Digital Signatures**
+
+Alice signs her public value with her private RSA key. Bob can verify it came from Alice.
+
+**Option 2: Certificates**
+
+A trusted third party (like a Certificate Authority) vouches for Alice's public key.
+
+**Option 3: Pre-shared secrets**
+
+If Alice and Bob already share a secret, they can use it to verify the exchange.
+
+---
+
+## In Practice
+
+Real-world protocols like TLS (used for HTTPS) combine Diffie-Hellman with authentication.
+
+1. The server proves its identity with a certificate
+2. Then Diffie-Hellman creates a session key
+3. This gives both **authentication** and **forward secrecy**
+
+> **Forward secrecy:** Even if the server's long-term key is compromised later, past conversations remain secure.

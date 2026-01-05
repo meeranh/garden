@@ -1,0 +1,150 @@
+---
+title: The Math
+prerequisites:
+  - cryptography/asymmetric-cryptography/diffie-hellman/key-exchange
+---
+
+::diffie-hellman-calc
+
+---
+
+## Public Parameters
+
+Alice and Bob first agree on two public numbers:
+
+- **p:** a large prime number
+- **g:** a generator (a number with special properties)
+
+Everyone can know these. They're not secret.
+
+---
+
+## Let's Use Real Numbers
+
+| Parameter | Value |
+|-----------|-------|
+| Prime $p$ | 23 |
+| Generator $g$ | 5 |
+
+---
+
+## Alice's Side
+
+**Step 1:** Alice picks a secret number.
+
+$$a = 6$$
+
+This is her **private key**. She never shares it.
+
+---
+
+**Step 2:** Alice computes her public value.
+
+$A = g^a \mod p$
+
+$\phantom{A} = 5^6 \mod 23$
+
+$\phantom{A} = 15625 \mod 23$
+
+$\phantom{A} = 8$
+
+She sends **A = 8** to Bob. Everyone can see this.
+
+---
+
+## Bob's Side
+
+**Step 1:** Bob picks a secret number.
+
+$$b = 15$$
+
+This is his **private key**. He never shares it.
+
+---
+
+**Step 2:** Bob computes his public value.
+
+$B = g^b \mod p$
+
+$\phantom{B} = 5^{15} \mod 23$
+
+$\phantom{B} = 19$
+
+He sends **B = 19** to Alice. Everyone can see this.
+
+---
+
+## Creating the Shared Secret
+
+Now comes the magic.
+
+---
+
+**Alice computes:**
+
+$K = B^a \mod p$
+
+$\phantom{K} = 19^6 \mod 23$
+
+$\phantom{K} = 2$
+
+---
+
+**Bob computes:**
+
+$K = A^b \mod p$
+
+$\phantom{K} = 8^{15} \mod 23$
+
+$\phantom{K} = 2$
+
+---
+
+**Same answer!** Both get K = 2.
+
+This is their shared secret. They can now use it as a key for symmetric encryption.
+
+---
+
+## Why Do They Get the Same Answer?
+
+Alice computes: $B^a = (g^b)^a = g^{ba}$
+
+Bob computes: $A^b = (g^a)^b = g^{ab}$
+
+Since $ab = ba$, they get the same result.
+
+---
+
+## What Eve (the Attacker) Sees
+
+Eve is watching the whole conversation. She knows:
+
+| Value | Known to Eve? |
+|-------|---------------|
+| $p = 23$ | Yes (public) |
+| $g = 5$ | Yes (public) |
+| $A = 8$ | Yes (sent publicly) |
+| $B = 19$ | Yes (sent publicly) |
+| $a = 6$ | **No** (Alice's secret) |
+| $b = 15$ | **No** (Bob's secret) |
+| $K = 2$ | **No** (shared secret) |
+
+---
+
+## Why Can't Eve Calculate K?
+
+To find K, Eve would need either $a$ or $b$.
+
+She knows $A = 8$ and that $A = 5^a \mod 23$.
+
+So she needs to find $a$ where $5^a \mod 23 = 8$.
+
+---
+
+This is the **Discrete Logarithm Problem**.
+
+For small numbers like 23, she could just try all possibilities. But for a 600-digit prime? There's no known efficient algorithm.
+
+> **Diffie-Hellman's security rests on the difficulty of the discrete logarithm problem.**
+
