@@ -1,7 +1,7 @@
 ---
 title: RSA Digital Signatures
 prerequisites:
-  - cryptography/asymmetric-cryptography/fundamentals/rsa-key-generation
+  - cryptography/asymmetric-cryptography/rsa/key-generation
 ---
 
 ## The Problem
