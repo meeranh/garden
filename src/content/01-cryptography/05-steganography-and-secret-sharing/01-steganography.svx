@@ -1,0 +1,168 @@
+---
+title: Steganography
+---
+
+## Hiding in Plain Sight
+
+**Encryption** hides the *content* of a message. **Steganography** hides the *existence* of the message.
+
+With encryption, Eve sees gibberish but *knows* you're communicating secretly. With steganography, Eve sees a normal photo, text, or file and suspects *nothing*.
+
+> The goal isn't "Eve can't read the message." It's "Eve doesn't know there's a message at all."
+
+---
+
+## Encryption vs Steganography
+
+| | **Encryption** | **Steganography** |
+|---|---------------|-------------------|
+| **Hides** | What you're saying | That you're saying *anything* |
+| **Eve sees** | Gibberish (suspicious) | Normal-looking content |
+| **Goal** | Confidentiality | Undetectability |
+
+You can combine both: **encrypt** the message, *then* **hide** it with steganography.
+
+---
+
+## Terminology
+
+Four key terms define the steganographic process:
+
+- **Cover medium**: The innocent-looking carrier. A photo, text, audio file, video. Something that wouldn't raise suspicion.
+
+- **Payload**: The secret message you want to hide.
+
+- **Stego-object**: The result after hiding the payload in the cover. Looks *identical* to the cover, but contains hidden data.
+
+- **Stego-key**: Optional password or key needed to extract the payload.
+
+> **Cover + Payload = Stego-object**
+
+---
+
+## Text-Based Steganography
+
+### First-Letter Method
+
+Hide a message in the **first letter** of each word:
+
+*"**B**ring **r**ope. **I** **n**eed **g**ear."*
+
+First letters spell: **BRING**
+
+The sentence reads normally. The secret message hides in the structure.
+
+---
+
+### Null Cipher
+
+Hide the message at **fixed positions**. For example, every 5th word:
+
+*"The weather seems nice* ***today*** *but I think* ***we*** *should stay home and* ***rest***"
+
+Every 5th word: **today**, **we**, **rest**
+
+The text flows naturally. The hidden message is embedded in plain sight.
+
+> Text steganography exploits the *flexibility* of natural language. Many ways to say the same thing.
+
+---
+
+## Image-Based Steganography: LSB
+
+**LSB** stands for **Least Significant Bit**.
+
+A pixel's color is stored as numbers (0-255 for each of R, G, B). In binary, that's 8 bits:
+
+| Color | Decimal | Binary |
+|-------|---------|--------|
+| Red | 182 | **1011011**0 |
+
+The **last bit** (highlighted) contributes almost nothing to the color. Changing it shifts the value by just ±1.
+
+*Invisible to the human eye.*
+
+::lsb-steganography
+
+---
+
+### The Technique
+
+1. Take each pixel's color value in binary
+2. **Replace the LSB** with one bit of your secret message
+3. Repeat for enough pixels to encode the full message
+
+| | Original | Message bit | Modified | Change |
+|---|----------|-------------|----------|--------|
+| Binary | 1011011**0** | **1** | 1011011**1** | |
+| Decimal | 182 | | 183 | +1 |
+
+The color changed by **1 out of 255**. Completely invisible.
+
+---
+
+### Example: Hiding "Hi"
+
+The ASCII for "Hi" in binary: `01001000 01101001`
+
+That's **16 bits**. We need to modify 16 pixels.
+
+| Pixel | Original | LSB replaced | New value | Change |
+|-------|----------|--------------|-----------|--------|
+| 1 | 181 | 0 | 180 | -1 |
+| 2 | 110 | 1 | 111 | +1 |
+| 3 | 203 | 0 | 202 | -1 |
+| 4 | 157 | 0 | 156 | -1 |
+| ... | ... | ... | ... | ... |
+
+**The image looks identical.** The message is hidden inside.
+
+---
+
+## Steganalysis
+
+**Steganalysis** is the art of *detecting* hidden messages. The attacker's countermeasure.
+
+**Common methods:**
+
+- **Statistical analysis**: LSB replacement creates detectable patterns in pixel distributions
+- **Visual inspection**: Enhanced contrast might reveal anomalies
+- **File size analysis**: Stego-objects might be larger than expected
+- **Comparison attacks**: If Eve has the original cover, differences reveal everything
+
+> If steganography's goal is *undetectability*, steganalysis tries to break that assumption.
+
+---
+
+## Communication Channels
+
+Not all hiding places are equal:
+
+**Unconstrained channels**: You control the cover completely. You can choose *any* image, craft *any* text. Easier to hide data naturally.
+
+**Socially constrained channels**: The cover must fit social context. Sending random nature photos to your boss would be suspicious. The cover must *make sense* for the relationship.
+
+> Good steganography considers **social** undetectability, not just **technical**.
+
+A perfectly hidden message in a suspicious context still fails.
+
+---
+
+## Applications
+
+| Use case | How steganography helps |
+|----------|------------------------|
+| **Censorship circumvention** | Hide messages in normal social media posts |
+| **Digital watermarking** | Embed invisible ownership info in images |
+| **Covert communication** | When encryption *itself* is suspicious |
+| **Data exfiltration** | Hide stolen data in innocent-looking files |
+
+---
+
+## Key Insight
+
+Encryption says *"you can't read this."*
+
+Steganography says *"there's nothing here to read."*
+
+> The best secret is one nobody knows exists.
