@@ -1,0 +1,129 @@
+---
+title: The Cheating Dealer
+prerequisites:
+  - cryptography/steganography-and-secret-sharing/shamirs-secret-sharing/secret-sharing
+---
+
+## The Trust Problem
+
+Shamir's scheme has a hidden assumption: **we trust the dealer**.
+
+The dealer builds the polynomial, computes all shares, and hands them out. Players receive their share and... just believe it's correct?
+
+**What if the dealer cheats?**
+
+---
+
+## How a Dealer Can Cheat
+
+A malicious dealer could give **inconsistent shares** to different players.
+
+| Player | Share received |
+|--------|----------------|
+| Alice | Point from polynomial $f(x)$ |
+| Bob | Point from polynomial $f(x)$ |
+| Carol | Point from a *different* polynomial $g(x)$ |
+
+When Alice and Bob combine shares, they recover the real secret.
+
+When Alice and Carol combine shares, they get **garbage**. Or worse, a *wrong* secret that looks valid.
+
+> The dealer can selectively control who can reconstruct and who cannot.
+
+---
+
+## The Problem with Blind Trust
+
+Players have **no way to verify** their shares are consistent.
+
+- Each player only sees *their own* share
+- They can't compare with others (that would leak information)
+- They only discover the problem at reconstruction time
+- By then, it's too late
+
+> In basic Shamir, you must trust the dealer completely. That's a dangerous assumption.
+
+---
+
+## The Solution: Commitments
+
+What if the dealer had to **commit** to the polynomial *before* distributing shares?
+
+A **commitment scheme** lets you:
+
+1. **Commit** to a value (lock it in, but keep it hidden)
+2. **Reveal** later (prove what you committed to)
+
+| Property | Meaning |
+|----------|---------|
+| **Hiding** | Commitment reveals nothing about the value |
+| **Binding** | Can't change the value after committing |
+
+---
+
+## Verifiable Secret Sharing
+
+**Verifiable Secret Sharing (VSS)** adds commitments to Shamir's scheme.
+
+The dealer must commit to the polynomial coefficients *publicly*. Players can then verify their share is consistent with those commitments.
+
+> If you cheated, the math won't check out.
+
+---
+
+## How It Works
+
+**Setup:** Dealer has polynomial $f(x) = S + a_1 x + a_2 x^2 + \ldots + a_{t-1} x^{t-1}$
+
+---
+
+**Step 1: Commit to coefficients**
+
+The dealer publishes commitments to *every* coefficient:
+
+| Coefficient | Commitment |
+|-------------|------------|
+| $S$ (secret) | $C_0 = \text{Commit}(S)$ |
+| $a_1$ | $C_1 = \text{Commit}(a_1)$ |
+| $a_2$ | $C_2 = \text{Commit}(a_2)$ |
+| ... | ... |
+
+These commitments are **public**. Everyone sees them.
+
+But commitments are *hiding*. No one learns the actual values.
+
+---
+
+**Step 2: Distribute shares**
+
+Dealer gives each player their share as usual:
+
+- Player 1 gets $(1, f(1))$
+- Player 2 gets $(2, f(2))$
+- Player $i$ gets $(i, f(i))$
+
+---
+
+**Step 3: Players verify**
+
+Here's the key insight. If we use **homomorphic commitments** (like Pedersen commitments), we can do math on commitments:
+
+$$\text{Commit}(a) \cdot \text{Commit}(b) = \text{Commit}(a + b)$$
+
+Player $i$ can compute what the commitment to $f(i)$ *should* be:
+
+$$C_0 \cdot C_1^i \cdot C_2^{i^2} \cdot \ldots = \text{Commit}(f(i))$$
+
+Then they check: does this match their share?
+
+> If the dealer gave you a fake share, the commitment check **fails**.
+
+---
+
+## Key Insight
+
+Verifiable Secret Sharing transforms "trust the dealer" into "verify the math."
+
+The commitment scheme acts as a **cryptographic receipt**. The dealer commits publicly, and that commitment holds them accountable.
+
+> Don't trust. Verify.
