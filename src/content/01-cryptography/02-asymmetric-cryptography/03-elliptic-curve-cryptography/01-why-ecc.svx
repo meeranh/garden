@@ -1,0 +1,56 @@
+---
+title: Why Elliptic Curves?
+prerequisites:
+  - cryptography/asymmetric-cryptography/rsa/key-generation
+---
+
+## The Problem with RSA
+
+RSA works. But there's a catch.
+
+To get **128-bit security** (what's considered secure today), RSA needs a **3072-bit** key.
+
+That's a number with over 900 digits.
+
+---
+
+## What If We Could Do Better?
+
+Elliptic Curve Cryptography (ECC) achieves the same security with much smaller keys.
+
+::ecc-vs-rsa
+
+---
+
+## Why Does This Matter?
+
+Smaller keys mean:
+
+- **Faster computation** for signing and verifying
+- **Less bandwidth** when sending keys and signatures
+- **Better for constrained devices** like smart cards, IoT sensors, and mobile phones
+
+Bitcoin, Ethereum, TLS 1.3, and Signal all use ECC.
+
+---
+
+## Why Is ECC More Efficient?
+
+Both RSA and ECC rely on hard math problems:
+
+| System | Hard Problem |
+|--------|--------------|
+| RSA | Factoring large numbers |
+| ECC | Elliptic Curve Discrete Logarithm |
+
+The elliptic curve problem is **harder** than factoring. So we can use smaller numbers and still be secure.
+
+---
+
+## What's an Elliptic Curve?
+
+It's a special type of curve defined by an equation. Points on this curve can be "added" together in a specific way.
+
+This addition has a remarkable property: it's easy to compute in one direction, but practically impossible to reverse.
+
+> The next sections explain how this works.

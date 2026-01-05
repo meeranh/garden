@@ -1,0 +1,67 @@
+---
+title: ECDH Key Exchange
+prerequisites:
+  - cryptography/asymmetric-cryptography/elliptic-curve-cryptography/keys-and-security
+  - cryptography/asymmetric-cryptography/diffie-hellman/key-exchange
+---
+
+## The Same Idea, Different Math
+
+ECDH is Diffie-Hellman, but using elliptic curves instead of modular exponentiation.
+
+The goal is the same: create a shared secret over a public channel.
+
+::ecdh
+
+---
+
+## The Setup
+
+Alice and Bob agree on:
+- An elliptic curve
+- A generator point $G$
+
+These are public. Everyone knows them.
+
+---
+
+## The Protocol
+
+**Alice's side:**
+
+1. Pick a secret number $a$ (her private key)
+2. Compute $A = aG$ (her public key)
+3. Send $A$ to Bob
+
+---
+
+**Bob's side:**
+
+1. Pick a secret number $b$ (his private key)
+2. Compute $B = bG$ (his public key)
+3. Send $B$ to Alice
+
+---
+
+## Creating the Shared Secret
+
+**Alice computes:**
+
+$$a \times B = a \times (bG) = abG$$
+
+**Bob computes:**
+
+$$b \times A = b \times (aG) = abG$$
+
+Both get the same point $abG$.
+
+---
+
+## Why It Works
+
+Scalar multiplication is **commutative**:
+
+$$a(bG) = b(aG) = (ab)G$$
+
+The order doesn't matter. Both paths lead to the same point.
+

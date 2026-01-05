@@ -1,0 +1,59 @@
+---
+title: Point Addition
+prerequisites:
+  - cryptography/asymmetric-cryptography/elliptic-curve-cryptography/the-curve
+---
+
+## Adding Points
+
+We can "add" two points on the curve to get a third point.
+
+This isn't regular addition. It's a geometric operation.
+
+---
+
+## How It Works: P + Q
+
+To add two different points $P$ and $Q$:
+
+**Step 1:** Draw a straight line through $P$ and $Q$.
+
+**Step 2:** This line hits the curve at exactly one more point. Call it $R'$.
+
+**Step 3:** Reflect $R'$ across the x-axis. This is $R = P + Q$.
+
+::ecc-point-addition
+
+---
+
+## Why Does the Line Hit a Third Point?
+
+The curve equation is **cubic** (has $x^3$).
+
+A line can intersect a cubic curve at most **3 times**.
+
+If the line already passes through $P$ and $Q$, there must be a third intersection point.
+
+---
+
+## Point Doubling: P + P
+
+What if we want to add a point to itself?
+
+We can't draw a line through just one point. So we use the **tangent line** instead.
+
+::ecc-point-doubling
+
+---
+
+## How It Works: 2P
+
+To compute $P + P = 2P$:
+
+**Step 1:** Draw the tangent line at $P$ (the line that just touches the curve).
+
+**Step 2:** This tangent hits the curve at one other point $R'$.
+
+**Step 3:** Reflect $R'$ across the x-axis. This is $2P$.
+
+> The exact angle of the tangent comes from differentiating the curve equation. The math works out cleanly, but we won't go into it here.

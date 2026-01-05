@@ -1,0 +1,67 @@
+---
+title: Finite Fields
+prerequisites:
+  - cryptography/asymmetric-cryptography/elliptic-curve-cryptography/scalar-multiplication
+---
+
+## The Problem with Real Numbers
+
+So far, we've drawn smooth curves with real numbers.
+
+But computers can't store infinite decimal precision. And cryptography needs **exact** arithmetic.
+
+The solution: work with integers modulo a prime $p$.
+
+---
+
+## Modular Arithmetic
+
+Instead of:
+
+$$y^2 = x^3 + 7$$
+
+We compute:
+
+$$y^2 \mod p = (x^3 + 7) \mod p$$
+
+> Same equation as before, we just added $\mod p$ to both sides.
+
+Now $x$ and $y$ can only be integers from $0$ to $p-1$.
+
+---
+
+## A Small Example
+
+Let's use $p = 17$ and the curve $y^2 = x^3 + 7$.
+
+**Is $(2, 0)$ on the curve?**
+
+$y^2 \mod 17 = 0^2 \mod 17 = 0$
+
+$x^3 + 7 \mod 17 = 8 + 7 \mod 17 = 15$
+
+$0 \neq 15$, so **no**.
+
+---
+
+**Is $(5, 8)$ on the curve?**
+
+$y^2 \mod 17 = 64 \mod 17 = 13$
+
+$x^3 + 7 \mod 17 = 125 + 7 \mod 17 = 132 \mod 17 = 13$
+
+$13 = 13$, so **yes**!
+
+---
+
+## What Changes?
+
+The curve is no longer smooth. It becomes a **scattered set of points**.
+
+::finite-field-curve
+
+But the key insight: **point addition still works**.
+
+The same formulas apply, just with modular arithmetic. The scattered points still form a group, and we can still do $kG$ efficiently.
+
+> This is how real cryptographic curves work. secp256k1 (used by Bitcoin) uses a 256-bit prime.

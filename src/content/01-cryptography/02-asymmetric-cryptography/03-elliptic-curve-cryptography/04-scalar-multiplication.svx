@@ -1,0 +1,89 @@
+---
+title: Scalar Multiplication
+prerequisites:
+  - cryptography/asymmetric-cryptography/elliptic-curve-cryptography/point-addition
+---
+
+## The Generator Point
+
+In ECC, everyone agrees on a starting point called $G$, the **generator point**.
+
+This is just a specific point on the curve that's been standardized. For Bitcoin's secp256k1 curve, $G$ is a fixed point that everyone uses.
+
+---
+
+## Multiplying a Point by a Number
+
+What does $1000G$ mean?
+
+It means: add $G$ to itself 1000 times.
+
+This is called **scalar multiplication**. The scalar (1000) tells us how many times to add.
+
+---
+
+## The Naive Way
+
+To compute $1000G$:
+
+- Start with $G$
+- Add $G$: $2G$
+- Add $G$: $3G$
+- ... repeat ...
+- Add $G$: $1000G$
+
+This takes **999 additions**. Too slow for cryptography.
+
+---
+
+## The Smart Way: Double-and-Add
+
+There's a much faster method using **doubling**.
+
+::ecc-scalar-multiplication
+
+---
+
+## How Double-and-Add Works
+
+Instead of adding $G$ one at a time, use **doubling** to jump ahead.
+
+- $G \to 2G$ (one double)
+- $2G \to 4G$ (one double)
+- $4G \to 8G$ (one double)
+- ... keep doubling ...
+
+Each doubling gets you twice as far. By combining doubles and adds cleverly, you can reach any number in roughly $\log_2(k)$ steps.
+
+For $1000G$: only **~14 operations** instead of 999!
+
+---
+
+## Why This Matters
+
+For a 256-bit scalar (like in Bitcoin):
+
+| Method | Operations |
+|--------|------------|
+| Naive | $2^{256}$ additions (impossible) |
+| Double-and-add | ~256 operations (instant) |
+
+The double-and-add algorithm makes ECC practical.
+
+---
+
+## The One-Way Property
+
+Here's what makes ECC secure:
+
+**Easy direction:**
+
+Given $G$ and $k$, computing $kG$ is fast (using double-and-add).
+
+**Hard direction:**
+
+Given $G$ and $Q = kG$, finding $k$ is practically impossible.
+
+This is the **Elliptic Curve Discrete Logarithm Problem (ECDLP)**.
+
+> You can multiply forward easily, but you can't divide backward.

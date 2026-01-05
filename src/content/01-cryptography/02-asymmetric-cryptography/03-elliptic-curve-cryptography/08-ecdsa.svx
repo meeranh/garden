@@ -1,0 +1,116 @@
+---
+title: ECDSA Signatures
+prerequisites:
+  - cryptography/asymmetric-cryptography/elliptic-curve-cryptography/ecdh
+  - cryptography/asymmetric-cryptography/rsa/signatures
+---
+
+## What's a Digital Signature?
+
+Alice wants to send a message to Bob. But how does Bob know it's really from Alice?
+
+A **digital signature** proves two things:
+
+1. The message came from Alice (not an imposter)
+2. The message wasn't tampered with
+
+Bitcoin and Ethereum use ECDSA to sign every transaction.
+
+---
+
+## The Setup
+
+Alice has her ECC key pair:
+
+- **Private key:** $d$ (a secret number only she knows)
+- **Public key:** $Q = dG$ (a point everyone can see)
+
+She wants to sign a message so anyone can verify it came from her.
+
+::ecdsa
+
+---
+
+## How Signing Works
+
+Alice has a message. Here's what she does:
+
+**1. Hash the message**
+
+Any message becomes a fixed-size number $h$. This is the message's fingerprint.
+
+---
+
+**2. Pick a random number $k$**
+
+This is a one-time secret. It **must** be random and **never reused**.
+
+---
+
+**3. Compute $r$**
+
+Multiply: $R = kG$ (a point on the curve)
+
+Take just the x-coordinate: $r$ = x-coordinate of $R$
+
+---
+
+**4. Compute $s$**
+
+$$s = \frac{h + d \cdot r}{k}$$
+
+> This mixes together the message hash ($h$), her private key ($d$), and the random value ($k$).
+
+---
+
+**5. The signature is $(r, s)$**
+
+Two numbers. Alice sends these along with her message.
+
+---
+
+## How Verification Works
+
+Bob receives the message and signature $(r, s)$. He also knows Alice's public key $Q$.
+
+**1. Hash the message**
+
+Bob computes the same hash $h$ from the message.
+
+---
+
+**2. Compute a check point $R'$**
+
+Using only public information:
+
+$$R' = \frac{h \cdot G + r \cdot Q}{s}$$
+
+---
+
+**3. Compare x-coordinates**
+
+If the x-coordinate of $R'$ equals $r$, the signature is **valid**.
+
+> Bob never needed Alice's private key. He verified using only public information.
+
+---
+
+## Why Only Alice Can Sign
+
+The signature formula uses Alice's private key $d$:
+
+$$s = \frac{h + d \cdot r}{k}$$
+
+To forge a signature, an attacker would need to find $d$ from $Q = dG$.
+
+That's ECDLP. Practically impossible.
+
+---
+
+## The Random $k$ is Critical
+
+If Alice ever uses the same $k$ for two different messages, an attacker can compute her private key.
+
+In 2010, Sony's PlayStation 3 signing key was stolen because they used the same $k$ every time.
+
+> The random number $k$ must be truly random and never repeated.

@@ -1,0 +1,92 @@
+---
+title: Keys and Security
+prerequisites:
+  - cryptography/asymmetric-cryptography/elliptic-curve-cryptography/finite-fields
+---
+
+## The Setup
+
+Everyone agrees on:
+
+- A curve equation (like $y^2 = x^3 + 7$)
+- A prime $p$ (defines the finite field)
+- A generator point $G$
+- The order $n$ (how many points $G$ generates)
+
+These are **public parameters**. Bitcoin's secp256k1 curve has all these standardized.
+
+---
+
+## Key Generation
+
+**Step 1:** Pick a random private key $d$.
+
+This is just a random number between $1$ and $n-1$.
+
+For secp256k1, $d$ is a 256-bit number.
+
+---
+
+**Step 2:** Compute the public key $Q$.
+
+$$Q = d \times G$$
+
+Multiply the generator $G$ by your private key $d$.
+
+The result is a point on the curve.
+
+---
+
+## What the Keys Look Like
+
+| Key | What It Is | Size (secp256k1) |
+|-----|------------|------------------|
+| Private key $d$ | A random number | 256 bits (32 bytes) |
+| Public key $Q$ | A point $(x, y)$ | 512 bits (64 bytes) |
+
+The public key can be **compressed** to 257 bits by storing only $x$ and one bit indicating if $y$ is even or odd (since there are two possible $y$ values).
+
+---
+
+## Why Is This Secure?
+
+An attacker knows:
+- $G$ (public)
+- $Q = dG$ (public)
+
+To find $d$, they need to solve:
+
+> Given $G$ and $Q$, find $d$ such that $Q = dG$.
+
+This is the **Elliptic Curve Discrete Logarithm Problem (ECDLP)**.
+
+---
+
+## Why ECDLP Is Hard
+
+You might think: "Just keep subtracting $G$ from $Q$ until you reach $\mathcal{O}$."
+
+But $d$ can be as large as $2^{256}$.
+
+Even at 1 billion operations per second, checking all possibilities would take longer than the age of the universe. **Much** longer.
+
+---
+
+## No Known Shortcuts
+
+For regular discrete log (like in Diffie-Hellman), there are sub-exponential algorithms.
+
+For ECDLP, the best known attacks are **fully exponential**. There's no mathematical shortcut.
+
+This is why ECC can use smaller keys than RSA for the same security.
+
+---
+
+## The One-Way Function
+
+| Direction | Operation | Difficulty |
+|-----------|-----------|------------|
+| Forward | Compute $Q = dG$ | Easy (double-and-add) |
+| Backward | Find $d$ from $Q$ and $G$ | Practically impossible |
+
+> This asymmetry is the foundation of ECC security.
