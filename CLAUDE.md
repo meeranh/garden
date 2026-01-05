@@ -204,153 +204,110 @@ Set-builder: \{x \mid x > 0\}
 
 ## Animations
 
-### Including in Content
-```markdown
-::animation-name
-```
-This loads `animations/animation-name.svelte` from the same directory.
+### Usage
+`::animation-name` loads `animations/animation-name.svelte` from same directory.
 
-### Creating an Animation
+### Template
 
-Place in `animations/` subdirectory alongside content:
-```
-00-topic/
-├── 01-lesson.svx
-└── animations/
-    └── my-animation.svelte
-```
-
-### Animation Template
 ```svelte
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
+  import * as d3 from 'd3';
   import type { AnimationController } from '$lib/components/AnimationWrapper.svelte';
 
   let { register }: { register?: (controller: AnimationController) => void } = $props();
-
-  let currentStep = $state(0);
+  let svg: SVGSVGElement;
+  let svgEl: d3.Selection<SVGSVGElement, unknown, null, undefined>;
   let isPlaying = $state(false);
-  let animationTimer: ReturnType<typeof setTimeout> | null = null;
+  let currentStep = $state(0);
+  let timeouts: ReturnType<typeof setTimeout>[] = [];
 
-  const totalSteps = 5;
-  const maxStep = totalSteps - 1;
+  const maxStep = 4;
+  const allElements = ['element-a', 'element-b', 'arrow'];  // All animatable elements
 
-  // Compute what to display based on current step
-  let display = $derived.by(() => {
-    if (currentStep === 0) return { title: 'Step 1', /* ... */ };
-    if (currentStep === 1) return { title: 'Step 2', /* ... */ };
-    // ...
-  });
+  // Step -> which elements are visible (cumulative, for next/prev)
+  const stepVisibility: Record<number, string[]> = {
+    0: ['element-a'],
+    1: ['element-a', 'element-b'],
+    2: ['element-a', 'element-b', 'arrow'],
+  };
 
-  // Required controller methods
-  function play() {
-    if (isPlaying) return;
-    isPlaying = true;
-    scheduleNext();
+  function sleep(ms: number): Promise<void> {
+    return new Promise((r) => { timeouts.push(setTimeout(r, ms)); });
+  }
+  function clearTimeouts() { timeouts.forEach(clearTimeout); timeouts = []; }
+
+  function applyStep(step: number) {
+    const visible = stepVisibility[step] || [];
+    allElements.forEach((el) => {
+      svgEl.select(`.${el}`).transition().duration(300).attr('opacity', visible.includes(el) ? 1 : 0);
+    });
+    currentStep = step;
   }
 
-  function pause() {
-    isPlaying = false;
-    if (animationTimer) {
-      clearTimeout(animationTimer);
-      animationTimer = null;
+  async function runAnimation() {
+    if (!isPlaying) return;
+    for (let i = currentStep; i <= maxStep; i++) {
+      if (!isPlaying) return;  // Early exit check
+      currentStep = i;
+      // D3 transitions here...
+      svgEl.select('.element-a').transition().duration(400).attr('opacity', 1);
+      await sleep(1500);
+      if (!isPlaying) return;  // Check after every sleep!
     }
+    isPlaying = false;
   }
 
-  function next() { if (currentStep < maxStep) currentStep++; }
-  function prev() { if (currentStep > 0) currentStep--; }
-  function skip() { pause(); currentStep = maxStep; }
-  function replay() { pause(); currentStep = 0; play(); }
+  function play() { if (!isPlaying) { isPlaying = true; runAnimation(); } }
+  function pause() { isPlaying = false; clearTimeouts(); }
+  function next() { pause(); if (currentStep < maxStep) applyStep(currentStep + 1); }
+  function prev() { pause(); if (currentStep > 0) applyStep(currentStep - 1); }
+  function skip() { pause(); applyStep(maxStep); }
+  function replay() { pause(); currentStep = 0; isPlaying = true; runAnimation(); }
   function getState() { return { isPlaying, currentStep, totalSteps: maxStep }; }
 
-  function scheduleNext() {
-    if (!isPlaying) return;
-    animationTimer = setTimeout(() => {
-      if (!isPlaying) return;
-      if (currentStep < maxStep) {
-        currentStep++;
-        scheduleNext();
-      } else {
-        isPlaying = false;
-      }
-    }, 1500); // ms per step
-  }
+  onMount(() => {
+    svgEl = d3.select(svg).attr('viewBox', '0 0 500 300');
+    // Create elements with class matching allElements, start hidden
+    svgEl.append('rect').attr('class', 'element-a').attr('opacity', 0)/*...*/;
+    svgEl.append('rect').attr('class', 'element-b').attr('opacity', 0)/*...*/;
+    register?.({ play, pause, next, prev, skip, replay, getState });
+  });
 
-  onMount(() => register?.({ play, pause, next, prev, skip, replay, getState }));
-  onDestroy(() => pause());
+  onDestroy(() => clearTimeouts());
 </script>
 
-<div class="container">
-  <div class="title">{display.title}</div>
-  <!-- Animation content here -->
-</div>
+<svg bind:this={svg} class="diagram"></svg>
 
 <style>
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-  }
-
-  .title {
-    color: var(--color-fg);
-  }
+  .diagram { display: block; margin: 0 auto; background: #1d2021; border-radius: 0.5rem; }
 </style>
 ```
 
-### Animation Principles
+### Key Points
 
-1. **Use D3.js** for smooth animations and transitions
-2. **Actual motion** - Elements should move, appear, transform. Not static diagrams flipping between states.
-3. **Step-driven state** - Animate through steps with clear labels showing what's happening
-4. **Progressive reveal** - Each step adds one piece of understanding
+1. **`stepVisibility`** - Map step number to list of ALL visible element classes
+2. **`allElements`** - Array of all element class names (must match what you create)
+3. **`applyStep(n)`** - Shows/hides elements for step n (makes next/prev work)
+4. **Early exit** - Check `if (!isPlaying) return` after every `await sleep()`
+5. **Elements start hidden** - Create with `.attr('opacity', 0)`
 
-### Colors (never hardcode)
-```css
-var(--color-bg)        /* #1d2021 - dark background */
-var(--color-bg-card)   /* #282828 - elevated surfaces */
-var(--color-fg)        /* #fbf1c7 - primary text */
-var(--color-fg-muted)  /* #d5c4a1 - secondary text */
-var(--color-border)    /* #3c3836 - borders */
-var(--color-accent)    /* #8ec07c - green, positive states */
-var(--color-math)      /* #fabd2f - yellow, equations */
-var(--color-error)     /* #fb4934 - red, invalid states */
-```
+### Colors (fetch from CSS variables in onMount)
+```javascript
+let colors: Record<string, string>;
 
-### SVG Animation Pattern
-```svelte
-<svg viewBox="0 0 300 150">
-  <circle
-    cx={position.x}
-    cy={position.y}
-    r="18"
-    class="element"
-    class:active={display.isActive}
-  />
-
-  {#each display.arrows as arrow}
-    <line x1={arrow.x1} y1={arrow.y1} x2={arrow.x2} y2={arrow.y2} class="arrow" />
-  {/each}
-</svg>
-
-<style>
-  .element {
-    fill: var(--color-bg-card);
-    stroke: var(--color-fg-muted);
-    transition: all 0.3s ease;
-  }
-
-  .element.active {
-    stroke: var(--color-accent);
-  }
-
-  .arrow {
-    stroke: var(--color-accent);
-    stroke-width: 2;
-    transition: all 0.3s ease;
-  }
-</style>
+onMount(() => {
+  const s = getComputedStyle(document.documentElement);
+  colors = {
+    bg: s.getPropertyValue('--color-bg').trim(),
+    fg: s.getPropertyValue('--color-fg').trim(),
+    fgMuted: s.getPropertyValue('--color-fg-muted').trim(),
+    accent: s.getPropertyValue('--color-accent').trim(),
+    yellow: s.getPropertyValue('--color-math').trim(),
+    border: s.getPropertyValue('--color-border').trim(),
+  };
+  // ... rest of onMount
+});
 ```
 
 ---

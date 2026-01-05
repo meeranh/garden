@@ -10,19 +10,7 @@
 	let currentStep = $state(0);
 	let timeouts: ReturnType<typeof setTimeout>[] = [];
 
-	const colors = {
-		bg: 'var(--color-bg)',
-		fg: 'var(--color-fg)',
-		yellow: 'var(--color-math)',
-		aqua: '#8ec07c',
-		orange: '#fe8019',
-		purple: '#d3869b',
-		green: 'var(--color-accent)',
-		blue: '#83a598',
-		border: 'var(--color-border)',
-		dark: 'var(--color-bg-card)',
-		red: 'var(--color-error)'
-	};
+	let colors: Record<string, string>;
 
 	// Layout
 	const width = 700;
@@ -458,6 +446,21 @@
 	}
 
 	onMount(() => {
+		const s = getComputedStyle(document.documentElement);
+		colors = {
+			bg: s.getPropertyValue('--color-bg').trim(),
+			dark: s.getPropertyValue('--color-bg-card').trim(),
+			fg: s.getPropertyValue('--color-fg').trim(),
+			border: s.getPropertyValue('--color-border').trim(),
+			yellow: s.getPropertyValue('--color-math').trim(),
+			aqua: s.getPropertyValue('--color-accent').trim(),
+			green: s.getPropertyValue('--color-accent').trim(),
+			red: s.getPropertyValue('--color-error').trim(),
+			purple: '#d3869b',
+			orange: '#fe8019',
+			blue: '#83a598'
+		};
+
 		svgEl = d3.select(svg).attr('width', width).attr('height', height).attr('viewBox', `0 0 ${width} ${height}`);
 
 		const defs = svgEl.append('defs');

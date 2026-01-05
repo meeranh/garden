@@ -13,19 +13,7 @@
 	const width = 650;
 	const height = 380;
 
-	const colors = {
-		bg: '#1d2021',
-		fg: '#fbf1c7',
-		yellow: '#fabd2f',
-		aqua: '#8ec07c',
-		orange: '#fe8019',
-		purple: '#d3869b',
-		green: '#8ec07c',
-		blue: '#83a598',
-		red: '#fb4934',
-		dark: '#282828',
-		border: '#504945'
-	};
+	let colors: Record<string, string>;
 
 	const plaintextBlocks = ['HELLO...', 'WORLD...', 'DATA....'];
 	const ciphertextBlocks = ['8A2F1C..', '3E7B94..', '5F1A3B..'];
@@ -251,6 +239,21 @@
 	}
 
 	onMount(() => {
+		const s = getComputedStyle(document.documentElement);
+		colors = {
+			bg: s.getPropertyValue('--color-bg').trim(),
+			dark: s.getPropertyValue('--color-bg-card').trim(),
+			fg: s.getPropertyValue('--color-fg').trim(),
+			border: s.getPropertyValue('--color-border').trim(),
+			yellow: s.getPropertyValue('--color-math').trim(),
+			aqua: s.getPropertyValue('--color-accent').trim(),
+			green: s.getPropertyValue('--color-accent').trim(),
+			red: s.getPropertyValue('--color-error').trim(),
+			purple: '#d3869b',
+			orange: '#fe8019',
+			blue: '#83a598'
+		};
+
 		svgEl = d3.select(svg).attr('viewBox', `0 0 ${width} ${height}`);
 
 		const defs = svgEl.append('defs');

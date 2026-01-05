@@ -13,18 +13,7 @@
 	const width = 700;
 	const height = 340;
 
-	const colors = {
-		bg: '#1d2021',
-		fg: '#fbf1c7',
-		yellow: '#fabd2f',
-		aqua: '#8ec07c',
-		orange: '#fe8019',
-		purple: '#d3869b',
-		green: '#8ec07c',
-		blue: '#83a598',
-		dark: '#282828',
-		border: '#504945'
-	};
+	let colors: Record<string, string>;
 
 	// Block data - blocks 0 and 2 are identical plaintext
 	const plaintextBlocks = ['HELLO...', 'WORLD...', 'HELLO...', 'DATA....'];
@@ -221,6 +210,20 @@
 	}
 
 	onMount(() => {
+		const s = getComputedStyle(document.documentElement);
+		colors = {
+			bg: s.getPropertyValue('--color-bg').trim(),
+			dark: s.getPropertyValue('--color-bg-card').trim(),
+			fg: s.getPropertyValue('--color-fg').trim(),
+			border: s.getPropertyValue('--color-border').trim(),
+			yellow: s.getPropertyValue('--color-math').trim(),
+			aqua: s.getPropertyValue('--color-accent').trim(),
+			green: s.getPropertyValue('--color-accent').trim(),
+			purple: '#d3869b',
+			orange: '#fe8019',
+			blue: '#83a598'
+		};
+
 		svgEl = d3.select(svg).attr('viewBox', `0 0 ${width} ${height}`);
 
 		const defs = svgEl.append('defs');

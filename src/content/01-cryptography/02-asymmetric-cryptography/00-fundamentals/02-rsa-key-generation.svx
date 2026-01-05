@@ -1,0 +1,161 @@
+---
+title: RSA Key Generation
+prerequisites:
+  - cryptography/asymmetric-cryptography/fundamentals/rsa-introduction
+---
+
+## What RSA Does
+
+RSA gives you two keys:
+
+- **Public key:** two numbers $(e, n)$
+- **Private key:** two numbers $(d, n)$
+
+To **encrypt** a message $M$:
+
+$$C = M^e \mod n$$
+
+To **decrypt** ciphertext $C$:
+
+$$M = C^d \mod n$$
+
+Raise to a power, take the remainder. That's it.
+
+---
+
+::rsa-encrypt-decrypt
+
+---
+
+## Let's Do It With Real Numbers
+
+Say we have:
+
+| Value | Number |
+|-------|--------|
+| $n$ | 55 |
+| $e$ (public exponent) | 3 |
+| $d$ (private exponent) | 27 |
+
+---
+
+**Encrypt the message 2:**
+
+$2^3 = 8$
+
+$8 \mod 55 = 8$
+
+Ciphertext is **8**.
+
+---
+
+**Decrypt 8:**
+
+$$8^{27} \mod 55 = \text{?}$$
+
+$8^{27}$ is a huge number. But when you divide by 55 and take the remainder, you get **2**.
+
+> The original message comes back.
+
+---
+
+## Where Do These Numbers Come From?
+
+This is **key generation**. Here's how we got 55, 3, and 27.
+
+---
+
+::rsa-key-generation
+
+---
+
+**Step 1:** Pick two prime numbers. Call them $p$ and $q$.
+
+$$p = 5, \quad q = 11$$
+
+---
+
+**Step 2:** Multiply them to get $n$.
+
+$$n = 5 \times 11 = 55$$
+
+This $n$ is public. Everyone can know it.
+
+---
+
+**Step 3:** Calculate $\phi(n)$.
+
+For two primes, there's a simple formula:
+
+$\phi(n) = (p-1) \times (q-1)$
+
+$\phantom{\phi(n)} = (5-1) \times (11-1)$
+
+$\phantom{\phi(n)} = 4 \times 10$
+
+$\phantom{\phi(n)} = 40$
+
+> **This is the secret.** You can calculate $\phi(n)$ because you know $p$ and $q$. Someone who only knows $n = 55$ would have to factor it first.
+
+---
+
+**Step 4:** Pick $e$, the public exponent.
+
+Choose any number that shares no common factors with $\phi(n)$.
+
+$$e = 3$$
+
+Does 3 share any factors with 40? No. Good.
+
+---
+
+**Step 5:** Find $d$, the private exponent.
+
+We need $d$ where $3 \times d \mod 40 = 1$.
+
+In other words: when we multiply $d$ by 3 and divide by 40, the remainder should be 1.
+
+How do we find it? We search.
+
+::find-private-exponent
+
+$d = 27$ works because $3 \times 27 = 81$, and $81 \div 40 = 2$ remainder $1$.
+
+---
+
+## The Keys
+
+| Key | Components | Who knows it |
+|-----|------------|--------------|
+| **Public** | $(e, n) = (3, 55)$ | Everyone |
+| **Private** | $(d, n) = (27, 55)$ | Only you |
+
+---
+
+## Why Does Decryption Work?
+
+When you encrypt then decrypt, you're doing:
+
+$$M^e \text{ then raised to } d = M^{e \times d}$$
+
+For us: $e \times d = 3 \times 27 = 81$
+
+---
+
+## Why Is It Secure?
+
+An attacker knows $e = 3$ and $n = 55$.
+
+To find $d$, they need $\phi(n)$.
+
+To find $\phi(n)$, they need $p$ and $q$.
+
+To find $p$ and $q$, they must **factor** $n$.
+
+---
+
+For $n = 55$? Trivial. $55 = 5 \times 11$.
+
+For a 600-digit $n$? Nobody knows how to factor it efficiently.
+
+> **RSA's security rests on the difficulty of factoring large numbers.**

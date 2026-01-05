@@ -1,0 +1,115 @@
+---
+title: RSA Digital Signatures
+prerequisites:
+  - cryptography/asymmetric-cryptography/fundamentals/rsa-key-generation
+---
+
+## The Problem
+
+You receive a message claiming to be from Alice.
+
+How do you know it's actually from her? Anyone could have written it.
+
+---
+
+## The Idea
+
+Alice has two keys:
+
+- **Private key:** only Alice knows this
+- **Public key:** everyone knows this
+
+What if Alice uses her **private key** to transform the message?
+
+Then anyone can use her **public key** to reverse it. If it works, the message *must* have come from Alice.
+
+> Only Alice has her private key. So only Alice could have created that transformation.
+
+---
+
+## Signing vs Encrypting
+
+RSA math works both ways:
+
+| Operation | Key used | Anyone can... |
+|-----------|----------|---------------|
+| Encrypt | Public key | Encrypt |
+| Decrypt | Private key | Only the owner |
+| **Sign** | Private key | Only the owner |
+| **Verify** | Public key | Verify |
+
+**Signing is not about secrecy.** Everyone can read the message. It's about proving who wrote it.
+
+---
+
+## How It Works
+
+::rsa-signature
+
+---
+
+Using the same keys from before:
+
+- Public key: $(e, n) = (3, 55)$
+- Private key: $(d, n) = (27, 55)$
+
+---
+
+**Alice signs a message $M = 2$:**
+
+She uses her **private key** to create a signature:
+
+$S = M^d \mod n$
+
+$S = 2^{27} \mod 55 = 52$
+
+Alice sends both the message (2) and the signature (52).
+
+---
+
+**Bob verifies the signature:**
+
+He uses Alice's **public key**:
+
+$M = S^e \mod n$
+
+$M = 52^{3} \mod 55 = 140608 \mod 55 = 2$
+
+He got back the original message. The signature is valid.
+
+> If someone tampered with the message or signature, this check would fail.
+
+---
+
+## Why This Proves Authenticity
+
+To create a valid signature, you need to compute $M^d \mod n$.
+
+To compute that, you need $d$.
+
+Only Alice knows $d$.
+
+So if the signature verifies, Alice must have created it.
+
+---
+
+## Encryption vs Signatures
+
+| Goal | Who uses private key? | Who uses public key? |
+|------|----------------------|---------------------|
+| **Confidentiality** | Recipient decrypts | Sender encrypts |
+| **Authentication** | Sender signs | Recipient verifies |
+
+**Encryption:** Hide the message. Only the recipient can read it.
+
+**Signature:** Prove who sent it. Anyone can verify.
+
+---
+
+## In Practice
+
+Real digital signatures don't sign the message directly. They sign a **hash** of the message.
+
+Why? Messages can be huge. Hashing reduces any message to a fixed size, making signing fast.
+
+But the principle is the same: private key to sign, public key to verify.

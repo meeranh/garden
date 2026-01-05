@@ -10,19 +10,7 @@
 	let currentStep = $state(0);
 	let timeouts: ReturnType<typeof setTimeout>[] = [];
 
-	const colors = {
-		bg: '#1d2021',
-		fg: '#ebdbb2',
-		yellow: '#fabd2f',
-		aqua: '#8ec07c',
-		orange: '#fe8019',
-		purple: '#d3869b',
-		green: '#b8bb26',
-		blue: '#83a598',
-		border: '#504945',
-		dark: '#282828',
-		red: '#fb4934'
-	};
+	let colors: Record<string, string>;
 
 	// Tux penguin - 14 wide x 24 tall
 	// 0=bg, 1=black body, 2=white, 3=pupil, 4=beak yellow, 5=feet orange
@@ -56,23 +44,8 @@
 	const gridWidth = 14;
 	const gridHeight = 24;
 
-	const plainColorMap: Record<number, string> = {
-		0: colors.bg,
-		1: '#282828',
-		2: '#ebdbb2',
-		3: '#1d2021',
-		4: '#fabd2f',
-		5: '#fe8019'
-	};
-
-	const ecbColorMap: Record<number, string> = {
-		0: '#3c3836',
-		1: '#504945',
-		2: '#928374',
-		3: '#665c54',
-		4: '#a89984',
-		5: '#bdae93'
-	};
+	let plainColorMap: Record<number, string>;
+	let ecbColorMap: Record<number, string>;
 
 	const totalSteps = 5;
 	const maxStep = totalSteps - 1;
@@ -260,6 +233,39 @@
 	}
 
 	onMount(() => {
+		const s = getComputedStyle(document.documentElement);
+		colors = {
+			bg: s.getPropertyValue('--color-bg').trim(),
+			dark: s.getPropertyValue('--color-bg-card').trim(),
+			fg: s.getPropertyValue('--color-fg').trim(),
+			border: s.getPropertyValue('--color-border').trim(),
+			yellow: s.getPropertyValue('--color-math').trim(),
+			aqua: s.getPropertyValue('--color-accent').trim(),
+			green: s.getPropertyValue('--color-accent').trim(),
+			red: s.getPropertyValue('--color-error').trim(),
+			purple: '#d3869b',
+			orange: '#fe8019',
+			blue: '#83a598'
+		};
+
+		plainColorMap = {
+			0: colors.bg,
+			1: '#282828',
+			2: '#ebdbb2',
+			3: '#1d2021',
+			4: '#fabd2f',
+			5: '#fe8019'
+		};
+
+		ecbColorMap = {
+			0: '#3c3836',
+			1: '#504945',
+			2: '#928374',
+			3: '#665c54',
+			4: '#a89984',
+			5: '#bdae93'
+		};
+
 		const width = 560;
 		const height = 300;
 		const gridPixelW = gridWidth * cellSize;
