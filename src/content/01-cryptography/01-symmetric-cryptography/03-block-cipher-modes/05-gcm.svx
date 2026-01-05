@@ -1,0 +1,94 @@
+---
+title: Galois/Counter Mode (GCM)
+prerequisites:
+  - cryptography/symmetric-cryptography/block-cipher-modes/ctr
+---
+
+## The Missing Piece
+
+CTR mode encrypts data. But it doesn't detect tampering.
+
+If an attacker flips a bit in the ciphertext, that bit flips in the decrypted plaintext. You'd never know something was wrong.
+
+**GCM adds authentication.** It produces a **tag** that detects any modification.
+
+---
+
+## How GCM Works
+
+GCM does two things at once:
+
+1. **Encrypt** using CTR mode (you already know this)
+2. **Authenticate** by computing a tag from the ciphertext
+
+::gcm-encryption
+
+---
+
+## The Tag
+
+The **authentication tag** is a 16-byte value computed from:
+- The ciphertext
+- Any additional data you want to protect
+- The lengths of both
+
+If even one bit of the ciphertext changes, the tag will be completely different.
+
+> Before decrypting, verify the tag. If it doesn't match, reject the message.
+
+---
+
+## Additional Authenticated Data (AAD)
+
+Sometimes you have data that needs authentication but not encryption.
+
+**Example:** A network packet header contains the destination address. It must be readable (routers need it), but you want to detect if someone changed it.
+
+GCM lets you authenticate both:
+- **Encrypted data**: The secret message
+- **Unencrypted data**: Headers, metadata, anything public but sensitive
+
+One tag protects everything.
+
+---
+
+## The Authentication Math
+
+GCM uses a polynomial hash called **GHASH**:
+
+1. Compute a hash key: H = AES(key, 0...0)
+2. Multiply each block with powers of H in a finite field
+3. The result depends on every bit of input
+
+The math is designed to be fast in hardware. Many CPUs have special instructions for it.
+
+---
+
+## Why Nonce Reuse Is Catastrophic
+
+In CTR mode, reusing a nonce leaks plaintext XORs.
+
+In GCM, it's worse: **reusing a nonce leaks the hash key H**.
+
+With H, an attacker can:
+- Forge valid tags for fake messages
+- Modify ciphertext and compute a valid tag
+
+One reused nonce breaks all past and future messages with that key.
+
+---
+
+## Trade-offs
+
+**Pros:**
+- Encryption and authentication in one operation
+- Parallelizable (CTR-based)
+- Hardware-accelerated on modern CPUs
+- Industry standard (TLS, HTTPS, WiFi)
+
+**Cons:**
+- Nonce reuse is catastrophic
+- Complex to implement correctly
+- Tag verification must happen before using decrypted data
+
+> **The lesson:** Encryption without authentication is incomplete. GCM gives you both in one efficient package.

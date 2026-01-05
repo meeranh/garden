@@ -11,7 +11,7 @@
 	let timeouts: ReturnType<typeof setTimeout>[] = [];
 
 	const width = 650;
-	const height = 340;
+	const height = 320;
 
 	const colors = {
 		bg: '#1d2021',
@@ -36,11 +36,9 @@
 	let plaintextBoxes: d3.Selection<SVGGElement, unknown, null, undefined>[];
 	let aesBoxes: d3.Selection<SVGGElement, unknown, null, undefined>[];
 	let ciphertextBoxes: d3.Selection<SVGGElement, unknown, null, undefined>[];
-	let keyLabel: d3.Selection<SVGGElement, unknown, null, undefined>;
-	let keyBus: d3.Selection<SVGGElement, unknown, null, undefined>;
 	let arrows1: d3.Selection<SVGPathElement, unknown, null, undefined>[];
 	let arrows2: d3.Selection<SVGPathElement, unknown, null, undefined>[];
-	let keyArrows: d3.Selection<SVGGElement, unknown, null, undefined>[];
+	let keyBoxes: d3.Selection<SVGGElement, unknown, null, undefined>[];
 	let highlightBox1: d3.Selection<SVGRectElement, unknown, null, undefined>;
 	let highlightBox2: d3.Selection<SVGRectElement, unknown, null, undefined>;
 
@@ -68,11 +66,9 @@
 		plaintextBoxes?.forEach((b) => b.attr('opacity', 0));
 		aesBoxes?.forEach((b) => b.attr('opacity', 0));
 		ciphertextBoxes?.forEach((b) => b.attr('opacity', 0));
-		keyLabel?.attr('opacity', 0);
-		keyBus?.attr('opacity', 0);
 		arrows1?.forEach((a) => a.attr('opacity', 0));
 		arrows2?.forEach((a) => a.attr('opacity', 0));
-		keyArrows?.forEach((a) => a.attr('opacity', 0));
+		keyBoxes?.forEach((k) => k.attr('opacity', 0));
 		highlightBox1?.attr('opacity', 0);
 		highlightBox2?.attr('opacity', 0);
 		stepText?.text('');
@@ -83,11 +79,9 @@
 		plaintextBoxes?.forEach((b) => b.attr('opacity', 1));
 		aesBoxes?.forEach((b) => b.attr('opacity', 1));
 		ciphertextBoxes?.forEach((b) => b.attr('opacity', 1));
-		keyLabel?.attr('opacity', 1);
-		keyBus?.attr('opacity', 1);
 		arrows1?.forEach((a) => a.attr('opacity', 1));
 		arrows2?.forEach((a) => a.attr('opacity', 1));
-		keyArrows?.forEach((a) => a.attr('opacity', 1));
+		keyBoxes?.forEach((k) => k.attr('opacity', 1));
 		highlightBox1?.attr('opacity', 1);
 		highlightBox2?.attr('opacity', 1);
 		stepText?.text('Identical plaintext blocks → Identical ciphertext blocks!');
@@ -109,22 +103,14 @@
 		}
 		await sleep(800);
 
-		// Step 2: Show key
+		// Step 2: Show AES boxes with their independent key inputs
 		currentStep = 2;
-		stepText?.text('Same key K used for every block');
-		keyLabel?.transition().duration(300).attr('opacity', 1);
-		await sleep(300);
-		keyBus?.transition().duration(400).attr('opacity', 1);
-		await sleep(500);
-		if (!isPlaying) return;
-
-		// Step 3: Show AES boxes and key arrows
-		currentStep = 3;
-		stepText?.text('Each block encrypted independently with AES');
+		stepText?.text('Same key K used independently for each block');
 		for (let i = 0; i < 4; i++) {
 			aesBoxes[i]?.transition().duration(200).attr('opacity', 1);
-			keyArrows[i]?.transition().duration(200).attr('opacity', 1);
-			await sleep(150);
+			keyBoxes[i]?.transition().duration(200).attr('opacity', 1);
+			await sleep(200);
+			if (!isPlaying) return;
 		}
 		await sleep(500);
 		if (!isPlaying) return;
@@ -252,74 +238,24 @@
 			.attr('font-weight', 'bold')
 			.text('ECB Mode — Electronic Codebook');
 
-		// Layout calculations - shifted right to make room for key on left
-		const startX = 100;
-		const blockSpacing = (width - startX - 40 - blockW) / 3;
-		const row1Y = 60;
-		const row2Y = 155;
-		const row3Y = 250;
-		const keyLineY = row2Y + aesH / 2; // Center of AES boxes
-
-		// Key label on the left
-		const keyX = 15;
-		keyLabel = svgEl.append('g').attr('opacity', 0);
-		keyLabel.append('rect')
-			.attr('x', keyX)
-			.attr('y', keyLineY - 13)
-			.attr('width', 55)
-			.attr('height', 26)
-			.attr('fill', colors.dark)
-			.attr('stroke', colors.orange)
-			.attr('stroke-width', 2)
-			.attr('rx', 4);
-		keyLabel.append('text')
-			.attr('x', keyX + 27)
-			.attr('y', keyLineY + 4)
-			.attr('text-anchor', 'middle')
-			.attr('fill', colors.orange)
-			.attr('font-size', '11px')
-			.attr('font-weight', 'bold')
-			.text('Key K');
-
-		// Key bus - horizontal line with branches to each AES box
-		keyBus = svgEl.append('g').attr('opacity', 0);
+		// Layout calculations
+		const startX = 45;
+		const blockSpacing = (width - startX - 20 - blockW) / 3;
+		const row1Y = 55;
+		const row2Y = 145;
+		const row3Y = 235;
 
 		plaintextBoxes = [];
 		aesBoxes = [];
 		ciphertextBoxes = [];
 		arrows1 = [];
 		arrows2 = [];
-		keyArrows = [];
+		keyBoxes = [];
 
 		// Calculate all block positions first
 		const blockCenters: number[] = [];
 		for (let i = 0; i < 4; i++) {
 			blockCenters.push(startX + i * blockSpacing + blockW / 2);
-		}
-
-		// Draw key bus: horizontal line from key label to first AES, then between boxes
-		const firstAesLeft = blockCenters[0] - aesW / 2;
-		keyBus.append('line')
-			.attr('x1', keyX + 60)
-			.attr('y1', keyLineY)
-			.attr('x2', firstAesLeft - 10)
-			.attr('y2', keyLineY)
-			.attr('stroke', colors.orange)
-			.attr('stroke-width', 1.5)
-			.attr('stroke-dasharray', '4,2');
-
-		// Segments between AES boxes (going around them)
-		for (let i = 0; i < 3; i++) {
-			const aesRight = blockCenters[i] + aesW / 2;
-			const nextAesLeft = blockCenters[i + 1] - aesW / 2;
-			keyBus.append('line')
-				.attr('x1', aesRight + 5)
-				.attr('y1', keyLineY)
-				.attr('x2', nextAesLeft - 10)
-				.attr('y2', keyLineY)
-				.attr('stroke', colors.orange)
-				.attr('stroke-width', 1.5)
-				.attr('stroke-dasharray', '4,2');
 		}
 
 		for (let i = 0; i < 4; i++) {
@@ -419,15 +355,37 @@
 				.attr('opacity', 0);
 			arrows2.push(arr2);
 
-			// Key arrow - small arrow from bus into left side of AES box
-			const keyArr = svgEl.append('g').attr('opacity', 0);
-			keyArr.append('path')
-				.attr('d', `M ${aesLeftX - 10} ${keyLineY} L ${aesLeftX - 2} ${keyLineY}`)
+			// Independent K box with arrow for this AES (no connection to other blocks)
+			const keyGroup = svgEl.append('g').attr('opacity', 0);
+			const keyBoxX = aesLeftX - 38;
+			const keyBoxY = row2Y + aesH / 2 - 10;
+			const keyBoxW = 24;
+			const keyBoxH = 20;
+
+			keyGroup.append('rect')
+				.attr('x', keyBoxX)
+				.attr('y', keyBoxY)
+				.attr('width', keyBoxW)
+				.attr('height', keyBoxH)
+				.attr('fill', colors.dark)
+				.attr('stroke', colors.orange)
+				.attr('stroke-width', 1.5)
+				.attr('rx', 3);
+			keyGroup.append('text')
+				.attr('x', keyBoxX + keyBoxW / 2)
+				.attr('y', keyBoxY + keyBoxH / 2 + 4)
+				.attr('text-anchor', 'middle')
+				.attr('fill', colors.orange)
+				.attr('font-size', '10px')
+				.attr('font-weight', 'bold')
+				.text('K');
+			keyGroup.append('path')
+				.attr('d', `M ${keyBoxX + keyBoxW + 2} ${row2Y + aesH / 2} L ${aesLeftX - 3} ${row2Y + aesH / 2}`)
 				.attr('fill', 'none')
 				.attr('stroke', colors.orange)
-				.attr('stroke-width', 2)
+				.attr('stroke-width', 1.5)
 				.attr('marker-end', 'url(#ecb-arr-orange)');
-			keyArrows.push(keyArr);
+			keyBoxes.push(keyGroup);
 		}
 
 		// Highlight boxes for identical blocks (blocks 0 and 2)

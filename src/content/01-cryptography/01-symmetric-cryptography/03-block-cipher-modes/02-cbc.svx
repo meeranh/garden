@@ -1,0 +1,66 @@
+---
+title: Cipher Block Chaining (CBC)
+prerequisites:
+  - cryptography/symmetric-cryptography/block-cipher-modes/ecb
+---
+
+## Breaking the Pattern
+
+ECB's fatal flaw: identical plaintext blocks produce identical ciphertext.
+
+CBC fixes this by **chaining** blocks together. Each block's encryption depends on the previous one.
+
+---
+
+## How CBC Works
+
+Before encrypting each block, XOR it with the previous ciphertext block.
+
+::cbc-encryption
+
+---
+
+## The Chain
+
+1. XOR the first plaintext block with an **Initialization Vector (IV)**
+2. Encrypt the result with AES to get the first ciphertext block
+3. XOR the next plaintext block with this ciphertext
+4. Encrypt, repeat
+
+Each ciphertext block depends on **all previous blocks**.
+
+---
+
+## The Initialization Vector
+
+For the first block, there's no "previous ciphertext" to XOR with.
+
+The **IV** is a random 16-byte value that starts the chain.
+
+- Must be random for each message
+- Doesn't need to be secret (sent with the ciphertext)
+- Ensures the same message encrypts differently each time
+
+---
+
+## Why It Works
+
+In ECB, identical inputs always produce identical outputs.
+
+In CBC, the XOR step ensures that even identical plaintext blocks have **different AES inputs** because they're mixed with different previous ciphertext.
+
+> The chain breaks the pattern.
+
+---
+
+## Trade-offs
+
+**Pros:**
+- Hides all patterns
+- Same message encrypts differently each time
+
+**Cons:**
+- Sequential: can't parallelize encryption (each block needs the previous ciphertext)
+- Error propagation: one corrupted block affects two blocks during decryption
+
+> **The lesson:** A little chaining goes a long way. XOR with the previous block is enough to hide all patterns.

@@ -1,0 +1,110 @@
+---
+title: Counter Mode (CTR)
+prerequisites:
+  - cryptography/symmetric-cryptography/block-cipher-modes/cbc
+---
+
+## The Parallel Solution
+
+CBC fixed ECB's pattern problem, but created a new limitation: each block depends on the previous one. You can't encrypt blocks in parallel, and you can't decrypt block 5 without first processing blocks 1-4.
+
+CTR takes a completely different approach.
+
+---
+
+## How CTR Works
+
+Instead of encrypting the plaintext, CTR encrypts a **counter** and XORs the result with plaintext.
+
+::ctr-encryption
+
+---
+
+## The Process
+
+1. Start with a unique **nonce** for this message
+2. For each block, create a counter value: nonce combined with block number (0, 1, 2...)
+3. Encrypt each counter with AES to produce a **keystream** block
+4. XOR the keystream with plaintext to get ciphertext
+
+The plaintext never enters AES. Only counters do.
+
+---
+
+## The Nonce
+
+The **nonce** (number used once) ensures each counter is unique across all messages.
+
+A typical 16-byte counter:
+
+| Bytes 0-7 | Bytes 8-15 |
+|-----------|------------|
+| Nonce | Block number |
+
+The nonce doesn't need to be random or secret. It just needs to be **unique for each message** encrypted with the same key.
+
+---
+
+## Why It Works
+
+Each counter value is different, so each keystream block is different.
+
+Identical plaintext blocks get XORed with different keystream blocks. Block 0's "HELLO..." uses keystream 0. Block 2's "HELLO..." uses keystream 2. Different keystreams, different ciphertext.
+
+> The counter changes what would be identical operations into unique ones.
+
+---
+
+## No Chaining
+
+This is CTR's superpower.
+
+Block 5 doesn't depend on blocks 0-4. To process block 5:
+1. Compute counter 5 (nonce + 5)
+2. Encrypt it with AES
+3. XOR with the data
+
+**Fully parallelizable.** Encrypt all blocks at once. Decrypt any block without touching the others. Jump to any position instantly.
+
+---
+
+## Encryption Equals Decryption
+
+The operation is just XOR with a keystream:
+
+- **Encrypt:** ciphertext = plaintext ⊕ keystream
+- **Decrypt:** plaintext = ciphertext ⊕ keystream
+
+Generate the keystream, XOR. Same operation both ways.
+
+> CTR turns a block cipher into a **stream cipher**.
+
+---
+
+## The Critical Rule
+
+**Never reuse a nonce with the same key.**
+
+If two messages use the same nonce and key, they share the same keystream. An attacker can XOR the ciphertexts together:
+
+$$C_1 \oplus C_2 = P_1 \oplus P_2$$
+
+The keystream cancels. The attacker learns how the plaintexts relate to each other. With enough messages, they can recover the actual content.
+
+One reused nonce breaks everything encrypted with that key.
+
+---
+
+## Trade-offs
+
+**Pros:**
+- Fully parallelizable encryption and decryption
+- Random access to any block
+- No padding needed for partial blocks
+- Encryption and decryption are identical operations
+
+**Cons:**
+- Nonce reuse is catastrophic
+- No authentication: flipping a ciphertext bit flips the corresponding plaintext bit
+
+> **The lesson:** Sometimes the best way to use a block cipher is to not encrypt the plaintext at all. Encrypt predictable counters, XOR with the data.

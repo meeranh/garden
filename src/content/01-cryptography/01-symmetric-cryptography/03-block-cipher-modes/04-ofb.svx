@@ -1,0 +1,77 @@
+---
+title: Output Feedback (OFB)
+prerequisites:
+  - cryptography/symmetric-cryptography/block-cipher-modes/ctr
+---
+
+## Another Way to Generate Keystream
+
+CTR mode encrypts counters (0, 1, 2, 3...) to generate a keystream.
+
+OFB takes a different approach: encrypt the IV, then **encrypt that result**, then encrypt *that* result, and so on.
+
+---
+
+## How OFB Works
+
+::ofb-encryption
+
+---
+
+## The Process
+
+**Block 0:**
+1. Encrypt the IV with AES → produces keystream block 0 (KS0)
+2. XOR KS0 with plaintext block 0 → ciphertext block 0
+
+**Block 1:**
+1. Encrypt KS0 with AES → produces KS1
+2. XOR KS1 with plaintext block 1 → ciphertext block 1
+
+**Block 2:**
+1. Encrypt KS1 with AES → produces KS2
+2. XOR KS2 with plaintext block 2 → ciphertext block 2
+
+Each keystream block is the previous one encrypted again. The output feeds back as the next input.
+
+---
+
+## Why "Output Feedback"?
+
+The **output** of AES becomes the **input** to the next AES.
+
+```
+IV → AES → KS0 → AES → KS1 → AES → KS2 → ...
+```
+
+This chain of encryptions produces the keystream. The plaintext never touches AES directly.
+
+---
+
+## OFB vs CTR
+
+Both generate a keystream and XOR with plaintext. The difference is how they generate it:
+
+| | OFB | CTR |
+|---|-----|-----|
+| Keystream from | Encrypt previous keystream | Encrypt counter values |
+| Parallelizable | No (each block needs previous) | Yes |
+| Random access | No (must generate in order) | Yes |
+
+CTR is more flexible. OFB came first historically.
+
+---
+
+## Trade-offs
+
+**Pros:**
+- Keystream can be pre-computed before the message arrives
+- Encryption and decryption are identical (just XOR)
+- Bit errors don't propagate (unlike CBC)
+
+**Cons:**
+- Not parallelizable (must generate keystream sequentially)
+- No random access to blocks
+- No authentication (same as CTR)
+
+> **The lesson:** OFB and CTR both turn a block cipher into a stream cipher. CTR won out because counters are simpler than feedback chains.
