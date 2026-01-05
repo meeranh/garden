@@ -1,0 +1,147 @@
+---
+title: Authenticated Key Exchange
+prerequisites:
+  - cryptography/asymmetric-cryptography/diffie-hellman
+  - cryptography/asymmetric-cryptography/ecc/ecdsa
+---
+
+## The Problem with Diffie-Hellman
+
+Diffie-Hellman lets Alice and Bob compute a shared secret over an insecure channel.
+
+But it has a critical weakness: **no authentication**.
+
+Alice sends her public value to Bob. But how does Bob know it actually came from Alice?
+
+---
+
+## Man-in-the-Middle Attack
+
+Eve sits between Alice and Bob:
+
+1. Alice sends $g^a$ intended for Bob
+2. Eve intercepts, sends her own $g^e$ to Bob
+3. Eve sends her own $g^{e'}$ to Alice
+4. Alice computes a key with Eve (thinking it's Bob)
+5. Bob computes a different key with Eve (thinking it's Alice)
+
+Eve now reads all messages. Decrypts with one key, re-encrypts with the other.
+
+> Alice and Bob think they're communicating securely. They're not.
+
+---
+
+## The Solution
+
+**Authenticate during the key exchange.**
+
+Prove your identity while exchanging keys. Three protocols do this:
+
+- **Signed DH** - sign your public value
+- **Station-to-Station (STS)** - sign and encrypt
+- **SIGMA** - sign and MAC
+
+---
+
+## Signed Diffie-Hellman
+
+The simplest fix: **sign your DH public value**.
+
+::signed-dh
+
+---
+
+### How It Works
+
+1. Alice generates her DH value $g^a$
+2. Alice **signs** it: $\text{sig}_A = \text{Sign}(g^a)$
+3. Alice sends both $g^a$ and $\text{sig}_A$ to Bob
+4. Bob **verifies** the signature using Alice's public key
+5. Bob does the same in reverse
+6. Both compute the shared secret
+
+> If Eve tries to substitute her own value, she can't forge Alice's signature.
+
+---
+
+### Weakness
+
+The signatures are sent in the clear.
+
+- Anyone watching can see Alice and Bob exchanged keys
+- No **deniability** - proof exists that they communicated
+- Signatures could potentially be replayed
+
+---
+
+## Station-to-Station (STS)
+
+A more robust protocol: **encrypt the signatures**.
+
+::sts
+
+---
+
+### How It Works
+
+1. Alice sends $g^a$ (unsigned)
+2. Bob sends $g^b$ (unsigned)
+3. Both compute the shared secret $K$
+4. Bob signs **both** values: $\text{sig}_B = \text{Sign}(g^a \| g^b)$
+5. Bob **encrypts** the signature with $K$: $E_K(\text{sig}_B)$
+6. Bob sends the encrypted signature to Alice
+7. Alice decrypts, verifies Bob's signature
+8. Alice does the same back to Bob
+
+---
+
+### Why Encrypt the Signature?
+
+- **Proves knowledge of $K$** - only someone who computed the shared secret can encrypt/decrypt
+- **Hides the signature** - eavesdroppers can't see who's communicating
+- **Stops Eve** - she can't produce a valid encrypted signature without knowing $K$
+
+---
+
+## SIGMA Protocol
+
+Used in real-world protocols like IKE (IPsec key exchange).
+
+Adds a **MAC** to bind identity to the session.
+
+::sigma
+
+> **ID** is the party's public key or certificate. It's encrypted so eavesdroppers can't see who's communicating.
+
+---
+
+### How It Works
+
+1. Exchange DH values, compute shared secret $K$
+2. Derive two keys from $K$: encryption key and MAC key
+3. Alice sends:
+   - Her identity (encrypted)
+   - Signature on the transcript
+   - MAC on her identity
+4. Bob verifies **both** signature and MAC
+5. Bob does the same back
+
+---
+
+### Why the MAC?
+
+The signature proves: *"I am Alice"*
+
+The MAC proves: *"I am Alice, and I computed this specific shared secret"*
+
+This prevents **identity misbinding attacks** - taking a signature from one session and using it in another.
+
+---
+
+## Which Protocol to Use?
+
+- **Signed DH** - simple, but signatures are exposed
+- **STS** - better privacy, signatures encrypted
+- **SIGMA** - strongest, used in production protocols
+
+> Real protocols like TLS use variations of these ideas: DH for key exchange, certificates for authentication.

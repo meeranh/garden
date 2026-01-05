@@ -1,0 +1,108 @@
+---
+title: Three-Pass Protocol
+---
+
+## The Problem
+
+Alice wants to send Bob a secret message.
+
+But they have:
+
+- **No shared key**
+- **No public key infrastructure**
+- Just an insecure channel
+
+How can they communicate securely?
+
+---
+
+## The Padlock Analogy
+
+Imagine Alice wants to send Bob a physical box with a secret inside.
+
+She can't send the key separately - Eve might intercept it.
+
+**The clever solution:**
+
+::three-pass
+
+---
+
+## How It Works
+
+1. **Alice** puts the message in a box, adds **her padlock**, sends to Bob
+2. **Bob** can't open it, so he adds **his padlock** too, sends back
+3. **Alice** removes **her padlock**, sends to Bob
+4. **Bob** removes **his padlock**, reads the message
+
+> Two padlocks, three passes, no shared key needed!
+
+---
+
+## The Cryptographic Version
+
+This works because of **commutative encryption** - encryption that can be applied and removed in any order:
+
+$$E_A(E_B(m)) = E_B(E_A(m))$$
+
+> $E_A$ and $E_B$ are Alice's and Bob's encryption functions.
+
+Like padlocks - it doesn't matter which one you put on first.
+
+---
+
+## Protocol Steps
+
+Alice has message $m$. Both have their own secret keys.
+
+| Pass | Action | What's Sent |
+|------|--------|-------------|
+| 1 | Alice encrypts | $c_1 = E_A(m)$ |
+| 2 | Bob encrypts | $c_2 = E_B(E_A(m))$ |
+| 3 | Alice decrypts | $c_3 = D_A(c_2) = E_B(m)$ |
+| - | Bob decrypts | $m = D_B(c_3)$ |
+
+---
+
+## What Encryption is Commutative?
+
+**XOR** is commutative:
+
+$$a \oplus b \oplus a = b$$
+
+But using XOR here is **insecure**. If Eve captures all three messages:
+
+$$c_1 \oplus c_2 \oplus c_3 = m$$
+
+---
+
+**Modular exponentiation** works better:
+
+- Encrypt: $E_K(m) = m^K \mod p$
+- Decrypt: $D_K(c) = c^{K^{-1}} \mod p$
+
+This is commutative and secure (related to Diffie-Hellman).
+
+---
+
+## Advantages
+
+- **No pre-shared secret** needed
+- **No public key infrastructure** needed
+- Works with **symmetric-style** operations
+
+---
+
+## Disadvantages
+
+- **Three round trips** - slow for real-time communication
+- **No authentication** - vulnerable to man-in-the-middle attacks
+- Eve could intercept and substitute her own padlocks
+
+---
+
+## The Takeaway
+
+> The Three-Pass Protocol shows you can exchange secrets without any prior setup - just commutative encryption and patience for three trips.
+
+In practice, we use faster methods like Diffie-Hellman. But this protocol demonstrates a beautiful cryptographic idea.

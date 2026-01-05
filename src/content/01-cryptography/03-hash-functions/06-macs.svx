@@ -1,0 +1,140 @@
+---
+title: Message Authentication Codes
+prerequisites:
+  - cryptography/hash-functions/cryptographic-hash-functions
+  - cryptography/symmetric-cryptography/block-cipher-modes
+---
+
+> **Notation:** $\|$ means **concatenation** (joining two things end to end).
+
+---
+
+## The Problem With Hashes
+
+You send a message with its hash. The receiver checks: *does the hash match?*
+
+But here's the issue: **anyone can compute a hash.**
+
+- Attacker intercepts your message
+- Changes the content
+- Computes a *new* hash
+- Sends both to the receiver
+
+The receiver checks... and it matches!
+
+> Hashes prove **integrity** (not modified), but not **authenticity** (who sent it).
+
+---
+
+## Enter the MAC
+
+A **Message Authentication Code** is a *keyed hash*.
+
+- **Inputs:** secret key + message
+- **Output:** a short *tag* (like a hash)
+
+Only someone with the key can produce a valid tag. So a MAC proves:
+
+- The message **wasn't tampered with**
+- It came from **someone who knows the key**
+
+---
+
+## HMAC
+
+**HMAC** (Hash-based MAC) builds a MAC from any hash function.
+
+The naive approach $\text{Hash}(key \| message)$ is vulnerable to **length extension attacks**. HMAC prevents this with a clever double-hash construction.
+
+---
+
+### How HMAC Works
+
+Given a **key** and **message**:
+
+1. **Pad** the key to the hash's block size
+2. **XOR** with inner pad ($\text{ipad} = \texttt{0x36}$ repeated) → *inner key*
+3. **XOR** with outer pad ($\text{opad} = \texttt{0x5c}$ repeated) → *outer key*
+4. **Inner hash:** $\text{Hash}(\text{inner\_key} \| \text{message})$
+5. **Outer hash:** $\text{Hash}(\text{outer\_key} \| \text{inner\_hash})$
+
+The result:
+
+$$\text{HMAC} = \text{Hash}(K \oplus \text{opad} \| \text{Hash}(K \oplus \text{ipad} \| m))$$
+
+::hmac
+
+---
+
+### Why Two Hashes?
+
+- The **inner hash** processes the message with the key mixed in
+- The **outer hash** "seals" the result, preventing length extension
+
+> Even if the hash function has weaknesses, the double construction adds protection.
+
+---
+
+## CBC-MAC
+
+**CBC-MAC** builds a MAC from a *block cipher* instead of a hash.
+
+- Uses the same chaining as CBC mode encryption
+- Only keeps the **final block**
+
+---
+
+### How CBC-MAC Works
+
+Given **blocks** B1, B2, B3 and a **key**:
+
+1. Start with **IV = 0** (all zeros)
+2. $C_1$ = Encrypt(B1 XOR IV)
+3. $C_2$ = Encrypt(B2 XOR $C_1$)
+4. $C_3$ = Encrypt(B3 XOR $C_2$)
+5. The **final block $C_3$** is the MAC
+
+::cbc-mac
+
+---
+
+### Why It Works
+
+- Each encryption depends on **all previous blocks** through XOR chaining
+- Change *any* bit in *any* block → final output changes completely
+
+> The last block is a fingerprint of the entire message.
+
+---
+
+## HMAC vs CBC-MAC
+
+| | HMAC | CBC-MAC |
+|---|------|---------|
+| **Built from** | Hash function | Block cipher |
+| **Speed** | Very fast | Depends on cipher |
+| **Common use** | TLS, JWT, APIs | Banking, payment systems |
+
+**HMAC** is more common today:
+
+- Simple and fast
+- Works with any hash function
+- Widely supported
+
+**CBC-MAC** is used where block ciphers are already available:
+
+- Hardware implementations
+- Legacy banking systems
+- Payment terminals
+
+---
+
+## Where MACs Are Used
+
+- **TLS/HTTPS:** Every packet is authenticated
+- **API tokens:** JWTs use HMAC to prevent tampering
+- **File verification:** Prove a file came from a trusted source
+- **Banking:** Authenticate transactions
+- **Message apps:** Verify message integrity
+
+> Whenever you need to prove *both* integrity and authenticity, use a MAC.
