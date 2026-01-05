@@ -50,7 +50,8 @@
 	.item {
 		color: #83a598;
 		transition: color 0.1s ease;
-		max-width: 200px;
+		flex: 0 1 auto;
+		min-width: 30px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -64,8 +65,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		max-width: none;
-		flex-shrink: 0;
+		flex: 0 0 auto;
+		min-width: auto;
 		line-height: 0;
 		margin-top: -4px;
 	}
@@ -76,17 +77,5 @@
 
 	.item.current {
 		color: #fabd2f;
-	}
-
-	@media (max-width: 600px) {
-		.item {
-			max-width: 80px;
-		}
-	}
-
-	@media (max-width: 400px) {
-		.item {
-			max-width: 60px;
-		}
 	}
 </style>
