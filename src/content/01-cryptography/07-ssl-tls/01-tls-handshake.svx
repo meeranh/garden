@@ -1,0 +1,165 @@
+---
+title: The TLS Handshake
+prerequisites:
+  - cryptography/cryptographic-protocols/pki-and-certificates
+---
+
+## What is TLS?
+
+**Transport Layer Security (TLS)** creates a secure channel over an insecure network.
+
+You're on coffee shop WiFi. You visit your bank.
+
+**Without TLS:**
+
+- Anyone on that WiFi can *read* your traffic
+- Attackers can *modify* data in transit
+- You can't verify you're talking to the *real* bank
+
+**With TLS:**
+
+- **Confidentiality:** Traffic is encrypted
+- **Integrity:** Tampering is detected
+- **Authentication:** Server proves its identity
+
+---
+
+## SSL vs TLS
+
+**SSL (Secure Sockets Layer):** The original, made by Netscape in the 90s.
+
+**TLS (Transport Layer Security):** The successor, standardized by IETF.
+
+| Version | Status |
+|---------|--------|
+| SSL 2.0 | *Broken*, deprecated |
+| SSL 3.0 | *Broken* (POODLE attack), deprecated |
+| TLS 1.0 | Old, being phased out |
+| TLS 1.1 | Old, being phased out |
+| TLS 1.2 | **Current standard** |
+| TLS 1.3 | **Latest**, faster and more secure |
+
+> Everyone says "SSL" but means TLS. The protocol is TLS. The name SSL stuck.
+
+---
+
+## The Handshake
+
+Before any HTTP data flows, client and server perform a **handshake**.
+
+The goal: *securely agree on encryption keys*.
+
+::tls-handshake
+
+---
+
+### Step 1: Client Hello
+
+The client initiates:
+
+- **TLS versions** it supports
+- **Cipher suites** it supports (e.g., `TLS_AES_256_GCM_SHA384`)
+- **Client random:** 32 bytes of random data
+
+> *"Here's what I can do. Let's talk."*
+
+---
+
+### Step 2: Server Hello
+
+The server responds:
+
+- **TLS version** to use
+- **Cipher suite** chosen from client's list
+- **Server random:** 32 bytes of random data
+- **Server's certificate**
+
+> *"Let's use this. Here's my certificate to prove who I am."*
+
+---
+
+### Step 3: Client Verifies Certificate
+
+The client checks:
+
+- Is the certificate **valid** (not expired)?
+- Is it signed by a **trusted CA**?
+- Does the **domain match**?
+
+**If any check fails, connection aborts.**
+
+> This is where the chain of trust matters. No valid certificate, no connection.
+
+---
+
+### Step 4: Key Exchange
+
+The client generates a **pre-master secret** (random bytes).
+
+Encrypts it with the server's **public key** from the certificate.
+
+Sends it to the server.
+
+Now both sides have:
+
+- Client random
+- Server random
+- Pre-master secret
+
+Both derive the **same session keys** from these three values.
+
+> The pre-master secret traveled encrypted. Only the server can decrypt it.
+
+---
+
+### Step 5: Finished
+
+Both sides send a **"Finished"** message, encrypted with the new session keys.
+
+If decryption works on both ends, the handshake succeeded.
+
+**The secure channel is established.**
+
+---
+
+## After the Handshake
+
+All traffic is now encrypted with **symmetric session keys**.
+
+| Phase | Crypto used | Why |
+|-------|-------------|-----|
+| Handshake | Asymmetric (RSA/ECDH) | Secure key exchange |
+| Data transfer | Symmetric (AES) | Fast encryption |
+
+> Same hybrid approach as PGP: asymmetric to exchange keys, symmetric for bulk data.
+
+---
+
+## Why This Complexity?
+
+**Problem:** Symmetric encryption is fast, but requires a shared key.
+
+**Problem:** How do you share a key over an insecure network?
+
+**Solution:** Use asymmetric encryption *once* to securely exchange a symmetric key.
+
+The handshake does exactly this:
+
+1. Server proves identity with certificate
+2. Client sends secret encrypted with server's public key
+3. Both derive symmetric keys
+4. Switch to fast symmetric encryption
+
+> The handshake is slow. But it only happens once per connection.
+
+---
+
+## TLS 1.3 Improvements
+
+TLS 1.3 made the handshake **faster** and **more secure**:
+
+- **Fewer round trips:** Handshake completes in 1 round trip (was 2)
+- **Removed old crypto:** No more RSA key exchange, only forward-secure options
+- **Encrypted earlier:** More of the handshake is encrypted
+
+> TLS 1.3 is what you should be using today.

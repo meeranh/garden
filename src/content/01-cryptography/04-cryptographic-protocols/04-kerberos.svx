@@ -1,0 +1,215 @@
+---
+title: Kerberos
+prerequisites:
+  - cryptography/cryptographic-protocols/key-distribution-centers
+---
+
+## The Password Problem
+
+With a basic KDC, every time you want to access a service:
+
+1. Send your password to the KDC
+2. Get a session key
+3. Access the service
+
+Access **10 services**? Enter your password **10 times**.
+
+This is:
+
+- **Annoying** - constant re-authentication
+- **Risky** - your password travels the network repeatedly
+- **Inefficient** - the KDC does redundant work
+
+> There has to be a better way.
+
+---
+
+## The Clever Solution
+
+What if you could prove your identity **once**, then use that proof all day?
+
+That's exactly what **Kerberos** does.
+
+1. **Morning**: Log in, prove your password
+2. **Get a "golden ticket"** that says *"I already verified this person"*
+3. **Rest of the day**: Use the ticket to access services, never enter password again
+
+> This is **single sign-on** - authenticate once, access everything.
+
+---
+
+## The Ticket Granting Ticket
+
+The "golden ticket" is called a **TGT** (Ticket Granting Ticket).
+
+Think of it like a wristband at a festival:
+
+- **Gate**: Check your real ticket, give you a wristband
+- **Rides**: Just show the wristband, no need to show the original ticket again
+
+The TGT is your wristband. It proves you already authenticated.
+
+---
+
+## The Two Servers
+
+Kerberos splits the KDC into two parts:
+
+| Server | Full Name | Job |
+|--------|-----------|-----|
+| **AS** | Authentication Server | Verifies your password, issues TGT |
+| **TGS** | Ticket Granting Server | Takes TGT, issues service tickets |
+
+**Why split them?**
+
+- The **AS** handles passwords - the most sensitive data
+- The **TGS** only handles tickets - less sensitive
+
+If the TGS is compromised, passwords are still safe.
+
+---
+
+## The Three Exchanges
+
+Kerberos authentication happens in three steps.
+
+::kerberos
+
+---
+
+### Exchange 1: Getting the TGT
+
+Alice wants to log in.
+
+| Direction | Message |
+|-----------|---------|
+| Alice → AS | *"I'm Alice, I want to log in"* |
+| AS → Alice | TGT + session key (encrypted with Alice's password) |
+
+If Alice knows her password, she can decrypt the response.
+
+Now she has:
+
+- A **TGT** (encrypted, she can't read it)
+- A **session key** for talking to TGS
+
+> The AS never stores or sends the password. It derives a key from the password.
+
+---
+
+### Exchange 2: Getting a Service Ticket
+
+Alice wants to access the file server.
+
+| Direction | Message |
+|-----------|---------|
+| Alice → TGS | TGT + *"I want access to file server"* |
+| TGS → Alice | Service ticket + new session key |
+
+**Notice**: Alice never sent her password. The TGT proves she already authenticated.
+
+Now she has:
+
+- A **service ticket** for the file server
+- A **session key** for talking to the file server
+
+---
+
+### Exchange 3: Accessing the Service
+
+Alice presents her ticket to the file server.
+
+| Direction | Message |
+|-----------|---------|
+| Alice → FileServer | Service ticket |
+| FileServer → Alice | *"Welcome, access granted"* |
+
+The file server decrypts the ticket, sees Alice's identity, and grants access.
+
+---
+
+## What's Inside a Ticket?
+
+A ticket is like a **sealed envelope**. Only the destination can open it.
+
+**TGT contains:**
+
+- Alice's identity
+- Session key (for talking to TGS)
+- Expiration time
+- *Encrypted with TGS's secret key*
+
+**Service Ticket contains:**
+
+- Alice's identity
+- Session key (for talking to service)
+- Expiration time
+- *Encrypted with the service's secret key*
+
+> Alice carries these tickets but **can't read them**. She just presents them.
+
+---
+
+## The Replay Problem
+
+What if Eve **steals Alice's ticket** and uses it herself?
+
+The ticket is valid. The service would accept it. Eve gets access.
+
+**Kerberos solves this with two mechanisms:**
+
+---
+
+### Timestamps
+
+Every ticket has an **expiration time**.
+
+- TGTs typically last **8-10 hours** (one workday)
+- Service tickets last **5-10 minutes**
+
+Stolen ticket? It's probably already expired.
+
+---
+
+### Authenticators
+
+When Alice presents a ticket, she also sends an **authenticator**:
+
+- A fresh timestamp
+- Encrypted with the session key
+
+The service checks:
+
+1. **Is the ticket valid?** (can I decrypt it?)
+2. **Is the authenticator fresh?** (timestamp within 5 minutes?)
+3. **Do they match?** (same identity, same session key?)
+
+> Eve can steal the ticket, but can't create valid authenticators without the session key.
+
+---
+
+## Why It Works
+
+| Step | What Happens | What Alice Gets |
+|------|--------------|-----------------|
+| 1 | Password → AS | TGT |
+| 2 | TGT → TGS | Service ticket |
+| 3 | Service ticket → Service | Access |
+
+**Password entered**: Once
+
+**Services accessible**: Unlimited (until TGT expires)
+
+---
+
+## Kerberos in the Real World
+
+Kerberos is everywhere:
+
+- **Windows Active Directory** - every domain login uses Kerberos
+- **macOS** - integrated into the system
+- **Linux** - MIT Kerberos, Heimdal
+
+When you log into a Windows domain and access network shares, printers, or email - Kerberos is working behind the scenes.
+
+> Named after the three-headed dog guarding the underworld. Kerberos guards your network with three exchanges.

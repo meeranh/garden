@@ -1,0 +1,88 @@
+---
+title: Apache SSL Configuration
+prerequisites:
+  - cryptography/ssl-tls/tls-handshake
+---
+
+## Enabling HTTPS on Apache
+
+To serve HTTPS, Apache needs two things:
+
+1. **A certificate** (proves your identity)
+2. **A private key** (lets you decrypt traffic)
+
+---
+
+## The Key Directives
+
+```apache
+<VirtualHost *:443>
+    ServerName example.com
+
+    SSLEngine on
+    SSLCertificateFile      /etc/ssl/certs/example.com.crt
+    SSLCertificateKeyFile   /etc/ssl/private/example.com.key
+</VirtualHost>
+```
+
+---
+
+### SSLCertificateFile
+
+**Your server's certificate.**
+
+This is what gets sent to clients during the TLS handshake.
+
+Contains:
+
+- Your domain name
+- Your public key
+- CA's signature
+
+```apache
+SSLCertificateFile /etc/ssl/certs/example.com.crt
+```
+
+> This file is *public*. It's sent to every client that connects.
+
+---
+
+### SSLCertificateKeyFile
+
+**Your private key.**
+
+This is what decrypts the pre-master secret during the handshake.
+
+```apache
+SSLCertificateKeyFile /etc/ssl/private/example.com.key
+```
+
+> This file is **secret**. If it leaks, attackers can impersonate your server.
+
+**Protect it:**
+
+- Restrict file permissions (`chmod 600`)
+- Don't commit to version control
+- Don't share it
+
+---
+
+## Certificate Chain
+
+Sometimes you also need intermediate certificates.
+
+Your certificate is signed by an intermediate CA, which is signed by the root CA.
+
+Clients have root CAs built in. But they might not have the intermediate.
+
+```apache
+SSLCertificateChainFile /etc/ssl/certs/chain.crt
+```
+
+Or in newer Apache, bundle everything in `SSLCertificateFile`:
+
+```apache
+SSLCertificateFile /etc/ssl/certs/example.com-fullchain.crt
+```
+
+> The full chain: Your cert → Intermediate CA → Root CA

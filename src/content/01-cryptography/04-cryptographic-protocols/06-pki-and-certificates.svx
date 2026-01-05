@@ -1,0 +1,215 @@
+---
+title: PKI and Certificates
+prerequisites:
+  - cryptography/asymmetric-cryptography/rsa
+  - cryptography/cryptographic-protocols/authenticated-key-exchange
+---
+
+## The Trust Problem
+
+In RSA and Diffie-Hellman, we assumed Alice has Bob's public key.
+
+But **how did she get it?**
+
+If Alice downloads Bob's public key from the internet, Eve could:
+
+1. **Intercept** the download
+2. **Substitute** her own public key
+3. **Read everything** Alice sends to "Bob"
+
+Alice encrypts messages thinking they're for Bob. *They're not.*
+
+> You can't just download a public key and trust it. You need to **verify** it belongs to who you think.
+
+---
+
+## The Real-World Analogy
+
+How do you prove your identity in the physical world?
+
+You show an **ID card** issued by a trusted authority (the government).
+
+The person checking:
+
+- Doesn't know you *personally*
+- **Trusts** the government
+- Accepts IDs the government issues
+
+**PKI works the same way.** A trusted authority vouches for public keys.
+
+---
+
+## Certificate Authorities
+
+A **Certificate Authority (CA)** is the trusted third party.
+
+1. Bob **proves his identity** to the CA
+2. The CA **signs a statement**: *"This public key belongs to Bob"*
+3. Alice **trusts the CA**, so she trusts the statement
+
+The signed statement is called a **digital certificate**.
+
+> Think of the CA as the government issuing ID cards. You trust the government, so you trust the IDs they issue.
+
+---
+
+## What's in a Certificate?
+
+A certificate binds an **identity** to a **public key**.
+
+| Field | Purpose |
+|-------|---------|
+| **Subject** | Who owns this key *(Bob, or example.com)* |
+| **Public Key** | The actual public key |
+| **Issuer** | The CA that vouches for this |
+| **Validity** | Not before / not after dates |
+| **Signature** | CA's signature over *everything above* |
+
+---
+
+**When Alice receives Bob's certificate:**
+
+1. She **verifies** the CA's signature
+2. If valid, she **trusts** the public key really is Bob's
+
+> The certificate is *proof*. Anyone can check the CA's signature and confirm the binding.
+
+---
+
+## The Recursion Problem
+
+Wait. To verify the CA's signature, Alice needs the **CA's public key**.
+
+How does she trust *that* key?
+
+Does she need *another* certificate? And *another*?
+
+> This seems like infinite recursion. Where does it end?
+
+---
+
+## Root Certificates: The Trust Anchors
+
+The recursion stops at **root certificates**.
+
+Your browser and operating system come pre-installed with **100-150 root CA certificates**. These are the *ultimate* trust anchors.
+
+- **You trust your OS vendor** (Apple, Microsoft, Google)
+- **They selected the root CAs** (DigiCert, Let's Encrypt, Comodo)
+- **You implicitly trust those CAs**
+
+> Root certificates are *self-signed*. The CA signs its own certificate. You trust it because your OS vendor included it.
+
+---
+
+## Certificate Chains
+
+In practice, root CAs **don't sign certificates directly**.
+
+They sign **intermediate CAs**, who sign end-user certificates.
+
+::cert-chain
+
+---
+
+### Why Intermediate CAs?
+
+- **Security** - Root CA private keys are kept **offline** in secure vaults. If they signed every certificate directly, they'd need to be online *constantly*.
+- **Damage control** - If an intermediate CA is compromised, *only its certificates* are affected. Revoke the intermediate, and the root stays safe.
+- **Delegation** - Root CAs can authorize different intermediates for different purposes.
+
+---
+
+## Verifying a Certificate Chain
+
+When your browser connects to a website:
+
+1. **Server sends** its certificate + intermediate certificates
+2. **Browser builds** the chain up to a trusted root
+3. **Verifies** each signature in the chain
+4. **Checks** that no certificate is expired or revoked
+
+*If any step fails, you see a security warning.*
+
+::cert-verify
+
+---
+
+## The X.509 Standard
+
+**X.509** defines the exact format for certificates.
+
+**It specifies:**
+
+- **Version** - currently v3
+- **Serial number** - unique per CA
+- **Signature algorithm** - e.g., SHA-256 with RSA
+- **Issuer and subject** - who signed, who owns
+- **Validity period** - start and end dates
+- **Public key info** - the actual key
+- **Extensions** - additional metadata
+
+> Every HTTPS certificate you encounter is X.509. It's *the* universal standard.
+
+---
+
+## Certificate Extensions
+
+X.509v3 added **extensions** for flexibility:
+
+| Extension | Purpose |
+|-----------|---------|
+| **Key Usage** | What the key can do *(signing, encryption)* |
+| **Subject Alternative Names** | Other valid names *(www.example.com, example.com)* |
+| **Basic Constraints** | Is this a CA certificate? |
+| **CRL Distribution Points** | Where to check for revocation |
+
+> Extensions let *one format* serve many purposes.
+
+---
+
+## Certificate Revocation
+
+What if a private key is **stolen**?
+
+The certificate is still valid until expiry. *That's a problem.*
+
+**Solution**: The CA publishes a **revocation list**.
+
+---
+
+**Two approaches:**
+
+| Method | How it works |
+|--------|--------------|
+| **CRL** | Certificate Revocation List - a signed list of revoked serial numbers |
+| **OCSP** | Online Certificate Status Protocol - query the CA *in real-time* |
+
+> Revocation is PKI's weak point. CRLs can be *outdated*, OCSP can be *slow*. Browsers often skip checking entirely.
+
+---
+
+## Certificate Lifecycle
+
+| Phase | What Happens |
+|-------|--------------|
+| **Request** | Bob generates a key pair, sends public key + identity proof to CA |
+| **Issuance** | CA verifies identity, signs and issues certificate |
+| **Usage** | Bob presents certificate, others verify the chain |
+| **Renewal** | Before expiry, Bob requests a new certificate |
+| **Revocation** | If compromised, CA adds to revocation list |
+
+---
+
+## PKI in the Real World
+
+PKI secures most of the internet:
+
+- **HTTPS** - every padlock in your browser is a verified certificate
+- **Email** - S/MIME uses certificates for encrypted email
+- **Code signing** - software updates are signed with certificates
+- **VPNs** - certificate-based authentication
+
+When you see the padlock, your browser verified a certificate chain from the website back to a pre-installed root CA.
+
+> PKI isn't perfect. It relies on trusting *~100 organizations* worldwide. But it's the foundation of internet security.

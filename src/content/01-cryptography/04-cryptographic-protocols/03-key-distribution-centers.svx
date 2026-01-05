@@ -1,0 +1,83 @@
+---
+title: Key Distribution Centers
+---
+
+## The Key Management Problem
+
+In symmetric cryptography, every pair of users needs a unique shared key.
+
+With 100 users, that's:
+
+$$\frac{n(n-1)}{2} = \frac{100 \times 99}{2} = 4,950 \text{ keys}$$
+
+With 1,000 users? Nearly **500,000 keys**.
+
+> This doesn't scale. You can't securely distribute and manage that many keys.
+
+---
+
+## The KDC Solution
+
+A **Key Distribution Center** is a trusted server that everyone shares a key with.
+
+- Alice has a key with KDC: $K_A$
+- Bob has a key with KDC: $K_B$
+- 100 users need only **100 keys**, not 4,950
+
+When Alice wants to talk to Bob, the KDC generates a fresh **session key** just for them.
+
+::kdc
+
+---
+
+## How It Works
+
+1. Alice sends a request to KDC: *"I want to talk to Bob"*
+2. KDC generates a fresh session key $K_S$
+3. KDC encrypts $K_S$ with Alice's key: $E_{K_A}(K_S)$
+4. KDC encrypts $K_S$ with Bob's key: $E_{K_B}(K_S)$
+5. Both receive the same session key
+6. Alice and Bob communicate using $K_S$
+
+> The session key is **temporary**. A new one is generated for each conversation.
+
+---
+
+## The Trust Problem
+
+The KDC knows **every session key**. It can read any conversation.
+
+You must trust the KDC completely:
+
+- **Won't eavesdrop** on your communications
+- **Won't be compromised** by attackers
+- **Won't go offline** when you need it
+
+> A single point of trust is also a single point of failure.
+
+---
+
+## Real-World Example: Kerberos
+
+**Kerberos** is a KDC protocol used in Windows Active Directory.
+
+It improves on the basic model:
+
+- **Tickets** - proof that KDC authenticated you
+- **Timestamps** - prevents replay attacks
+- **Two servers** - Authentication Server + Ticket Granting Server
+
+Every time you log into a Windows domain, Kerberos is working behind the scenes.
+
+---
+
+## Why KDCs Are Limited
+
+KDCs work well in **closed environments** like corporate networks.
+
+They don't work for the internet:
+
+- **Who runs the KDC?** No single entity everyone trusts
+- **Billions of users** - doesn't scale
+- **Global availability** - KDC must never go down
+
