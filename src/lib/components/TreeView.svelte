@@ -13,38 +13,15 @@
 	<div class="tree depth-{depth}">
 		{#each nodes as node, i}
 			{@const num = getNum(i)}
-			{#if depth === 0}
-				<div class="section-card">
-					<a href="/{node.path}" class="section-header">
-						<span class="section-num">{num}</span>
-						<span class="section-title">{node.title}</span>
-						<span class="section-arrow">→</span>
-					</a>
-					{#if node.children.length > 0}
-						<div class="section-content">
-							<TreeView nodes={node.children} depth={depth + 1} parentNum={num} />
-						</div>
-					{/if}
-				</div>
-			{:else if depth === 1}
-				<div class="subsection">
-					<a href="/{node.path}" class="subsection-link">
-						<span class="subsection-num">{num}</span>
-						{node.title}
-					</a>
-					{#if node.children.length > 0}
-						<TreeView nodes={node.children} depth={depth + 1} parentNum={num} />
-					{/if}
-				</div>
-			{:else}
-				<a href="/{node.path}" class="topic-link">
-					<span class="topic-num">{num}</span>
-					{node.title}
+			<div class="item">
+				<a href="/{node.path}" class="link">
+					<span class="num">{num}</span>
+					<span class="title">{node.title}</span>
 				</a>
 				{#if node.children.length > 0}
 					<TreeView nodes={node.children} depth={depth + 1} parentNum={num} />
 				{/if}
-			{/if}
+			</div>
 		{/each}
 	</div>
 {/if}
@@ -55,107 +32,81 @@
 		padding: 0;
 	}
 
-	/* Level 0: Section Cards */
-	.depth-0 {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
+	.item {
+		margin: 0;
 	}
 
-	.section-card {
-		background: linear-gradient(135deg, rgba(40, 40, 40, 0.4) 0%, rgba(30, 30, 30, 0.2) 100%);
-		border: 1px solid #3c3836;
-		border-radius: 8px;
-		overflow: hidden;
-		transition: all 0.2s ease;
+	.link {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.75rem;
+		padding: 0.35rem 0;
+		transition: all 0.15s ease;
 	}
 
-	.section-card:hover {
-		border-color: #504945;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-	}
-
-	.section-header {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		padding: 1rem 1.25rem;
-		background: rgba(60, 56, 54, 0.3);
-		border-bottom: 1px solid #3c3836;
-		transition: all 0.2s ease;
-	}
-
-	.section-header:hover {
-		background: rgba(80, 73, 69, 0.4);
-	}
-
-	.section-num {
+	.num {
 		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.7rem;
-		font-weight: 700;
-		color: #1d2021;
-		background: #fabd2f;
-		padding: 0.25rem 0.5rem;
-		border-radius: 4px;
-		letter-spacing: 0.05em;
+		font-size: 0.75rem;
+		font-weight: 600;
+		min-width: 2rem;
+		text-align: right;
 	}
 
-	.section-title {
-		flex: 1;
-		font-size: 1rem;
-		font-weight: 600;
+	.title {
 		color: #ebdbb2;
 	}
 
-	.section-arrow {
-		color: #665c54;
-		transition: all 0.2s ease;
+	.link:hover .title {
+		color: var(--color-accent);
 	}
 
-	.section-header:hover .section-arrow {
+	/* Level 0: Sections */
+	.depth-0 {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.depth-0 > .item > .link {
+		padding: 0.5rem 0;
+	}
+
+	.depth-0 > .item > .link .num {
 		color: #fabd2f;
-		transform: translateX(4px);
+		font-size: 0.85rem;
+		min-width: 1.5rem;
 	}
 
-	.section-content {
-		padding: 0.75rem 1.25rem 1rem;
+	.depth-0 > .item > .link .title {
+		font-size: 1.05rem;
+		font-weight: 600;
+	}
+
+	.depth-0 > .item > .link:hover .num {
+		color: #fabd2f;
 	}
 
 	/* Level 1: Subsections */
 	.depth-1 {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 0.25rem;
+		margin-top: 0.5rem;
+		margin-left: 2.25rem;
 	}
 
-	.subsection {
-		position: relative;
-		padding-left: 1rem;
-		border-left: 2px solid #3c3836;
-	}
-
-	.subsection-link {
-		display: flex;
-		align-items: baseline;
-		gap: 0.6rem;
-		padding: 0.4rem 0.75rem;
-		font-size: 0.9rem;
-		font-weight: 500;
-		color: #ebdbb2;
-		border-radius: 4px;
-		transition: all 0.15s ease;
-	}
-
-	.subsection-num {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.75rem;
+	.depth-1 > .item > .link .num {
 		color: #b8bb26;
 		min-width: 2rem;
 	}
 
-	.subsection-link:hover {
-		color: #8ec07c;
-		background: rgba(142, 192, 124, 0.1);
+	.depth-1 > .item > .link .title {
+		font-size: 0.9rem;
+		color: #d5c4a1;
+	}
+
+	.depth-1 > .item > .link:hover .num {
+		color: #b8bb26;
 	}
 
 	/* Level 2+: Topics */
@@ -164,40 +115,44 @@
 		flex-direction: column;
 		gap: 0.15rem;
 		margin-top: 0.25rem;
-		margin-left: 0.5rem;
-		padding-left: 0.75rem;
-		border-left: 1px solid #504945;
+		margin-left: 2.75rem;
 	}
 
-	.topic-link {
-		display: flex;
-		align-items: baseline;
-		gap: 0.5rem;
-		padding: 0.25rem 0.5rem;
-		font-size: 0.8rem;
-		color: #d5c4a1;
-		border-radius: 3px;
-		transition: all 0.15s ease;
-	}
-
-	.topic-num {
-		font-family: 'JetBrains Mono', monospace;
+	.depth-2 > .item > .link .num {
+		color: #83a598;
 		font-size: 0.7rem;
-		color: #83a598;
-		min-width: 2.5rem;
+		min-width: 2.75rem;
 	}
 
-	.topic-link:hover {
+	.depth-2 > .item > .link .title {
+		font-size: 0.85rem;
+		color: #bdae93;
+	}
+
+	.depth-2 > .item > .link:hover .num {
 		color: #83a598;
-		background: rgba(131, 165, 152, 0.1);
 	}
 
 	/* Deeper levels */
 	:global(.tree .depth-3),
 	:global(.tree .depth-4),
 	:global(.tree .depth-5) {
-		margin-left: 0.5rem;
-		padding-left: 0.5rem;
-		border-left: 1px solid #3c3836;
+		margin-left: 3.5rem;
+		margin-top: 0.15rem;
+	}
+
+	:global(.tree .depth-3 > .item > .link .num),
+	:global(.tree .depth-4 > .item > .link .num),
+	:global(.tree .depth-5 > .item > .link .num) {
+		min-width: 3.5rem;
+		color: #d3869b;
+		font-size: 0.65rem;
+	}
+
+	:global(.tree .depth-3 > .item > .link .title),
+	:global(.tree .depth-4 > .item > .link .title),
+	:global(.tree .depth-5 > .item > .link .title) {
+		font-size: 0.8rem;
+		color: #a89984;
 	}
 </style>
