@@ -136,6 +136,32 @@
 
 <div class="container">
 	<svg viewBox="0 0 {width} {height}" class="scene">
+		<!-- Arrow markers -->
+		<defs>
+			<marker
+				id="arrow-left"
+				markerWidth="10"
+				markerHeight="10"
+				refX="8"
+				refY="3"
+				orient="auto"
+				markerUnits="strokeWidth"
+			>
+				<path d="M0,0 L0,6 L9,3 z" fill="var(--color-accent)" />
+			</marker>
+			<marker
+				id="arrow-right"
+				markerWidth="10"
+				markerHeight="10"
+				refX="8"
+				refY="3"
+				orient="auto"
+				markerUnits="strokeWidth"
+			>
+				<path d="M0,0 L0,6 L9,3 z" fill="var(--color-error)" />
+			</marker>
+		</defs>
+
 		<!-- P box (plaintext) -->
 		{#if display.showP}
 			<g class="fade-in">
@@ -323,27 +349,29 @@
 
 		<!-- Attack arrows showing both directions -->
 		{#if display.highlightBothSides && !display.showTable}
-			<!-- Left attack arrow (curved) -->
+			<!-- Left attack arrow: P top → M top (curved high above K₁) -->
 			<path
-				d="M {pX} {centerY - boxH / 2 - 38} Q {(pX + mX) / 2} {centerY - 85} {mX} {centerY -
-					boxH / 2 -
-					38}"
+				d="M {pX} {centerY - boxH / 2}
+				   Q {(pX + mX) / 2 + 40} {centerY - boxH / 2 - 95}
+				   {mX - 8} {centerY - boxH / 2}"
 				class="attack-arrow left"
 				fill="none"
+				marker-end="url(#arrow-left)"
 			/>
-			<text x={(pX + mX) / 2} y={centerY - 78} class="attack-label left">
+			<text x={(pX + mX) / 2 + 20} y={centerY - boxH / 2 - 75} class="attack-label left">
 				Encrypt with K₁
 			</text>
 
-			<!-- Right attack arrow (curved) -->
+			<!-- Right attack arrow: C top → M top (curved high above K₂) -->
 			<path
-				d="M {cX} {centerY - boxH / 2 - 38} Q {(cX + mX) / 2} {centerY - 85} {mX} {centerY -
-					boxH / 2 -
-					38}"
+				d="M {cX} {centerY - boxH / 2}
+				   Q {(cX + mX) / 2 - 40} {centerY - boxH / 2 - 95}
+				   {mX + 8} {centerY - boxH / 2}"
 				class="attack-arrow right"
 				fill="none"
+				marker-end="url(#arrow-right)"
 			/>
-			<text x={(cX + mX) / 2} y={centerY - 78} class="attack-label right">
+			<text x={(cX + mX) / 2 - 20} y={centerY - boxH / 2 - 75} class="attack-label right">
 				Decrypt with K₂
 			</text>
 		{/if}
