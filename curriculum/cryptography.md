@@ -273,9 +273,3 @@
   - Lack of standards
 - Attack scenarios and impacts
 - Security controls
-
-### 6.4 Other Topics
-- S/MIME
-- Quantum cryptography
-- Blockchain
-- Anonymity and Tor
