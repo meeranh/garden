@@ -1,0 +1,136 @@
+---
+title: Basic Digital Modulation
+prerequisites:
+  - wireless-communications/rf-fundamentals/diversity-techniques
+---
+
+## The Problem
+
+You have digital data: `1 0 1 1 0 1`
+
+You want to send it wirelessly through the air. But you can't just transmit $1$ and $0$ directly. The air doesn't understand bits.
+
+> You need to encode your bits onto a **wave** that can actually travel.
+
+---
+
+## The Carrier Wave
+
+A **carrier** is just a simple sine wave oscillating at a fixed frequency.
+
+By itself, it carries no information. It's just a steady hum. Think of it as a blank canvas, a vehicle that will carry your data.
+
+---
+
+**But a sine wave has three properties you can change:**
+
+| Property | What it means |
+|----------|---------------|
+| **Amplitude** | The height of the wave (*how loud*) |
+| **Frequency** | How fast it oscillates (*how high-pitched*) |
+| **Phase** | Where in the cycle it starts (*shifted left or right*) |
+
+::sine-wave-properties
+
+---
+
+## The Three Modulation Types
+
+To encode bits, you **change one of these properties** based on whether you're sending a 0 or 1.
+
+| Modulation | What changes |
+|------------|--------------|
+| **ASK** | Amplitude |
+| **FSK** | Frequency |
+| **PSK** | Phase |
+
+---
+
+## ASK: Amplitude Shift Keying
+
+**Change the amplitude to represent bits.**
+
+- **1** = full amplitude (*wave present*)
+- **0** = low/zero amplitude (*wave weak or absent*)
+
+::ask-modulation
+
+---
+
+**Simple idea:** Turn the wave ON for 1, OFF (or quiet) for 0.
+
+**The problem:** Noise in the real world affects amplitude. If interference weakens your signal, a 1 might look like a 0.
+
+> **ASK is simple but vulnerable to noise.**
+
+---
+
+## FSK: Frequency Shift Keying
+
+**Change the frequency to represent bits.**
+
+- **1** = higher frequency (*faster oscillation*)
+- **0** = lower frequency (*slower oscillation*)
+
+::fsk-modulation
+
+---
+
+**Why is this better?** Noise typically affects amplitude, not frequency. Even if the wave gets weaker, you can still count how fast it's oscillating.
+
+> **FSK is more robust than ASK.**
+
+**The tradeoff:** You need two different frequencies, which uses more bandwidth.
+
+---
+
+## PSK: Phase Shift Keying
+
+**Change the phase to represent bits.**
+
+Phase is where the wave "starts" in its cycle. Shifting the phase by 180° flips the wave upside down.
+
+- **1** = normal phase (0°)
+- **0** = inverted phase (180°)
+
+::psk-modulation
+
+---
+
+Notice how at each bit transition, the wave either continues normally or **flips**. That flip is the 180° phase shift.
+
+> **PSK is very robust.** Phase is harder for noise to corrupt than amplitude.
+
+This is why **BPSK** (Binary PSK) is widely used in WiFi, cellular, and satellite systems.
+
+---
+
+## Comparison
+
+| Type | What changes | Advantage | Disadvantage |
+|------|--------------|-----------|--------------|
+| **ASK** | Amplitude | Simple to implement | Vulnerable to noise |
+| **FSK** | Frequency | Robust to noise | Uses more bandwidth |
+| **PSK** | Phase | Very robust | More complex receiver |
+
+---
+
+## The Key Insight
+
+All three are doing the same fundamental thing:
+
+> **Mapping bits to wave properties.**
+
+- ASK: bit → amplitude
+- FSK: bit → frequency
+- PSK: bit → phase
+
+In binary versions (**BASK**, **BFSK**, **BPSK**), you have 2 possible symbols, so you encode **1 bit per symbol**.
+
+---
+
+## What's Next?
+
+What if we used **4 phases** instead of 2? Then each symbol could represent **2 bits**.
+
+That's **QPSK** (Quadrature PSK), and it leads us to even more efficient modulation schemes like **QAM**.

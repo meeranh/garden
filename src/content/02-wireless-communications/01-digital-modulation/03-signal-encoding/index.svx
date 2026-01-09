@@ -1,0 +1,160 @@
+---
+title: Signal Encoding
+prerequisites:
+  - wireless-communications/digital-modulation/basic-modulation
+---
+
+## The Problem
+
+You have a stream of bits: `1 0 1 1 0 0 1`
+
+You need to send this as **electrical voltage** over a wire.
+
+The simplest idea: high voltage = $1$, low voltage = $0$.
+
+This is called **NRZ-L** (Non-Return-to-Zero, Level).
+
+---
+
+## NRZ: Simple But Flawed
+
+::nrz-problem
+
+---
+
+The problem: when you send many $1$s in a row, the voltage just **stays high**.
+
+The receiver sees a flat line. How does it know how many $1$s there were?
+
+> Without transitions, the receiver has no way to count bit boundaries.
+
+---
+
+## The Synchronization Problem
+
+The transmitter and receiver need **synchronized clocks** to agree on bit timing.
+
+But clocks drift. Even a tiny mismatch compounds over time.
+
+With a long run of identical bits:
+
+- Transmitter: "I sent eight $1$s"
+- Receiver: "I counted... seven? Nine?"
+
+**We need transitions in the signal to keep clocks synchronized.**
+
+---
+
+## Manchester Encoding
+
+The clever solution: instead of voltage *levels*, use **transitions**.
+
+- **$1$** = transition from low to high (in the middle of the bit)
+- **$0$** = transition from high to low (in the middle of the bit)
+
+::manchester-encoding
+
+---
+
+Every single bit has a transition in the middle.
+
+This means:
+
+- **Self-clocking**: the receiver recovers timing from the signal itself
+- **No flat lines**: guaranteed transition every bit period
+- **No DC component**: average voltage is zero
+
+---
+
+## The Tradeoff
+
+Manchester encoding uses **twice the bandwidth** of NRZ.
+
+Why? Because there's a potential transition at *every* bit boundary AND in the middle of each bit.
+
+> Manchester is used in **10BASE-T Ethernet** where reliability matters more than bandwidth efficiency.
+
+---
+
+## The DC Component Problem
+
+There's another issue with NRZ that Manchester also solves: **DC offset**.
+
+If you transmit more $1$s than $0$s, the average voltage isn't zero. This **DC component** causes problems:
+
+- **Transformers block DC**: many transmission systems use transformers that can't pass constant voltage
+- **Capacitors charge up**: DC builds up and distorts the signal over time
+- **Wasted power**: maintaining a constant offset wastes energy
+
+Manchester naturally fixes this: every bit spends **equal time** at high and low voltage, so the average is always zero.
+
+---
+
+## Can We Get DC-Free Without Doubling Bandwidth?
+
+Manchester solves both problems (sync and DC), but at the cost of **2x bandwidth**.
+
+What if we want DC-free transmission without that penalty?
+
+> This leads us to a different approach: using **three voltage levels** instead of two.
+
+---
+
+## AMI: A Different Approach
+
+**Alternate Mark Inversion** uses **three voltage levels**: +V, 0, -V
+
+The rules:
+
+- **$0$** = zero voltage
+- **$1$** = alternates between +V and -V
+
+So `1 0 1 1 0 1` becomes: +V, 0, -V, +V, 0, -V
+
+::ami-encoding
+
+---
+
+## Why Alternate?
+
+By alternating polarity on each $1$, the positive and negative voltages **cancel out**.
+
+> No DC component: the average voltage is zero.
+
+**Bonus**: if you ever see two +V in a row, you know an error occurred. Built-in error detection!
+
+---
+
+## AMI's Weakness
+
+AMI still has a problem with **long runs of zeros**.
+
+If you send `0 0 0 0 0 0 0 0`, the signal stays at zero voltage. No transitions, same synchronization problem as NRZ.
+
+This led to variants like **B8ZS** and **HDB3** that insert artificial transitions during long zero runs.
+
+---
+
+## Comparison
+
+::encoding-comparison
+
+---
+
+| Encoding | Levels | Self-clocking | DC-free | Bandwidth |
+|----------|--------|---------------|---------|-----------|
+| NRZ-L | 2 | No | No | 1x |
+| Manchester | 2 | Yes | Yes | 2x |
+| AMI | 3 | Partial | Yes | 1x |
+
+---
+
+## When To Use What
+
+**NRZ**: Simple, efficient, but only for short distances or when you have a separate clock signal.
+
+**Manchester**: When you need guaranteed synchronization. Used in Ethernet.
+
+**AMI**: When you need DC-free transmission (like over telephone lines) and can handle the occasional long-zero problem.
+
+> The right encoding depends on your channel characteristics and requirements.

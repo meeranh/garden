@@ -1,0 +1,113 @@
+---
+title: QPSK
+prerequisites:
+  - wireless-communications/digital-modulation/basic-modulation
+---
+
+## Starting from BPSK
+
+Remember **BPSK**? We used 2 phases to represent bits:
+
+| Phase | Bit |
+|-------|-----|
+| 0° | 1 |
+| 180° | 0 |
+
+With 2 phases, we have 2 possible symbols. Each symbol carries **1 bit**.
+
+---
+
+## What If We Used More Phases?
+
+If we use **4 phases** instead of 2, we have **4 possible symbols**.
+
+How many bits can 4 symbols represent?
+
+$$\text{bits per symbol} = \log_2(\text{number of symbols}) = \log_2(4) = 2$$
+
+> **4 phases = 4 symbols = 2 bits per symbol**
+
+---
+
+## QPSK: Quadrature Phase Shift Keying
+
+**QPSK** uses 4 phases, spaced 90° apart:
+
+| Phase | Bits |
+|-------|------|
+| 45° | 00 |
+| 135° | 01 |
+| 225° | 11 |
+| 315° | 10 |
+
+Instead of sending bits one at a time, we send them **in pairs**.
+
+---
+
+## The Constellation Diagram
+
+A **constellation diagram** shows all possible symbols as points on a 2D plane.
+
+- Each dot is a **symbol**
+- The angle from center is the **phase**
+- The label shows which **bits** that symbol represents
+
+::qpsk-constellation
+
+---
+
+## The Waveform
+
+When we transmit QPSK, the wave shifts between 4 different phases based on the bit pairs:
+
+::qpsk-waveform
+
+---
+
+Notice how each symbol period carries **2 bits**. The phase of the wave tells the receiver which pair was sent.
+
+---
+
+## Why Is This Better?
+
+**Same bandwidth, double the data rate.**
+
+| Modulation | Bits per symbol | Symbols needed for 1000 bits |
+|------------|-----------------|------------------------------|
+| BPSK | 1 | 1000 |
+| QPSK | 2 | 500 |
+
+> You're transmitting **twice as much data** in the same time, using the same bandwidth.
+
+---
+
+## The Tradeoff
+
+With 4 phases instead of 2, the symbols are **closer together** on the constellation.
+
+If noise pushes a received signal slightly, it might land closer to the wrong symbol.
+
+> QPSK is slightly more vulnerable to noise than BPSK, but the efficiency gain is worth it.
+
+---
+
+## Where Is QPSK Used?
+
+QPSK is everywhere:
+
+- **WiFi** (802.11)
+- **LTE / 4G / 5G**
+- **Satellite communications**
+- **Digital TV**
+
+It's the sweet spot between simplicity and efficiency.
+
+---
+
+## What's Next?
+
+QPSK only changes **phase**. All symbols have the same amplitude (*same distance from center*).
+
+What if we also varied **amplitude**? Then we could pack even more symbols into the constellation.
+
+That's **QAM** (Quadrature Amplitude Modulation), where 16-QAM gives us 16 symbols = **4 bits per symbol**.

@@ -1,0 +1,81 @@
+---
+title: Drawing Constellations
+prerequisites:
+  - wireless-communications/digital-modulation/qam
+---
+
+## Exam Skill: Drawing QAM Constellations
+
+A common exam question: *"Draw the constellation diagram for 16-QAM"* or *"Draw the 64-QAM constellation"*
+
+This page teaches you how to draw them correctly.
+
+---
+
+## Drawing 16-QAM
+
+**16-QAM** is a **4×4 grid** of points.
+
+::constellation-drawing
+
+---
+
+**Steps to draw 16-QAM:**
+
+1. **Draw the axes**: I (horizontal) and Q (vertical)
+2. **Mark the I axis** with levels: -3, -1, +1, +3
+3. **Mark the Q axis** with the same levels: -3, -1, +1, +3
+4. **Draw grid lines** at each level (optional, helps accuracy)
+5. **Place a point** at every intersection
+
+> **Result:** 4 × 4 = **16 points**
+
+---
+
+## Drawing 64-QAM
+
+**64-QAM** is an **8×8 grid** of points.
+
+**Steps:**
+
+1. **Draw the axes**: I (horizontal) and Q (vertical)
+2. **Mark 8 levels** on each axis: -7, -5, -3, -1, +1, +3, +5, +7
+3. **Place a point** at every intersection
+
+> **Result:** 8 × 8 = **64 points**
+
+---
+
+## Quick Reference
+
+| QAM Type | Grid Size | Levels on Each Axis | Total Points |
+|----------|-----------|---------------------|--------------|
+| **16-QAM** | 4×4 | -3, -1, +1, +3 | 16 |
+| **32-QAM** | Cross pattern | Varies | 32 |
+| **64-QAM** | 8×8 | -7, -5, -3, -1, +1, +3, +5, +7 | 64 |
+
+---
+
+## Key Points for Exams
+
+1. **Axes must be labeled**: I (horizontal) and Q (vertical)
+2. **Points are evenly spaced**: equal distance between adjacent points
+3. **Symmetric around origin**: equal points in all four quadrants
+4. **Levels are odd numbers**: ...-3, -1, +1, +3...
+
+---
+
+## Bits Per Symbol
+
+Remember the formula:
+
+$$\text{bits per symbol} = \log_2(\text{number of symbols})$$
+
+| QAM Type | Symbols | Bits per Symbol |
+|----------|---------|-----------------|
+| 16-QAM | 16 | 4 |
+| 32-QAM | 32 | 5 |
+| 64-QAM | 64 | 6 |
+| 256-QAM | 256 | 8 |
+
+> This is often needed in **LTE throughput calculations**.

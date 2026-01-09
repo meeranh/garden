@@ -1,0 +1,126 @@
+---
+title: QAM
+prerequisites:
+  - wireless-communications/digital-modulation/qpsk
+---
+
+## The Limitation of QPSK
+
+In **QPSK**, we used 4 phases to get 4 symbols = 2 bits per symbol.
+
+But notice: all 4 symbols are the **same distance from the center**. We're only changing phase, not amplitude.
+
+::qpsk-limitation
+
+---
+
+All points sit on a circle. We're leaving a lot of space unused.
+
+> What if we used **both** phase AND amplitude?
+
+---
+
+## QAM: Quadrature Amplitude Modulation
+
+Instead of just a circle, we fill the 2D space with a **grid** of symbols.
+
+More symbols = more bits per symbol.
+
+---
+
+## 16-QAM
+
+**16-QAM** arranges symbols in a 4×4 grid:
+
+::qam16-constellation
+
+---
+
+That's **16 symbols**.
+
+$$\text{bits per symbol} = \log_2(16) = 4$$
+
+> Each symbol carries **4 bits**. Double what QPSK can do!
+
+---
+
+## How It Works
+
+We use **two carrier waves** that are 90° apart:
+
+- **I wave** (in-phase): controls **left-right** position
+- **Q wave** (quadrature): controls **up-down** position
+
+By setting the amplitude of each wave independently, we can place the signal at any point on the grid.
+
+::iq-components
+
+---
+
+**For 16-QAM**, each wave can have 4 amplitude levels: -3, -1, +1, +3
+
+That gives us 4 × 4 = **16 possible combinations** = 16 grid points.
+
+> Each unique combination of I and Q amplitudes represents a different symbol.
+
+---
+
+## 64-QAM
+
+Want even more efficiency? Use an 8×8 grid:
+
+::qam64-constellation
+
+---
+
+That's **64 symbols**.
+
+$$\text{bits per symbol} = \log_2(64) = 6$$
+
+> Each symbol carries **6 bits**.
+
+---
+
+## The Efficiency Comparison
+
+::modulation-comparison
+
+---
+
+> More symbols = more bits per symbol = **higher data rate** in the same bandwidth.
+
+---
+
+## The Tradeoff
+
+With more symbols packed into the same space, they get **closer together**.
+
+If noise shifts a received signal slightly, it might land on the **wrong symbol**.
+
+::noise-tradeoff
+
+---
+
+> The more efficient the modulation, the **cleaner the signal needs to be**.
+
+---
+
+## Adaptive Modulation
+
+This is why WiFi and LTE **adapt**:
+
+- **Strong signal?** Use 64-QAM or 256-QAM for maximum speed
+- **Weak signal?** Fall back to QPSK or BPSK for reliability
+
+Your phone is constantly switching modulation based on signal quality.
+
+---
+
+## Where Is QAM Used?
+
+Everywhere that needs high data rates:
+
+- **WiFi** (up to 1024-QAM in WiFi 6)
+- **Cable internet** (up to 4096-QAM)
+- **LTE / 5G** (adaptive modulation)
+- **Digital TV**
