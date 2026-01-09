@@ -1,4 +1,4 @@
-import { getAllFiles, fileToUrl, extractOrder, slugToTitle, metadata } from './loader';
+import { getAllFiles, fileToUrl, extractOrder, slugToTitle, metadata, getContent } from './loader';
 
 export interface TreeNode {
 	slug: string;
@@ -60,7 +60,9 @@ function buildTree(): TreeNode {
 
 			// If this is the last segment, this file provides content for this node
 			if (i === segments.length - 1) {
-				child.hasContent = true;
+				// Check if there's actual body content (not just frontmatter)
+				const contentData = getContent(child.path);
+				child.hasContent = contentData?.hasBodyContent || false;
 				if (fileMeta.title) {
 					child.title = fileMeta.title;
 				}

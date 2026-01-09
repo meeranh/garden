@@ -1,0 +1,201 @@
+---
+title: Link Budget
+prerequisites:
+  - wireless-communications/rf-fundamentals/antenna-fundamentals/gain-and-directivity
+  - wireless-communications/rf-fundamentals/propagation-and-path-loss/free-space-path-loss
+---
+
+## Following the Signal
+
+Imagine you're transmitting a WiFi signal across a room.
+
+You start with **100 milliwatts** of power. But by the time it reaches your laptop, only a tiny fraction remains. Where did the rest go?
+
+---
+
+**Some things help your signal:**
+
+- Your **transmitter antenna** focuses the power in a direction (instead of wasting it in all directions)
+- Your **receiver antenna** captures the incoming waves
+
+**Some things hurt your signal:**
+
+- **Distance** causes the signal to spread out and weaken (path loss)
+
+---
+
+> A **link budget** is just keeping track of all these gains and losses to figure out how much power actually arrives.
+
+---
+
+## The Simple Rule
+
+In decibels, this becomes simple arithmetic:
+
+$$\text{Received Power} = \text{Transmit Power} + \text{Gains} - \text{Losses}$$
+
+Or more precisely:
+
+$$P_r = P_t + G_t + G_r - L_p$$
+
+---
+
+| Symbol | What it means |
+|--------|---------------|
+| $P_t$ | Transmit power (what you start with) |
+| $G_t$ | Transmitter antenna gain (focusing helps) |
+| $G_r$ | Receiver antenna gain (better catching) |
+| $L_p$ | Path loss (distance hurts) |
+| $P_r$ | Received power (what's left) |
+
+> This is called the **Friis transmission equation**. It's just addition and subtraction.
+
+---
+
+## A Worked Example
+
+Let's trace a signal from a WiFi router to a laptop:
+
+| Step | What happens | Value |
+|------|--------------|-------|
+| Start | Transmit power | **+20 dBm** (100 mW) |
+| Add | TX antenna gain | **+5 dB** |
+| Add | RX antenna gain | **+3 dB** |
+| Subtract | Path loss | **−100 dB** |
+| **Result** | Received power | **−72 dBm** |
+
+$$P_r = 20 + 5 + 3 - 100 = -72 \text{ dBm}$$
+
+---
+
+## Wait, Negative Power?
+
+**−72 dBm** sounds strange. How can power be negative?
+
+It's not. Remember, **dBm is relative to 1 milliwatt**:
+
+| dBm | Meaning | Actual Power |
+|-----|---------|--------------|
+| +20 dBm | 100× more than 1 mW | 100 mW |
+| 0 dBm | Exactly 1 mW | 1 mW |
+| −30 dBm | 1000× less than 1 mW | 0.001 mW |
+| −72 dBm | Tiny fraction of 1 mW | 0.00000006 mW |
+
+> Negative dBm just means **less than 1 milliwatt**. Your signal is weak, but it's still real power.
+
+::dbm-scale
+
+---
+
+## Is −72 dBm Enough?
+
+Here's the real question: **can your receiver actually hear that signal?**
+
+The problem is noise. Your receiver doesn't sit in perfect silence. Every electronic component generates a faint hiss from electrons jiggling around randomly. This **thermal noise** is unavoidable.
+
+> What matters isn't how strong your signal is. It's **how much stronger your signal is than the noise**.
+
+---
+
+## How Much Noise?
+
+Thermal noise power depends on three things:
+
+$$N = kTB$$
+
+| Symbol | Meaning | Typical Value |
+|--------|---------|---------------|
+| $k$ | Boltzmann's constant | $1.38 \times 10^{-23}$ J/K |
+| $T$ | Temperature | 300 K (room temp) |
+| $B$ | Bandwidth *(in Hertz)* | Depends on your system |
+
+---
+
+In dB form, this becomes:
+
+$$N_{dBm} = 10\log_{10}(kT) + 10\log_{10}(B) + 30$$
+
+At room temperature, $10\log_{10}(kT) + 30 = -174$ dBm/Hz. This is the **noise floor**, the quietest your receiver can possibly be.
+
+So for any bandwidth B:
+
+$$N = -174 + 10\log_{10}(B)$$
+
+---
+
+**Example:** If you're using a **20 MHz** channel (that's 20,000,000 Hz):
+
+<div class="math-left">
+
+$$\begin{aligned}
+N &= -174 + 10\log_{10}(B) \\
+  &= -174 + 10\log_{10}(20{,}000{,}000) \\
+  &= -174 + 73 \\
+  &= -101 \text{ dBm}
+\end{aligned}$$
+
+</div>
+
+So with −72 dBm of signal and −101 dBm of noise, your signal is **29 dB stronger than the noise**. That's good!
+
+---
+
+## But There's Another Factor: Bit Rate
+
+Your received power is the **total** power arriving each second. But you're sending individual **bits**, and that power gets divided among them.
+
+Think of it like a pizza:
+
+- **1 Mbps** = 1 million bits sharing the power (each bit gets a decent slice)
+- **100 Mbps** = 100 million bits sharing the power (each bit gets a tiny crumb)
+
+> **Faster bit rate = less energy per bit = more vulnerable to noise.**
+
+::energy-per-bit
+
+---
+
+## Energy Per Bit: Eb/No
+
+**Eb/No** measures how much energy each bit has compared to the noise.
+
+$$\frac{E_b}{N_0} \text{ (dB)} = P_r - 10\log_{10}(R_b) + 198.6$$
+
+| Symbol | Meaning |
+|--------|---------|
+| $P_r$ | Received power in dBm |
+| $R_b$ | Bit rate in bits per second |
+| 198.6 | Constant for room temperature |
+
+---
+
+**Example:** −72 dBm received power, 10 Mbps bit rate
+
+<div class="math-left">
+
+$$\begin{aligned}
+\frac{E_b}{N_0} &= P_r - 10\log_{10}(R_b) + 198.6 \\
+  &= -72 - 10\log_{10}(10{,}000{,}000) + 198.6 \\
+  &= -72 - 70 + 198.6 \\
+  &= 56.6 \text{ dB}
+\end{aligned}$$
+
+</div>
+
+> An Eb/No of **56.6 dB** is excellent. Typical systems need around 10-20 dB for reliable communication.
+
+---
+
+## Summary
+
+A link budget answers three questions:
+
+| Question | How to find it |
+|----------|----------------|
+| How much power arrives? | $P_r = P_t + G_t + G_r - L_p$ |
+| How much noise is there? | $N = kTB$ (or use −174 + 10log(B) at room temp) |
+| Is each bit strong enough? | Calculate Eb/No |
+
+---
+
+> In the next section, we'll work through **exam-style problems** using these formulas.

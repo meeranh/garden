@@ -1,0 +1,117 @@
+---
+title: Diversity Techniques
+prerequisites:
+  - wireless-communications/rf-fundamentals/link-budget/unit-conversions
+---
+
+## The Problem: Fading
+
+Wireless signals fade. Sometimes your signal arrives strong, sometimes it arrives weak or not at all.
+
+This happens because of **multipath interference**. Signals bounce off walls, floors, and objects. These reflected copies arrive at slightly different times, sometimes adding together, sometimes canceling out.
+
+---
+
+The frustrating thing? Fading is often **temporary** and **localized** (*only affects a specific spot*).
+
+The signal might be terrible *right here, right now*, but perfectly fine:
+- A few centimeters away
+- A moment later
+- On a different frequency
+
+---
+
+## The Solution
+
+> **Don't put all your eggs in one basket.**
+
+If you send your signal in multiple "versions" that fade **independently**, the chance that *all* of them fail at the same time becomes very small.
+
+This is called **diversity**.
+
+---
+
+There are three main types:
+
+| Type | What you vary |
+|------|---------------|
+| **Spatial** | Antenna location |
+| **Frequency** | Carrier frequency |
+| **Time** | When you transmit |
+
+---
+
+## Spatial Diversity
+
+Use **multiple antennas** at different physical locations.
+
+If two antennas are far enough apart (typically half a wavelength), the fading at each antenna is **independent**. When one antenna is in a deep fade, the other probably isn't.
+
+::spatial-diversity
+
+---
+
+**Two approaches:**
+
+- **Selection** - Use whichever antenna has the best signal right now
+- **Combining** - Mathematically combine signals from all antennas
+
+> Your WiFi router has multiple antennas for exactly this reason.
+
+---
+
+## Frequency Diversity
+
+Send the same information on **multiple frequencies**.
+
+Different frequencies fade independently. A signal at 2.4 GHz might hit destructive interference while 2.5 GHz is fine, because their wavelengths are different.
+
+::frequency-diversity
+
+---
+
+**How it's used:**
+
+- **OFDM** (WiFi, LTE, 5G) spreads data across many subcarriers. If some fade, others carry the data through.
+- **Frequency hopping** keeps jumping between frequencies so you don't stay on a bad one for long.
+
+---
+
+## Time Diversity
+
+Send the same information at **different times**.
+
+The channel changes over time. If you're moving (or things around you are moving), a fade now might clear up in a few milliseconds.
+
+::time-diversity
+
+---
+
+**How it's used:**
+
+- **Retransmissions** - If a packet fails, send it again
+- **Interleaving** - Spread data bits across time so burst errors get scattered
+
+> Time diversity works best when things are moving. In a completely static environment, waiting won't help.
+
+---
+
+## Comparing the Three
+
+| Type | Best when... | Cost |
+|------|--------------|------|
+| Spatial | Room for multiple antennas | Extra hardware |
+| Frequency | Bandwidth is available | Uses more spectrum |
+| Time | Things are moving | Adds latency |
+
+---
+
+## The Tradeoff
+
+Diversity improves reliability, but always costs something:
+
+- **Spatial** = more antennas (hardware cost, physical space)
+- **Frequency** = more bandwidth (spectrum is expensive)
+- **Time** = more delay (retransmissions take time)
+
+> Real systems combine all three. Your phone uses spatial diversity (multiple antennas), frequency diversity (OFDM), and time diversity (retransmissions) all at once.

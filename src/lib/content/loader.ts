@@ -10,12 +10,29 @@ const metadata = import.meta.glob('/src/content/**/*.svx', {
 	import: 'metadata'
 });
 
+// Import raw content to check for body content
+const rawFiles = import.meta.glob('/src/content/**/*.svx', {
+	eager: true,
+	query: '?raw',
+	import: 'default'
+});
+
+// Check if a file has body content (not just frontmatter)
+function hasBodyContent(raw: string): boolean {
+	// Match frontmatter block and capture everything after
+	const match = raw.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n?([\s\S]*)$/);
+	if (!match) return false;
+	const body = match[1].trim();
+	return body.length > 0;
+}
+
 export interface ContentData {
 	component: Component;
 	metadata: {
 		title?: string;
 		prerequisites?: string[];
 	};
+	hasBodyContent: boolean;
 }
 
 // Transform file path to URL path
@@ -49,10 +66,12 @@ const contentMap = new Map<string, ContentData>();
 for (const [file, module] of Object.entries(modules)) {
 	const urlPath = fileToUrl(file);
 	const meta = (metadata[file] as { title?: string; prerequisites?: string[] }) || {};
+	const raw = rawFiles[file] as string;
 
 	contentMap.set(urlPath, {
 		component: (module as { default: Component }).default,
-		metadata: meta
+		metadata: meta,
+		hasBodyContent: hasBodyContent(raw)
 	});
 }
 

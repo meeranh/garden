@@ -33,10 +33,13 @@ export function getBreadcrumbs(path: string): { path: string; title: string }[] 
 	return crumbs;
 }
 
-// Get previous and next siblings for navigation
+// Get previous and next for navigation (includes parent-child relationships)
 export function getSiblings(path: string): { prev?: TreeNode; next?: TreeNode } {
 	const segments = path.split('/').filter(Boolean);
 	if (segments.length === 0) return {};
+
+	const node = findNode(path);
+	if (!node) return {};
 
 	// Get parent path
 	const parentPath = segments.slice(0, -1).join('/');
@@ -49,10 +52,22 @@ export function getSiblings(path: string): { prev?: TreeNode; next?: TreeNode } 
 
 	if (currentIndex === -1) return {};
 
-	return {
-		prev: currentIndex > 0 ? siblings[currentIndex - 1] : undefined,
-		next: currentIndex < siblings.length - 1 ? siblings[currentIndex + 1] : undefined
-	};
+	let prev: TreeNode | undefined =
+		currentIndex > 0 ? siblings[currentIndex - 1] : undefined;
+	let next: TreeNode | undefined =
+		currentIndex < siblings.length - 1 ? siblings[currentIndex + 1] : undefined;
+
+	// If node has content AND children, "next" should be first child
+	if (node.hasContent && node.children.length > 0) {
+		next = node.children[0];
+	}
+
+	// If no prev sibling and parent has content, "prev" should be parent
+	if (!prev && parent.hasContent) {
+		prev = parent;
+	}
+
+	return { prev, next };
 }
 
 // Get all paths for prerendering (flattened tree)

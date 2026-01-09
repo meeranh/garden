@@ -1,0 +1,128 @@
+---
+title: Two-Ray Ground Model
+prerequisites:
+  - wireless-communications/rf-fundamentals/propagation-and-path-loss/free-space-path-loss
+---
+
+## Back to Reality
+
+Free space path loss assumes signals travel in a **straight line** through empty space.
+
+But on Earth? There's a **giant reflector** everywhere you go.
+
+> **The ground.**
+
+---
+
+## Two Paths, One Receiver
+
+When you transmit a signal near the ground, your receiver actually gets **two copies**:
+
+1. **Direct ray**: straight line from transmitter to receiver
+2. **Reflected ray**: bounces off the ground first
+
+::two-ray-model
+
+---
+
+These two rays travel **different distances** and arrive at **slightly different times**.
+
+---
+
+## The Interference Problem
+
+When two waves meet, they **combine**.
+
+---
+
+**If they're in sync** (peaks align with peaks):
+
+::constructive-interference
+
+> They **add together**, and the signal gets *stronger*. This is **constructive interference**.
+
+---
+
+**If they're out of sync** (peaks align with troughs):
+
+::destructive-interference
+
+> They **cancel out**, and the signal gets *weaker* or disappears entirely. This is **destructive interference**.
+
+---
+
+| Phase Difference | Result | Signal Strength |
+|------------------|--------|-----------------|
+| **0°** (in sync) | Constructive | **Stronger** |
+| **90°** | Partial | Medium |
+| **180°** (opposite) | Destructive | **Weaker / Dead** |
+
+---
+
+## Dead Spots
+
+This is why you sometimes get **dead spots** in coverage.
+
+At certain distances, the direct and reflected rays arrive *exactly* out of phase.
+
+> They cancel each other. **No signal.**
+
+Move a few meters? The geometry changes. Signal comes back.
+
+---
+
+## The Two-Ray Formula
+
+At **long distances**, the two-ray model gives a simpler path loss:
+
+$$L_p = 40\log_{10}(d) - 20\log_{10}(h_t) - 20\log_{10}(h_r)$$
+
+> - **$d$** = distance between transmitter and receiver
+> - **$h_t$** = height of transmitter antenna
+> - **$h_r$** = height of receiver antenna
+
+---
+
+**Notice something?**
+
+- Free space: loss grows with $d^2$ (20 log)
+- Two-ray: loss grows with $d^4$ (40 log)
+
+> **Ground reflections make things worse.** Signal falls off *much* faster.
+
+---
+
+## The Height Advantage
+
+Look at the formula again. **Antenna height helps.**
+
+$$- 20\log_{10}(h_t) - 20\log_{10}(h_r)$$
+
+These are *negative* terms. **Higher antennas = less path loss.**
+
+---
+
+| Scenario | Path Loss |
+|----------|-----------|
+| Both antennas **low** (1m) | High loss |
+| Transmitter **raised** (10m) | **20 dB better** |
+| Both antennas **raised** | Even better |
+
+---
+
+> This is why **cell towers are tall** and why **rooftop antennas** work better than ground-level ones.
+
+---
+
+## Which Model to Use?
+
+| Model | Use When |
+|-------|----------|
+| **Free Space** | Satellites, high altitude, no ground nearby |
+| **Two-Ray** | Ground-based: cellular, WiFi, vehicles |
+
+> **Rule of thumb:** If the signal can hit the ground, use two-ray.
+
+---
+
+Two-ray is still a simplification. Real environments add reflections off walls, diffraction around corners, and scattering. But two-ray captures the **most important effect**: ground reflection.

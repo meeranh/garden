@@ -22,7 +22,7 @@ export async function load({ params }) {
 		path,
 		node,
 		content: contentData?.component || null,
-		hasContent: !!contentData,
+		hasContent: contentData?.hasBodyContent || false,
 		breadcrumbs: getBreadcrumbs(path),
 		prev: siblings.prev,
 		next: siblings.next

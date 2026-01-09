@@ -1,0 +1,27 @@
+---
+title: Practice Questions
+prerequisites:
+  - wireless-communications/rf-fundamentals/link-budget/unit-conversions
+---
+
+## Question 1
+
+> Assume that the 5G received power is **Pr = -72 dBm**. What will be the receive power in Watts?
+
+---
+
+**Solution:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+P &= 10^{(\text{dBm} - 30) / 10} \\
+  &= 10^{(-72 - 30) / 10} \\
+  &= 10^{-102 / 10} \\
+  &= 10^{-10.2} \\
+  &= 6.31 \times 10^{-11} \text{ W}
+\end{aligned}$$
+
+</div>
+
+> That's **63.1 picowatts** (pW). Tiny, but still real power that receivers can detect.

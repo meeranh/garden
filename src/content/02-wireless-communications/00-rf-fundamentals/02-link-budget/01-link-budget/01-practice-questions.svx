@@ -1,0 +1,156 @@
+---
+title: Practice Questions
+prerequisites:
+  - wireless-communications/rf-fundamentals/link-budget/link-budget
+---
+
+## Problem 1: Received Power
+
+> Find the received power at the destination when the sender is transmitting information with a power of **1 mW**. The antenna gains at transmitter and receiver are **$G_t = 5$** and **$G_r = 10$**, respectively. The distance between the transmitter and the receiver is **1 km** and the frequency at which the transmitter is operating is **2.4 GHz**.
+>
+> *(Hint: take care of the units)*
+
+---
+
+**Step 1: Convert to dB**
+
+| Value | Calculation | Result |
+|-------|-------------|--------|
+| $P_t = 1$ mW | $10\log_{10}(1)$ | **0 dBm** |
+| $G_t = 5$ | $10\log_{10}(5)$ | **7 dB** |
+| $G_r = 10$ | $10\log_{10}(10)$ | **10 dB** |
+
+---
+
+**Step 2: Calculate path loss**
+
+Using FSPL: $L_p = 20\log_{10}\left(\frac{4\pi d f}{c}\right)$
+
+$$L_p = 20\log_{10}\left(\frac{4\pi \times 1000 \times 2.4 \times 10^9}{3 \times 10^8}\right)$$
+
+$$L_p = 20\log_{10}(100531) \approx 100 \text{ dB}$$
+
+---
+
+**Step 3: Apply Friis equation**
+
+$$P_r = P_t + G_t + G_r - L_p$$
+
+$$P_r = 0 + 7 + 10 - 100 = -83 \text{ dBm}$$
+
+> **Answer:** The received power is **-83 dBm**.
+
+---
+
+## Problem 2: dBm to Watts
+
+> Assume that the 5G received power is **$P_r = -72$ dBm**. What will be the received power in Watts?
+
+---
+
+**The formula:**
+
+$$P_{\text{watts}} = 10^{(P_{\text{dBm}} - 30) / 10}$$
+
+---
+
+**Substitute:**
+
+$$P = 10^{(-72 - 30) / 10} = 10^{-102/10} = 10^{-10.2}$$
+
+$$P \approx 6.31 \times 10^{-11} \text{ W}$$
+
+> **Answer:** **63 picowatts** (or $6.31 \times 10^{-11}$ W).
+
+---
+
+## Problem 3: Path Loss and Eb/No
+
+> Calculate the **path loss ($L_{dB}$)** and the **$E_b/N_0$** of a WiFi system.
+>
+> **Given:**
+> - $h_t = 0.5$ m
+> - $h_r = 1$ m
+> - $d = 100$ m
+> - 8 kbits/sample at 1000 samples/sec
+> - $k$ = Boltzmann's constant = $1.3803 \times 10^{-23}$ J/K
+> - BW = 30 MHz
+> - T = 300 K
+
+---
+
+### Part A: Path Loss
+
+Since antenna heights are given, use the **two-ray ground model**:
+
+$$L_p = 40\log_{10}(d) - 20\log_{10}(h_t) - 20\log_{10}(h_r)$$
+
+---
+
+**Calculate each term:**
+
+| Term | Calculation | Result |
+|------|-------------|--------|
+| $40\log_{10}(100)$ | $40 \times 2$ | **80 dB** |
+| $20\log_{10}(0.5)$ | $20 \times (-0.301)$ | **-6 dB** |
+| $20\log_{10}(1)$ | $20 \times 0$ | **0 dB** |
+
+---
+
+**Combine:**
+
+$$L_p = 80 - (-6) - 0 = 86 \text{ dB}$$
+
+> **Path loss:** **86 dB**
+
+---
+
+### Part B: Eb/No
+
+**Step 1: Calculate data rate**
+
+$$R_b = 8 \text{ kbits/sample} \times 1000 \text{ samples/sec} = 8 \text{ Mbps}$$
+
+---
+
+**Step 2: Calculate noise spectral density**
+
+$$N_0 = kT = 1.3803 \times 10^{-23} \times 300 = 4.14 \times 10^{-21} \text{ W/Hz}$$
+
+In dB: $10\log_{10}(N_0) = -203.8$ dBW/Hz $= -173.8$ dBm/Hz
+
+---
+
+**Step 3: Calculate Eb/No**
+
+Assuming transmit power $P_t = 20$ dBm (100 mW, typical WiFi):
+
+$$P_r = P_t - L_p = 20 - 86 = -66 \text{ dBm}$$
+
+$$\frac{E_b}{N_0} = P_r - 10\log_{10}(R_b) - 10\log_{10}(kT)$$
+
+$$\frac{E_b}{N_0} = -66 - 10\log_{10}(8 \times 10^6) - (-203.8)$$
+
+$$\frac{E_b}{N_0} = -66 - 69 + 203.8 = 68.8 \text{ dB}$$
+
+> **Eb/No:** **68.8 dB**
+
+---
+
+## Quick Reference
+
+| Conversion | Formula |
+|------------|---------|
+| Linear to dB | $10\log_{10}(x)$ |
+| dBm to Watts | $10^{(P_{\text{dBm}} - 30) / 10}$ |
+| Watts to dBm | $10\log_{10}(P_{\text{mW}})$ |
+
+| Path Loss | Formula |
+|-----------|---------|
+| Free space | $20\log_{10}\left(\frac{4\pi d f}{c}\right)$ |
+| Two-ray | $40\log_{10}(d) - 20\log_{10}(h_t) - 20\log_{10}(h_r)$ |
+
+| Link Budget | Formula |
+|-------------|---------|
+| Received power | $P_r = P_t + G_t + G_r - L_p$ |
+| Eb/No | $P_r - 10\log_{10}(R_b) - 10\log_{10}(kT)$ |

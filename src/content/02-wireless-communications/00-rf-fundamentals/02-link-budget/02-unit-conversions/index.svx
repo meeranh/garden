@@ -1,0 +1,129 @@
+---
+title: Unit Conversions
+prerequisites:
+  - wireless-communications/rf-fundamentals/link-budget/link-budget
+---
+
+## The Problem
+
+You calculated a received power of **−72 dBm**.
+
+But sometimes you need the actual power in **Watts**. How do you convert?
+
+---
+
+## What dBm Actually Means
+
+- **dBm** measures power relative to *1 milliwatt*.
+
+> **0 dBm = 1 mW** (this is the reference point)
+
+---
+
+From there, the pattern is simple:
+
+| dBm | Power |
+|-----|-------|
+| +30 dBm | 1 W |
+| +20 dBm | 100 mW |
+| +10 dBm | 10 mW |
+| **0 dBm** | **1 mW** |
+| −10 dBm | 0.1 mW |
+| −20 dBm | 0.01 mW |
+| −30 dBm | 0.001 mW |
+
+> Every **+10 dB** = **10× more power**. Every **−10 dB** = **10× less power**.
+
+---
+
+## From dBm to Watts
+
+To undo the logarithm and get back to Watts:
+
+$$P_{\text{Watts}} = 10^{(\text{dBm} - 30) / 10}$$
+
+---
+
+**Example:** Convert **40 dBm** to Watts
+
+<div class="math-left">
+
+$$\begin{aligned}
+P &= 10^{(\text{dBm} - 30) / 10} \\
+  &= 10^{(40 - 30) / 10} \\
+  &= 10^{1} \\
+  &= 10 \text{ W}
+\end{aligned}$$
+
+</div>
+
+> This can be written as **10,000 mW** (milliwatts) since 1 W = 1000 mW.
+
+---
+
+## From Watts to dBm
+
+Going the other direction is simpler. If you have power in **milliwatts**:
+
+$$\text{dBm} = 10\log_{10}(P_{\text{mW}})$$
+
+If you have power in **Watts**, multiply by 1000 first (or add 30 at the end):
+
+$$\text{dBm} = 10\log_{10}(P_{\text{W}}) + 30$$
+
+---
+
+**Example:** Convert **10,000 mW** to dBm
+
+<div class="math-left">
+
+$$\begin{aligned}
+\text{dBm} &= 10\log_{10}(P_{\text{mW}}) \\
+           &= 10\log_{10}(10000) \\
+           &= 10 \times 4 \\
+           &= 40 \text{ dBm}
+\end{aligned}$$
+
+</div>
+
+---
+
+## What About dBW?
+
+You might see **dBW** in some contexts. It's the same idea, but relative to **1 Watt** instead of 1 milliwatt.
+
+Since 1 W = 1000 mW, and $10\log_{10}(1000) = 30$:
+
+$$\text{dBm} = \text{dBW} + 30$$
+
+| Power | dBm | dBW |
+|-------|-----|-----|
+| 1 W | 30 dBm | 0 dBW |
+| 1 mW | 0 dBm | −30 dBW |
+
+> **dBm is more common** in wireless communications. dBW is sometimes used for higher power systems.
+
+---
+
+## Quick Reference
+
+| From | To | Formula |
+|------|----|---------|
+| dBm | Watts | $P_W = 10^{(\text{dBm} - 30) / 10}$ |
+| dBm | Milliwatts | $P_{mW} = 10^{\text{dBm} / 10}$ |
+| Milliwatts | dBm | $\text{dBm} = 10\log_{10}(P_{mW})$ |
+| Watts | dBm | $\text{dBm} = 10\log_{10}(P_W) + 30$ |
+| dBW | dBm | $\text{dBm} = \text{dBW} + 30$ |
+
+---
+
+## Common Values
+
+| Power | dBm |
+|-------|-----|
+| 1 W | 30 dBm |
+| 100 mW | 20 dBm |
+| 10 mW | 10 dBm |
+| 1 mW | 0 dBm |
+| 0.1 mW | −10 dBm |
+| 0.001 mW (1 µW) | −30 dBm |

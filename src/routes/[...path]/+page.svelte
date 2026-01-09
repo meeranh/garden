@@ -31,7 +31,7 @@
 		</article>
 	{/if}
 
-	{#if data.node.children.length > 0}
+	{#if data.node.children.length > 0 && !data.hasContent}
 		<TreeView nodes={data.node.children} />
 	{:else if !data.hasContent}
 		<Empty />

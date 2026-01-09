@@ -44,6 +44,14 @@ a {
 	color: var(--color-math);
 }
 
+/* Left-aligned math: wrap display math in <div class="math-left"> */
+.math-left .katex-display {
+	text-align: left;
+}
+.math-left .katex-display > .katex {
+	text-align: left;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
 	width: 8px;

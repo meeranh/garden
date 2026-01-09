@@ -1,0 +1,237 @@
+---
+title: Free Space Path Loss
+prerequisites:
+  - wireless-communications/rf-fundamentals/antenna-fundamentals/gain-and-directivity
+---
+
+## The Ripple Effect
+
+Drop a stone in a pond. **Ripples spread outward** in all directions.
+
+---
+
+**Near the stone:**
+- Ripples are **tall** and **strong**
+- Lots of energy in a *small* area
+
+**Far from the stone:**
+- Ripples are **shallow** and **weak**
+- Same energy spread over a *much larger* area
+
+---
+
+> **The energy isn't disappearing.** It's *spreading out* over a larger and larger area.
+
+This is **exactly** what happens to radio signals.
+
+::signal-spreading
+
+---
+
+## Why Signals Get Weaker
+
+When an antenna transmits, the signal radiates outward like an **expanding sphere**.
+
+---
+
+Here's the key insight:
+
+> **ALL** of the transmitted power spreads across the surface of this sphere. *Every single watt.*
+
+---
+
+As the sphere gets **bigger**, that *same* power is spread over a **larger surface area**.
+
+::sphere-spreading
+
+---
+
+**The math is brutal:**
+
+| Distance | Sphere Surface Area | Power Density |
+|----------|---------------------|---------------|
+| **1m** | 1x | **100%** |
+| **2m** | **4x** larger | **25%** |
+| **3m** | **9x** larger | **11%** |
+| **10m** | **100x** larger | **1%** |
+
+---
+
+> **Same total power. Bigger sphere. Less power at any single point.**
+
+This weakening is called **path loss**.
+
+---
+
+The surface area of a sphere grows with **distance squared** ($r^2$).
+
+So power density **shrinks** with $\frac{1}{r^2}$.
+
+> **Double the distance → quarter the power density.** This is the **inverse square law**.
+
+---
+
+## Free Space Path Loss
+
+**Free Space Path Loss (FSPL)** is the *ideal* case:
+
+- Signal traveling through **empty space** *(no air, no objects, nothing)*
+- **Nothing** in the way
+- *No* reflections, *no* obstacles, *no* interference
+
+> **Pure geometric spreading.** The *minimum* loss you'll ever get.
+
+---
+
+**The formula:**
+
+$$L_p = 20\log_{10}\left(\frac{4\pi d}{\lambda}\right)$$
+
+---
+
+**Don't panic.** Let's break it down:
+
+> - **$L_p$** = path loss *(in dB)* — how much weaker the signal gets
+> - **$d$** = distance — how far the signal travels
+> - **$\lambda$** = wavelength — the "length" of each wave
+
+---
+
+## The Distance Factor
+
+**How does distance affect path loss?**
+
+| Distance | Path Loss Change | Signal Strength |
+|----------|------------------|-----------------|
+| **1x** | baseline | Full |
+| **2x** | **+6 dB** | *4x weaker* |
+| **4x** | **+12 dB** | *16x weaker* |
+| **10x** | **+20 dB** | *100x weaker* |
+
+---
+
+> **Path loss grows with the *square* of distance.** Go **10x** further → signal is **100x** weaker.
+
+---
+
+## The Frequency Factor
+
+Here's something that surprises people:
+
+> **Higher frequency = more path loss** at the same distance.
+
+---
+
+**But wait.** The signal spreads out the *same way* regardless of frequency. So why does frequency matter?
+
+::frequency-aperture
+
+---
+
+**The answer:** It's about the **receiving antenna**.
+
+Think of your antenna as a **bucket catching rain**.
+
+- The *rain* (signal) is falling everywhere
+- Your *bucket* (antenna) can only catch what falls into it
+- A **bigger bucket** catches more rain
+
+---
+
+Here's the key insight:
+
+> An antenna's **effective size** depends on the wavelength it's designed for.
+
+At **higher frequencies** (shorter wavelengths), an antenna's effective "catching area" gets **smaller**.
+
+---
+
+**Same signal spreading out.** But the antenna **catches less** of it.
+
+| Frequency | Wavelength | Antenna "Catch Area" |
+|-----------|------------|----------------------|
+| **900 MHz** | ~33 cm | **Larger** |
+| **2.4 GHz** | ~12 cm | Medium |
+| **5 GHz** | ~6 cm | Smaller |
+| **28 GHz** | ~1 cm | **Much smaller** |
+
+---
+
+> **Higher frequency → smaller effective antenna → less signal captured → more "loss".**
+
+---
+
+**Real-world impact:**
+
+| Frequency | Use Case | Range |
+|-----------|----------|-------|
+| **900 MHz** | Old cell networks | *Long range* |
+| **2.4 GHz** | WiFi, Bluetooth | Medium |
+| **5 GHz** | Fast WiFi | Shorter |
+| **28 GHz** | 5G mmWave | *Very short* |
+
+---
+
+> This is why **5G needs more cell towers** than 4G. Higher frequency = shorter range.
+
+---
+
+## The Alternative Formula
+
+Sometimes you know **frequency** instead of wavelength. No problem:
+
+$$L_p = 20\log_{10}\left(\frac{4\pi d f}{c}\right)$$
+
+> - **$f$** = frequency *(in Hz)*
+> - **$c$** = speed of light *($3 \times 10^8$ m/s)*
+
+---
+
+Since $\lambda = \frac{c}{f}$, both formulas give the **same answer**.
+
+> **Use whichever is more convenient** for your situation.
+
+---
+
+## Practical Example
+
+**Scenario:** WiFi router at **2.4 GHz**, receiver **10 meters** away.
+
+---
+
+**Plugging into the formula:**
+
+$$L_p = 20\log_{10}\left(\frac{4\pi \times 10 \times 2.4 \times 10^9}{3 \times 10^8}\right)$$
+
+$$L_p \approx 60 \text{ dB}$$
+
+---
+
+**What does 60 dB mean?**
+
+> That's **one million times weaker** than the transmitted signal.
+
+---
+
+And this is the *ideal* case. **No walls. No interference. No obstacles.**
+
+> **Reality is always worse.**
+
+---
+
+## The Catch
+
+Free space path loss assumes **perfect conditions**.
+
+---
+
+**In the real world, you also deal with:**
+
+- **Obstacles**: walls, buildings, trees *absorb* signal
+- **Reflections**: ground, ceilings, metal *bounce* signal
+- **Atmospheric absorption**: rain, humidity *attenuate* signal
+- **Interference**: other signals *compete* with yours
+
+---
+
+> **FSPL is the *minimum* loss.** Everything else **adds on top**.

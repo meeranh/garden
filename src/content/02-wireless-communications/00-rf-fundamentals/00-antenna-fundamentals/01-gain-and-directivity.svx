@@ -1,0 +1,203 @@
+---
+title: Gain and Directivity
+---
+
+## The Lightbulb vs The Flashlight
+
+Imagine you have a **lightbulb** and a **flashlight**, both using the *same battery*.
+
+---
+
+The **lightbulb** spreads light in *all* directions.
+
+Stand anywhere around it, and you see some glow.
+
+---
+
+The **flashlight** focuses light in *one* direction.
+
+- Stand **in front** of it, and it's *blinding*
+- Stand **behind** it, and there's *nothing*
+
+---
+
+**Same power. Different distribution.**
+
+The flashlight isn't creating *more* light. It's **concentrating** the same light into a *smaller area*.
+
+> This is **exactly** how directional antennas work.
+
+---
+
+## The Isotropic Antenna
+
+In theory, there's a perfect "lightbulb antenna" that radiates **equally in all directions**.
+
+We call it an **isotropic antenna**.
+
+---
+
+Here's the thing:
+
+> **It doesn't actually exist.** You can't build one.
+
+But it's incredibly useful as a *reference point* for comparing real antennas.
+
+::isotropic-vs-directional
+
+---
+
+## Directivity
+
+> **Directivity** measures how much an antenna *focuses* its power compared to an isotropic antenna.
+
+---
+
+If an antenna has **directivity of 10**, it means:
+
+In its *strongest direction*, the power density is **10 times** what an isotropic antenna would produce.
+
+---
+
+**Think of it like water pressure.**
+
+A garden hose and a pressure washer might use the *same water flow*. But the pressure washer **focuses** it through a tiny nozzle.
+
+> Same input. **More concentrated** output.
+
+---
+
+## From Directivity to Gain
+
+Directivity is the *theoretical* best case. It assumes a **perfect antenna** with *no losses*.
+
+---
+
+**Real antennas aren't perfect.**
+
+Some power gets absorbed by:
+
+- **Antenna materials** (metal resistance)
+- **Cables** (signal loss)
+- **Connectors** (impedance mismatches)
+
+This lost power turns into **heat**.
+
+---
+
+**Antenna efficiency** tells us how much of the input power *actually* gets radiated:
+
+$$\eta = \frac{P_{\text{radiated}}}{P_{\text{input}}}$$
+
+> - **$P_{\text{input}}$** = power you *feed into* the antenna
+> - **$P_{\text{radiated}}$** = power that *actually leaves* as radio waves
+> - The difference is **lost as heat**
+
+An efficiency of **0.8**? That's *80% radiated*, *20% wasted*.
+
+---
+
+## Gain
+
+> **Gain** is what you *actually* get in practice.
+
+$$G = D \times \eta$$
+
+**Gain** equals **directivity** times **efficiency**.
+
+---
+
+| Antenna Quality | Efficiency | Result |
+|-----------------|------------|--------|
+| **High-end** | 95% | Gain ≈ Directivity |
+| **Typical** | 70-80% | Gain noticeably less |
+| **Cheap** | 50% | *Half* the power wasted |
+
+---
+
+> If directivity is what *could* happen, **gain is what *does* happen**.
+
+---
+
+## The Unit: dBi
+
+Gain numbers can get *huge*. A satellite dish might have a gain of 10,000.
+
+Writing "10,000x" everywhere gets awkward. So we use **decibels (dB)** to *compress* big numbers into manageable ones.
+
+---
+
+**How it works:**
+
+The logarithm asks: *"10 to what power gives me this number?"*
+
+- $\log_{10}(10) = 1$ because $10^1 = 10$
+- $\log_{10}(100) = 2$ because $10^2 = 100$
+- $\log_{10}(1000) = 3$ because $10^3 = 1000$
+
+> **Decibels turn multiplication into addition.** A gain of 1,000,000 becomes just **60 dB**.
+
+---
+
+$$G_{\text{dBi}} = 10 \log_{10}(G)$$
+
+The **"i"** in dBi means *relative to isotropic*. It's our reference point.
+
+| Linear Gain | dBi | Meaning |
+|-------------|-----|---------|
+| 1 | 0 dBi | Same as isotropic |
+| 2 | 3 dBi | **2x** intensity |
+| 10 | 10 dBi | **10x** intensity |
+| 100 | 20 dBi | **100x** intensity |
+
+---
+
+> **The pattern:** Every **+3 dB** *doubles* power. Every **+10 dB** *multiplies by 10*.
+
+---
+
+## dBm: Decibels for Power
+
+**dBi** compares gain to an isotropic antenna.
+
+**dBm** measures *absolute power* relative to **1 milliwatt**.
+
+$$P_{\text{dBm}} = 10 \log_{10}\left(\frac{P}{1 \text{ mW}}\right)$$
+
+---
+
+| Power | dBm |
+|-------|-----|
+| 1 mW | **0 dBm** |
+| 10 mW | **10 dBm** |
+| 100 mW | **20 dBm** |
+| 1 W | **30 dBm** |
+
+---
+
+**Converting dBm back to Watts:**
+
+$$P_{\text{watts}} = 10^{(P_{\text{dBm}} - 30) / 10}$$
+
+---
+
+**Exam-Style Problem:**
+
+> A 5G signal has received power **$P_r = -72$ dBm**. What is this in Watts?
+
+**Solution:**
+
+$$P = 10^{(-72 - 30) / 10} = 10^{-10.2} \approx 6.31 \times 10^{-11} \text{ W}$$
+
+> That's **63 picowatts**. Receivers are *incredibly* sensitive.
+
+---
+
+## The Tradeoff
+
+High directivity is a **double-edged sword**:
+
+- **Great** if you know *exactly* where your receiver is
+- **Terrible** if you need coverage in *all* directions
+
+> **There's no free lunch.** Focusing power *somewhere* means taking it away from *everywhere else*.
