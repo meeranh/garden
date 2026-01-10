@@ -1,0 +1,83 @@
+---
+title: OFDMA
+prerequisites:
+  - wireless-communications/multiple-access/ofdm/orthogonality
+---
+
+## From One User to Many
+
+With OFDM, we split data across many subcarriers. But so far, **one user** gets all of them.
+
+*What if multiple users need to share the same channel?*
+
+---
+
+## OFDMA: Sharing Subcarriers
+
+**OFDMA** = OFDM + Multiple Access
+
+Instead of one user taking all subcarriers, we **divide them among users**:
+
+- User A gets subcarriers 1-3
+- User B gets subcarriers 4-6
+- User C gets subcarriers 7-8
+- *...and so on*
+
+::user-allocation
+
+---
+
+> **OFDMA lets multiple users transmit simultaneously on different subcarriers.**
+
+The base station decides *who gets what*. Allocation can change every millisecond.
+
+---
+
+## Smart Allocation
+
+Not all frequencies work equally well for every user.
+
+**Why?** Signals bounce differently, creating **different channel conditions** for each person:
+
+- *User A might have strong signal on low frequencies*
+- *User B might have strong signal on high frequencies*
+- *It varies based on location, obstacles, reflections*
+
+::channel-aware
+
+---
+
+The base station can assign subcarriers **based on quality**:
+
+- Give User A the frequencies *where their signal is strong*
+- Give User B the frequencies *where their signal is strong*
+- **Result:** Everyone gets better performance
+
+> **Each user gets the frequencies that work best for them.**
+
+---
+
+## Why OFDMA?
+
+| Benefit | How |
+|---------|-----|
+| **Multiple users** | Different users on different subcarriers |
+| **Flexible allocation** | Give more subcarriers to users who need more data |
+| **Channel-aware** | Assign the best frequencies to each user |
+| **Efficient spectrum** | No gaps between users |
+
+---
+
+## Summary
+
+> **OFDMA = sharing OFDM subcarriers among multiple users.**
+
+**Key points:**
+
+- Each user gets a *subset* of subcarriers
+- Base station allocates *dynamically*
+- Users get frequencies that *work best for them*
+
+*This is what LTE and 5G use for the **downlink** (tower to phone).*
+
+*But there's a problem when phones transmit back...*

@@ -1,0 +1,94 @@
+---
+title: Cyclic Prefix
+prerequisites:
+  - wireless-communications/multiple-access/ofdm/orthogonality
+---
+
+## The Remaining Problem
+
+We've split data across subcarriers and made them orthogonal. But there's still *one* issue.
+
+---
+
+**Reflections can spill into the next symbol.**
+
+A reflected copy of symbol 1 arrives *late* and overlaps with symbol 2. This corrupts symbol 2's data.
+
+::isi-problem
+
+---
+
+## The Solution: Cyclic Prefix
+
+Add **guard time** before each symbol. But not just *any* guard time.
+
+> **Key idea:** Copy the **end** of the symbol and put it at the **beginning**.
+
+---
+
+::cyclic-copy
+
+---
+
+**Why copy the end?**
+
+- An *empty* gap would break subcarrier orthogonality
+- The receiver needs to see **complete sine wave cycles**
+- By copying the end, the symbol *wraps around* on itself
+- Any window of the correct length contains a valid symbol
+
+---
+
+**How does this help?**
+
+The reflection from symbol 1 lands in the **cyclic prefix** of symbol 2, not in the actual data.
+
+::guard-time
+
+The receiver simply **discards** the prefix and extracts the clean symbol.
+
+---
+
+## How Long Should the Prefix Be?
+
+The cyclic prefix must be **longer than the maximum reflection delay**.
+
+| Environment | Max Delay | Typical CP |
+|-------------|-----------|------------|
+| Indoor WiFi | ~100 ns | 800 ns |
+| Urban cellular | ~5 μs | 4.7 μs |
+| Rural/hilly | ~20 μs | 16.7 μs |
+
+> **If the reflection arrives within the CP duration, it won't cause interference.**
+
+*Worse environments need longer prefixes.*
+
+---
+
+## The Cost
+
+The cyclic prefix is **overhead**. It carries *no new information*.
+
+**Example: WiFi 802.11a**
+
+- **Symbol duration:** 4 μs
+- **Cyclic prefix:** 0.8 μs
+- **Overhead:** 0.8 / 4.8 = **17%**
+
+We sacrifice some efficiency for *immunity to reflections*.
+
+> *It's a worthwhile trade-off. Without the CP, reflections would corrupt the data entirely.*
+
+---
+
+## Summary
+
+> **Cyclic prefix = copy the end of symbol to the beginning as a guard time.**
+
+| Without CP | With CP |
+|------------|---------|
+| Reflections corrupt next symbol | Reflections hit the prefix |
+| ISI problems | **ISI eliminated** |
+| Maximum throughput | *Slight overhead* |
+
+The cyclic prefix is the **final piece** that makes OFDM work in real-world multipath environments.

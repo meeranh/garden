@@ -1,0 +1,82 @@
+---
+title: Subcarriers
+prerequisites:
+  - wireless-communications/multiple-access/ofdm
+---
+
+## Serial vs Parallel
+
+Imagine you need to send 12 bits: `101100111010`
+
+---
+
+**Traditional (Serial):**
+
+Send all 12 bits one after another on a **single frequency**.
+
+::serial-bits
+
+Each bit has *very little time*. Reflections from bit 1 can easily smear into bit 2.
+
+---
+
+**OFDM (Parallel):**
+
+Split the bits across **multiple frequencies** and send them **at the same time**.
+
+::parallel-bits
+
+Now each bit gets **4x more time**. Reflections settle down *before* the next bit arrives.
+
+---
+
+## The Trade-Off
+
+| Approach | Symbol Duration | Multipath Resistance |
+|----------|-----------------|---------------------|
+| Serial (1 carrier) | Short | *Poor* |
+| Parallel (N carriers) | N× longer | **Good** |
+
+> **Same total data rate, but each subcarrier is slower and more robust.**
+
+---
+
+## What Is a Subcarrier?
+
+A **subcarrier** is just a sine wave at a specific frequency.
+
+In OFDM, you have *many* sine waves (subcarriers) running in parallel. Each one carries a small piece of your data.
+
+---
+
+**Example: WiFi 802.11a**
+
+- **Total bandwidth:** 20 MHz
+- **Number of subcarriers:** 64
+- **Each subcarrier:** 312.5 kHz wide
+
+Instead of *one* 20 MHz channel, you get *64 narrow* 312.5 kHz channels working together.
+
+---
+
+## How Data Is Mapped
+
+The process works like this:
+
+1. Take the incoming **bit stream**
+2. **Group bits** (e.g., 4 bits per subcarrier for 16-QAM)
+3. **Map** each group to a subcarrier using modulation (BPSK, QPSK, QAM)
+4. **Transmit** all subcarriers *simultaneously*
+5. Receiver **separates and decodes** each subcarrier
+
+> *Each subcarrier is modulated independently, but they all transmit at the same time.*
+
+---
+
+## Summary
+
+> **Subcarriers = parallel transmission on multiple frequencies**
+
+- Instead of *one fast stream*, you get *many slow streams*
+- Same throughput, better resistance to reflections
+- Each subcarrier can use different modulation based on channel quality

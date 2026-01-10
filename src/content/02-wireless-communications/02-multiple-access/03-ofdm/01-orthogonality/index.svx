@@ -1,0 +1,92 @@
+---
+title: Orthogonality
+prerequisites:
+  - wireless-communications/multiple-access/ofdm/subcarriers
+---
+
+## The Spacing Problem
+
+We have multiple subcarriers transmitting in parallel. But how *close* can we pack them in frequency?
+
+---
+
+**Traditional approach:** Leave gaps between channels.
+
+::traditional-gaps
+
+---
+
+**OFDM approach:** Overlap the channels, but make them **orthogonal**.
+
+::ofdm-overlap
+
+The subcarriers *overlap*, but they don't interfere. How?
+
+---
+
+## The Magic of Orthogonality
+
+Two signals are **orthogonal** if they don't interfere when you measure one while the other is present.
+
+> **Key insight:** At the *exact center* of each subcarrier, all other subcarriers have **zero amplitude**.
+
+---
+
+Look at a single subcarrier in the frequency domain. It's not a perfect rectangle. It has a shape called a **sinc function**:
+
+- **Peak** at the center frequency
+- **Crosses zero** at regular intervals
+- *Small ripples* that fade away
+
+---
+
+**The trick:** Space subcarriers exactly **1/T Hz apart**, where T is the symbol duration.
+
+When you do this:
+
+- Subcarrier 1's **peak** is at subcarrier 2's *zero crossing*
+- Subcarrier 2's **peak** is at subcarrier 1's *zero crossing*
+- And so on for *all* subcarriers
+
+> *Every subcarrier's peak aligns perfectly with every other subcarrier's null.*
+
+---
+
+::orthogonal-subcarriers
+
+---
+
+## Why 1/T Hz?
+
+A symbol lasting **T seconds** has a frequency spectrum that crosses zero every **1/T Hz**.
+
+| Symbol Duration | Zero Crossings |
+|-----------------|----------------|
+| T = 1 ms | Every 1000 Hz |
+| T = 4 μs | Every 250 kHz |
+
+> **Subcarrier spacing = 1 / Symbol duration**
+
+This is *not* a coincidence. It's a fundamental property of the Fourier transform.
+
+---
+
+## The Result
+
+| Traditional | OFDM |
+|-------------|------|
+| Gaps between channels | Channels *overlap* |
+| Wastes spectrum | **Maximum efficiency** |
+| Simple filters | Needs *precise timing* |
+
+OFDM packs subcarriers as tightly as *mathematically possible*.
+
+---
+
+## Summary
+
+> **Orthogonality = subcarriers overlap but don't interfere because peaks align with zero crossings.**
+
+- The spacing of **1/T Hz** is the key
+- When you sample one subcarrier, all others contribute *exactly zero*
+- This lets OFDM use spectrum **50% more efficiently** than traditional systems

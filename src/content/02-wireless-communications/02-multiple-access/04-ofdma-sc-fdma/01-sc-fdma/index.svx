@@ -1,0 +1,106 @@
+---
+title: SC-FDMA
+prerequisites:
+  - wireless-communications/multiple-access/ofdma-sc-fdma/ofdma
+---
+
+## The Power Problem
+
+OFDMA works great for the **downlink** (tower to phone).
+
+*But there's a problem for the **uplink** (phone to tower).*
+
+---
+
+When you add many sine waves together, sometimes they all **peak at the same moment**.
+
+::wave-peaks
+
+---
+
+**Most of the time:**
+
+- Waves partially cancel out
+- Signal stays *moderate*
+
+**Occasionally:**
+
+- Waves align perfectly
+- Signal spikes *way up*
+
+> This is called **high PAPR** (Peak-to-Average Power Ratio).
+
+---
+
+## Why Does This Matter?
+
+Your phone's amplifier must handle the **highest peaks** without distorting.
+
+| Average Power | Peak Power | What You Need |
+|---------------|------------|---------------|
+| 1 W | 10 W | 10 W amplifier |
+
+*You're paying for a 10W amplifier but only using 1W most of the time.*
+
+---
+
+**The problem:**
+
+- Amplifier runs *inefficiently*
+- Wastes power as heat
+- **Drains your battery faster**
+
+> The tower has unlimited power. *It doesn't care.*
+>
+> But your phone runs on a **small battery**. *Every watt matters.*
+
+---
+
+## SC-FDMA: The Fix
+
+**SC-FDMA** = Single Carrier FDMA
+
+Before transmitting, we **spread** each data symbol across all your assigned subcarriers.
+
+::spreading
+
+---
+
+**Regular OFDMA:**
+
+- Each symbol sits *alone* on one subcarrier
+- Waves are independent
+- *Can spike when they align*
+
+**SC-FDMA:**
+
+- Each symbol is *smeared* across many subcarriers
+- Combined signal behaves like a **single smooth wave**
+- *Much lower peaks*
+
+> **Lower peaks = less power waste = longer battery life.**
+
+---
+
+## Where Each Is Used
+
+| Direction | Technology | Why |
+|-----------|------------|-----|
+| **Downlink** (tower → phone) | OFDMA | Tower has power. *Maximize efficiency.* |
+| **Uplink** (phone → tower) | SC-FDMA | Phone has battery. *Minimize power waste.* |
+
+::uplink-downlink
+
+---
+
+## Summary
+
+> **SC-FDMA spreads data to avoid power spikes, saving battery on the uplink.**
+
+| | OFDMA | SC-FDMA |
+|-|-------|---------|
+| **Peaks** | High | *Low* |
+| **Power** | More needed | *Less needed* |
+| **Used for** | Downlink | Uplink |
+
+*This is why LTE uses different technologies for each direction.*

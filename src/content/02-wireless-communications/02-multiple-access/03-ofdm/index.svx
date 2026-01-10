@@ -1,0 +1,83 @@
+---
+title: OFDM
+prerequisites:
+  - wireless-communications/multiple-access/tdma
+---
+
+## The Problem
+
+Wireless signals bounce off walls, buildings, and cars. These **reflections** arrive at different times.
+
+---
+
+When you transmit data **fast**, these delayed reflections cause bits to **blur together** (*the reflection from bit 1 arrives while bit 2 is being received*). This is called **inter-symbol interference (ISI)**.
+
+- The *direct* signal arrives first
+- The *reflected* signal arrives slightly later
+- If your bits are short, the reflection from bit 1 overlaps with bit 2
+
+---
+
+**The faster you transmit, the worse it gets.**
+
+At high data rates, each bit occupies a *tiny* time window. A reflection delayed by just a few microseconds can smear across *multiple* bits.
+
+> This is why early wireless systems had low data rates. Going faster meant more interference.
+
+---
+
+## The OFDM Solution
+
+**OFDM** (Orthogonal Frequency Division Multiplexing) solves this with a clever trick:
+
+> Instead of sending data **fast on one frequency**, send it **slowly on many frequencies in parallel**.
+
+---
+
+Think of it like lanes on a highway:
+
+- **Single lane, fast cars:** One crash affects everyone behind
+- **Multiple lanes, slower cars:** Each lane is independent, more robust
+
+---
+
+::highway-lanes
+
+---
+
+Each frequency is called a **subcarrier**.
+
+- Each subcarrier transmits *slowly* enough that reflections don't cause problems
+- But there are *many* subcarriers working together
+- The **total data rate is still high**
+
+> *Same throughput, but each individual channel is more robust.*
+
+---
+
+## Three Key Concepts
+
+OFDM relies on **three ideas**:
+
+| Concept | Purpose |
+|---------|---------|
+| **Subcarriers** | Split data across parallel channels |
+| **Orthogonality** | Pack subcarriers tightly without interference |
+| **Cyclic Prefix** | Guard time that absorbs reflections |
+
+We'll explore each one in detail.
+
+---
+
+## Where OFDM Is Used
+
+OFDM is *everywhere* in modern wireless:
+
+| Technology | Notes |
+|------------|-------|
+| **WiFi** (802.11a/g/n/ac/ax) | All modern WiFi uses OFDM |
+| **4G LTE** | Downlink uses OFDMA |
+| **5G NR** | Both uplink and downlink |
+| **Digital TV** (DVB-T) | Terrestrial broadcast |
+
+> **Why so popular?** Because real-world environments are full of reflections, and OFDM handles them gracefully.
