@@ -1,0 +1,85 @@
+---
+title: FDMA
+prerequisites:
+  - wireless-communications/multiple-access/duplexing
+---
+
+## The Problem
+
+Multiple users want to make calls **at the same time**.
+
+But there's only one radio spectrum. How do we share it?
+
+---
+
+## The Solution: Divide by Frequency
+
+**FDMA** (Frequency Division Multiple Access) gives each user their own **slice of the spectrum**.
+
+Think of radio stations. Each broadcasts on its own frequency:
+- 101.1 FM
+- 102.3 FM
+- 104.5 FM
+
+They all transmit **simultaneously**, but on **different frequencies**. No interference.
+
+FDMA works the same way for phone calls.
+
+---
+
+## How It Works
+
+::fdma-spectrum
+
+---
+
+The total spectrum is divided into **non-overlapping channels**.
+
+Each user gets **one channel** for their entire call.
+
+**Guard bands** sit between channels to prevent overlap.
+
+> **Key point**: Users transmit **continuously** on their assigned frequency. The channel is theirs until the call ends.
+
+---
+
+## Channel Allocation
+
+How do we decide who gets which channel?
+
+**Fixed Assignment:**
+- Channels permanently assigned to specific users
+- Simple, but wasteful if the user isn't always transmitting
+
+**Demand Assignment:**
+- Channels assigned only when needed
+- Released when the call ends
+- More efficient use of spectrum
+
+---
+
+## Advantages
+
+- **Simple** to implement
+- **No synchronization** needed between users
+- Works well for **continuous traffic** (like voice calls)
+
+---
+
+## Disadvantages
+
+- **Wastes bandwidth** when user is silent (channel still reserved)
+- **Limited users** (one per channel)
+- **Guard bands** waste spectrum
+- **Inflexible** (can't easily give one user more bandwidth)
+
+---
+
+## Real World Example
+
+**1G cellular** (AMPS) used FDMA:
+- 30 kHz channels
+- One call per channel
+- Analog voice transmission
+
+Modern systems moved beyond pure FDMA because it wastes too much spectrum. But the concept of dividing by frequency is still used in combination with other techniques.

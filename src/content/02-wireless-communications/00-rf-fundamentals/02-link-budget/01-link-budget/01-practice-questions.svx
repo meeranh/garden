@@ -71,11 +71,13 @@ $$P \approx 6.31 \times 10^{-11} \text{ W}$$
 > **Given:**
 > - $h_t = 0.5$ m
 > - $h_r = 1$ m
-> - $d = 100$ m
+> - $d = 100$ m *(assumed - some exam papers omit this value)*
 > - 8 kbits/sample at 1000 samples/sec
 > - $k$ = Boltzmann's constant = $1.3803 \times 10^{-23}$ J/K
 > - BW = 30 MHz
 > - T = 300 K
+
+**Note:** Past exam papers sometimes omit the distance. If this happens, state your assumption (e.g., "assuming d = 100m for indoor WiFi") and proceed with the calculation.
 
 ---
 

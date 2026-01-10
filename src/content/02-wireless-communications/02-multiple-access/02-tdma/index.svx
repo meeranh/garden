@@ -1,0 +1,106 @@
+---
+title: TDMA
+prerequisites:
+  - wireless-communications/multiple-access/fdma
+---
+
+## The Problem With FDMA
+
+FDMA gives each user their own frequency. Simple, but wasteful.
+
+When you're listening (not talking), your channel sits **idle**. Nobody else can use it.
+
+What if we could **share** a single frequency among multiple users?
+
+---
+
+## The Solution: Take Turns
+
+**TDMA** (Time Division Multiple Access) gives everyone the **same frequency**, but different **time slots**.
+
+Think of a shared microphone at a meeting:
+- Only one person speaks at a time
+- Everyone takes turns
+- Rotate fast enough, and everyone gets to talk
+
+---
+
+## How It Works
+
+::tdma-slots
+
+---
+
+Time is divided into repeating **frames**.
+
+Each frame contains multiple **time slots**.
+
+Each user gets **one slot per frame** to transmit their data.
+
+> **Key point**: Users transmit in short **bursts**, then wait for their next turn. The rotation is so fast you don't notice.
+
+---
+
+## Frame Structure
+
+A TDMA frame looks like this:
+
+```
+|←―――――――――― One Frame ―――――――――→|
+┌──────┬──────┬──────┬──────┬──────┐
+│Slot 1│Slot 2│Slot 3│Slot 4│Slot 5│  ...
+└──────┴──────┴──────┴──────┴──────┘
+│User 1│User 2│User 3│User 4│User 5│
+```
+
+The frame repeats continuously. Each user transmits during their assigned slot, every frame.
+
+---
+
+## Guard Times
+
+Between slots, there's a tiny **guard time** (a gap).
+
+This prevents overlap if one user's timing is slightly off.
+
+Similar to guard bands in FDMA, but in **time** instead of frequency.
+
+---
+
+## TDMA vs FDMA
+
+| | **FDMA** | **TDMA** |
+|---|----------|----------|
+| **Divides by** | Frequency | Time |
+| **User transmits** | Continuously | In bursts |
+| **Synchronization** | Not needed | Critical |
+| **Users per channel** | 1 | Multiple (e.g. 8) |
+
+---
+
+## Advantages
+
+- **More users** per frequency channel
+- **Flexible** slot allocation (give busy users more slots)
+- **No guard bands** wasting spectrum
+- Battery saving: phone can **sleep** between slots
+
+---
+
+## Disadvantages
+
+- **Precise timing** required (synchronization is critical)
+- **Buffering** needed (must store data between transmission slots)
+- **Multipath delay** can cause inter-slot interference
+
+---
+
+## Real World Example
+
+**GSM (2G)** uses TDMA:
+- 8 time slots per frame
+- Frame duration: 4.615 ms
+- Each slot: ~577 microseconds
+- One frequency supports **8 simultaneous calls**
+
+This is why GSM could handle more users than 1G (which used FDMA only).

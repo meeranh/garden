@@ -1,0 +1,110 @@
+---
+title: Duplexing
+prerequisites:
+  - wireless-communications/digital-modulation/basic-modulation
+---
+
+## The Problem
+
+When you make a phone call, you need to **talk and listen at the same time**.
+
+But radio transmission is like a walkie-talkie by default. You can either transmit OR receive, not both.
+
+> **Duplexing** solves this problem by enabling two-way communication.
+
+---
+
+## Two Solutions
+
+There are two ways to achieve full-duplex communication:
+
+1. **FDD** (Frequency Division Duplex): Use **two different frequencies**
+2. **TDD** (Time Division Duplex): Use **one frequency**, but **take turns**
+
+---
+
+## FDD: Frequency Division Duplex
+
+Use **separate frequencies** for each direction:
+
+- **Uplink**: phone → tower (lower frequency band)
+- **Downlink**: tower → phone (higher frequency band)
+
+::fdd-duplex
+
+---
+
+Both directions work **simultaneously** because they don't interfere with each other.
+
+A **guard band** sits between the two frequencies to prevent overlap.
+
+> **Analogy**: Two separate roads. One for northbound traffic, one for southbound. Both flow at the same time.
+
+---
+
+## TDD: Time Division Duplex
+
+Use **one frequency**, but alternate between sending and receiving:
+
+- Transmit for a few milliseconds
+- Switch to receive for a few milliseconds
+- Repeat
+
+::tdd-duplex
+
+---
+
+The switching happens so fast (milliseconds) that you don't notice any gaps.
+
+> **Analogy**: A single-lane bridge with a traffic light. Cars alternate directions, but it's so fast it feels continuous.
+
+---
+
+## Comparison
+
+| | **FDD** | **TDD** |
+|---|---------|---------|
+| **Frequencies** | Two (paired) | One |
+| **Simultaneous?** | Yes | No (alternating) |
+| **Spectrum needed** | More | Less |
+| **Latency** | Lower | Slightly higher |
+| **Flexible capacity?** | No (fixed split) | Yes (adjust ratio) |
+
+---
+
+## When To Use Which?
+
+**FDD is better when:**
+
+- Traffic is **symmetric** (equal upload and download)
+- **Low latency** is critical
+- **Paired spectrum** is available
+
+**TDD is better when:**
+
+- Traffic is **asymmetric** (more download than upload)
+- Spectrum is **limited** or unpaired
+- You want **flexibility** to adjust capacity dynamically
+
+---
+
+## Real World Examples
+
+| Technology | Duplexing |
+|------------|-----------|
+| **GSM** | FDD |
+| **LTE** | Both (FDD-LTE and TDD-LTE) |
+| **5G** | Both |
+| **WiFi** | TDD |
+| **Satellite** | Usually FDD |
+
+---
+
+## LTE Band Numbers
+
+In LTE, band numbers tell you the duplexing mode:
+
+- **Bands 1-31**: FDD
+- **Bands 33-46**: TDD
+
+> Most countries use FDD for wide-area coverage and TDD for capacity hotspots.
