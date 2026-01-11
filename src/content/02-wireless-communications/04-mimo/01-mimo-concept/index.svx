@@ -1,0 +1,138 @@
+---
+title: MIMO Concept
+prerequisites:
+  - wireless-communications/rf-fundamentals/multipath
+---
+
+## The Problem With One Antenna
+
+Traditional wireless systems use **one antenna to send** and **one antenna to receive**. This is called **SISO** (Single Input, Single Output).
+
+The problem?
+
+- You can only send **one stream** of data at a time
+- Want more throughput? You need *more bandwidth*
+- But bandwidth is **expensive** and **limited**
+
+> **What if you could send multiple streams at the same time, on the same frequency?**
+
+That's exactly what MIMO does.
+
+---
+
+## Multiple Antennas = Multiple Streams
+
+**MIMO** stands for **Multiple Input, Multiple Output**.
+
+- **Multiple Input** → multiple antennas at the *transmitter*
+- **Multiple Output** → multiple antennas at the *receiver*
+
+The magic: with multiple antennas on both ends, you can send **separate data streams simultaneously** over the **same frequency**.
+
+This is called **spatial multiplexing**.
+
+::spatial-multiplexing
+
+> **Each stream takes a different path through space.** The receiver can separate them because they arrive with *different characteristics*.
+
+---
+
+## How Does the Receiver Separate the Streams?
+
+This is where **multipath** becomes your friend.
+
+In a real environment:
+- Signals **bounce** off walls, buildings, and objects
+- Each stream travels a *slightly different* combination of paths
+- The receiver uses math to **untangle** them
+
+> **Ironically, the "messy" multipath environment that causes problems for simple systems is actually *good* for MIMO.**
+
+In a perfectly clear line-of-sight with no reflections, all streams would arrive the same way. The receiver *couldn't tell them apart*.
+
+---
+
+## MIMO Configurations
+
+MIMO systems are described by their antenna count: **Tx x Rx**
+
+| Configuration | Transmit Antennas | Receive Antennas | Max Streams |
+|---------------|-------------------|------------------|-------------|
+| **2x2** | 2 | 2 | 2 |
+| **4x4** | 4 | 4 | 4 |
+| **8x8** | 8 | 8 | 8 |
+
+> **Read it as:** "2 transmit antennas, 2 receive antennas"
+
+---
+
+## Impact on Throughput
+
+How many streams can you send? It depends on the **bottleneck**.
+
+> **Throughput multiplier = min(Tx antennas, Rx antennas)**
+
+The side with *fewer* antennas limits you.
+
+| Setup | Calculation | Throughput Boost |
+|-------|-------------|------------------|
+| 2 Tx, 2 Rx | min(2, 2) = 2 | **2x** |
+| 4 Tx, 4 Rx | min(4, 4) = 4 | **4x** |
+| 4 Tx, 2 Rx | min(4, 2) = 2 | **2x** *(receiver is bottleneck)* |
+| 8 Tx, 8 Rx | min(8, 8) = 8 | **8x** |
+
+> **More antennas = more simultaneous streams = higher throughput** — *without using more bandwidth*.
+
+---
+
+## Example: Impact on System Capacity
+
+> What is the impact on the system capacity when an **8x8 MIMO** antenna configuration is used?
+
+- 8x8 MIMO can transmit **8 parallel streams** simultaneously
+- System capacity is multiplied by **8x**
+- No additional bandwidth required
+- Formula: capacity multiplier = min(8, 8) = **8**
+
+---
+
+## Where is MIMO Used?
+
+MIMO is everywhere in modern wireless:
+
+**WiFi:**
+- **802.11n** introduced MIMO (up to 4x4)
+- **802.11ac** uses MIMO + wider channels
+- **802.11ax (WiFi 6)** uses 8x8 MIMO with MU-MIMO (multi-user)
+
+**Cellular Networks:**
+- **4G LTE** uses 2x2 or 4x4 MIMO in most deployments
+- **5G NR** uses **Massive MIMO** with 32, 64, or even 128 antennas at the base station
+
+**Why it's so important:**
+- Spectrum is *expensive* and *limited*
+- MIMO lets you get **more data through the same spectrum**
+- It's one of the key technologies that made 4G and 5G possible
+
+> MIMO is one of the **biggest capacity boosters** in modern wireless.
+
+---
+
+## Example: MIMO in Cellular Networks
+
+> What is the concept of MIMO antennas? Explain where and how they are used in modern cellular networks.
+
+**Concept:**
+- MIMO uses multiple antennas at both transmitter and receiver
+- Sends **multiple data streams simultaneously** over the same frequency
+- Receiver separates streams using different signal paths (spatial multiplexing)
+
+**Where it's used:**
+- **4G LTE**: 2x2 and 4x4 MIMO configurations
+- **5G NR**: Massive MIMO with 32-128 antennas at base stations
+
+**How it's used:**
+- Base station has multiple antennas pointing at the coverage area
+- User devices (phones) have 2-4 antennas
+- Multiple streams transmitted simultaneously
+- Capacity multiplied by number of streams (e.g., 4x4 = 4x throughput)
