@@ -1,0 +1,158 @@
+---
+title: WiFi Security
+prerequisites:
+  - wireless-communications/wifi/standards
+---
+
+## The Problem
+
+WiFi signals travel through the air. Anyone nearby can **capture** them.
+
+Without encryption:
+- Attackers can **read** everything you send
+- Attackers can **inject** fake packets
+- Your network is wide open
+
+> WiFi security is about **encrypting** the connection so only authorized users can read the data.
+
+---
+
+## WEP (1999) — The Original (Broken)
+
+**Wired Equivalent Privacy** — the first attempt at WiFi security.
+
+**How it works:**
+- Uses **RC4** stream cipher for encryption
+- 24-bit **IV** (Initialization Vector) added to each packet
+- Same shared key for everyone on the network
+
+**The fatal flaw:**
+- 24-bit IV is **too short**
+- Only ~16 million possible IVs
+- After ~5000 packets, IVs start **repeating**
+- Repeated IVs let attackers **crack the key**
+
+**How broken is it?**
+- Can be cracked in **under 5 minutes**
+- Tools like *aircrack-ng* automate the attack
+- Just need to capture enough packets
+
+> **Never use WEP.** It provides essentially no security.
+
+---
+
+## WPA (2003) — The Emergency Patch
+
+**Wi-Fi Protected Access** — a quick fix while the real solution (802.11i) was being developed.
+
+**How it works:**
+- Still uses **RC4** (same as WEP)
+- Adds **TKIP** (Temporal Key Integrity Protocol)
+- TKIP generates a **new key for every packet**
+- No more IV reuse problem
+
+**Improvements over WEP:**
+- Per-packet keys (no IV reuse)
+- Message integrity check (detects tampering)
+- Sequence counter (prevents replay attacks)
+
+**Limitations:**
+- Still based on RC4 (aging cipher)
+- TKIP has its own vulnerabilities
+- Was always meant to be *temporary*
+
+> WPA was a **band-aid** — better than WEP, but not a real fix.
+
+---
+
+## WPA2 (2004) — The Proper Fix
+
+**Wi-Fi Protected Access 2** — based on the **IEEE 802.11i** standard.
+
+**How it works:**
+- Replaced RC4 with **AES** encryption (much stronger)
+- Uses **CCMP** protocol instead of TKIP
+- **Four-way handshake** to securely establish keys
+
+**Why AES matters:**
+- Government-grade encryption
+- No known practical attacks
+- Used worldwide for sensitive data
+
+**Improvements over WPA:**
+- AES is fundamentally stronger than RC4
+- CCMP provides better integrity protection
+- Proper security from the ground up (not a patch)
+
+**Limitations:**
+- Four-way handshake is vulnerable to **offline attacks**
+- Attacker can capture handshake, then brute-force the password offline
+- **KRACK attack** (2017) found a vulnerability in the handshake itself
+
+> WPA2 is still **secure for most uses** — just use a strong password.
+
+---
+
+## WPA3 (2018) — The Modern Standard
+
+**Wi-Fi Protected Access 3** — fixes WPA2's weaknesses.
+
+**How it works:**
+- Replaces four-way handshake with **SAE** (Simultaneous Authentication of Equals)
+- Also called **Dragonfly handshake**
+- Based on a zero-knowledge proof
+
+**Key improvements:**
+
+**1. No offline attacks:**
+- Attacker *can't* capture handshake and crack it later
+- Must interact with the network in real-time
+- Guessing wrong locks them out
+
+**2. Forward secrecy:**
+- Even if password is cracked *later*, past traffic stays protected
+- Each session has unique keys
+
+**3. 192-bit security mode:**
+- For enterprise/government networks
+- Stronger encryption suite
+
+**4. Easy Connect:**
+- QR code setup for IoT devices
+- No need to type passwords on devices without screens
+
+**Current status:**
+- Required for **WiFi 6** certification
+- Still rolling out — WPA2 is more common
+- Most new devices support both
+
+> WPA3 fixes the *design flaws* in WPA2, not just implementation bugs.
+
+---
+
+## Comparison
+
+| | **WEP** | **WPA** | **WPA2** | **WPA3** |
+|---|---------|---------|----------|----------|
+| **Year** | 1999 | 2003 | 2004 | 2018 |
+| **Encryption** | RC4 | RC4 + TKIP | AES + CCMP | AES + GCMP |
+| **Key exchange** | Static | Per-packet | Four-way handshake | SAE (Dragonfly) |
+| **Security** | Broken | Weak | Strong | Strongest |
+| **Offline attacks** | Easy | Possible | Possible | **Not possible** |
+| **Status** | Never use | Legacy | Current standard | Recommended |
+
+---
+
+## What Should You Use?
+
+**For home networks:**
+- Use **WPA3** if all your devices support it
+- Otherwise, **WPA2** with a **strong password** (12+ characters)
+- **Never** use WEP or open networks
+
+**For enterprise:**
+- WPA2-Enterprise or WPA3-Enterprise
+- Uses RADIUS server for authentication
+- Each user has unique credentials
+
+> **The password matters.** Even WPA2 is secure if your password can't be guessed.

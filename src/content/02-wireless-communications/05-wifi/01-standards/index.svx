@@ -1,0 +1,126 @@
+---
+title: IEEE 802.11 Standards
+---
+
+## The WiFi Family
+
+WiFi isn't one thing. It's a **family of standards**, each identified by a letter. Over time, each new version brought faster speeds, better range, or new technologies.
+
+> **802.11** is the IEEE standard. The letter after it (a, b, g, n, ac, ax) tells you *which version*.
+
+---
+
+## 802.11b (1999) — The First Popular WiFi
+
+This is where WiFi took off.
+
+- **Frequency:** 2.4 GHz
+- **Max speed:** 11 Mbps
+- **Range:** Good (2.4 GHz travels far)
+
+**The catch:** 2.4 GHz is a *crowded* band. Microwaves, Bluetooth, baby monitors, and your neighbor's WiFi all compete for the same space.
+
+---
+
+## 802.11a (1999) — The Road Not Taken
+
+Released the *same year* as 802.11b, but took a different approach.
+
+- **Frequency:** 5 GHz
+- **Max speed:** 54 Mbps
+- **Range:** Shorter (5 GHz doesn't penetrate walls as well)
+
+**Why it didn't win:** More expensive, shorter range. Most people chose 802.11b instead.
+
+> But 5 GHz would come back later — it has **less interference** and **more available channels**.
+
+---
+
+## 802.11g (2003) — Best of Both Worlds
+
+Combined the best parts of a and b.
+
+- **Frequency:** 2.4 GHz *(good range, like b)*
+- **Max speed:** 54 Mbps *(fast, like a)*
+- **Backward compatible** with 802.11b devices
+
+This became the new standard for home routers.
+
+---
+
+## 802.11n (2009) — MIMO Changes Everything
+
+The biggest leap forward. This is when WiFi got *serious*.
+
+- **Frequency:** Both **2.4 GHz and 5 GHz**
+- **Max speed:** Up to 600 Mbps
+- **Key innovation:** **MIMO** (multiple antennas)
+
+**What MIMO added:**
+- Multiple streams sent simultaneously
+- Up to 4x4 antenna configurations
+- Wider channels (40 MHz instead of 20 MHz)
+
+> 802.11n was the first WiFi standard to use MIMO. This is why "Wireless N" routers have multiple antennas sticking out.
+
+---
+
+## 802.11ac (2013) — Gigabit WiFi
+
+Pushed speeds into gigabit territory.
+
+- **Frequency:** 5 GHz only
+- **Max speed:** Up to 6.9 Gbps (theoretical)
+- **MIMO:** Up to 8x8
+- **Channel width:** 80 MHz or 160 MHz
+
+**New feature — MU-MIMO:**
+- **Multi-User MIMO**
+- Router can talk to *multiple devices at once*
+- Previous standards: one device at a time
+
+---
+
+## 802.11ax / WiFi 6 (2019) — Efficiency First
+
+Not just about raw speed. Focused on **handling crowds better**.
+
+- **Frequency:** Both 2.4 GHz and 5 GHz
+- **Max speed:** Up to 9.6 Gbps
+- **Key innovation:** **OFDMA** (borrowed from cellular)
+
+**Why it matters:**
+- Better performance in crowded places (airports, stadiums)
+- More efficient use of spectrum
+- Lower latency
+
+> WiFi 6 uses the same OFDMA technology as 4G/5G cellular networks.
+
+---
+
+## Quick Comparison
+
+| Standard | Year | Frequency | Max Speed | Key Feature |
+|----------|------|-----------|-----------|-------------|
+| **802.11b** | 1999 | 2.4 GHz | 11 Mbps | First popular WiFi |
+| **802.11a** | 1999 | 5 GHz | 54 Mbps | Less interference |
+| **802.11g** | 2003 | 2.4 GHz | 54 Mbps | Best of a + b |
+| **802.11n** | 2009 | 2.4 / 5 GHz | 600 Mbps | **MIMO** |
+| **802.11ac** | 2013 | 5 GHz | 6.9 Gbps | MU-MIMO, wide channels |
+| **802.11ax** | 2019 | 2.4 / 5 GHz | 9.6 Gbps | **OFDMA** |
+
+---
+
+## Setting Up a WiFi Router (802.11g Example)
+
+Basic steps to configure a wireless router:
+
+1. **Connect** to the router (via Ethernet or default WiFi)
+2. **Access admin panel** (usually `192.168.0.1` or `192.168.1.1`)
+3. **Set SSID** — the network name people will see
+4. **Choose channel** — pick one with less interference (1, 6, or 11 for 2.4 GHz)
+5. **Select security** — use **WPA2** (never WEP)
+6. **Set password** — strong, unique passphrase
+7. **Save and reboot**
+
+> **Tip:** For 2.4 GHz, channels **1, 6, and 11** don't overlap with each other. Pick one of these to minimize interference from neighbors.

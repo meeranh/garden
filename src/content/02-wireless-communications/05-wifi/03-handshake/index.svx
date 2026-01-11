@@ -1,0 +1,137 @@
+---
+title: Four-Way Handshake
+prerequisites:
+  - wireless-communications/wifi/security
+---
+
+## The Problem
+
+You want to connect to a WiFi network. You know the password. The router knows the password.
+
+But you can't just *send* the password over the air. Anyone listening would capture it.
+
+> **How do you prove you know the password, without revealing it?**
+
+That's what the **four-way handshake** solves.
+
+---
+
+## The Goal
+
+Both sides need to end up with the same **encryption keys**, without ever transmitting:
+- The actual password
+- The final encryption key
+
+Instead, they exchange **random numbers** and use math to derive the keys independently.
+
+---
+
+## The Four Messages
+
+::four-way-handshake
+
+---
+
+## Step by Step
+
+**Before the handshake:**
+
+Both the AP and Client already know:
+- **SSID** (network name)
+- **Password** (the pre-shared key)
+
+From these, both independently calculate the **PMK** (Pairwise Master Key).
+
+> The PMK is *never* transmitted. Both sides derive it from the password.
+
+---
+
+**Message 1: AP → Client**
+
+The AP sends a random number called **ANonce**.
+
+- Just a random value
+- Not encrypted (doesn't need to be)
+- Starts the handshake
+
+---
+
+**Message 2: Client → AP**
+
+The Client now has:
+- PMK (from password)
+- ANonce (from AP)
+- SNonce (its own random number)
+
+It combines these to create the **PTK** (Pairwise Transient Key) — the actual encryption key.
+
+The Client sends:
+- **SNonce** (its random number)
+- **MIC** (Message Integrity Code) — proof it calculated the PTK correctly
+
+> The MIC proves the Client knows the password *without revealing it*.
+
+---
+
+**Message 3: AP → Client**
+
+The AP now has everything it needs. It calculates the same PTK.
+
+It sends:
+- **GTK** (Group Temporal Key) — for broadcast/multicast traffic
+- Another MIC to prove *it* also knows the password
+
+The Client **installs the keys** after receiving this message.
+
+---
+
+**Message 4: Client → AP**
+
+The Client sends an **ACK** (acknowledgment).
+
+The AP **installs the keys** after receiving this.
+
+> Both sides now have identical encryption keys. The connection is secured.
+
+---
+
+## Key Hierarchy
+
+The handshake creates multiple keys:
+
+| Key | Full Name | Purpose |
+|-----|-----------|---------|
+| **PMK** | Pairwise Master Key | Derived from password, never transmitted |
+| **PTK** | Pairwise Transient Key | Encrypts unicast traffic (just you) |
+| **GTK** | Group Temporal Key | Encrypts broadcast/multicast (everyone) |
+
+---
+
+## Why This is Secure
+
+**The password is never sent:**
+- Both sides derive PMK independently
+- Attacker can't extract password from captured handshake
+
+**Random numbers prevent replay:**
+- ANonce and SNonce are fresh each time
+- Can't reuse a captured handshake
+
+**MIC proves knowledge:**
+- Only someone with the correct PMK can generate valid MIC
+- Proves identity without revealing secrets
+
+---
+
+## The Weakness (KRACK Attack)
+
+The handshake has one vulnerability:
+
+- If **Message 4 is lost**, the AP retransmits Message 3
+- Client reinstalls the *same* key
+- This resets the **nonce counter**
+- Reused nonce + same key = encryption can be broken
+
+**WPA3's SAE handshake** was designed to avoid this entire class of attacks.
+
+> **For WPA2:** Keep your devices patched. The KRACK vulnerability was fixed in 2017 updates.
