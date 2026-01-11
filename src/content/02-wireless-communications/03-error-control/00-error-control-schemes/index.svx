@@ -1,0 +1,267 @@
+---
+title: Error Control Schemes
+---
+
+## The Problem
+
+When you send data wirelessly, **bits can get corrupted**.
+
+- Radio interference
+- Signal fading
+- Noise
+
+*How do we deal with errors?*
+
+---
+
+## Two Fundamental Approaches
+
+| Approach | Strategy |
+|----------|----------|
+| **ARQ** | Detect errors, *request retransmission* |
+| **FEC** | Detect errors, *fix them yourself* |
+
+---
+
+## ARQ: Automatic Repeat Request
+
+> **Simple idea:** If something's wrong, *ask for it again*.
+
+**How it works:**
+
+1. Sender transmits data
+2. Receiver checks if it's correct *(using a checksum)*
+3. If correct → send **ACK** *(acknowledgment)*
+4. If wrong → send **NACK** *(negative acknowledgment)*
+5. Sender retransmits on NACK
+
+::arq-flow
+
+---
+
+**Pros:**
+
+- *Simple* to implement
+- Only retransmit *when needed*
+- **Guaranteed** correct data
+
+**Cons:**
+
+- Requires *back-and-forth* communication
+- **High latency** (waiting for ACK/NACK)
+- Bad for real-time *(voice, video)*
+- Many retransmissions if channel is noisy
+
+---
+
+## FEC: Forward Error Correction
+
+> **Simple idea:** Send *extra bits* so receiver can **fix errors itself**.
+
+**How it works:**
+
+1. Sender adds **redundant bits**
+2. Receiver uses those extra bits to *detect AND correct* errors
+3. **No retransmission needed**
+
+---
+
+### But wait... how can you *correct* an error?
+
+*Doesn't that require knowing what was sent?*
+
+**The trick:** Not all bit patterns are valid.
+
+---
+
+### Example: Repetition Code
+
+Instead of sending `0` or `1`, send each bit **three times**:
+
+| Original | Send |
+|----------|------|
+| 0 | `000` |
+| 1 | `111` |
+
+Only **two patterns** are valid: `000` and `111`.
+
+---
+
+**What if one bit flips?**
+
+::fec-correction
+
+---
+
+| Received | Closest Valid | Decoded As |
+|----------|---------------|------------|
+| `001` | `000` *(1 bit away)* | **0** |
+| `010` | `000` *(1 bit away)* | **0** |
+| `110` | `111` *(1 bit away)* | **1** |
+| `101` | `111` *(1 bit away)* | **1** |
+
+> **Valid codewords are spread far apart.** Errors land you in the space between them. Decode by finding the *nearest* valid codeword.
+
+---
+
+**Pros:**
+
+- **No waiting** for retransmission
+- Great for *real-time* (voice, video)
+- Works with **no return channel** *(satellite broadcast)*
+
+**Cons:**
+
+- *Always* sends extra bits (overhead)
+- Can only correct **limited** errors
+
+---
+
+## ARQ vs FEC: The Trade-off
+
+| | **ARQ** | **FEC** |
+|-|---------|---------|
+| **Overhead** | Low *(only on error)* | High *(always extra bits)* |
+| **Latency** | High *(wait for ACK)* | Low *(correct immediately)* |
+| **Best for** | File downloads, email | Voice, video, streaming |
+| **Bad channel** | Many retransmissions | May exceed capacity |
+
+*Can we get the best of both worlds?*
+
+---
+
+## HARQ: Hybrid ARQ
+
+> **Combine FEC + ARQ** for the best of both.
+
+**How it works:**
+
+1. Send data with *some* FEC *(not full strength)*
+2. Receiver tries to decode
+3. If FEC fixes all errors → **done**
+4. If not → **request retransmission**
+
+---
+
+**Key insight:** The retransmission can be **combined** with the original to improve decoding.
+
+*You're not throwing away the first attempt!*
+
+---
+
+## HARQ Types
+
+There are **three types** of HARQ, differing in *what* gets retransmitted:
+
+| Type | Retransmits | Strategy |
+|------|-------------|----------|
+| **Type I** | *Same data* | Combine copies |
+| **Type II** | *Different parity bits* | Add more redundancy |
+| **Type III** | *Self-decodable packets* | Each transmission standalone |
+
+---
+
+## Type I: Chase Combining
+
+> **Retransmit the exact same data.** Combine both copies.
+
+::harq-type1
+
+---
+
+**How it helps:**
+
+- Two noisy copies → **average them**
+- Noise is random, so averaging *reduces* it
+- Better chance of correct decoding
+
+**Downside:**
+
+- Not very efficient
+- Same information repeated
+
+---
+
+## Type II: Incremental Redundancy
+
+> **Retransmit *different* parity bits.** Each transmission adds *new* information.
+
+::harq-type2
+
+---
+
+**How it works:**
+
+1. **First transmission:** Data + *some* parity bits
+2. **If failed:** Send *different* parity bits *(not the same!)*
+3. Receiver **combines both** → more redundancy → better correction
+
+**Why it's better:**
+
+- Each retransmission provides **new information**
+- More efficient than repeating the same thing
+- Builds up redundancy *only when needed*
+
+---
+
+## Type III: Self-Decodable
+
+> **Each transmission can be decoded on its own** if conditions are good enough.
+
+::harq-type3
+
+---
+
+**How it works:**
+
+- Every transmission includes *enough* redundancy to be standalone
+- If one transmission is clean enough → decode immediately
+- If not → combine with others
+
+**Trade-off:**
+
+- More overhead per transmission
+- But simpler receiver logic
+
+---
+
+## What Does LTE Use?
+
+> **LTE uses Type II (Incremental Redundancy)** with a *circular buffer*.
+
+**Why?**
+
+- Most **efficient** use of bandwidth
+- Only adds redundancy *when needed*
+- Each retransmission provides *new* parity bits
+
+---
+
+**How LTE does it:**
+
+1. Encode data into a **large set of coded bits**
+2. First transmission: send a *portion* of coded bits
+3. Retransmission: send a *different portion*
+4. Receiver keeps combining until it can decode
+
+---
+
+## Summary
+
+| Scheme | Strategy | Used For |
+|--------|----------|----------|
+| **ARQ** | Retransmit on error | Reliable data transfer |
+| **FEC** | Fix errors with redundancy | Real-time, broadcast |
+| **HARQ** | FEC + ARQ combined | Modern wireless (LTE, 5G) |
+
+---
+
+**HARQ Types:**
+
+| Type | What's Retransmitted | Efficiency |
+|------|---------------------|------------|
+| **I** | Same data | *Low* |
+| **II** | Different parity | **High** *(LTE uses this)* |
+| **III** | Self-decodable | *Medium* |
+
+> **HARQ Type II (Incremental Redundancy)** is the winner for modern wireless because it adds redundancy *only when needed* and each retransmission provides *new* information.

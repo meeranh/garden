@@ -1,0 +1,148 @@
+---
+title: Hamming Codes
+prerequisites:
+  - wireless-communications/error-control/error-control-schemes
+---
+
+## What is a Hamming Code?
+
+A way to add **check bits** to your data so that if one bit gets corrupted, you can find and fix it.
+
+You take your data, add some extra bits in specific positions, and send the whole thing. If a bit flips during transmission, the check bits tell you *exactly which position* went wrong.
+
+---
+
+## The Recipe
+
+Here's all you need to know:
+
+> **Check bits go at positions 1, 2, 4, 8, 16...** (powers of 2)
+>
+> **Data bits fill everything else.**
+
+That's it. For an 11-bit message, you need 4 check bits, giving you 15 bits total.
+
+::position-layout
+
+| Position | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+|----------|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|
+| Type | **C** | **C** | D | **C** | D | D | D | **C** | D | D | D | D | D | D | D |
+
+**C** = Check bit, **D** = Data bit
+
+---
+
+## Step 1: Place Your Data
+
+Take your 11-bit message and put it in the data positions (skip 1, 2, 4, 8).
+
+**Example:** Message = `10011011011`
+
+| Position | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+|----------|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|
+| Value | ? | ? | **1** | ? | **0** | **0** | **1** | ? | **1** | **0** | **1** | **1** | **0** | **1** | **1** |
+
+The data bits `1-0-0-1-1-0-1-1-0-1-1` go into positions 3, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15.
+
+---
+
+## Step 2: Calculate Each Check Bit
+
+Each check bit covers specific positions. You count the 1s in those positions. If the count is odd, the check bit = 1. If even, check bit = 0.
+
+::check-coverage
+
+**Which positions does each check bit cover?**
+
+| Check bit | Covers positions |
+|-----------|------------------|
+| P1 (pos 1) | 1, 3, 5, 7, 9, 11, 13, 15 |
+| P2 (pos 2) | 2, 3, 6, 7, 10, 11, 14, 15 |
+| P4 (pos 4) | 4, 5, 6, 7, 12, 13, 14, 15 |
+| P8 (pos 8) | 8, 9, 10, 11, 12, 13, 14, 15 |
+
+> **Easy way to remember:** P1 covers every position where the binary has a 1 in the first digit. P2 covers positions with 1 in the second digit. And so on.
+
+---
+
+## Step 2 (continued): Do the Math
+
+Look at the positions each check bit covers, count the 1s, and set the check bit to make the total even.
+
+::calculate-checks
+
+**P1** covers 1, 3, 5, 7, 9, 11, 13, 15:
+- Values: ?, 1, 0, 1, 1, 1, 0, 1 → five 1s
+- Need even total → **P1 = 1**
+
+**P2** covers 2, 3, 6, 7, 10, 11, 14, 15:
+- Values: ?, 1, 0, 1, 0, 1, 1, 1 → five 1s
+- Need even total → **P2 = 1**
+
+**P4** covers 4, 5, 6, 7, 12, 13, 14, 15:
+- Values: ?, 0, 0, 1, 1, 0, 1, 1 → four 1s
+- Already even → **P4 = 0**
+
+**P8** covers 8, 9, 10, 11, 12, 13, 14, 15:
+- Values: ?, 1, 0, 1, 1, 0, 1, 1 → five 1s
+- Need even total → **P8 = 1**
+
+---
+
+## The Complete Codeword
+
+| Position | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+|----------|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|
+| Value | **1** | **1** | 1 | **0** | 0 | 0 | 1 | **1** | 1 | 0 | 1 | 1 | 0 | 1 | 1 |
+
+> **Send:** `110001110110111`
+
+---
+
+## Finding and Fixing Errors
+
+Now imagine the receiver gets `110001110**1**10111` (bit 10 flipped from 0 to 1).
+
+**Step 1:** Check each parity group again.
+
+**P1** covers 1, 3, 5, 7, 9, 11, 13, 15: 1+1+0+1+1+1+0+1 = 6 → **even (ok)**
+
+**P2** covers 2, 3, 6, 7, 10, 11, 14, 15: 1+1+0+1+**1**+1+1+1 = 7 → **odd (error!)**
+
+**P4** covers 4, 5, 6, 7, 12, 13, 14, 15: 0+0+0+1+1+0+1+1 = 4 → **even (ok)**
+
+**P8** covers 8, 9, 10, 11, 12, 13, 14, 15: 1+1+**1**+1+1+0+1+1 = 7 → **odd (error!)**
+
+**Step 2:** Add up the positions of failed checks.
+
+- P2 failed → 2
+- P8 failed → 8
+- **Error position = 2 + 8 = 10**
+
+**Step 3:** Flip bit 10 to correct it!
+
+::error-syndrome
+
+---
+
+## Quick Reference
+
+| Step | What to do |
+|------|------------|
+| **1. Count check bits** | For $m$ data bits, need $r$ check bits where $2^r \geq m + r + 1$ |
+| **2. Place data** | Put data in non-power-of-2 positions (3, 5, 6, 7, 9, 10, ...) |
+| **3. Calculate checks** | Each check bit makes its group have even parity |
+| **4. Find error** | Recheck all groups, add positions of failed checks |
+| **5. Fix it** | Flip the bit at that position |
+
+---
+
+## The Formula
+
+How many check bits do you need?
+
+For **4 data bits**: 3 check bits (7-bit code)
+For **11 data bits**: 4 check bits (15-bit code)
+For **26 data bits**: 5 check bits (31-bit code)
+
+> The pattern: check bits go at 1, 2, 4, 8... and data fills the rest. Total positions = $2^r - 1$ where $r$ is the number of check bits.
