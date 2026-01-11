@@ -1,0 +1,181 @@
+---
+title: MAC QoS Framework
+prerequisites:
+  - wireless-communications/wimax/physical-layer
+---
+
+## Why Do We Need QoS?
+
+Not all internet traffic is the same.
+
+Think about it:
+- A **VoIP call** needs instant delivery. Even 200ms delay ruins the conversation.
+- A **video stream** needs steady bandwidth. Buffering is annoying.
+- A **file download** just wants to finish eventually. Speed matters, timing doesn't.
+- An **email** can arrive whenever. Nobody notices a 5-second delay.
+
+> **The problem:** Without QoS, the network treats everything equally. Your important voice call competes with someone's bulk download.
+
+---
+
+## What is QoS?
+
+**QoS = Quality of Service**
+
+It means giving **different treatment** to different types of traffic based on their needs.
+
+- **Voice?** High priority, low latency
+- **Video?** Guaranteed bandwidth
+- **Downloads?** Best effort, whatever's available
+
+> QoS lets the network be **smart** about how it allocates resources.
+
+---
+
+## The 5 Service Classes
+
+WiMAX defines **5 service classes**, from most demanding to least:
+
+::service-classes
+
+---
+
+## 1. UGS (Unsolicited Grant Service)
+
+> **For:** VoIP, video conferencing, T1/E1 leased lines
+
+**What it does:**
+- Provides **constant bit rate** (CBR)
+- Fixed-size grants at **regular intervals**
+- No need to request bandwidth
+
+**Why "unsolicited"?**
+- The base station **automatically** sends bandwidth grants
+- User doesn't have to ask for it each time
+- *Zero delay* for getting transmission slots
+
+**Example:** A VoIP call needs 64 kbps every 20ms. UGS guarantees exactly that.
+
+---
+
+## 2. rtPS (Real-time Polling Service)
+
+> **For:** Streaming video, MPEG, live broadcasts
+
+**What it does:**
+- Supports **variable bit rate** (VBR)
+- Base station **polls** the user periodically
+- User can request bandwidth when polled
+
+**How polling works:**
+1. Base station asks: "Do you have data to send?"
+2. User responds with how much bandwidth it needs
+3. Base station grants the requested amount
+
+**Why not UGS?**
+- Video bit rate changes (action scenes vs still frames)
+- UGS would waste bandwidth during quiet moments
+- rtPS adapts to actual needs
+
+---
+
+## 3. ertPS (Extended Real-time Polling Service)
+
+> **For:** VoIP with silence suppression
+
+**The problem it solves:**
+- VoIP with silence suppression doesn't send data during quiet periods
+- **UGS** would waste bandwidth during silence
+- **rtPS** would add latency when speech resumes
+
+**The solution:**
+- Works like **UGS when you're talking** (automatic grants)
+- Works like **rtPS during silence** (no wasted bandwidth)
+- *Best of both worlds*
+
+> ertPS is basically "smart VoIP mode"
+
+---
+
+## 4. nrtPS (Non-real-time Polling Service)
+
+> **For:** FTP, file transfers, large downloads
+
+**What it does:**
+- **Guaranteed minimum bandwidth**
+- Polling at regular intervals (but less frequent than rtPS)
+- Can tolerate some delay
+
+**The difference from rtPS:**
+- rtPS: "I need bandwidth NOW for real-time content"
+- nrtPS: "I need bandwidth eventually, but guarantee me a minimum"
+
+**Example:** Downloading a large file. You want decent speed, but a few extra seconds doesn't matter.
+
+---
+
+## 5. BE (Best Effort)
+
+> **For:** Web browsing, email, background updates
+
+**What it does:**
+- **No guarantees** at all
+- Gets whatever bandwidth is left over
+- Lowest priority
+
+**When it's used:**
+- Checking email
+- Browsing websites
+- Any traffic that doesn't need special treatment
+
+> BE is the "economy class" of WiMAX. You'll get there, but no promises about when.
+
+---
+
+## Quick Comparison
+
+| Class | Full Name | Traffic Type | Bit Rate | Latency | Guarantee |
+|-------|-----------|--------------|----------|---------|-----------|
+| **UGS** | Unsolicited Grant Service | VoIP | Constant | Very Low | Full |
+| **rtPS** | Real-time Polling Service | Video stream | Variable | Low | Polling |
+| **ertPS** | Extended Real-time PS | VoIP + silence | Variable | Very Low | Adaptive |
+| **nrtPS** | Non-real-time Polling | FTP, downloads | Variable | Tolerant | Minimum BW |
+| **BE** | Best Effort | Web, email | Variable | Any | None |
+
+---
+
+## How a Connection Gets QoS
+
+**Step 1:** User requests a connection
+- Specifies what service class it needs
+- Provides traffic parameters (bandwidth, latency)
+
+**Step 2:** Admission control
+- Base station checks: "Can I meet these requirements?"
+- If network is overloaded, request may be **rejected**
+
+**Step 3:** Connection granted
+- Base station assigns resources
+- Scheduler treats this connection according to its class
+
+**Step 4:** Ongoing service
+- UGS: automatic grants
+- rtPS/ertPS: regular polling
+- nrtPS: periodic polling
+- BE: opportunistic access
+
+---
+
+## Why This Matters
+
+Without QoS:
+- Voice calls would stutter
+- Video would buffer constantly
+- Real-time apps would be unusable
+
+With QoS:
+- Critical traffic gets priority
+- Network resources used efficiently
+- Different apps coexist happily
+
+> **WiMAX QoS ensures that a VoIP call never loses to a file download.**

@@ -1,0 +1,173 @@
+---
+title: Physical Layer (PHY)
+prerequisites:
+  - wireless-communications/multiple-access/ofdma
+---
+
+## What is WiMAX?
+
+**WiMAX** = Worldwide Interoperability for Microwave Access
+
+Think of it as **WiFi's long-range cousin**:
+- WiFi: ~100m range, best effort, unlicensed spectrum
+- WiMAX: **several km range**, QoS support, licensed spectrum
+
+> WiMAX was designed for **metropolitan area networks**: city-wide coverage from a single base station.
+
+---
+
+## IEEE 802.16e
+
+The **802.16e** standard added mobility support to WiMAX.
+
+**Key features:**
+- Mobile users (not just fixed)
+- Handover between base stations
+- Power saving modes
+
+This made WiMAX a competitor to cellular (3G/4G), though LTE eventually won.
+
+---
+
+## OFDMA-Based PHY
+
+WiMAX uses **OFDMA** for its physical layer, the same technology later adopted by LTE.
+
+**How it works:**
+- Spectrum divided into many **subcarriers**
+- Subcarriers grouped into **subchannels**
+- Different subchannels assigned to different users
+
+> WiMAX was one of the **first** mobile broadband systems to use OFDMA.
+
+---
+
+## Scalable Parameters
+
+WiMAX PHY is **scalable**, adapting to available bandwidth:
+
+| Channel Bandwidth | FFT Size | Subcarrier Spacing |
+|-------------------|----------|-------------------|
+| 1.25 MHz | 128 | 10.94 kHz |
+| 5 MHz | 512 | 10.94 kHz |
+| 10 MHz | 1024 | 10.94 kHz |
+| 20 MHz | 2048 | 10.94 kHz |
+
+> **Subcarrier spacing stays constant.** More bandwidth = more subcarriers, not wider subcarriers.
+
+---
+
+## Frame Structure
+
+WiMAX transmission is organized into **frames** (typically 5ms).
+
+Each frame contains:
+- **Downlink (DL) subframe**: base station → users
+- **Uplink (UL) subframe**: users → base station
+
+::frame-structure
+
+The frame is a **2D grid**:
+- **Horizontal axis:** Time (OFDM symbols)
+- **Vertical axis:** Frequency (subchannels)
+
+---
+
+## Frame Components
+
+**Preamble:**
+- First symbol of the frame
+- Used for synchronization and channel estimation
+
+**FCH (Frame Control Header):**
+- Contains DL-MAP location info
+- Tells users where to find their data
+
+**DL-MAP / UL-MAP:**
+- **Maps** that tell each user which time-frequency slots are theirs
+- DL-MAP: describes downlink allocations
+- UL-MAP: describes uplink allocations
+
+**Bursts:**
+- Actual user data
+- Each burst = one user's allocation
+- Can use different modulation (QPSK, 16-QAM, 64-QAM)
+
+---
+
+## Subchannelization Modes
+
+WiMAX offers different ways to group subcarriers into subchannels:
+
+**PUSC (Partial Usage of Subchannels):**
+- Subcarriers **distributed** across the band
+- Provides **frequency diversity**
+- Good for **mobile** users
+
+**FUSC (Full Usage of Subchannels):**
+- All subcarriers used
+- Maximum diversity
+- Downlink only
+
+**AMC (Adaptive Modulation and Coding):**
+- **Adjacent** subcarriers grouped together
+- Allows **channel-aware** scheduling
+- Good for **stationary** users with strong signals
+
+> **PUSC** is most common. It handles mobility well by spreading each user's data across the spectrum.
+
+---
+
+## Adaptive Modulation
+
+WiMAX adapts modulation based on channel conditions:
+
+| Modulation | Bits/Symbol | When Used |
+|------------|-------------|-----------|
+| **QPSK** | 2 | Poor signal (far from base station) |
+| **16-QAM** | 4 | Medium signal |
+| **64-QAM** | 6 | Strong signal (close to base station) |
+
+> **Better signal = higher modulation = more throughput.** The system constantly adapts.
+
+---
+
+## Duplexing
+
+WiMAX supports both:
+
+**TDD (Time Division Duplex):**
+- DL and UL share the same frequency
+- Take turns in time
+- More flexible for asymmetric traffic
+- **Most common** in WiMAX
+
+**FDD (Frequency Division Duplex):**
+- DL and UL use different frequencies
+- Simultaneous transmission
+- Requires paired spectrum
+
+---
+
+## MIMO Support
+
+WiMAX 802.16e supports **MIMO**:
+- 2x2 and 4x4 configurations
+- Spatial multiplexing for throughput
+- Space-time coding for reliability
+
+> MIMO in WiMAX works the same way as in WiFi and LTE: multiple antennas, multiple streams.
+
+---
+
+## Summary
+
+| Feature | WiMAX 802.16e |
+|---------|---------------|
+| **Multiple Access** | OFDMA |
+| **Bandwidth** | 1.25 - 20 MHz (scalable) |
+| **Frame Duration** | ~5 ms |
+| **Duplexing** | TDD or FDD |
+| **Modulation** | QPSK, 16-QAM, 64-QAM (adaptive) |
+| **MIMO** | Up to 4x4 |
+| **Subchannelization** | PUSC, FUSC, AMC |

@@ -1,0 +1,183 @@
+---
+title: Scheduling
+prerequisites:
+  - wireless-communications/wimax/mac-qos
+---
+
+## The Scheduler's Job
+
+Imagine a WiMAX base station with 50 users. All of them want to use the internet *right now*. But there's limited capacity: only a few can transmit at any moment.
+
+**Who goes first?**
+
+- The person on a VoIP call who needs instant delivery?
+- The person downloading a file who's been waiting longest?
+- The person with the strongest signal who can transmit fastest?
+
+This is the **scheduler's job**. Every 5ms, it decides which users get which time-frequency slots.
+
+> QoS classes define *what* each connection needs. The scheduler decides *who actually gets to transmit*.
+
+---
+
+## Two Approaches
+
+Schedulers fall into two categories:
+
+**Channel-Unaware:**
+- Ignore signal quality
+- Follow fixed rules
+- Simple but inefficient
+
+**Channel-Aware:**
+- Check each user's signal before deciding
+- Exploit good channel moments
+- Complex but higher throughput
+
+---
+
+## Channel-Unaware Schedulers
+
+These schedulers don't know (or don't care) about channel conditions.
+
+---
+
+### Round Robin
+
+The simplest approach: **take turns**.
+
+::round-robin
+
+**How it works:**
+- User 1 gets a slot, then User 2, then User 3...
+- Cycle repeats
+- Everyone gets equal time
+
+**Pros:**
+- Completely fair
+- Very simple to implement
+
+**Cons:**
+- Wastes capacity when users have bad signals
+- A user with poor signal still gets slots (transmits slowly)
+
+> Round Robin treats everyone equally, even when that's inefficient.
+
+---
+
+### Weighted Fair Queuing (WFQ)
+
+Like Round Robin, but **weighted by priority**.
+
+::wfq
+
+**How it works:**
+- Each connection has a weight based on its QoS class
+- Higher weight = more slots
+- UGS might get weight 4, BE might get weight 1
+
+**Pros:**
+- Respects QoS priorities
+- Still fair within each class
+
+**Cons:**
+- Still ignores channel quality
+- High-priority user with bad signal wastes premium slots
+
+> WFQ is "smart" about priorities but "blind" to channel conditions.
+
+---
+
+## Channel-Aware Schedulers
+
+These schedulers check signal quality before assigning slots.
+
+**Key insight:** In a cell with many users, *someone* probably has a good channel right now. Schedule them!
+
+This is called **multiuser diversity**.
+
+---
+
+### Max C/I (Maximum Carrier-to-Interference)
+
+Always pick the user with the **best signal**.
+
+::max-ci
+
+**How it works:**
+- Measure each user's channel quality (C/I ratio)
+- Give slots to whoever has the highest C/I
+- Repeat every scheduling decision
+
+**Pros:**
+- Maximizes total cell throughput
+- Users transmit at highest possible rate
+
+**Cons:**
+- **Unfair!** Users far from base station starve
+- Users near the tower dominate
+
+> Max C/I is greedy: maximum throughput, minimum fairness.
+
+---
+
+### Proportional Fair
+
+The **best of both worlds**: throughput AND fairness.
+
+::proportional-fair
+
+**How it works:**
+- Track each user's *average* throughput over time
+- Calculate: current rate / average rate
+- Pick the user with the highest ratio
+
+**Why this works:**
+- User usually has bad signal, but right now it's decent? High ratio, gets scheduled.
+- User always has great signal? Lower ratio (current ≈ average), less priority.
+
+**Pros:**
+- High throughput (exploits good channels)
+- Fair over time (everyone eventually gets served)
+
+**Cons:**
+- More complex to implement
+- Requires tracking history
+
+> Proportional Fair asks: "Who is doing better *than usual* right now?"
+
+---
+
+## Comparison
+
+| Scheduler | Throughput | Fairness | Channel-Aware | Complexity |
+|-----------|------------|----------|---------------|------------|
+| **Round Robin** | Low | High | No | Low |
+| **WFQ** | Medium | High | No | Medium |
+| **Max C/I** | Highest | Lowest | Yes | High |
+| **Proportional Fair** | High | Medium | Yes | High |
+
+---
+
+## Which One to Use?
+
+**Round Robin:** When simplicity matters and all users are similar.
+
+**WFQ:** When you need QoS differentiation but can't measure channels.
+
+**Max C/I:** When raw throughput is all that matters (rare in practice).
+
+**Proportional Fair:** The standard choice for modern systems. Used in LTE too.
+
+---
+
+## How Scheduling Fits Together
+
+1. **QoS class** defines requirements (latency, bandwidth)
+2. **Admission control** accepts/rejects connections
+3. **Scheduler** assigns slots each frame, considering:
+   - QoS requirements (UGS needs regular slots)
+   - Channel conditions (if channel-aware)
+   - Fairness constraints
+
+> The scheduler is where QoS promises become reality.
