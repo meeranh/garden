@@ -1,0 +1,222 @@
+---
+title: LTE Frame Structure
+---
+
+LTE needs a way to organize **time** and **frequency** so millions of users can share the same spectrum. The **frame structure** is that organizational system.
+
+Think of it like a train schedule. Every train (data packet) needs a specific time slot and platform (frequency). Without this structure, *chaos*.
+
+---
+
+## The Time Hierarchy
+
+LTE divides time into a **nested hierarchy**. Each level zooms in *further*.
+
+::frame-hierarchy
+
+---
+
+### Radio Frame: The Big Picture
+
+The **radio frame** is the largest time unit:
+
+> **1 Radio Frame = 10 ms**
+
+This 10 ms window repeats *forever*. Everything in LTE is synchronized to this heartbeat.
+
+---
+
+### Subframes: Dividing the Frame
+
+Each radio frame contains **10 subframes**:
+
+| Unit | Duration | Count per Frame |
+|------|----------|-----------------|
+| Radio Frame | 10 ms | 1 |
+| Subframe | **1 ms** | 10 |
+
+Each subframe is the **basic scheduling unit**. The network decides *what to send* in each 1 ms subframe.
+
+---
+
+### Time-Slots: Further Division
+
+Each subframe splits into **2 time-slots**:
+
+| Unit | Duration | Count per Subframe |
+|------|----------|--------------------|
+| Subframe | 1 ms | 1 |
+| Time-slot | **0.5 ms** | 2 |
+
+So one radio frame has **20 time-slots** total.
+
+---
+
+### OFDM Symbols: The Atomic Unit
+
+Each time-slot contains **7 OFDM symbols** (with normal cyclic prefix):
+
+| Unit | Duration | Count per Slot |
+|------|----------|----------------|
+| Time-slot | 0.5 ms | 1 |
+| OFDM Symbol | ~71.4 μs | **7** |
+
+Why 7? It comes from the math:
+- Subcarrier spacing = 15 kHz
+- Symbol duration = 1/15000 = 66.7 μs
+- Add cyclic prefix time, and 7 symbols fit in 0.5 ms
+
+---
+
+## Cyclic Prefix: The Guard Time
+
+*Remember* the **cyclic prefix** from OFDM? It's the guard time that prevents inter-symbol interference from multipath.
+
+LTE offers **two options**:
+
+::cyclic-prefix
+
+---
+
+### Normal Cyclic Prefix
+
+- **CP duration:** ~5.2 μs (first symbol) / ~4.7 μs (others)
+- **Symbols per slot:** 7
+- **Use case:** Most deployments, small to medium cells
+
+The short guard time means *more symbols* fit in each slot, giving you *higher throughput*.
+
+---
+
+### Extended Cyclic Prefix
+
+- **CP duration:** ~16.7 μs
+- **Symbols per slot:** 6
+- **Use case:** Large cells, mountainous terrain, high multipath environments
+
+The longer guard time *wastes* more capacity but provides *better protection* against multipath delay spread.
+
+> **Rule of thumb:** Normal CP handles delay spreads up to ~5 μs. Extended CP handles up to ~17 μs.
+
+---
+
+## The Frequency Dimension
+
+Now the *other* axis. LTE uses OFDM with a fixed **subcarrier spacing**:
+
+> **Subcarrier spacing = 15 kHz**
+
+The total bandwidth determines how many subcarriers you get:
+
+| Bandwidth | Usable Subcarriers |
+|-----------|-------------------|
+| 1.4 MHz | 72 |
+| 5 MHz | 300 |
+| 10 MHz | 600 |
+| 20 MHz | 1200 |
+
+---
+
+## Resource Block: The Allocation Unit
+
+Here's the *crucial* concept. LTE allocates resources in 2D chunks called **Resource Blocks (RB)**.
+
+::resource-block
+
+---
+
+### What's in a Resource Block?
+
+A **Resource Block** combines time and frequency:
+
+> **1 RB = 12 subcarriers × 7 OFDM symbols**
+
+Breaking that down:
+- **12 subcarriers** × 15 kHz = **180 kHz** bandwidth
+- **7 symbols** = **1 time-slot** = 0.5 ms duration
+- **84 Resource Elements** total (12 × 7)
+
+---
+
+### Resource Element: The Smallest Unit
+
+A **Resource Element (RE)** is the atomic unit:
+
+> **1 RE = 1 subcarrier × 1 OFDM symbol**
+
+This is the *smallest addressable unit* in LTE. Each RE carries one modulation symbol (QPSK, 16-QAM, or 64-QAM).
+
+---
+
+### How Many Resource Blocks?
+
+The number of RBs depends on your bandwidth:
+
+| Bandwidth | Resource Blocks |
+|-----------|-----------------|
+| 1.4 MHz | 6 RBs |
+| 5 MHz | 25 RBs |
+| 10 MHz | 50 RBs |
+| 20 MHz | 100 RBs |
+
+The scheduler assigns RBs to users *each subframe*. **More RBs = more capacity.**
+
+---
+
+## FDD vs TDD: Frame Types
+
+LTE supports two **duplexing modes** that determine how uplink and downlink share the spectrum.
+
+::fdd-vs-tdd
+
+---
+
+### Type 1: FDD (Frequency Division Duplex)
+
+**FDD** uses **separate frequencies** for uplink and downlink:
+
+- Uplink and downlink transmit *simultaneously*
+- Requires **paired spectrum** (two frequency bands)
+- All 10 subframes available for each direction
+- **Most common** in LTE deployments
+
+---
+
+### Type 2: TDD (Time Division Duplex)
+
+**TDD** uses the **same frequency** for both directions:
+
+- Uplink and downlink *take turns* in time
+- Uses **unpaired spectrum** (single frequency band)
+- Some subframes for DL, some for UL, some special
+- **Flexible** UL/DL ratio based on traffic patterns
+
+---
+
+### Which is Better?
+
+| Aspect | FDD | TDD |
+|--------|-----|-----|
+| Spectrum | Paired (more expensive) | Unpaired |
+| Latency | Lower (simultaneous) | Higher (waiting for turn) |
+| Flexibility | Fixed UL/DL ratio | Adjustable ratio |
+| Deployment | ~80% of LTE networks | ~20% of LTE networks |
+
+**FDD dominates** because paired spectrum was *historically* more available and the constant bandwidth simplifies planning.
+
+---
+
+## Summary: Key Parameters
+
+| Parameter | Value |
+|-----------|-------|
+| Radio frame | 10 ms |
+| Subframe | 1 ms |
+| Time-slot | 0.5 ms |
+| Symbols/slot (Normal CP) | 7 |
+| Symbols/slot (Extended CP) | 6 |
+| Subcarrier spacing | 15 kHz |
+| Resource Block | 12 subcarriers × 7 symbols |
+| RB bandwidth | 180 kHz |
+
+> **The frame structure is LTE's universal clock.** Every device, every tower, every packet follows this timing. It's what makes coordinated multi-user access possible.
