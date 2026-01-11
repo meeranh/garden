@@ -1,0 +1,186 @@
+---
+title: GSM Air Interface
+prerequisites:
+  - wireless-communications/cellular-gsm/cellular-fundamentals
+---
+
+## What is the Air Interface?
+
+The **air interface** is how your phone communicates with the cell tower over radio waves.
+
+GSM defines *exactly* how this works:
+- Which frequencies to use
+- How to share them among users
+- How to send and receive at the same time
+
+> Think of it as the *language* your phone and the tower speak to each other.
+
+---
+
+## FDD: Talking and Listening at Once
+
+When you're on a call, you need to **send** and **receive** simultaneously. You talk while the other person talks.
+
+**FDD (Frequency Division Duplex)** solves this by using *two different frequencies*:
+
+::fdd-duplex
+
+---
+
+**The two directions:**
+
+| Direction | Name | Who Transmits |
+|-----------|------|---------------|
+| Phone → Tower | **Uplink** | Your phone |
+| Tower → Phone | **Downlink** | The cell tower |
+
+> By using separate frequencies, your phone's transmitter doesn't interfere with its own receiver.
+
+---
+
+## GSM Frequency Bands
+
+In GSM 900 (the original band):
+
+| Direction | Frequency Range |
+|-----------|-----------------|
+| Uplink | 890 - 915 MHz |
+| Downlink | 935 - 960 MHz |
+| **Gap** | 45 MHz |
+
+The 45 MHz gap keeps uplink and downlink *cleanly separated*.
+
+---
+
+## Carriers: Dividing the Spectrum
+
+GSM divides each band into **carriers** (individual channels).
+
+- **Band** = the full chunk of spectrum (e.g., 25 MHz for uplink)
+- **Carrier** = one narrow slice of that band (200 kHz) that carries one channel
+
+Each carrier is **200 kHz wide**.
+
+::carrier-bandwidth
+
+---
+
+**Simple math:**
+
+With 25 MHz of spectrum:
+
+$$\text{Number of carriers} = \frac{25 \text{ MHz}}{0.2 \text{ MHz}} = 125 \text{ carriers}$$
+
+> Each carrier is like a *lane* on a highway. More carriers = more lanes = more capacity.
+
+---
+
+## Full Duplex = A Pair of Carriers
+
+A **full duplex carrier** is actually a *pair*:
+
+- One 200 kHz carrier for **uplink**
+- One 200 kHz carrier for **downlink**
+
+| Component | Bandwidth |
+|-----------|-----------|
+| Uplink carrier | 200 kHz |
+| Downlink carrier | 200 kHz |
+| **Full duplex pair** | 2 × 200 kHz = 400 kHz |
+
+> When someone says "one GSM carrier," they usually mean *the pair*.
+
+---
+
+## TDMA: Sharing a Carrier Among Users
+
+One 200 kHz carrier could handle one call. But that's *wasteful*.
+
+**TDMA (Time Division Multiple Access)** lets **8 users share** one carrier by *taking turns*.
+
+::tdma-slots
+
+---
+
+## How TDMA Works
+
+Time is divided into **frames**. Each frame has **8 time slots**.
+
+| Parameter | Value |
+|-----------|-------|
+| Frame duration | 4.615 ms |
+| Slots per frame | 8 |
+| Slot duration | ~577 μs |
+
+Each user gets *one slot per frame*. They transmit their burst, then wait for the next frame.
+
+---
+
+**Why this works:**
+
+The switching happens *so fast* (every 4.615 ms) that it feels continuous to humans.
+
+Your voice is digitized, compressed, and sent in short bursts. The gaps are imperceptible.
+
+> It's like a conversation where 8 people take *very fast* turns. So fast it sounds like everyone's talking at once.
+
+---
+
+## The Benefit of TDMA
+
+**Without TDMA:** 1 carrier = 1 call
+
+**With TDMA:** 1 carrier = 8 calls
+
+This **8x improvement** is huge for network capacity.
+
+---
+
+## Time Slot Structure
+
+Each 577 μs slot contains a **burst** of data:
+
+| Field | Purpose |
+|-------|---------|
+| Guard bits | Prevent overlap between slots |
+| Training sequence | Helps receiver synchronize |
+| Data bits | Your actual voice (encrypted) |
+
+> The training sequence is like a "known pattern" that helps the receiver tune in properly.
+
+---
+
+## Putting It All Together
+
+::gsm-complete
+
+---
+
+## GSM Air Interface Summary
+
+| Parameter | Value |
+|-----------|-------|
+| **Duplex method** | FDD (separate frequencies) |
+| **Carrier bandwidth** | 200 kHz |
+| **Full duplex pair** | 2 × 200 kHz |
+| **Access method** | TDMA |
+| **Slots per frame** | 8 |
+| **Frame duration** | 4.615 ms |
+| **Users per carrier** | 8 |
+
+---
+
+## Capacity Example
+
+**Given:** 7 MHz paired spectrum, 7-cell cluster
+
+| Step | Calculation | Result |
+|------|-------------|--------|
+| Total carriers | 7 MHz / 0.2 MHz | 35 carriers |
+| Carriers per cell | 35 / 7 | 5 carriers |
+| Users per carrier | (TDMA) | 8 users |
+| **Calls per cell** | 5 × 8 | **40 calls** |
+
+*Minus a few slots reserved for control channels.*
+
+> This is how operators calculate network capacity and plan cell deployments.

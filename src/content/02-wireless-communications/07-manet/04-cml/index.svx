@@ -14,9 +14,9 @@ We've seen two approaches:
 | **OLSR** | Proactive | Always ready, but constant overhead |
 | **AODV** | Reactive | No overhead when idle, but discovery delay |
 
-Neither is always better. It depends on the situation.
+Neither is *always* better. It depends on the situation.
 
-> **CML's idea:** Why not switch between them based on what the network needs?
+> **CML's idea:** Why not switch between them based on what the network *needs*?
 
 ---
 
@@ -26,10 +26,10 @@ Neither is always better. It depends on the situation.
 
 Like a chameleon changes color to match its environment, CML changes its **routing strategy** to match network conditions.
 
-- When traffic is heavy → act like **OLSR** (proactive)
-- When traffic is light → act like **AODV** (reactive)
+- When traffic is *heavy* → act like **OLSR** (proactive)
+- When traffic is *light* → act like **AODV** (reactive)
 
-> CML adapts. It's not stuck with one approach.
+> CML *adapts*. It's not stuck with one approach.
 
 ---
 
@@ -50,7 +50,7 @@ When the network is **small** or **traffic is heavy**, CML enters **P-Phase**.
 - Maintains routing tables proactively
 - Routes are always ready
 
-**Why?** When everyone is talking, you want routes ready. The overhead is worth it.
+**Why?** When everyone is talking, you want routes *ready*. The overhead is worth it.
 
 > P-Phase = OLSR-like behavior
 
@@ -65,7 +65,7 @@ When the network is **large** or **traffic is sparse**, CML enters **R-Phase**.
 - Discovers routes on-demand (like AODV)
 - Saves bandwidth and battery
 
-**Why?** When few nodes are talking, constant updates are wasteful.
+**Why?** When *few* nodes are talking, constant updates are wasteful.
 
 > R-Phase = AODV-like behavior
 
@@ -80,7 +80,7 @@ This happens when:
 - CML is **deciding** which mode fits better
 - Transitioning from one phase to another
 
-During O-Phase, the protocol is unstable. It hasn't committed to either strategy yet.
+During O-Phase, the protocol is *unstable*. It hasn't committed to either strategy yet.
 
 ---
 
@@ -95,13 +95,13 @@ CML monitors several factors:
 | **Node density** | Dense | Sparse |
 | **Mobility** | Low | High |
 
-When these factors change significantly, CML switches phases.
+When these factors change *significantly*, CML switches phases.
 
 ---
 
 ## The Advantage
 
-In theory, CML gives you:
+*In theory*, CML gives you:
 
 - **Low latency** when traffic is heavy (proactive mode)
 - **Low overhead** when traffic is light (reactive mode)
@@ -115,7 +115,7 @@ In theory, CML gives you:
 
 Here's the problem.
 
-An **attacker** can manipulate network conditions to force CML to switch phases repeatedly.
+An **attacker** can manipulate network conditions to force CML to switch phases *repeatedly*.
 
 **How the attack works:**
 1. Attacker injects fake traffic → CML switches to P-Phase
@@ -128,7 +128,7 @@ An **attacker** can manipulate network conditions to force CML to switch phases 
 - Packets get dropped
 - Network performance degrades
 
-> The attacker never touches the routing messages directly. They just trigger endless oscillations.
+> The attacker *never touches* the routing messages directly. They just trigger endless oscillations.
 
 ---
 
@@ -141,7 +141,7 @@ During phase transitions:
 
 There's a **window of vulnerability** where routing is unreliable.
 
-An attacker exploiting this window can cause significant packet loss without being detected as a routing attack.
+An attacker exploiting this window can cause significant packet loss *without being detected* as a routing attack.
 
 ---
 
@@ -168,4 +168,4 @@ An attacker exploiting this window can cause significant packet loss without bei
 | **AODV** | Reactive | On-demand | High (first packet) | Discovery flooding |
 | **CML** | Hybrid | Adaptive | Adaptive | Oscillation attacks |
 
-> Each protocol makes different trade-offs. There's no universal "best" choice.
+> Each protocol makes different trade-offs. There's no universal *"best"* choice.

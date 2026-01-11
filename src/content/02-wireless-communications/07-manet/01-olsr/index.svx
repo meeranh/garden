@@ -4,7 +4,7 @@ title: OLSR (Optimized Link State Routing)
 
 ## What is a MANET?
 
-A **Mobile Ad Hoc Network** has no infrastructure. No cell towers. No routers. No fixed network.
+A **Mobile Ad Hoc Network** has no infrastructure. No cell towers. No routers. *No fixed network*.
 
 Just devices talking **directly to each other**.
 
@@ -12,7 +12,7 @@ Just devices talking **directly to each other**.
 
 **Example:** 20 soldiers in a jungle with radios. No cell coverage. They form a network among themselves.
 
-If Soldier A wants to reach Soldier T (who's 500m away, out of direct range), the message **hops through intermediate soldiers**.
+If Soldier A wants to reach Soldier T (who's 500m away, *out of direct range*), the message **hops through intermediate soldiers**.
 
 > **The routing problem:** How does A know *which* path to use?
 
@@ -24,13 +24,13 @@ Simplest approach: A broadcasts the message. Everyone who hears it rebroadcasts.
 
 ::flooding-problem
 
-**The problem:** If 20 nodes all rebroadcast, you get **20 transmissions** for one message.
+**The problem:** If 20 nodes all rebroadcast, you get **20 transmissions** for *one message*.
 
 - Wastes bandwidth
 - Drains batteries
 - Causes collisions
 
-> Flooding works, but it's incredibly wasteful.
+> Flooding works, but it's *incredibly* wasteful.
 
 ---
 
@@ -42,7 +42,7 @@ Instead of *everyone* rebroadcasting, only **selected nodes** rebroadcast.
 
 The idea:
 1. Each node picks a small set of neighbors as its **MPRs**
-2. Only MPRs forward messages
+2. *Only* MPRs forward messages
 3. Everyone else stays quiet
 
 ::mpr-selection
@@ -91,7 +91,7 @@ Every node **periodically** broadcasts HELLO messages.
 2. **2-hop neighbors:** Who can my neighbors reach?
 3. **MPR selection:** Which neighbors should I pick as MPRs?
 
-> HELLOs are **not forwarded**. They only travel 1 hop.
+> HELLOs are **not forwarded**. They only travel *1 hop*.
 
 ---
 
@@ -103,8 +103,8 @@ Once MPRs are selected, they broadcast **TC messages**.
 - The node's MPR selector set (who selected me as MPR?)
 
 **Key difference from HELLO:**
-- TC messages **are forwarded** (but only by MPRs)
-- They spread across the entire network
+- TC messages **are forwarded** (but *only* by MPRs)
+- They spread across the *entire* network
 
 ---
 
@@ -112,7 +112,7 @@ Once MPRs are selected, they broadcast **TC messages**.
 
 Every node builds a **topology table**: a map of the entire network.
 
-> From the topology table, each node can compute routes to any destination.
+> From the topology table, each node can compute routes to *any* destination.
 
 ---
 
@@ -140,7 +140,7 @@ OLSR's optimization: **Only MPRs flood TC messages.**
 
 ::flooding-comparison
 
-This dramatically reduces overhead.
+This *dramatically* reduces overhead.
 
 ---
 
@@ -160,14 +160,14 @@ This dramatically reduces overhead.
 
 ## Deficiency: Constant Overhead
 
-OLSR sends HELLO and TC messages **all the time**, even when no one is sending actual data.
+OLSR sends HELLO and TC messages **all the time**, even when *no one is sending actual data*.
 
 **The cost:**
 - Battery drain (constant radio usage)
 - Bandwidth waste (routing updates nobody uses)
 - Doesn't scale well (more nodes = more overhead)
 
-> In a quiet network, OLSR keeps chattering about routes that aren't being used.
+> In a quiet network, OLSR keeps chattering about routes that *aren't being used*.
 
 ---
 

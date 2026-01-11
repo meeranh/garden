@@ -1,0 +1,133 @@
+---
+title: Cellular Fundamentals
+---
+
+## The Problem
+
+Radio spectrum is **expensive and limited**. But mobile networks need to serve *millions* of users across entire cities.
+
+You can't just use one frequency for everyone. Too many people would interfere with each other.
+
+> **The solution:** Divide the coverage area into small **cells**, and **reuse** the same frequencies in cells that are *far apart*.
+
+---
+
+## Cells and Base Stations
+
+A **cell** is a geographic area served by one base station (tower).
+
+::cell-layout
+
+Instead of one giant tower trying to cover everything, you use *many smaller cells*. Each cell handles users in its area.
+
+**Why cells?**
+- Smaller area = fewer users per cell = *less congestion*
+- Lower power needed = *longer battery life* for phones
+- Same frequencies can be reused in *distant* cells
+
+---
+
+## The Cluster Concept
+
+You can't use the same frequency in **neighboring** cells. They'd interfere.
+
+So you group cells into a **cluster**. Within a cluster, *every cell uses different frequencies*.
+
+::frequency-reuse
+
+Once you finish one cluster, you **repeat the pattern**. Cells using the same frequency are now *far apart*.
+
+> A **cluster** is the smallest group of cells that uses the complete set of available frequencies.
+
+---
+
+## Cluster Size
+
+Common cluster sizes: **3, 4, 7, 12**
+
+| Cluster Size | Frequencies per Cell | Reuse Distance |
+|--------------|---------------------|----------------|
+| 3 | High | Short |
+| 4 | Medium-High | Medium |
+| 7 | Medium | Long |
+| 12 | Low | Very Long |
+
+**Smaller cluster** = more frequencies per cell = higher capacity
+
+**Larger cluster** = frequencies reused farther apart = less interference
+
+---
+
+## Co-Channel Interference
+
+When two cells use the **same frequency**, their signals can overlap. This is **co-channel interference**.
+
+::co-channel-interference
+
+The *closer* the cells, the *worse* the interference. Users hear noise, calls drop, data slows down.
+
+> **Co-channel interference** is the main factor limiting how small your cluster can be.
+
+---
+
+## The Trade-off
+
+::cluster-tradeoff
+
+You want the **smallest cluster** that still gives *acceptable* call quality.
+
+- Too small: interference *ruins* calls
+- Too large: *wasting* capacity
+
+---
+
+## Signal-to-Interference Ratio (SIR)
+
+**SIR** measures how strong your wanted signal is compared to interference.
+
+$$\text{SIR} = \frac{\text{Signal Power}}{\text{Interference Power}}$$
+
+Higher SIR = *better quality*. You need a minimum SIR for acceptable calls (typically 12-18 dB for voice).
+
+> The **most important criterion** for choosing cluster size is maintaining adequate SIR.
+
+---
+
+## Calculating Capacity
+
+**Example:** You have 7 MHz of spectrum. Each carrier needs 200 kHz. You use a 7-cell cluster.
+
+| Step | Calculation | Result |
+|------|-------------|--------|
+| Total carriers | 7 MHz / 0.2 MHz | 35 carriers |
+| Carriers per cell | 35 / 7 | 5 carriers |
+
+More carriers per cell = more simultaneous calls.
+
+---
+
+## Spectral Efficiency
+
+**Spectral efficiency** = how well you use your spectrum.
+
+If you compare cluster N and cluster M, where N > M:
+
+| Cluster | Frequencies per Cell | Spectral Efficiency |
+|---------|---------------------|---------------------|
+| N (larger) | Fewer | Lower |
+| M (smaller) | More | **Higher** |
+
+> **Smaller clusters are more spectrally efficient**, but *only if* interference stays acceptable.
+
+---
+
+## Summary
+
+| Concept | Meaning |
+|---------|---------|
+| **Cell** | Area served by one base station |
+| **Cluster** | Group of cells using all available frequencies |
+| **Frequency reuse** | Same frequency used in distant cells |
+| **Co-channel interference** | Interference from cells on same frequency |
+| **SIR** | Signal quality measure (signal vs interference) |
+| **Cluster size trade-off** | Smaller = more capacity but more interference |

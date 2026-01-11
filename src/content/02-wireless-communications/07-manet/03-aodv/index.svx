@@ -8,7 +8,7 @@ prerequisites:
 
 OLSR works, but it's **wasteful**.
 
-It sends HELLO and TC messages **constantly**, even when nobody is actually sending data. In a quiet network, all that routing overhead is pure waste.
+It sends HELLO and TC messages **constantly**, even when *nobody is actually sending data*. In a quiet network, all that routing overhead is pure waste.
 
 > What if we only discovered routes **when we actually need them**?
 
@@ -24,7 +24,7 @@ That's the idea behind **AODV**.
 
 ## AODV: On-Demand Routing
 
-AODV is **reactive**. It does nothing until someone wants to send data.
+AODV is **reactive**. It does *nothing* until someone wants to send data.
 
 **When node A wants to reach node D:**
 
@@ -32,7 +32,7 @@ AODV is **reactive**. It does nothing until someone wants to send data.
 2. No route? Start **route discovery**
 3. Route found? Just send the packet
 
-> No constant chatter. No wasted updates. Routes are discovered **on demand**.
+> No constant chatter. No wasted updates. Routes are discovered *on demand*.
 
 ---
 
@@ -54,7 +54,7 @@ Every node that receives the RREQ **rebroadcasts** it (if they haven't seen it b
 
 Here's the clever part.
 
-As the RREQ floods outward, each node remembers **where it came from**. This creates a **reverse path** back to the source.
+As the RREQ floods outward, each node remembers *where it came from*. This creates a **reverse path** back to the source.
 
 ::route-discovery
 
@@ -72,7 +72,7 @@ As the RREP travels back:
 - Each node learns the **forward path** to D
 - When RREP reaches A, the route is complete
 
-> A can now send data to D. The route was discovered **only when needed**.
+> A can now send data to D. The route was discovered *only when needed*.
 
 ---
 
@@ -80,9 +80,9 @@ As the RREP travels back:
 
 What if some node along the way **already knows** how to reach D?
 
-It can send the RREP immediately! No need to flood all the way to D.
+It can send the RREP *immediately*! No need to flood all the way to D.
 
-This speeds up route discovery when routes are partially known.
+This speeds up route discovery when routes are *partially known*.
 
 ---
 
@@ -114,7 +114,7 @@ The source can then:
 
 AODV saves bandwidth when the network is quiet. But there's a cost.
 
-**The first packet waits.**
+**The first packet *waits*.**
 
 When A wants to send to D, the first packet must wait while:
 1. RREQ floods the network
@@ -131,9 +131,9 @@ This is called **route discovery latency**.
 
 For **real-time traffic** (voice, video), waiting for route discovery is a problem.
 
-The delay can be hundreds of milliseconds in a large network.
+The delay can be *hundreds of milliseconds* in a large network.
 
-**Also:** Route discovery causes a **flood** of RREQ packets. If many nodes start discoveries at once, the network gets congested.
+**Also:** Route discovery causes a **flood** of RREQ packets. If many nodes start discoveries at once, the network gets *congested*.
 
 > AODV trades **constant overhead** for **occasional flooding**.
 
@@ -164,7 +164,7 @@ The delay can be hundreds of milliseconds in a large network.
 | **Best for** | Dense traffic | Sparse traffic |
 | **Standardized** | RFC 3626 | RFC 3561 |
 
-> Neither is "better". They're optimized for different scenarios.
+> Neither is *"better"*. They're optimized for different scenarios.
 
 ---
 

@@ -8,7 +8,7 @@ prerequisites:
 
 OLSR worked, but it had problems:
 
-- **Monolithic design** - Everything bundled together, hard to extend
+- **Monolithic design** - Everything bundled together, *hard to extend*
 - **Hop count only** - Couldn't consider link quality
 - **IPv4 only** - No IPv6 support
 - **Fixed message format** - Hard to add new features
@@ -19,7 +19,7 @@ OLSR worked, but it had problems:
 
 ## The Big Change: Modular Design
 
-OLSR was one big protocol. OLSRv2 splits into **two separate protocols**:
+OLSR was *one big protocol*. OLSRv2 splits into **two separate protocols**:
 
 ::modular-architecture
 
@@ -37,7 +37,7 @@ OLSR was one big protocol. OLSRv2 splits into **two separate protocols**:
 
 **Why separate it?**
 
-Other protocols can reuse NHDP! You don't need to reinvent neighbor discovery for every new routing protocol.
+Other protocols can *reuse* NHDP! You don't need to reinvent neighbor discovery for every new routing protocol.
 
 > NHDP is like a **building block** that any protocol can use.
 
@@ -65,7 +65,7 @@ The **OLSRv2 core** handles the network-wide picture:
 
 OLSR only counted **hops**. Shortest path = fewest hops.
 
-**Problem:** A 2-hop path through strong links might be better than a 1-hop path through a weak link.
+**Problem:** A 2-hop path through *strong* links might be better than a 1-hop path through a *weak* link.
 
 ::link-metrics
 
@@ -88,7 +88,7 @@ OLSRv2 can use different **metrics** to evaluate links:
 
 ## TLV: Flexible Messages
 
-OLSR had fixed message formats. Adding new features meant breaking compatibility.
+OLSR had fixed message formats. Adding new features meant *breaking compatibility*.
 
 OLSRv2 uses **TLV (Type-Length-Value)** encoding:
 
@@ -137,7 +137,7 @@ OLSRv2 inherits OLSR's fundamental limitation:
 - TC messages sent periodically
 - Routes maintained even when not used
 
-> No matter how modular or flexible, OLSRv2 still wastes resources in quiet networks.
+> No matter how modular or flexible, OLSRv2 *still* wastes resources in quiet networks.
 
 ---
 
@@ -166,4 +166,4 @@ OLSRv2 inherits OLSR's fundamental limitation:
 - Sparse traffic (wasted updates)
 - Battery-constrained devices
 
-> OLSRv2 is OLSR done right, but it's still proactive. For a different approach, see **AODV** (reactive routing).
+> OLSRv2 is OLSR *done right*, but it's still proactive. For a different approach, see **AODV** (reactive routing).

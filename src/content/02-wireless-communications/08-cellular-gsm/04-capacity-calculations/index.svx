@@ -1,0 +1,226 @@
+---
+title: GSM Capacity Calculations
+prerequisites:
+  - wireless-communications/cellular-gsm/gsm-air-interface
+---
+
+## Quick Refresher
+
+Before we calculate, let's recall what these terms mean:
+
+- **Spectrum** - The chunk of radio frequencies the operator owns (e.g., 7 MHz)
+- **Carrier** - One 200 kHz slice of that spectrum (a single channel)
+- **Cell** - The area covered by one tower
+- **Cluster** - A group of cells that together use *all* the carriers once
+- **Carriers per cell** - How many carriers a single tower gets to use
+
+> With frequency reuse, each cell only gets *some* of the carriers. Neighboring cells get different ones to avoid interference.
+
+---
+
+## The Big Question
+
+You're a mobile operator. You've been given spectrum. **How many phone calls can each cell handle?**
+
+This is *the* fundamental capacity question in cellular networks.
+
+---
+
+## The Three-Step Chain
+
+Capacity flows through three conversions:
+
+$$\text{Spectrum} \rightarrow \text{Carriers} \rightarrow \text{Carriers per cell} \rightarrow \text{Calls per cell}$$
+
+Each step is simple. Let's walk through them.
+
+---
+
+## Step 1: Spectrum → Carriers
+
+Your spectrum gets divided into **carriers**. Each GSM carrier is **200 kHz** wide.
+
+$$\text{Total carriers} = \frac{\text{Spectrum (MHz)}}{0.2 \text{ MHz}}$$
+
+> Think of it like cutting a rope into pieces. A 7-meter rope cut into 0.2-meter pieces gives you 35 pieces.
+
+---
+
+**Example:** You have 7 MHz of spectrum.
+
+$$\text{Carriers} = \frac{7}{0.2} = 35 \text{ carriers}$$
+
+---
+
+## Step 2: Carriers → Carriers per Cell
+
+You can't use *all* carriers in every cell. That would cause interference between neighboring cells using the same frequency.
+
+With **frequency reuse**, carriers are divided among cells in a cluster.
+
+$$\text{Carriers per cell} = \frac{\text{Total carriers}}{\text{Cluster size}}$$
+
+---
+
+**Example:** 35 carriers with a 7-cell cluster.
+
+$$\text{Carriers per cell} = \frac{35}{7} = 5 \text{ carriers}$$
+
+Each cell gets 5 carriers. Neighboring cells get *different* carriers.
+
+> If you get a fractional result, round *down*. You can't have half a carrier.
+
+---
+
+## Step 3: Carriers per Cell → Calls per Cell
+
+Each carrier supports **8 users** via TDMA (8 time slots per frame).
+
+$$\text{Calls per cell} = \text{Carriers per cell} \times 8$$
+
+---
+
+**Example:** 5 carriers per cell.
+
+$$\text{Calls} = 5 \times 8 = 40 \text{ calls}$$
+
+---
+
+## Control Channel Overhead
+
+Not all 8 slots carry voice. Some slots are reserved for **control channels**:
+
+- **BCCH** - Broadcast channel (cell info)
+- **CCCH** - Common control (paging, access)
+- **SDCCH** - Signaling during call setup
+
+Typically, **1-2 carriers** worth of slots go to control.
+
+$$\text{Speech calls} = \text{Total slots} - \text{Control slots}$$
+
+> For a cell with 5 carriers (40 slots), expect roughly **32-38 speech calls** after control overhead.
+
+---
+
+## The Complete Formula
+
+Putting it all together:
+
+$$\text{Speech calls per cell} = \left( \frac{\text{Spectrum}}{0.2} \div \text{Cluster size} \right) \times 8 - \text{Control}$$
+
+---
+
+## What About "2× Spectrum"?
+
+When you see **2×7 MHz**, it means:
+
+- 7 MHz for **uplink** (phone → tower)
+- 7 MHz for **downlink** (tower → phone)
+
+For capacity calculations, use just *one* direction (they're paired). So "2×7 MHz" means you work with **7 MHz**.
+
+---
+
+## Worked Example 1
+
+> A GSM operator is allocated **2×7 MHz** of spectrum. The technical parameters are:
+> - TDMA and FDD
+> - **8 time slots** per TDMA frame
+> - Carrier bandwidth = **200 kHz**
+> - Cluster size = **7 cells**
+>
+> (i) What is the number of carriers per cell?
+> (ii) What is the maximum number of speech calls possible in a cell?
+
+**Solution:**
+
+**(i) Carriers per cell:**
+
+$$\text{Total carriers} = \frac{7 \text{ MHz}}{0.2 \text{ MHz}} = 35$$
+
+$$\text{Carriers per cell} = \frac{35}{7} = \textbf{5 carriers}$$
+
+**(ii) Speech calls per cell:**
+
+$$\text{Total slots} = 5 \times 8 = 40$$
+
+After subtracting control channel overhead: **~38 speech calls**
+
+---
+
+## Worked Example 2
+
+> A GSM operator is allocated **2×8 MHz** of spectrum. The technical parameters are:
+> - TDMA and FDD
+> - **8 time slots** per TDMA frame
+> - Carrier bandwidth = **200 kHz**
+> - Cluster size = **7 cells**
+>
+> (i) What is the number of carriers per cell?
+> (ii) What is the maximum number of speech calls possible in a cell?
+
+**Solution:**
+
+**(i) Carriers per cell:**
+
+$$\text{Total carriers} = \frac{8 \text{ MHz}}{0.2 \text{ MHz}} = 40$$
+
+$$\text{Carriers per cell} = \frac{40}{7} = 5.71 \rightarrow \textbf{5 carriers}$$
+
+We round *down* - you can't have a fraction of a carrier.
+
+**(ii) Speech calls per cell:**
+
+$$\text{Total slots} = 5 \times 8 = 40$$
+
+After subtracting control channel overhead: **~38 speech calls**
+
+---
+
+## Worked Example 3
+
+> A GSM operator is allocated **2×6 MHz** of spectrum. The technical parameters are:
+> - TDMA and FDD
+> - **8 time slots** per TDMA frame
+> - Carrier bandwidth = **200 kHz**
+> - Cluster size = **7 cells**
+>
+> (i) What is the number of carriers per cell?
+> (ii) What is the maximum number of speech calls possible in a cell?
+
+**Solution:**
+
+**(i) Carriers per cell:**
+
+$$\text{Total carriers} = \frac{6 \text{ MHz}}{0.2 \text{ MHz}} = 30$$
+
+$$\text{Carriers per cell} = \frac{30}{7} = 4.28 \rightarrow \textbf{4 carriers}$$
+
+**(ii) Speech calls per cell:**
+
+$$\text{Total slots} = 4 \times 8 = 32$$
+
+After subtracting control channel overhead: **~30 speech calls**
+
+---
+
+## Why This Matters
+
+This calculation answers real business questions:
+
+- **Network planning:** How many cells do we need for 10,000 users?
+- **Spectrum value:** Is buying 1 MHz more spectrum worth it?
+- **Technology comparison:** How does GSM capacity compare to 3G?
+
+> Every extra MHz of spectrum or every improvement in cluster size *directly* translates to more revenue for operators.
+
+---
+
+## Key Numbers to Remember
+
+| Parameter | GSM Value |
+|-----------|-----------|
+| Carrier bandwidth | 200 kHz |
+| Time slots per carrier | 8 |
+| Common cluster size | 7 cells |
+| Control overhead | ~1-2 carriers |

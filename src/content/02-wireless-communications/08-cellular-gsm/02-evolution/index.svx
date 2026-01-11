@@ -1,0 +1,212 @@
+---
+title: Cellular Evolution (2G to 4G)
+prerequisites:
+  - wireless-communications/cellular-gsm/cellular-fundamentals
+---
+
+## The Driving Force
+
+Every generation of cellular technology exists for *one reason*:
+
+> **Users want more data, faster.**
+
+From voice calls to video streaming, each generation answered the demands of its era.
+
+---
+
+## 2G: The Digital Revolution
+
+**Era:** Early 1990s
+
+**The problem:** 1G was analog. Poor quality, no security, limited capacity.
+
+**The solution:** Go digital.
+
+---
+
+**What 2G (GSM) brought:**
+
+- **Digital voice** - Clearer calls, encrypted
+- **SMS** - Text messaging (a surprise hit)
+- **Better capacity** - More users per cell
+
+**Technology:**
+- TDMA (Time Division Multiple Access)
+- Circuit-switched (dedicated channel per call)
+- 200 kHz carriers, 8 time slots
+
+---
+
+**Data? Barely.**
+
+GSM was designed for *voice*. Data came later as an afterthought:
+
+| Standard | Speed | Use Case |
+|----------|-------|----------|
+| GPRS | ~50 kbps | Basic email |
+| EDGE | ~200 kbps | Slow web browsing |
+
+> 2G data was *painful*. But for voice and SMS, it worked brilliantly.
+
+---
+
+## 3G: Mobile Internet Arrives
+
+**Era:** Early 2000s
+
+**The driving factor:** People wanted *real* mobile internet. Email with attachments. Web pages with images. Maybe even video.
+
+---
+
+**What 3G (UMTS) brought:**
+
+- **Data-aware design** - Built for internet, not just voice
+- **Higher speeds** - Finally usable for web browsing
+- **Better spectral efficiency** - CDMA instead of TDMA
+
+**Technology:**
+- WCDMA (Wideband CDMA)
+- 5 MHz carriers
+- Still circuit-switched voice
+
+---
+
+**Speed progression:**
+
+| Standard | Speed | What it enabled |
+|----------|-------|-----------------|
+| 3G (basic) | 384 kbps | Web browsing |
+| HSPA | 3-7 Mbps | Video calls, music streaming |
+| HSPA+ | 20+ Mbps | Approaching broadband |
+
+---
+
+**The limitation:**
+
+Voice and data still *competed* for resources. Circuit-switched voice meant inefficient use of spectrum.
+
+> 3G proved mobile data was valuable. But it wasn't *fast enough* for what came next.
+
+---
+
+## 4G: The Smartphone Era
+
+**Era:** Around 2010
+
+**The driving factor:** The iPhone launched in 2007. Android followed. Suddenly everyone had a *pocket computer* demanding video, apps, and social media.
+
+> 3G couldn't keep up. A fundamental redesign was needed.
+
+---
+
+**What 4G (LTE) brought:**
+
+- **All-IP network** - *Everything* is data, including voice (VoLTE)
+- **OFDMA** - Far better spectral efficiency
+- **Flat architecture** - Fewer hops, lower latency
+- **MIMO** - Multiple antennas for parallel streams
+
+---
+
+**The key shift: Voice becomes data.**
+
+In 2G and 3G, voice had its *own* dedicated system. In 4G, voice is just another app.
+
+| Aspect | 2G/3G | 4G |
+|--------|-------|-----|
+| Voice | Circuit-switched | Packet-switched (VoLTE) |
+| Data | Add-on | Core design |
+| Architecture | Hierarchical | Flat |
+
+---
+
+**Speeds:**
+
+| Standard | Speed | What it enabled |
+|----------|-------|-----------------|
+| LTE | 100+ Mbps | HD video streaming |
+| LTE-Advanced | 1+ Gbps | 4K video, real-time gaming |
+
+> 4G finally delivered *true* mobile broadband. Your phone became as capable as your home internet.
+
+---
+
+## The Pattern
+
+Each generation brought roughly **10x improvement** in speed:
+
+| Generation | Typical Speed | Primary Use |
+|------------|---------------|-------------|
+| **2G** | ~100 kbps | Voice, SMS |
+| **3G** | ~1-5 Mbps | Mobile internet |
+| **4G** | ~50-100 Mbps | Video, apps, everything |
+
+---
+
+## Major Driving Factors
+
+**1. Data demand explosion**
+
+Users went from *kilobytes* to *gigabytes* per month. Video alone accounts for most mobile traffic today.
+
+---
+
+**2. Spectral efficiency**
+
+Spectrum is *expensive and limited*. Each generation squeezes more bits from the same MHz.
+
+| Generation | Efficiency |
+|------------|------------|
+| 2G (GSM) | ~0.2 bps/Hz |
+| 3G (HSPA) | ~1 bps/Hz |
+| 4G (LTE) | ~3-5 bps/Hz |
+
+---
+
+**3. Latency requirements**
+
+Real-time apps (video calls, gaming) need *low delay*.
+
+| Generation | Typical Latency |
+|------------|-----------------|
+| 2G | 300-500 ms |
+| 3G | 100-200 ms |
+| 4G | 30-50 ms |
+
+---
+
+**4. Device evolution**
+
+Phones transformed from *calling devices* to *pocket computers*. The network had to keep up.
+
+---
+
+**5. New applications**
+
+Each generation enabled things that were *impossible* before:
+
+- **2G:** SMS, basic mobile communication
+- **3G:** Mobile web, video calls, app stores
+- **4G:** HD streaming, cloud apps, mobile-first services
+
+---
+
+## Summary
+
+| Generation | Era | Key Tech | Driving Factor |
+|------------|-----|----------|----------------|
+| **2G** | 1990s | TDMA, GSM | Digital quality |
+| **3G** | 2000s | CDMA, HSPA | Mobile internet |
+| **4G** | 2010s | OFDMA, MIMO | Smartphones, video |
+
+> Each generation solved the *previous* generation's bottleneck, then created new demands that required the *next* generation.
+
+---
+
+## What About 5G?
+
+5G continues the pattern: more speed, lower latency, more connections.
+
+But that's beyond our scope here. The key insight is understanding *why* cellular technology evolves:
+
+> **Technology follows demand.** When users need more, engineers find a way.
