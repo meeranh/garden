@@ -1,0 +1,171 @@
+---
+title: CML (ChaMeLeon Protocol)
+prerequisites:
+  - wireless-communications/manet/olsr
+  - wireless-communications/manet/aodv
+---
+
+## The Best of Both Worlds?
+
+We've seen two approaches:
+
+| Protocol | Strategy | Trade-off |
+|----------|----------|-----------|
+| **OLSR** | Proactive | Always ready, but constant overhead |
+| **AODV** | Reactive | No overhead when idle, but discovery delay |
+
+Neither is always better. It depends on the situation.
+
+> **CML's idea:** Why not switch between them based on what the network needs?
+
+---
+
+## What is CML?
+
+**CML (ChaMeLeon)** is a **hybrid** routing protocol developed at Kingston University.
+
+Like a chameleon changes color to match its environment, CML changes its **routing strategy** to match network conditions.
+
+- When traffic is heavy → act like **OLSR** (proactive)
+- When traffic is light → act like **AODV** (reactive)
+
+> CML adapts. It's not stuck with one approach.
+
+---
+
+## The Three Phases
+
+CML operates in three distinct phases:
+
+::phase-switching
+
+---
+
+## P-Phase: Proactive Mode
+
+When the network is **small** or **traffic is heavy**, CML enters **P-Phase**.
+
+**Behavior:**
+- Sends periodic HELLO messages
+- Maintains routing tables proactively
+- Routes are always ready
+
+**Why?** When everyone is talking, you want routes ready. The overhead is worth it.
+
+> P-Phase = OLSR-like behavior
+
+---
+
+## R-Phase: Reactive Mode
+
+When the network is **large** or **traffic is sparse**, CML enters **R-Phase**.
+
+**Behavior:**
+- No periodic messages
+- Discovers routes on-demand (like AODV)
+- Saves bandwidth and battery
+
+**Why?** When few nodes are talking, constant updates are wasteful.
+
+> R-Phase = AODV-like behavior
+
+---
+
+## O-Phase: Oscillation
+
+Between P and R, there's the **O-Phase** (Oscillation).
+
+This happens when:
+- Network conditions are **borderline**
+- CML is **deciding** which mode fits better
+- Transitioning from one phase to another
+
+During O-Phase, the protocol is unstable. It hasn't committed to either strategy yet.
+
+---
+
+## When Does CML Switch?
+
+CML monitors several factors:
+
+| Factor | P-Phase (Proactive) | R-Phase (Reactive) |
+|--------|---------------------|-------------------|
+| **Network size** | Small | Large |
+| **Traffic load** | Heavy | Light |
+| **Node density** | Dense | Sparse |
+| **Mobility** | Low | High |
+
+When these factors change significantly, CML switches phases.
+
+---
+
+## The Advantage
+
+In theory, CML gives you:
+
+- **Low latency** when traffic is heavy (proactive mode)
+- **Low overhead** when traffic is light (reactive mode)
+- **Automatic adaptation** to changing conditions
+
+> You get the benefits of both OLSR and AODV, depending on what the network needs.
+
+---
+
+## Deficiency: Oscillation Attacks
+
+Here's the problem.
+
+An **attacker** can manipulate network conditions to force CML to switch phases repeatedly.
+
+**How the attack works:**
+1. Attacker injects fake traffic → CML switches to P-Phase
+2. Attacker stops → CML switches to R-Phase
+3. Repeat...
+
+**The damage:**
+- Constant switching wastes resources
+- Routing tables become inconsistent during transitions
+- Packets get dropped
+- Network performance degrades
+
+> The attacker never touches the routing messages directly. They just trigger endless oscillations.
+
+---
+
+## Why Oscillation is Dangerous
+
+During phase transitions:
+
+- **P → R:** Proactive routes expire, but reactive discovery hasn't started
+- **R → P:** Reactive routes may be stale, proactive tables not yet built
+
+There's a **window of vulnerability** where routing is unreliable.
+
+An attacker exploiting this window can cause significant packet loss without being detected as a routing attack.
+
+---
+
+## CML Summary
+
+| Aspect | Description |
+|--------|-------------|
+| **Type** | Hybrid (switches between proactive and reactive) |
+| **P-Phase** | Proactive mode (OLSR-like) |
+| **R-Phase** | Reactive mode (AODV-like) |
+| **O-Phase** | Transition/oscillation period |
+| **Advantage** | Adapts to network conditions |
+| **Deficiency** | Vulnerable to oscillation attacks |
+| **Developed at** | Kingston University |
+
+---
+
+## Comparing All Four Protocols
+
+| Protocol | Type | Overhead | Latency | Vulnerability |
+|----------|------|----------|---------|---------------|
+| **OLSR** | Proactive | Constant | Low | Wasted resources when idle |
+| **OLSRv2** | Proactive | Constant | Low | Same as OLSR |
+| **AODV** | Reactive | On-demand | High (first packet) | Discovery flooding |
+| **CML** | Hybrid | Adaptive | Adaptive | Oscillation attacks |
+
+> Each protocol makes different trade-offs. There's no universal "best" choice.

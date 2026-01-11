@@ -1,0 +1,200 @@
+---
+title: OLSR (Optimized Link State Routing)
+---
+
+## What is a MANET?
+
+A **Mobile Ad Hoc Network** has no infrastructure. No cell towers. No routers. No fixed network.
+
+Just devices talking **directly to each other**.
+
+---
+
+**Example:** 20 soldiers in a jungle with radios. No cell coverage. They form a network among themselves.
+
+If Soldier A wants to reach Soldier T (who's 500m away, out of direct range), the message **hops through intermediate soldiers**.
+
+> **The routing problem:** How does A know *which* path to use?
+
+---
+
+## The Naive Solution: Flooding
+
+Simplest approach: A broadcasts the message. Everyone who hears it rebroadcasts. Eventually it reaches T.
+
+::flooding-problem
+
+**The problem:** If 20 nodes all rebroadcast, you get **20 transmissions** for one message.
+
+- Wastes bandwidth
+- Drains batteries
+- Causes collisions
+
+> Flooding works, but it's incredibly wasteful.
+
+---
+
+## OLSR's Big Idea: MPRs
+
+**MPR = Multipoint Relay**
+
+Instead of *everyone* rebroadcasting, only **selected nodes** rebroadcast.
+
+The idea:
+1. Each node picks a small set of neighbors as its **MPRs**
+2. Only MPRs forward messages
+3. Everyone else stays quiet
+
+::mpr-selection
+
+> A selects the **minimum set** of 1-hop neighbors (B and D) that cover all 2-hop neighbors. C is redundant because F and G are already covered by B and D.
+
+---
+
+## How MPR Selection Works
+
+Each node needs to figure out:
+- **1-hop neighbors:** Who can I reach directly?
+- **2-hop neighbors:** Who can my neighbors reach?
+
+Then it selects the **minimum set** of 1-hop neighbors that covers all 2-hop neighbors. Only MPRs rebroadcast. Everyone else stays quiet.
+
+---
+
+## OLSR Message Types
+
+OLSR uses two main message types:
+
+| Message | Who Sends | Purpose |
+|---------|-----------|---------|
+| **HELLO** | Everyone | Discover neighbors |
+| **TC** | Only MPRs | Share topology info |
+
+---
+
+## Step 1: HELLO Messages
+
+Every node **periodically** broadcasts HELLO messages.
+
+**HELLO contains:**
+- List of all neighbors
+- Link status for each (symmetric or asymmetric)
+- Who selected me as their MPR
+
+::hello-messages
+
+---
+
+**What nodes learn from HELLOs:**
+
+1. **Neighbor table:** Who are my 1-hop neighbors?
+2. **2-hop neighbors:** Who can my neighbors reach?
+3. **MPR selection:** Which neighbors should I pick as MPRs?
+
+> HELLOs are **not forwarded**. They only travel 1 hop.
+
+---
+
+## Step 2: TC (Topology Control) Messages
+
+Once MPRs are selected, they broadcast **TC messages**.
+
+**TC contains:**
+- The node's MPR selector set (who selected me as MPR?)
+
+**Key difference from HELLO:**
+- TC messages **are forwarded** (but only by MPRs)
+- They spread across the entire network
+
+---
+
+**What nodes learn from TCs:**
+
+Every node builds a **topology table**: a map of the entire network.
+
+> From the topology table, each node can compute routes to any destination.
+
+---
+
+## Step 3: Route Calculation
+
+With the topology table, each node runs a **shortest path algorithm** (like Dijkstra).
+
+This produces the **routing table:**
+
+| Destination | Next Hop | Hops |
+|-------------|----------|------|
+| Node D | B | 2 |
+| Node E | C | 2 |
+| Node F | B | 3 |
+
+> Routes are computed **before** you need them. That's what makes OLSR *proactive*.
+
+---
+
+## Why OLSR is "Optimized"
+
+Traditional link-state routing (like OSPF) has **everyone** flood topology updates.
+
+OLSR's optimization: **Only MPRs flood TC messages.**
+
+::flooding-comparison
+
+This dramatically reduces overhead.
+
+---
+
+## The Complete Picture
+
+**Periodic operations:**
+1. Send HELLO (everyone, every few seconds)
+2. Send TC (only MPRs, less frequently)
+3. Recalculate routes when topology changes
+
+**When sending data:**
+- Look up destination in routing table
+- Forward to next hop
+- No route discovery delay!
+
+---
+
+## Deficiency: Constant Overhead
+
+OLSR sends HELLO and TC messages **all the time**, even when no one is sending actual data.
+
+**The cost:**
+- Battery drain (constant radio usage)
+- Bandwidth waste (routing updates nobody uses)
+- Doesn't scale well (more nodes = more overhead)
+
+> In a quiet network, OLSR keeps chattering about routes that aren't being used.
+
+---
+
+## When OLSR Works Well
+
+**Good for:**
+- Small to medium networks (under ~100 nodes)
+- Dense networks (many neighbors)
+- High traffic (routes are actually used)
+- Low latency requirements (no route discovery delay)
+
+**Bad for:**
+- Large networks (too much overhead)
+- Sparse traffic (wasted updates)
+- Battery-constrained devices
+
+---
+
+## Summary
+
+| Concept | Description |
+|---------|-------------|
+| **Type** | Proactive (table-driven) |
+| **MPR** | Selected nodes that forward messages |
+| **HELLO** | Discover neighbors (not forwarded) |
+| **TC** | Share topology (forwarded by MPRs only) |
+| **Optimization** | Only MPRs flood, not everyone |
+| **Deficiency** | Constant overhead even when idle |
+
+> OLSR trades **bandwidth** for **speed**. Routes are always ready, but you pay for it constantly.

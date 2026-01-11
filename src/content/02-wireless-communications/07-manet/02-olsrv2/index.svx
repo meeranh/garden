@@ -1,0 +1,169 @@
+---
+title: OLSRv2 (Version 2)
+prerequisites:
+  - wireless-communications/manet/olsr
+---
+
+## Why a New Version?
+
+OLSR worked, but it had problems:
+
+- **Monolithic design** - Everything bundled together, hard to extend
+- **Hop count only** - Couldn't consider link quality
+- **IPv4 only** - No IPv6 support
+- **Fixed message format** - Hard to add new features
+
+> OLSRv2 fixes these issues while keeping the same core idea: **proactive routing with MPRs**.
+
+---
+
+## The Big Change: Modular Design
+
+OLSR was one big protocol. OLSRv2 splits into **two separate protocols**:
+
+::modular-architecture
+
+---
+
+## NHDP: Neighborhood Discovery Protocol
+
+**NHDP** handles everything about discovering neighbors.
+
+**What it does:**
+- Sends HELLO messages
+- Discovers 1-hop and 2-hop neighbors
+- Detects link quality
+- Selects MPRs
+
+**Why separate it?**
+
+Other protocols can reuse NHDP! You don't need to reinvent neighbor discovery for every new routing protocol.
+
+> NHDP is like a **building block** that any protocol can use.
+
+---
+
+## OLSRv2 Core: Topology and Routing
+
+The **OLSRv2 core** handles the network-wide picture:
+
+**What it does:**
+- Sends TC (Topology Control) messages
+- Builds the topology map
+- Calculates routes
+
+**It relies on NHDP for:**
+- Neighbor information
+- MPR selection
+- Link status
+
+> OLSRv2 core focuses on routing. NHDP focuses on neighbors. Clean separation.
+
+---
+
+## New Feature: Link Metrics
+
+OLSR only counted **hops**. Shortest path = fewest hops.
+
+**Problem:** A 2-hop path through strong links might be better than a 1-hop path through a weak link.
+
+::link-metrics
+
+---
+
+## How Link Metrics Work
+
+OLSRv2 can use different **metrics** to evaluate links:
+
+| Metric | What it Measures | Good For |
+|--------|------------------|----------|
+| **Hop count** | Number of hops | Simple networks |
+| **ETX** | Expected transmissions | Lossy links |
+| **Bandwidth** | Link capacity | High-throughput needs |
+| **Delay** | Latency | Real-time traffic |
+
+> The MPR selection and route calculation now consider **link quality**, not just connectivity.
+
+---
+
+## TLV: Flexible Messages
+
+OLSR had fixed message formats. Adding new features meant breaking compatibility.
+
+OLSRv2 uses **TLV (Type-Length-Value)** encoding:
+
+::tlv-encoding
+
+> TLV makes OLSRv2 **future-proof**. New features can be added without breaking old implementations.
+
+---
+
+## IPv4 and IPv6
+
+OLSR was designed for IPv4.
+
+OLSRv2 works with **both**:
+- IPv4 networks
+- IPv6 networks
+- Mixed networks
+
+This was essential for modern deployments.
+
+---
+
+## What Stayed the Same
+
+The **core concepts** are identical to OLSR:
+
+| Concept | OLSR | OLSRv2 |
+|---------|------|--------|
+| Type | Proactive | Proactive |
+| MPRs | Yes | Yes |
+| HELLO messages | Yes | Yes (via NHDP) |
+| TC messages | Yes | Yes |
+| Flooding optimization | MPR-based | MPR-based |
+
+> If you understand OLSR, you understand OLSRv2. It's the same idea, better implemented.
+
+---
+
+## Deficiency: Still Proactive
+
+OLSRv2 inherits OLSR's fundamental limitation:
+
+**Constant overhead.**
+
+- HELLO messages sent periodically (via NHDP)
+- TC messages sent periodically
+- Routes maintained even when not used
+
+> No matter how modular or flexible, OLSRv2 still wastes resources in quiet networks.
+
+---
+
+## OLSR vs OLSRv2 Summary
+
+| Feature | OLSR | OLSRv2 |
+|---------|------|--------|
+| **Design** | Monolithic | Modular (NHDP + Core) |
+| **Metrics** | Hop count only | Flexible (ETX, bandwidth, etc.) |
+| **Messages** | Fixed format | TLV-based (extensible) |
+| **IP version** | IPv4 | IPv4 and IPv6 |
+| **Overhead** | Constant | Constant |
+| **Standardized** | RFC 3626 | RFC 7181 |
+
+---
+
+## When to Use OLSRv2
+
+**Good for:**
+- Networks needing link-quality routing
+- IPv6 deployments
+- Systems that want to reuse NHDP
+
+**Still bad for:**
+- Large networks (overhead scales poorly)
+- Sparse traffic (wasted updates)
+- Battery-constrained devices
+
+> OLSRv2 is OLSR done right, but it's still proactive. For a different approach, see **AODV** (reactive routing).

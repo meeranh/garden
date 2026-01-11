@@ -1,0 +1,182 @@
+---
+title: AODV (Ad-hoc On-Demand Distance Vector)
+prerequisites:
+  - wireless-communications/manet/olsr
+---
+
+## The Problem with OLSR
+
+OLSR works, but it's **wasteful**.
+
+It sends HELLO and TC messages **constantly**, even when nobody is actually sending data. In a quiet network, all that routing overhead is pure waste.
+
+> What if we only discovered routes **when we actually need them**?
+
+That's the idea behind **AODV**.
+
+---
+
+## Proactive vs Reactive
+
+::reactive-vs-proactive
+
+---
+
+## AODV: On-Demand Routing
+
+AODV is **reactive**. It does nothing until someone wants to send data.
+
+**When node A wants to reach node D:**
+
+1. A checks its routing table
+2. No route? Start **route discovery**
+3. Route found? Just send the packet
+
+> No constant chatter. No wasted updates. Routes are discovered **on demand**.
+
+---
+
+## Route Discovery: RREQ
+
+When A needs a route to D, it broadcasts a **RREQ (Route Request)**.
+
+The RREQ contains:
+- **Source address** (A)
+- **Destination address** (D)
+- **Sequence numbers** (to prevent loops)
+- **Hop count** (starts at 0)
+
+Every node that receives the RREQ **rebroadcasts** it (if they haven't seen it before).
+
+---
+
+## The Reverse Path
+
+Here's the clever part.
+
+As the RREQ floods outward, each node remembers **where it came from**. This creates a **reverse path** back to the source.
+
+::route-discovery
+
+> By the time RREQ reaches D, every node along the way knows how to get back to A.
+
+---
+
+## Route Reply: RREP
+
+When D receives the RREQ, it sends back a **RREP (Route Reply)**.
+
+The RREP travels back along the **reverse path** that was set up during the RREQ flood.
+
+As the RREP travels back:
+- Each node learns the **forward path** to D
+- When RREP reaches A, the route is complete
+
+> A can now send data to D. The route was discovered **only when needed**.
+
+---
+
+## Intermediate Route Reply
+
+What if some node along the way **already knows** how to reach D?
+
+It can send the RREP immediately! No need to flood all the way to D.
+
+This speeds up route discovery when routes are partially known.
+
+---
+
+## Route Maintenance: RERR
+
+Nodes are mobile. Links break.
+
+When a node detects a **link failure** (neighbor disappeared), it sends a **RERR (Route Error)** back to the source.
+
+::route-maintenance
+
+The source can then:
+- Start a new route discovery
+- Or use an alternative route if one exists
+
+---
+
+## AODV Message Summary
+
+| Message | Purpose | Who Sends |
+|---------|---------|-----------|
+| **RREQ** | Find a route to destination | Source (broadcast) |
+| **RREP** | Reply with route information | Destination or intermediate |
+| **RERR** | Report a broken link | Node detecting failure |
+
+---
+
+## The Trade-off
+
+AODV saves bandwidth when the network is quiet. But there's a cost.
+
+**The first packet waits.**
+
+When A wants to send to D, the first packet must wait while:
+1. RREQ floods the network
+2. RREP travels back
+
+This is called **route discovery latency**.
+
+> OLSR: Routes always ready, constant overhead
+> AODV: No overhead when idle, but delay on first packet
+
+---
+
+## Deficiency: Route Discovery Latency
+
+For **real-time traffic** (voice, video), waiting for route discovery is a problem.
+
+The delay can be hundreds of milliseconds in a large network.
+
+**Also:** Route discovery causes a **flood** of RREQ packets. If many nodes start discoveries at once, the network gets congested.
+
+> AODV trades **constant overhead** for **occasional flooding**.
+
+---
+
+## When to Use AODV
+
+**Good for:**
+- Sparse traffic (long idle periods)
+- Battery-constrained devices
+- Networks where not everyone talks to everyone
+
+**Bad for:**
+- Real-time traffic (latency-sensitive)
+- Dense traffic (frequent route discoveries)
+- Highly mobile networks (routes break often)
+
+---
+
+## OLSR vs AODV
+
+| Aspect | OLSR | AODV |
+|--------|------|------|
+| **Type** | Proactive | Reactive |
+| **Route discovery** | Always ready | On-demand |
+| **Overhead when idle** | High | None |
+| **First packet delay** | None | Route discovery time |
+| **Best for** | Dense traffic | Sparse traffic |
+| **Standardized** | RFC 3626 | RFC 3561 |
+
+> Neither is "better". They're optimized for different scenarios.
+
+---
+
+## Summary
+
+| Concept | Description |
+|---------|-------------|
+| **Reactive** | Routes discovered only when needed |
+| **RREQ** | Route Request (floods to find destination) |
+| **RREP** | Route Reply (travels back to source) |
+| **RERR** | Route Error (reports broken links) |
+| **Reverse path** | Set up during RREQ flood |
+| **Deficiency** | Route discovery latency |
+
+> AODV is the opposite of OLSR. It waits until you need a route, then finds one. No constant overhead, but the first packet has to wait.
