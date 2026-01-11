@@ -1,0 +1,241 @@
+---
+title: LTE Architecture
+prerequisites:
+  - wireless-communications/cellular-gsm/evolution
+---
+
+## The Big Shift
+
+LTE is fundamentally different from GSM/3G. It's an **all-IP network**.
+
+Everything - voice, video, messages - becomes *data packets*. No more circuit-switching.
+
+> This is why 4G feels like "mobile broadband" rather than a "phone network with data added on."
+
+---
+
+## Two Planes
+
+LTE separates all traffic into two distinct paths:
+
+::two-planes
+
+---
+
+**Data Plane (User Plane)**
+
+- Carries your *actual content* - videos, web pages, files
+- The highway for user traffic
+- Optimized for **speed** and **throughput**
+
+**Control Plane**
+
+- Carries *signaling* - authentication, mobility, session management
+- The management layer
+- Optimized for **reliability** and **security**
+
+> Think of a postal system: the **data plane** is trucks carrying packages. The **control plane** is the logistics system deciding *where* trucks go.
+
+---
+
+## Why Separate Them?
+
+| Benefit | Explanation |
+|---------|-------------|
+| **Scalability** | Data traffic can grow without overloading signaling |
+| **Optimization** | Each plane tuned for its specific job |
+| **Flexibility** | Can upgrade one without touching the other |
+| **Security** | Control plane protected separately |
+
+---
+
+## The Network Nodes
+
+LTE has six key nodes. Let's meet them one by one.
+
+::network-nodes
+
+---
+
+## User Equipment (UE)
+
+Your phone, tablet, or any LTE device.
+
+- Connects to the network over **radio**
+- Contains a **SIM card** with your identity
+- Handles all the radio complexity (modulation, MIMO, etc.)
+
+---
+
+## eNodeB (Evolved Node B)
+
+The **cell tower** - but smarter than before.
+
+| What it does |
+|--------------|
+| All radio communication with UEs |
+| Radio resource management |
+| Handover decisions |
+| Encryption of user data |
+
+> In GSM, towers were "dumb" - controlled by a separate BSC. In LTE, the **eNodeB makes decisions locally**. This reduces latency.
+
+---
+
+## S-GW (Serving Gateway)
+
+The **data router** inside the LTE network.
+
+- Routes user data packets between eNodeB and P-GW
+- **Anchor point** when you move between towers
+- Buffers data during handovers
+
+> When you're driving and switch towers, the S-GW ensures your YouTube video doesn't stop. It's the *mobility anchor* for data.
+
+---
+
+## P-GW (PDN Gateway)
+
+The **door to the internet**.
+
+| What it does |
+|--------------|
+| Connects LTE to external networks (internet, corporate) |
+| Assigns your **IP address** |
+| Policy enforcement (QoS, charging) |
+| Packet filtering |
+
+> Every packet leaving or entering LTE passes through the P-GW. It's the boundary between "LTE world" and "internet world."
+
+---
+
+## The Two Gateways
+
+Why two gateways? They have different jobs:
+
+| Gateway | Scope | Role |
+|---------|-------|------|
+| **S-GW** | Internal | Handles mobility *within* LTE |
+| **P-GW** | External | Handles connection *to outside* |
+
+::gateway-flow
+
+---
+
+## MME (Mobility Management Entity)
+
+The **brain** of the control plane.
+
+| Responsibility |
+|----------------|
+| **Authentication** - "Are you allowed on this network?" |
+| **Security** - Key management, encryption setup |
+| **Mobility** - Tracking where you are, managing handovers |
+| **Session management** - Setting up/tearing down data sessions |
+
+> The MME *never* touches user data. It only handles signaling. This separation is key to LTE's scalability.
+
+---
+
+## HSS (Home Subscriber Server)
+
+The **database** of all subscribers.
+
+- Stores your identity (IMSI)
+- Stores your subscription details (what services you can use)
+- Stores security keys for authentication
+
+> When you turn on your phone, the MME asks the HSS: "Is this user legitimate? What are they allowed to do?"
+
+---
+
+## How Everything Connects
+
+::full-architecture
+
+---
+
+## The Data Path
+
+When you watch a YouTube video:
+
+1. **Video packets** come from the internet
+2. Enter LTE through the **P-GW**
+3. Route through the **S-GW**
+4. Reach your **eNodeB** (tower)
+5. Transmitted over **radio** to your **UE**
+
+> The MME and HSS are *not involved* in this flow. They only handled the initial setup.
+
+---
+
+## The Control Path
+
+When you first connect to LTE:
+
+1. **UE** sends attach request to **eNodeB**
+2. **eNodeB** forwards to **MME**
+3. **MME** asks **HSS** to authenticate you
+4. **HSS** confirms your identity and subscription
+5. **MME** sets up security and creates your session
+6. **MME** tells **S-GW** and **P-GW** to prepare your data path
+
+*Then* data can flow.
+
+---
+
+## Flat vs Hierarchical
+
+::flat-vs-hierarchical
+
+---
+
+**GSM Architecture (Hierarchical)**
+
+```
+UE → BTS → BSC → MSC → Gateway
+```
+
+Many layers, many hops, higher latency.
+
+**LTE Architecture (Flat)**
+
+```
+UE → eNodeB → Gateways
+```
+
+Fewer layers, fewer hops, *lower latency*.
+
+---
+
+## Why Flat Matters
+
+| Metric | GSM | LTE |
+|--------|-----|-----|
+| Hops to internet | 4-5 | 2-3 |
+| Latency | 100-200 ms | 30-50 ms |
+| Tower intelligence | Low (BSC decides) | High (eNodeB decides) |
+
+> Real-time apps (video calls, gaming) need low latency. The flat architecture makes this possible.
+
+---
+
+## Key Takeaways
+
+| Component | Role |
+|-----------|------|
+| **UE** | Your device |
+| **eNodeB** | Smart tower (radio + decisions) |
+| **S-GW** | Internal data router, mobility anchor |
+| **P-GW** | Internet gateway, IP assignment |
+| **MME** | Control brain (auth, mobility, sessions) |
+| **HSS** | Subscriber database |
+
+---
+
+## Remember
+
+- **Data plane** = user traffic (S-GW, P-GW)
+- **Control plane** = signaling (MME, HSS)
+- **eNodeB** = the only node that touches *both* planes
+- **All-IP** = everything is packets, no circuit switching
