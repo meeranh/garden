@@ -1,0 +1,183 @@
+---
+title: 6G Standardization Process
+prerequisites:
+  - wireless-communications/5g/requirements
+  - wireless-communications/standards-organizations
+---
+
+## Why Does This Take So Long?
+
+Creating a global wireless standard isn't like releasing an app update.
+
+**Every country**, **every telecom company**, and **every device manufacturer** needs to agree on how phones will communicate. Getting that agreement takes about **10 years** per generation.
+
+> 5G took from 2012 (early research) to 2020 (widespread deployment). 6G follows the same pattern.
+
+---
+
+## The Three-Phase Process
+
+Every cellular generation goes through the same stages:
+
+| Phase | Duration | What Happens |
+|-------|----------|--------------|
+| **Vision & Requirements** | Years 1-3 | ITU-R defines targets |
+| **Technology Development** | Years 3-7 | 3GPP writes specifications |
+| **Deployment** | Years 7-10+ | Networks go live |
+
+---
+
+## Phase 1: Vision & Requirements
+
+**Who:** ITU-R (the radio arm of the International Telecommunication Union)
+
+**What:** They define what the next generation *should* achieve.
+
+For 6G, this is called **IMT-2030** (just like 5G was "IMT-2020").
+
+---
+
+**IMT-2030 sets targets like:**
+
+- How fast should it be?
+- How low should latency be?
+- How many devices per square kilometer?
+- What new capabilities are needed?
+
+> *The ITU doesn't build anything. They define the goals that everyone else builds toward.*
+
+---
+
+## Phase 2: Technology Development
+
+**Who:** 3GPP (3rd Generation Partnership Project)
+
+**What:** They write the *actual technical specifications* that engineers use to build networks.
+
+---
+
+**How 3GPP works:**
+
+1. Companies propose technologies
+2. Proposals are tested and debated
+3. Winners get included in the standard
+4. Specifications are published as **Releases**
+
+| Release | Expected | Focus |
+|---------|----------|-------|
+| **Rel-20** | 2025 | Final 5G-Advanced |
+| **Rel-21** | 2027 | Early 6G foundations |
+| **Rel-22** | 2029 | Full 6G specifications |
+
+---
+
+## Phase 3: Deployment
+
+**Who:** Network operators (Vodafone, AT&T, etc.) and device manufacturers (Apple, Samsung, etc.)
+
+**What:** Build the actual networks and devices.
+
+---
+
+**Deployment is gradual:**
+
+1. **Trial networks** in select cities
+2. **Commercial launch** in major markets
+3. **Mass rollout** over several years
+4. **Device availability** lags behind networks
+
+> *Just because the standard is finished doesn't mean you can use it tomorrow.*
+
+---
+
+## The 6G Timeline
+
+| Year | Milestone |
+|------|-----------|
+| **2021-2023** | Research begins, vision papers published |
+| **2023** | ITU-R starts IMT-2030 framework |
+| **2027** | IMT-2030 requirements finalized |
+| **2028-2029** | Technology proposals evaluated |
+| **2030** | First 6G specifications expected |
+| **2030-2035** | Commercial deployment begins |
+
+---
+
+## IMT-2030: The 6G Vision
+
+ITU-R's IMT-2030 framework defines **six usage scenarios** for 6G:
+
+| Scenario | Description |
+|----------|-------------|
+| **Immersive Communication** | Holographic calls, extended reality |
+| **Hyper Reliable Low Latency** | Remote surgery, industrial control |
+| **Massive Communication** | Billions of IoT sensors |
+| **Ubiquitous Connectivity** | Coverage everywhere, including rural/ocean |
+| **AI & Communication** | AI-native network design |
+| **Integrated Sensing** | Radar + communication in one system |
+
+---
+
+## 6G Performance Targets
+
+How does 6G compare to 5G?
+
+| Metric | 5G Target | 6G Target | Improvement |
+|--------|-----------|-----------|-------------|
+| **Peak Speed** | 20 Gbps | 1 Tbps | **50x** |
+| **Latency** | 1 ms | 0.1 ms | **10x** |
+| **Connection Density** | 1M/km² | 10M/km² | **10x** |
+| **Reliability** | 99.999% | 99.99999% | **100x** |
+| **Energy Efficiency** | Baseline | 100x better | **100x** |
+
+> These are *targets*, not guarantees. The final standard may differ.
+
+---
+
+## Key Technologies Expected in 6G
+
+**New spectrum:**
+- **Sub-THz frequencies** (100 GHz - 300 GHz)
+- Massive bandwidth, but very short range
+
+**AI integration:**
+- AI for network optimization
+- AI for resource allocation
+- AI-native protocol design
+
+**New capabilities:**
+- **Integrated sensing and communication** (radar + data in same signal)
+- **Reconfigurable Intelligent Surfaces** (smart walls that reflect signals)
+- **Non-terrestrial networks** (satellites as standard, not add-on)
+
+---
+
+## The Organizations Involved
+
+| Organization | Role | Output |
+|--------------|------|--------|
+| **ITU-R** | Sets global vision | IMT-2030 requirements |
+| **3GPP** | Writes technical specs | Release 21, 22+ |
+| **National Regulators** | Allocate spectrum | Country-specific bands |
+| **Industry Alliances** | Promote adoption | Marketing, interoperability |
+
+---
+
+## Why This Matters for Exams
+
+Exam questions often ask:
+
+1. **"Describe the 6G standardization process"** - Explain the three phases
+2. **"What is IMT-2030?"** - ITU-R's framework defining 6G requirements
+3. **"When will 6G be available?"** - Specs around 2030, deployment 2030-2035
+4. **"What are the 6G targets?"** - Know the key metrics (1 Tbps, 0.1 ms latency)
+
+---
+
+## Key Takeaways
+
+1. **Standardization takes ~10 years** per generation
+2. **ITU-R** sets the vision (IMT-2030), **3GPP** writes the specs
+3. **6G specs expected around 2030**, deployment follows
+4. **Key targets:** 1 Tbps speed, 0.1 ms latency, AI-native design
+5. **New technologies:** Sub-THz spectrum, integrated sensing, intelligent surfaces

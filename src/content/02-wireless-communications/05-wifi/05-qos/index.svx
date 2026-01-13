@@ -1,0 +1,162 @@
+---
+title: WiFi QoS (802.11e)
+prerequisites:
+  - wireless-communications/wifi/csma-ca
+---
+
+## The Problem
+
+Before 802.11e, WiFi treated all traffic equally.
+
+Your VoIP call? Same priority as someone downloading a movie. Your video stream? Competing with background updates.
+
+> **Result:** Voice calls stutter. Video buffers. Real-time apps suffer.
+
+---
+
+## The Solution: EDCA
+
+**IEEE 802.11e** introduced **EDCA** (Enhanced Distributed Channel Access).
+
+The key idea: **different traffic types get different priority**.
+
+::access-categories
+
+---
+
+## The 4 Access Categories
+
+EDCA defines four **Access Categories** (ACs), from highest to lowest priority:
+
+| Category | Name | Traffic Type | Examples |
+|----------|------|--------------|----------|
+| **AC_VO** | Voice | Real-time voice | VoIP, video calls |
+| **AC_VI** | Video | Streaming video | Netflix, YouTube |
+| **AC_BE** | Best Effort | Normal traffic | Web browsing, email |
+| **AC_BK** | Background | Low priority | Downloads, backups |
+
+> **AC_BE is the default.** Unless an application specifically requests higher priority, traffic goes here.
+
+---
+
+## How Priority Works
+
+EDCA uses **three parameters** to control priority:
+
+| Parameter | What It Controls |
+|-----------|------------------|
+| **AIFS** | How long to wait before trying to transmit |
+| **CWmin / CWmax** | Contention window size range |
+| **TXOP** | How long you can transmit once you win |
+
+---
+
+## AIFS (Arbitration Inter-Frame Space)
+
+After the channel becomes free, every station must wait before transmitting.
+
+**Higher priority = shorter wait time.**
+
+::channel-contention
+
+---
+
+Think of it like a race:
+
+- **Voice (AC_VO):** Starts running after 2 time slots
+- **Video (AC_VI):** Starts running after 2 time slots
+- **Best Effort (AC_BE):** Starts running after 3 time slots
+- **Background (AC_BK):** Starts running after 7 time slots
+
+> Voice gets a **head start**. By the time background traffic is ready to go, voice has already won.
+
+---
+
+## Contention Window (CWmin / CWmax)
+
+When multiple stations want to transmit, they pick a **random backoff** time from a range.
+
+| Category | CWmin | CWmax |
+|----------|-------|-------|
+| **AC_VO** | 3 | 7 |
+| **AC_VI** | 7 | 15 |
+| **AC_BE** | 15 | 1023 |
+| **AC_BK** | 15 | 1023 |
+
+---
+
+**What this means:**
+
+- **Voice** picks a random number between 0 and 3 (then up to 7 on retry)
+- **Background** picks a random number between 0 and 15 (then up to 1023)
+
+> With a smaller range, **voice almost always picks a lower number** and wins.
+
+---
+
+## TXOP (Transmission Opportunity)
+
+Once you win the channel, how long can you keep it?
+
+| Category | TXOP Limit |
+|----------|------------|
+| **AC_VO** | 1.504 ms |
+| **AC_VI** | 3.008 ms |
+| **AC_BE** | 0 (one frame) |
+| **AC_BK** | 0 (one frame) |
+
+**Voice and Video** get a time window to send multiple frames back-to-back.
+
+**Best Effort and Background** must compete again after each frame.
+
+---
+
+## Putting It All Together
+
+| Category | AIFS | CWmin | CWmax | TXOP |
+|----------|------|-------|-------|------|
+| **AC_VO** | 2 | 3 | 7 | 1.5 ms |
+| **AC_VI** | 2 | 7 | 15 | 3 ms |
+| **AC_BE** | 3 | 15 | 1023 | 0 |
+| **AC_BK** | 7 | 15 | 1023 | 0 |
+
+> **Voice wins because:** Shorter AIFS + smaller CW + guaranteed TXOP = almost always gets priority.
+
+---
+
+## Real-World Impact
+
+**Without QoS:**
+- VoIP call on same network as file download
+- Both compete equally
+- Voice packets delayed, call quality suffers
+
+**With QoS (EDCA):**
+- VoIP call tagged as AC_VO
+- Gets priority over file download (AC_BK)
+- Clear voice, smooth call
+
+---
+
+## How Applications Use QoS
+
+Applications mark their packets with a **priority value** (using DSCP or WMM tags).
+
+| Application | Marks as | Gets |
+|-------------|----------|------|
+| VoIP app (Zoom, Teams) | AC_VO | Highest priority |
+| Video streaming | AC_VI | High priority |
+| Web browser | AC_BE | Normal |
+| Update service | AC_BK | Lowest |
+
+> **WMM (Wi-Fi Multimedia)** is the certification that devices support 802.11e QoS.
+
+---
+
+## Key Takeaways
+
+1. **EDCA** differentiates traffic into 4 Access Categories
+2. **Priority is controlled by:** AIFS, Contention Window, and TXOP
+3. **Higher priority means:** Wait less, smaller backoff, transmit longer
+4. **Voice (AC_VO)** has highest priority, **Background (AC_BK)** has lowest
+5. **WMM** is the industry name for 802.11e QoS support

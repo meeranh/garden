@@ -1,0 +1,143 @@
+---
+title: 5G Deployment Options (NSA vs SA)
+prerequisites:
+  - wireless-communications/5g/architecture
+---
+
+## The Problem
+
+You can't just rip out your entire 4G network and replace it overnight. That would cost *billions* and leave customers without service.
+
+**Two approaches:**
+
+1. **Non-Standalone (NSA)** - Use existing 4G infrastructure, add 5G on top
+2. **Standalone (SA)** - Build a completely new 5G network from scratch
+
+---
+
+## Non-Standalone (NSA)
+
+**The idea:** Keep your 4G core network, just add 5G radio towers.
+
+- Phone connects to *both* 4G and 5G simultaneously
+- 4G handles the "control" stuff (authentication, mobility)
+- 5G provides the *fast data*
+
+---
+
+**Pros:**
+- Faster to deploy
+- Cheaper
+- Uses existing infrastructure
+
+**Cons:**
+- Can't get *full* 5G benefits
+- Still limited by 4G core
+
+> **NSA is a stepping stone.** Get 5G speeds now, upgrade the core later.
+
+---
+
+## Standalone (SA)
+
+**The idea:** Build everything fresh - new 5G core, new 5G radios.
+
+- Phone connects to 5G *only*
+- Full 5G core with all new features (network slicing, ultra-low latency)
+- No 4G dependency
+
+---
+
+**Pros:**
+- Full 5G capabilities
+- Network slicing works properly
+- Future-proof
+
+**Cons:**
+- Expensive
+- Takes longer to deploy
+
+> **SA is the end goal.** This is *real* 5G with all the features.
+
+---
+
+## The Deployment Options
+
+3GPP defined specific "options" numbered by architecture:
+
+> **EPC** = Evolved Packet Core (the 4G core network)
+>
+> **5GC** = 5G Core (the new 5G core network with SBA)
+>
+> **LTE** = 4G radio access
+>
+> **NR** = New Radio (5G radio access)
+
+---
+
+| Option | Radio | Core | Type |
+|--------|-------|------|------|
+| **Option 1** | LTE | EPC | Pure 4G |
+| **Option 2** | NR | 5GC | **Standalone** |
+| **Option 3** | LTE + NR | EPC | **NSA** |
+| **Option 4** | LTE + NR | 5GC | NSA |
+| **Option 5** | LTE | 5GC | Transitional |
+| **Option 7** | LTE + NR | 5GC | NSA |
+
+---
+
+## The Key Options
+
+**Option 3 (NSA with 4G core)**
+
+- Most common *first* deployment
+- 4G anchor + 5G for speed boost
+- Quick to market
+
+**Option 2 (Standalone)**
+
+- True 5G, *no 4G dependency*
+- Full 5GC with all features
+- The ultimate goal
+
+---
+
+## The Migration Path
+
+Most carriers follow this path:
+
+$$\text{Option 1} \rightarrow \text{Option 3} \rightarrow \text{Option 2}$$
+
+| Phase | What Happens |
+|-------|--------------|
+| **Start** | Pure 4G (Option 1) |
+| **Phase 1** | Add 5G radios, keep 4G core (Option 3) |
+| **Phase 2** | Deploy 5G core, go standalone (Option 2) |
+
+> This lets carriers offer "5G" *quickly* while building out the full 5G core in the background.
+
+---
+
+## Why Option 3 First?
+
+| Factor | Option 3 (NSA) | Option 2 (SA) |
+|--------|----------------|---------------|
+| **Time to deploy** | Months | Years |
+| **Cost** | Lower | Higher |
+| **Coverage** | Use existing 4G | Build from scratch |
+| **Features** | Limited | Full 5G |
+
+> *Speed to market matters.* Carriers wanted to say "we have 5G" as soon as possible.
+
+---
+
+## Summary
+
+| Term | Meaning |
+|------|---------|
+| **NSA** | Non-Standalone - 5G radio + 4G core |
+| **SA** | Standalone - 5G radio + 5G core |
+| **Option 3** | Most common NSA deployment |
+| **Option 2** | True standalone 5G |
+| **EPC** | 4G core network |
+| **5GC** | 5G core network |

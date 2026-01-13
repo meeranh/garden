@@ -1,0 +1,179 @@
+---
+title: CSMA/CA and Contention Window
+prerequisites:
+  - wireless-communications/wifi/standards
+---
+
+## The Problem
+
+In WiFi, everyone shares the same air.
+
+If two devices transmit at the *same time*, their signals collide and **both fail**. Neither message gets through.
+
+> We need a way to *avoid* collisions before they happen.
+
+---
+
+## CSMA/CA
+
+**CSMA/CA** = Carrier Sense Multiple Access with Collision *Avoidance*
+
+The key word is **avoidance**. We don't detect collisions after they happen. We try to *prevent* them.
+
+---
+
+## The Two Rules
+
+**Rule 1: Listen before you talk**
+
+Before transmitting, check if the channel is busy. If someone else is transmitting, *wait*.
+
+**Rule 2: Wait a random time**
+
+Even when the channel becomes free, don't transmit immediately. Pick a **random number** and wait that many time slots.
+
+> *Why random?* If two devices both waited for the channel and it becomes free, they'd transmit at the *same instant*. The random wait spreads them out.
+
+---
+
+## The Contention Window
+
+Where does the random number come from?
+
+You pick it from a range called the **Contention Window (CW)**.
+
+- Pick a random number between **0** and **CW - 1**
+- Wait that many time slots
+- Then transmit
+
+---
+
+**Example:** CW = 16
+
+You pick randomly from: 0, 1, 2, 3, ... 15
+
+If you pick 5, you wait 5 slots before transmitting.
+
+> A **slot** in WiFi is about 9 microseconds.
+
+---
+
+## What Happens on Collision?
+
+Sometimes two devices *still* collide. Maybe they picked the same random number, or their waits overlapped.
+
+**When collision happens:**
+1. Both transmissions fail
+2. Each device **doubles** its contention window
+3. Pick a new random number from the *larger* range
+4. Try again
+
+---
+
+## The Doubling Rule
+
+::backoff-animation
+
+---
+
+| Attempt | CW Size | Pick from | Avg wait |
+|---------|---------|-----------|----------|
+| 1st | 16 | 0 - 15 | 7.5 slots |
+| 2nd (retry) | 32 | 0 - 31 | 15.5 slots |
+| 3rd (retry) | 64 | 0 - 63 | 31.5 slots |
+| 4th (retry) | 128 | 0 - 127 | 63.5 slots |
+| 5th (retry) | 256 | 0 - 255 | 127.5 slots |
+
+The window keeps doubling until it hits **CWmax** (usually 1024).
+
+> This is called **Binary Exponential Backoff**. Each failure *doubles* your wait range.
+
+---
+
+## Why Does This Work?
+
+**Low traffic:** Small CW means short waits. Fast transmission.
+
+**High traffic (many collisions):** CW grows large. Devices spread out over a wider range, reducing collision probability.
+
+> *The network adapts automatically.* More congestion = longer backoffs = fewer collisions.
+
+---
+
+## The Formula
+
+After **n** collisions, the contention window is:
+
+$$CW_n = \min(CW_{min} \times 2^n, \; CW_{max})$$
+
+And the **average** number of slots you wait:
+
+$$\text{Average wait} = \frac{CW - 1}{2}$$
+
+---
+
+## Worked Example
+
+> **Given:** Initial CW = 63 slots. What is the CW after the 3rd retransmission?
+
+**The 3rd retransmission means 3 collisions have occurred.**
+
+Each collision doubles the CW:
+
+| Event | Calculation | CW |
+|-------|-------------|-----|
+| Initial | Given | 63 |
+| 1st collision | 63 × 2 | 126 |
+| 2nd collision | 126 × 2 | 252 |
+| 3rd collision | 252 × 2 | **504** |
+
+> **Answer:** CW = 504 slots after the 3rd retransmission.
+
+---
+
+## Another Example
+
+> **Given:** CWmin = 16, CWmax = 1024, slot time = 9 μs
+>
+> After 5 failed attempts, what's the expected backoff time?
+
+**Step 1:** Calculate CW after 5 failures
+
+$$CW = 16 \times 2^5 = 16 \times 32 = 512$$
+
+Check against max: 512 is below 1024, so CW = 512
+
+---
+
+**Step 2:** Calculate average slots
+
+$$\text{Average} = \frac{512 - 1}{2} = 255.5 \text{ slots}$$
+
+---
+
+**Step 3:** Convert to time
+
+$$\text{Time} = 255.5 \times 9 \mu s = 2299.5 \mu s \approx 2.3 \text{ ms}$$
+
+> **Answer:** Expected backoff is approximately **2.3 ms**.
+
+---
+
+## On Success
+
+When your transmission **succeeds**:
+
+- CW resets back to **CWmin**
+- Start fresh for the next transmission
+
+> The penalty for collisions is temporary. Once you succeed, you're back to fast access.
+
+---
+
+## Key Points
+
+1. **CSMA/CA** avoids collisions by listening first and waiting randomly
+2. **Contention Window** is the range you pick your random wait from
+3. **Binary Exponential Backoff**: CW doubles on each collision
+4. **Formula**: $CW_n = CW_{min} \times 2^n$ (capped at CWmax)
+5. **Average wait**: $(CW - 1) / 2$ slots

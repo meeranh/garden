@@ -159,30 +159,39 @@ Think of it like a pizza:
 
 **Eb/No** measures how much energy each bit has compared to the noise.
 
-$$\frac{E_b}{N_0} \text{ (dB)} = P_r - 10\log_{10}(R_b) + 198.6$$
+$$\frac{E_b}{N_0} = \frac{P_r}{R_b \cdot k \cdot T}$$
 
-| Symbol | Meaning |
-|--------|---------|
-| $P_r$ | Received power in dBm |
-| $R_b$ | Bit rate in bits per second |
-| 198.6 | Constant for room temperature |
+In dB form, this becomes:
+
+$$\frac{E_b}{N_0} \text{ (dB)} = P_r\text{(dBm)} - 10\log_{10}(R_b) + 228.6 - 10\log_{10}(T)$$
+
+| Term | Value | Meaning |
+|------|-------|---------|
+| $P_r$ | Your value | Received power in dBm |
+| $R_b$ | Your value | Bit rate in bits per second |
+| 228.6 | Constant | Comes from $-10\log_{10}(k)$ where $k = 1.38 \times 10^{-23}$ |
+| $T$ | Usually 300K | Temperature in Kelvin |
+
+At **room temperature (300K)**, $10\log_{10}(300) = 24.8$, so the formula simplifies to:
+
+$$\frac{E_b}{N_0} \text{ (dB)} = P_r\text{(dBm)} - 10\log_{10}(R_b) + 173.8$$
 
 ---
 
-**Example:** −72 dBm received power, 10 Mbps bit rate
+**Example:** −72 dBm received power, 10 Mbps bit rate, T = 300K
 
 <div class="math-left">
 
 $$\begin{aligned}
-\frac{E_b}{N_0} &= P_r - 10\log_{10}(R_b) + 198.6 \\
-  &= -72 - 10\log_{10}(10{,}000{,}000) + 198.6 \\
-  &= -72 - 70 + 198.6 \\
-  &= 56.6 \text{ dB}
+\frac{E_b}{N_0} &= P_r - 10\log_{10}(R_b) + 173.8 \\
+  &= -72 - 10\log_{10}(10{,}000{,}000) + 173.8 \\
+  &= -72 - 70 + 173.8 \\
+  &= 31.8 \text{ dB}
 \end{aligned}$$
 
 </div>
 
-> An Eb/No of **56.6 dB** is excellent. Typical systems need around 10-20 dB for reliable communication.
+> An Eb/No of **31.8 dB** is excellent. Typical systems need around 10-20 dB for reliable communication.
 
 ---
 

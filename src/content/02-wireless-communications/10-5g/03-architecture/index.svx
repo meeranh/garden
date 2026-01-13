@@ -1,0 +1,214 @@
+---
+title: 5G Core Architecture
+prerequisites:
+  - wireless-communications/5g/requirements
+---
+
+## The Problem with 4G
+
+In 4G (LTE), the core network was designed like a **chain**.
+
+Each component had *fixed* connections to *specific* other components. Want to add a new feature? You'd have to **rewire everything**.
+
+> This made 4G *inflexible* and hard to upgrade.
+
+---
+
+## The 5G Solution: Service-Based Architecture
+
+5G redesigns the core as a **service marketplace**.
+
+Instead of fixed connections, components **offer services** on a common bus. *Anyone* who needs a service can request it.
+
+::service-based-architecture
+
+---
+
+**Why is this better?**
+
+| 4G Approach | 5G Approach |
+|-------------|-------------|
+| Fixed point-to-point links | Flexible service bus |
+| Hard to add features | Easy to extend |
+| Monolithic design | Cloud-native, containerized |
+| Hardware-dependent | Software-defined |
+
+> Think of it like going from **dedicated phone lines** to **the internet**.
+
+---
+
+## The Three Main Components
+
+The 5G core has many components, but **three do the heavy lifting**:
+
+| Component | Name | One-Line Summary |
+|-----------|------|------------------|
+| **AMF** | Access and Mobility Management | *"Who are you and where are you?"* |
+| **SMF** | Session Management Function | *"Set up your data connection"* |
+| **UPF** | User Plane Function | *"Actually move your data"* |
+
+::data-flow
+
+---
+
+## AMF: The Gatekeeper
+
+**AMF** handles *everything* about you connecting to the network.
+
+**When you turn on your phone:**
+1. Phone says "Hello, I'm here" → **AMF receives it**
+2. AMF checks your identity → *Are you a valid subscriber?*
+3. AMF registers your location → *Which cell are you in?*
+
+---
+
+**AMF's responsibilities:**
+
+| Task | What It Means |
+|------|---------------|
+| **Registration** | Phone joins the network |
+| **Authentication** | Verify you're legitimate |
+| **Mobility** | Track which cell you're in |
+| **Security** | Encryption setup |
+
+> **AMF is like a receptionist** - handles check-in and knows *where everyone is*.
+
+---
+
+## SMF: The Planner
+
+**SMF** sets up the *path* for your data.
+
+**When you want to browse the web:**
+1. AMF tells SMF *"this user wants data"*
+2. SMF creates a **PDU session** (data pipe)
+3. SMF assigns you an **IP address**
+4. SMF tells UPF *how to route your traffic*
+
+---
+
+**SMF's responsibilities:**
+
+| Task | What It Means |
+|------|---------------|
+| **Session setup** | Create the data connection |
+| **IP allocation** | Give you an address |
+| **QoS control** | Set speed/priority rules |
+| **UPF selection** | Choose which UPF to use |
+
+> **SMF is like a network planner** - *designs the pipes* for your data to flow.
+
+---
+
+## UPF: The Workhorse
+
+**UPF** is where your data *actually* flows.
+
+AMF and SMF *just make decisions*. **UPF moves packets.**
+
+---
+
+**When you load a webpage:**
+1. Your phone sends a request → **UPF receives it**
+2. UPF checks the rules → **Where should this go?**
+3. UPF forwards to internet → **Packet leaves the network**
+4. Response comes back → **UPF sends it to your phone**
+
+---
+
+**UPF's responsibilities:**
+
+| Task | What It Means |
+|------|---------------|
+| **Packet forwarding** | Move data in/out |
+| **Traffic inspection** | Check what's flowing |
+| **QoS enforcement** | Apply speed limits |
+| **Usage reporting** | Track how much you use |
+
+> **UPF is like the postal service** - doesn't make decisions, *just delivers packages*.
+
+---
+
+## How They Work Together
+
+**The flow when you connect:**
+
+| Step | What Happens | Component |
+|------|--------------|-----------|
+| 1 | Phone requests connection | → **AMF** |
+| 2 | AMF authenticates you | **AMF** |
+| 3 | AMF requests session setup | AMF → **SMF** |
+| 4 | SMF configures UPF | SMF → **UPF** |
+| 5 | Data starts flowing | Phone ↔ **UPF** ↔ Internet |
+
+> **Control plane** (AMF, SMF) makes decisions. **User plane** (UPF) moves data.
+
+---
+
+## Control Plane vs User Plane
+
+5G **separates** these two planes *completely*.
+
+| Plane | Purpose | Components | Traffic |
+|-------|---------|------------|---------|
+| **Control** | Decisions, signaling | AMF, SMF, etc. | Small, occasional |
+| **User** | Actual data | UPF | Large, constant |
+
+---
+
+**Why separate them?**
+
+- **Scale independently** - Need more data capacity? *Add UPFs*. More users connecting? *Add AMFs*.
+- **Place differently** - UPF can be at network edge *(low latency)*. Control plane can be centralized.
+- **Secure differently** - Control plane is *highly protected*. User plane is *optimized for speed*.
+
+---
+
+## The Other Components
+
+The core has more functions for specific tasks:
+
+| Component | Full Name | What It Does |
+|-----------|-----------|--------------|
+| **UDM** | Unified Data Management | Stores subscriber info |
+| **AUSF** | Authentication Server | Security verification |
+| **PCF** | Policy Control Function | Rules and policies |
+| **NRF** | Network Repository Function | Service discovery |
+| **NSSF** | Network Slice Selection | Picks the right slice |
+| **NEF** | Network Exposure Function | APIs for external apps |
+
+---
+
+## Service-Based Interfaces
+
+In SBA, components communicate using **HTTP/REST APIs**.
+
+Each component exposes **services** that others can call:
+
+| Component | Service Name | What It Offers |
+|-----------|--------------|----------------|
+| AMF | Namf | Mobility, registration |
+| SMF | Nsmf | Session management |
+| UDM | Nudm | Subscriber data |
+| PCF | Npcf | Policy decisions |
+| NRF | Nnrf | Service discovery |
+
+> The "N" prefix means "Network function". **Namf** = AMF's network services.
+
+---
+
+## Network Slicing
+
+One powerful feature of SBA: **network slicing**.
+
+The *same* physical network can be **divided into virtual networks**, each optimized for *different* uses.
+
+| Slice | Optimized For | Example Use |
+|-------|---------------|-------------|
+| **eMBB slice** | High bandwidth | Video streaming |
+| **URLLC slice** | Low latency | Remote surgery |
+| **mMTC slice** | Many devices | IoT sensors |
+
+> Each slice gets its own AMF, SMF, UPF instances. *Same hardware, different virtual networks.*
+
+::network-slicing
