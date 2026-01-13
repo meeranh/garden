@@ -73,15 +73,11 @@ A mobile app for depression and anxiety monitoring:
 
 ## Other Applications
 
-**Customer Service** - Detect frustrated caller, route to human agent instead of bot.
-
-**E-Learning** - Student looks confused? Slow down and give more examples.
-
-**Gaming** - Player bored? Increase difficulty. Player stressed? Ease up.
-
-**Driving Assistant** - Detect drowsiness or road rage, give safety alerts.
-
-**Healthcare** - Monitor elderly patients for signs of depression or anxiety.
+- **Customer Service** - Detect frustrated caller, route to human agent instead of bot
+- **E-Learning** - Student confused? Slow down and give more examples
+- **Gaming** - Player bored? Increase difficulty. Stressed? Ease up
+- **Driving Assistant** - Detect drowsiness or road rage, give safety alerts
+- **Healthcare** - Monitor elderly patients for signs of depression or anxiety
 
 ---
 
