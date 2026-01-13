@@ -1,0 +1,138 @@
+---
+title: D2D Networks
+---
+
+**Normal communication:** Phone → Tower → Phone
+
+What if the other person is *right next to you*?
+
+> Why go through a tower 2 km away to talk to someone 5 meters away?
+
+---
+
+## Device-to-Device (D2D)
+
+::d2d-concept
+
+**D2D** lets devices talk *directly* to each other.
+
+- No tower in the middle
+- Shorter path = lower latency
+- Offloads traffic from the network
+
+---
+
+## Why D2D?
+
+| Benefit | Explanation |
+|---------|-------------|
+| **Lower latency** | Direct path, no tower roundtrip |
+| **Offload traffic** | Less load on the network |
+| **Works without coverage** | Useful in disasters, rural areas |
+| **Energy efficient** | Shorter distance = less power |
+| **Better for proximity** | Optimized for nearby devices |
+
+---
+
+## In-Band vs Out-Band D2D
+
+The key question: **what frequencies does D2D use?**
+
+---
+
+### In-Band D2D
+
+D2D uses the **same frequencies as cellular**.
+
+::inband-d2d
+
+Your phone talks to another phone using *LTE/5G spectrum*. The cellular network **controls** the D2D connection.
+
+**Why?** The network already owns this spectrum. *No need to use anything else.*
+
+**Problem:** D2D might interfere with regular cellular users. The network must carefully coordinate who uses what.
+
+> *In-band = same frequencies as cellular, network is in charge.*
+
+---
+
+### Out-Band D2D
+
+D2D uses **completely different frequencies** like WiFi or Bluetooth.
+
+::outband-d2d
+
+Your phone talks to another phone using *WiFi or Bluetooth*. The cellular network **has nothing to do with it**.
+
+**Why?** WiFi and Bluetooth are *unlicensed*. Anyone can use them. No coordination needed with the cellular network.
+
+**Think of it like:** AirDrop, WiFi Direct, Bluetooth file sharing. *Your carrier isn't involved at all.*
+
+> *Out-band = different frequencies, network doesn't care.*
+
+---
+
+### The Difference
+
+| | In-Band | Out-Band |
+|--|---------|----------|
+| **Frequencies** | Cellular (LTE/5G) | WiFi / Bluetooth |
+| **Network involved?** | Yes, controls everything | No, independent |
+| **Interference risk** | Can interfere with cellular | None to cellular |
+| **Example** | Network-managed D2D | AirDrop, Bluetooth |
+
+---
+
+## D2D Use Cases
+
+### Proximity Services
+
+- Find nearby friends
+- Local advertisements
+- Social networking by location
+
+*"Who's nearby?"*
+
+---
+
+### Public Safety
+
+- First responders communicate when network is down
+- Disaster scenarios
+- Emergency coordination
+
+*"Network failed, but we can still talk."*
+
+---
+
+### Content Sharing
+
+- Share files with nearby devices
+- Local multiplayer gaming
+- Quick transfers without internet
+
+*"Send this video to your phone directly."*
+
+---
+
+### Relay
+
+- Phone acts as relay for another phone with weak signal
+- Extends coverage
+- Cooperative communication
+
+*"I have signal, I'll relay for you."*
+
+---
+
+## Summary
+
+| Concept | Key Point |
+|---------|-----------|
+| **D2D** | Direct device-to-device, no tower |
+| **In-band** | Uses cellular spectrum |
+| **Out-band** | Uses WiFi/Bluetooth |
+| **Underlay** | Shares spectrum with cellular |
+| **Overlay** | Dedicated D2D spectrum |
+
+> **D2D = shortcut.** *Why go through the tower when you're right next to each other?*

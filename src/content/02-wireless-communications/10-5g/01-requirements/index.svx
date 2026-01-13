@@ -1,0 +1,143 @@
+---
+title: 5G Requirements
+---
+
+What should 5G actually *do*? The ITU defined three main goals.
+
+> **ITU** = International Telecommunication Union. *They set the standards.*
+
+---
+
+## The 5G Triangle
+
+::itu-triangle
+
+The ITU created a **triangle diagram** with three corners. Each corner represents a *different type* of application with *different needs*.
+
+These are the **three pillars of 5G:**
+
+1. **eMBB** - enhanced Mobile Broadband
+2. **URLLC** - Ultra-Reliable Low-Latency Communications
+3. **mMTC** - massive Machine-Type Communications
+
+---
+
+## eMBB: Enhanced Mobile Broadband
+
+> *"I want faster internet."*
+
+This is the **"more of what we already have"** pillar.
+
+**What it means:**
+- Faster downloads
+- Better streaming
+- More data capacity
+
+---
+
+### eMBB Targets
+
+| Metric | Target |
+|--------|--------|
+| **Peak data rate** | 20 Gbps |
+| **User experienced rate** | 100 Mbps |
+| **Area traffic capacity** | 10 Mbps/m² |
+
+*These numbers are 10-100x better than LTE.*
+
+---
+
+### eMBB Use Cases
+
+- **4K/8K video streaming** - *no buffering*
+- **Virtual Reality (VR)** - *high bandwidth, immersive*
+- **Augmented Reality (AR)** - *overlay digital on real world*
+- **Crowded venues** - *stadiums, concerts, festivals*
+
+> eMBB is about **speed and capacity**. *More data, faster.*
+
+---
+
+## URLLC: Ultra-Reliable Low-Latency
+
+> *"If it's late or fails, someone could die."*
+
+This is for applications where **delay = disaster**.
+
+**What it means:**
+- Instant response (*milliseconds*)
+- Never fails (*five nines reliability*)
+
+---
+
+### URLLC Targets
+
+| Metric | Target |
+|--------|--------|
+| **Latency** | 1 ms (round-trip) |
+| **Reliability** | 99.999% |
+
+**99.999% reliability** = only 5 minutes of downtime *per year*.
+
+*LTE latency is around 30-50 ms. URLLC needs 1 ms.*
+
+---
+
+### URLLC Use Cases
+
+- **Remote surgery** - *surgeon controls robot miles away*
+- **Autonomous vehicles** - *car must react instantly*
+- **Industrial automation** - *robot arms in factories*
+- **Drone control** - *real-time piloting*
+
+> URLLC is about **reliability and speed**. *Never late, never fails.*
+
+---
+
+## mMTC: Massive Machine-Type Communications
+
+> *"A million sensors, each sending tiny updates."*
+
+This is **not about speed**. It's about *scale* and *battery life*.
+
+**What it means:**
+- Billions of tiny devices
+- Very low power consumption
+- Small amounts of data
+
+---
+
+### mMTC Targets
+
+| Metric | Target |
+|--------|--------|
+| **Connection density** | 1 million devices/km² |
+| **Battery life** | 10+ years |
+| **Data per device** | Very small (bytes) |
+
+*A sensor might send 100 bytes once per hour. But there are millions of them.*
+
+---
+
+### mMTC Use Cases
+
+- **Smart meters** - *electricity, water, gas*
+- **Agricultural sensors** - *soil moisture, temperature*
+- **Asset tracking** - *shipping containers, packages*
+- **Environmental monitoring** - *air quality, noise levels*
+
+> mMTC is about **scale and efficiency**. *Millions of devices, tiny data, long battery.*
+
+---
+
+## Why Three Pillars?
+
+**LTE couldn't do all three well.** You had to choose.
+
+| Need | LTE Problem |
+|------|-------------|
+| eMBB | Limited bandwidth |
+| URLLC | Too much latency |
+| mMTC | Too power-hungry |
+
+> **5G is designed to handle all three simultaneously.**

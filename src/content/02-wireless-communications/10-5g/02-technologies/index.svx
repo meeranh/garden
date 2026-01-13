@@ -1,0 +1,153 @@
+---
+title: 5G Technologies
+---
+
+We need more spectrum for 5G. But the traditional bands are *crowded*.
+
+> **Solution:** Go higher! Use **millimeter waves**.
+
+---
+
+## What is mmWave?
+
+Frequencies between **24 GHz and 100 GHz**.
+
+The wavelength at these frequencies is only **1-10 millimeters**. *Hence the name.*
+
+::mmwave-comparison
+
+---
+
+## The Spectrum Comparison
+
+| Band | Frequency | Wavelength |
+|------|-----------|------------|
+| **LTE** | 700 MHz - 2.6 GHz | 11 - 43 cm |
+| **Sub-6 GHz 5G** | 3.5 - 6 GHz | 5 - 8 cm |
+| **mmWave 5G** | 24 - 100 GHz | 1 - 10 mm |
+
+*Higher frequency = shorter wavelength = more bandwidth available.*
+
+---
+
+## Advantages of mmWave
+
+### 1. Massive Bandwidth
+
+Traditional bands give you **20 MHz** chunks. *That's it.*
+
+mmWave has **hundreds of MHz** available. *Wide open spectrum.*
+
+> More bandwidth = faster speeds. *Simple math.*
+
+---
+
+### 2. Very High Data Rates
+
+With all that bandwidth, you can achieve **multi-gigabit speeds**.
+
+| Band | Typical Speed |
+|------|---------------|
+| LTE | 100 Mbps |
+| Sub-6 GHz 5G | 500 Mbps - 1 Gbps |
+| **mmWave 5G** | **1 - 10 Gbps** |
+
+*Perfect for eMBB applications.*
+
+---
+
+### 3. Less Crowded
+
+Nobody was using these frequencies before. *Fresh, open spectrum.*
+
+- No interference from existing users
+- Easier to get licenses
+- Room to grow
+
+---
+
+## Challenges of mmWave
+
+Here's the catch: **high frequency = problems**.
+
+---
+
+### 1. Limited Range
+
+mmWave signals don't travel far.
+
+| Band | Typical Range |
+|------|---------------|
+| LTE | Several kilometers |
+| Sub-6 GHz 5G | 1-2 km |
+| **mmWave 5G** | **200-300 meters** |
+
+*You need many small cells to cover an area.*
+
+---
+
+### 2. Blocked by Everything
+
+mmWave can't penetrate obstacles.
+
+**What blocks mmWave:**
+- Walls (*can't go indoors*)
+- Buildings
+- Trees and foliage
+- Rain (*yes, rain*)
+- *Even your hand*
+
+> mmWave needs **line-of-sight**. *If something's in the way, signal dies.*
+
+---
+
+### 3. Expensive Deployment
+
+Because of limited range, you need **lots of small cells**.
+
+- More base stations = more cost
+- More backhaul connections needed
+- More maintenance
+
+*Great for dense urban areas. Not practical for rural.*
+
+---
+
+## mmWave Trade-off
+
+| Advantage | Disadvantage |
+|-----------|--------------|
+| Huge bandwidth | Short range |
+| Multi-gigabit speeds | Blocked by obstacles |
+| Uncrowded spectrum | Expensive to deploy |
+| Low latency | Needs line-of-sight |
+
+> **mmWave = blazing fast, but only if you're close and nothing's in the way.**
+
+---
+
+## Where mmWave Makes Sense
+
+mmWave works best in **specific scenarios**:
+
+- **Stadiums** - *dense crowds, limited area*
+- **Airports** - *high traffic, controlled environment*
+- **Shopping malls** - *indoor, can place many cells*
+- **Urban hotspots** - *city centers, high demand*
+- **Fixed wireless** - *home internet, stationary receiver*
+
+> *Don't expect mmWave everywhere. It's a tool for specific situations.*
+
+---
+
+## The 5G Spectrum Strategy
+
+5G uses **all bands together**:
+
+| Layer | Band | Purpose |
+|-------|------|---------|
+| **Coverage** | Low band (600-900 MHz) | Wide area, indoors |
+| **Capacity** | Mid band (2.5-6 GHz) | Balance of speed/range |
+| **Speed** | mmWave (24-100 GHz) | Extreme speed in hotspots |
+
+> **5G isn't just mmWave.** It's a *layered approach* using the right band for each situation.
