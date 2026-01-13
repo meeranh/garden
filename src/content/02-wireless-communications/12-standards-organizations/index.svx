@@ -1,0 +1,108 @@
+---
+title: Standards Organizations
+---
+
+## Why Standards?
+
+Without standards, your phone couldn't talk to a WiFi router from a different manufacturer. Standards ensure **interoperability**.
+
+Three main organizations create wireless/networking standards:
+
+| Organization | Focus |
+|--------------|-------|
+| **IETF** | Internet protocols |
+| **ITU** | Global telecom coordination |
+| **IEEE** | Hardware/physical standards |
+
+---
+
+## IETF (Internet Engineering Task Force)
+
+**Function:** Creates **Internet protocols** - the rules for how data moves across the Internet.
+
+- Open organization, anyone can participate
+- Publishes **RFCs** (Request for Comments) as standards
+- Focused on *how the Internet works*
+
+---
+
+### IETF Working Groups
+
+| Working Group | What They Work On |
+|---------------|-------------------|
+| **MOBILEIP** | Mobile IP protocols (MIPv4, MIPv6) |
+| **MANET** | Mobile Ad-hoc Networks (AODV, OLSR) |
+| **HTTPbis** | HTTP protocol updates |
+
+> *"If it's an Internet protocol, IETF probably made it."*
+
+---
+
+## ITU (International Telecommunication Union)
+
+**Function:** UN agency that coordinates **global telecom standards** and **radio spectrum allocation**.
+
+When countries need to agree on which frequencies to use, ITU coordinates it.
+
+---
+
+### ITU Sectors
+
+| Sector | Name | Function |
+|--------|------|----------|
+| **ITU-R** | Radiocommunication | Radio frequencies, satellite orbits, wireless standards |
+| **ITU-T** | Telecommunication Standardization | Network protocols, codecs, quality standards |
+| **ITU-D** | Development | Helps developing countries build telecom infrastructure |
+
+---
+
+### ITU Examples
+
+- **ITU-R** allocates which frequencies 5G/6G can use worldwide
+- **ITU-T** defines video compression standards (H.264, H.265)
+- **ITU-D** provides technical assistance to developing nations
+
+> *"If countries need to agree on something telecom-related, ITU coordinates it."*
+
+---
+
+## IEEE (Institute of Electrical and Electronics Engineers)
+
+**Function:** Professional organization that creates **technical standards**, especially for **local networking and hardware**.
+
+---
+
+### IEEE 802 Standards
+
+| Standard | Name | What It Is |
+|----------|------|------------|
+| **802.3** | Ethernet | Wired LAN |
+| **802.11** | WiFi | Wireless LAN |
+| **802.15** | WPAN | Bluetooth, ZigBee |
+| **802.16** | WiMAX | Wireless MAN |
+| **802.21** | MIH | Media Independent Handover |
+
+> *"If it starts with 802, IEEE made it."*
+
+---
+
+## How They Work Together
+
+$$
+\text{ITU} \xrightarrow{\text{allocates spectrum}} \text{IEEE} \xrightarrow{\text{needs protocols}} \text{IETF}
+$$
+
+**Example flow:**
+1. **ITU-R** says "5 GHz band is for unlicensed use"
+2. **IEEE** creates 802.11a/n/ac to use that band
+3. **IETF** creates protocols (IP, TCP) that run over WiFi
+
+---
+
+## Summary
+
+| Organization | Creates | Examples |
+|--------------|---------|----------|
+| **IETF** | Internet protocols | IP, TCP, Mobile IP, HTTP |
+| **ITU** | Global coordination, spectrum | Frequency allocation, H.264 |
+| **IEEE** | Hardware standards | 802.11 (WiFi), 802.3 (Ethernet) |

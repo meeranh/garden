@@ -1,0 +1,156 @@
+---
+title: IEEE 802.21 MIH
+---
+
+## The Problem
+
+Your phone can connect to **different networks**: WiFi, LTE, WiMAX, etc.
+
+Each network has its own way of doing things. When you want to switch from WiFi to LTE, the upper layers (like Mobile IP) need to know what's happening.
+
+But each network speaks a **different language**. How do the upper layers understand all of them?
+
+---
+
+## The Solution: MIH Function
+
+**MIH** (Media Independent Handover) sits in the middle and **translates**.
+
+It provides a **common interface** that works the same way regardless of which network you're using.
+
+::mih-architecture
+
+---
+
+## How It Works
+
+Upper layers ask MIH questions like:
+- *"What's the signal like?"*
+- *"Is there a better network nearby?"*
+
+MIH asks the specific network and gives back a **standardized answer**.
+
+> **MIH = One interface to rule them all**
+
+---
+
+## Three Types of Services
+
+MIH provides three services:
+
+1. **Event Services** - Network tells upper layers something happened
+2. **Command Services** - Upper layers tell network to do something
+3. **Information Services** - Database of available networks
+
+---
+
+## Event Services
+
+*"Something happened, let me tell you about it"*
+
+Events flow **upward** from the network to upper layers.
+
+| Event | What It Means |
+|-------|---------------|
+| **Link_Detected** | "I found a new network nearby" |
+| **Link_Up** | "Connection established" |
+| **Link_Down** | "Connection lost" |
+| **Link_Going_Down** | "Connection is *about to* drop" |
+| **Link_Parameters_Report** | "Here's the current signal quality" |
+
+---
+
+### Link_Going_Down is Powerful
+
+This event **predicts** that the connection will drop soon.
+
+It warns you *before* you lose connection, so you can prepare a handover. This is exactly what FMIPv6 needs!
+
+> *"I'm about to lose signal. Start preparing now!"*
+
+---
+
+## Command Services
+
+*"Do this for me"*
+
+Commands flow **downward** from upper layers to the network.
+
+| Command | What It Does |
+|---------|--------------|
+| **Link_Get_Parameters** | "Tell me the current signal strength" |
+| **Link_Configure_Thresholds** | "Warn me when signal drops below X" |
+| **Link_Actions** | "Connect/disconnect from this network" |
+
+---
+
+### Handover Queries
+
+Two special commands help with handover decisions:
+
+- **MIH_Net_HO_Candidate_Query** - Network asks: *"Where can this device go?"*
+- **MIH_MN_HO_Candidate_Query** - Device asks: *"What networks are available?"*
+
+These help both the network and device find the best handover target.
+
+---
+
+## Information Services
+
+*"What options do I have?"*
+
+This is like a **database** of available networks and their properties:
+
+- What networks exist nearby?
+- What are their capabilities?
+- What's the cost of using each one?
+
+The device queries this to make **smart decisions** about which network to switch to.
+
+---
+
+## What MIH Does NOT Do
+
+MIH doesn't do the handover itself.
+
+It just provides **information** and **control**. The actual handover is still done by Mobile IP or other protocols.
+
+> Think of MIH as a **translator** and **messenger** between network layers and upper layers.
+
+---
+
+## Why MIH Matters
+
+**Without MIH**, Mobile IP would need separate code for:
+- How to detect WiFi signal drop
+- How to detect LTE signal drop
+- How to detect WiMAX signal drop
+- etc.
+
+**With MIH**, Mobile IP just listens for `Link_Going_Down` and it works for **all** networks.
+
+---
+
+## Summary
+
+### Event Services (Network → Upper Layers)
+
+| Event | Meaning |
+|-------|---------|
+| **MIH_Link_Detected** | New network found nearby |
+| **MIH_Link_Up** | Connection established |
+| **MIH_Link_Down** | Connection lost |
+| **MIH_Link_Going_Down** | Connection about to drop |
+| **MIH_Link_Parameters_Report** | Signal quality update |
+
+### Command Services (Upper Layers → Network)
+
+| Command | Purpose |
+|---------|---------|
+| **MIH_Link_Get_Parameters** | Get current signal strength |
+| **MIH_Link_Configure_Thresholds** | Set warning thresholds |
+| **MIH_Link_Actions** | Connect/disconnect |
+| **MIH_Net_HO_Candidate_Query** | Network asks for handover targets |
+| **MIH_MN_HO_Candidate_Query** | Device asks for available networks |
+
+> **MIH provides a common language for heterogeneous networks.**

@@ -1,0 +1,88 @@
+---
+title: Mobile IPv4
+---
+
+## The Players
+
+There are **4 entities** in Mobile IPv4:
+
+::mipv4-players
+
+
+
+1. **Mobile Node (MN)** - Your phone or laptop. The device that moves around.
+
+2. **Correspondent Node (CN)** - The server or person you're talking to. They don't know or care that you're mobile.
+
+3. **Home Agent (HA)** - A router in your home network. It knows your permanent Home Address and tracks where you currently are.
+
+4. **Foreign Agent (FA)** - A router in the network you've moved to. It helps your device get a temporary Care-of Address.
+
+---
+
+## The Process
+
+::mipv4-flow
+
+---
+
+### Step 1: You Leave Home
+
+You move from your home network to a foreign network. Like going from home WiFi to a coffee shop.
+
+---
+
+### Step 2: Discovery
+
+The Foreign Agent broadcasts *"I'm here!"* messages. Your phone hears this and realizes it's in a new network.
+
+---
+
+### Step 3: Registration
+
+Your phone tells the Home Agent:
+
+> *"Hey, I've moved. My new Care-of Address is X. Forward my packets there."*
+
+The Home Agent updates its records.
+
+---
+
+### Step 4: Packet Flow
+
+When someone sends you a packet:
+
+- **CN** sends packet to your Home Address *(they don't know you moved)*
+- **Home Agent** receives it, wraps it in a new packet addressed to your Care-of Address *(tunneling)*
+- **Foreign Agent** receives the tunneled packet, unwraps it, delivers to your phone
+
+---
+
+### Step 5: Reply
+
+When you reply, your packet goes **directly** to CN. No tunneling needed for outbound.
+
+---
+
+## Why Foreign Agent?
+
+You might ask: *"Why do we need a Foreign Agent? Can't the phone just get an IP directly?"*
+
+Two reasons:
+
+- **Saves addresses** - Multiple mobile devices can share one Care-of Address (the FA's address)
+- **Less work for phone** - The FA handles the decapsulation, not your battery-limited phone
+
+---
+
+## The Triangle Problem
+
+Notice the inefficiency?
+
+::triangle-routing
+
+Packets **to you** take a detour through Home Agent. Packets **from you** go direct.
+
+This is called **triangle routing**. It's wasteful but simple.
+
+> **Mobile IPv4 trades efficiency for simplicity.** The CN never needs to know you're mobile.

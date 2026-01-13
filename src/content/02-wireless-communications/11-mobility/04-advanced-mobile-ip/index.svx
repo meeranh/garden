@@ -1,0 +1,144 @@
+---
+title: Advanced Mobile IP
+---
+
+## The Problem
+
+When you move between networks, there's a **delay**:
+
+1. You detect you've moved
+2. You get a new Care-of Address
+3. You tell the Home Agent
+4. Home Agent updates its records
+
+During this time, **packets are lost**.
+
+The following protocols try to fix this in different ways.
+
+---
+
+## HMIPv6 (Hierarchical MIPv6)
+
+**Problem:** Every time you move, you tell the Home Agent. But the Home Agent might be far away. That takes time.
+
+**Solution:** Add a **local anchor** called **MAP** (Mobility Anchor Point).
+
+::hmipv6
+
+---
+
+### How HMIPv6 Works
+
+Instead of telling the distant Home Agent every time you move:
+
+- You tell the nearby **MAP**
+- MAP handles local mobility
+- Home Agent only knows about MAP, not your exact location
+
+> *"Don't bother the faraway Home Agent for local moves."*
+
+---
+
+### Two Addresses in HMIPv6
+
+- **Regional CoA (RCoA)** - Address at MAP level. Doesn't change when you move locally.
+- **Local CoA (LCoA)** - Your actual current address. Changes with every move.
+
+When you move within the same region, only LCoA changes. The Home Agent never needs to know.
+
+---
+
+## FMIPv6 (Fast MIPv6)
+
+**Problem:** You detect you've moved *after* you've already moved. By then, packets are lost.
+
+**Solution:** **Predict** the handover and prepare *before* you move.
+
+::fmipv6
+
+---
+
+### How FMIPv6 Works
+
+1. Your phone detects signal is getting weak *(you're about to move)*
+2. **Before** you disconnect, you get a new CoA from the next network
+3. You tell the old router: *"Forward my packets to this new address"*
+4. You move
+5. Packets were already being forwarded. **No loss!**
+
+> *"Start forwarding before you actually move."*
+
+---
+
+### Two Modes
+
+- **Predictive mode** - You had time to prepare before moving *(best case)*
+- **Reactive mode** - You moved too fast, do it after *(fallback)*
+
+---
+
+## PMIPv6 (Proxy MIPv6)
+
+**Problem:** MIPv6 requires the phone to do a lot of work. What if the phone doesn't support MIPv6?
+
+**Solution:** **The network does everything.** The phone doesn't even know mobility is happening.
+
+::pmipv6
+
+---
+
+### How PMIPv6 Works
+
+Two new entities:
+
+- **MAG (Mobile Access Gateway)** - The router you connect to. Detects when you arrive/leave.
+- **LMA (Local Mobility Anchor)** - Central anchor that tracks where you are.
+
+When you move:
+
+1. New MAG detects you
+2. New MAG tells LMA: *"The mobile node is with me now"*
+3. LMA updates the tunnel
+
+Your phone does **nothing**. It thinks it never moved.
+
+> *"Let the network handle it. Phone doesn't need to know."*
+
+---
+
+## Comparison
+
+| Feature | HMIPv6 | FMIPv6 | PMIPv6 |
+|---------|--------|--------|--------|
+| **Goal** | Reduce signaling to HA | Reduce handover delay | Network-based mobility |
+| **Who works?** | MN + MAP | MN + routers | **Network only** |
+| **Phone needs MIPv6?** | Yes | Yes | **No** |
+| **Key idea** | Local anchor | Predict & prepare | Proxy does it all |
+
+---
+
+## HMIPv6 vs FMIPv6
+
+**Similarities:**
+
+- Both improve MIPv6
+- Both require phone to support MIPv6
+- Both reduce handover problems
+
+**Differences:**
+
+| | HMIPv6 | FMIPv6 |
+|--|--------|--------|
+| **Approach** | Local anchor (hierarchy) | Predict early |
+| **Reduces** | Signaling distance | Packet loss |
+| **New entity** | MAP | None |
+
+---
+
+## Summary
+
+| Protocol | Key Insight |
+|----------|-------------|
+| **HMIPv6** | Don't bother faraway HA for local moves |
+| **FMIPv6** | Start forwarding before you move |
+| **PMIPv6** | Network handles it, phone doesn't know |

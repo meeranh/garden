@@ -1,0 +1,84 @@
+---
+title: Mobile IPv6
+---
+
+Mobile IPv6 is a **cleaner, improved version** of Mobile IPv4.
+
+Three big changes:
+
+1. No Foreign Agent needed
+2. Route optimization (fixes triangle routing!)
+3. Built-in security
+
+---
+
+## Change 1: No Foreign Agent
+
+::no-foreign-agent
+
+In MIPv4, the Foreign Agent helped you get a Care-of Address.
+
+In MIPv6, **your phone does this itself**. Why?
+
+- IPv6 has **auto-configuration** built in
+- Your phone can generate its own Care-of Address automatically
+- Modern phones are powerful enough to handle decapsulation
+
+> *One less entity to worry about.*
+
+---
+
+## Change 2: Route Optimization
+
+Remember the triangle problem? Packets always detoured through Home Agent.
+
+**MIPv6 fixes this.**
+
+::route-optimization
+
+---
+
+### How It Works
+
+1. First packet still goes through Home Agent *(CN doesn't know where you are)*
+2. Home Agent tells CN: *"Hey, the mobile node is actually at this Care-of Address"*
+3. Now CN sends **directly** to you
+
+> **Triangle routing only happens once.** After that, packets go direct.
+
+---
+
+## Change 3: Built-in Security
+
+MIPv4 had security bolted on as an afterthought.
+
+MIPv6 uses **IPsec** by default for all signaling:
+
+- Binding Updates are authenticated
+- Registration messages are encrypted
+- No one can hijack your Home Address
+
+---
+
+## The Full Process
+
+1. **You move** to a new network
+2. **Auto-configure** a Care-of Address *(no Foreign Agent needed)*
+3. **Send Binding Update** to Home Agent: *"I'm at this new address"*
+4. **Home Agent forwards** first packets to you
+5. **Route optimization**: Home Agent tells CN your real location
+6. **CN sends directly** to you from now on
+
+---
+
+## MIPv4 vs MIPv6
+
+| Feature | MIPv4 | MIPv6 |
+|---------|-------|-------|
+| Foreign Agent | Required | **Not needed** |
+| Triangle routing | Always | **Only first packet** |
+| Route optimization | No | **Yes** |
+| Security | Optional | **Built-in (IPsec)** |
+| Address config | Manual/DHCP | **Auto-configuration** |
+
+> **MIPv6 = MIPv4 minus the Foreign Agent, plus route optimization.**
