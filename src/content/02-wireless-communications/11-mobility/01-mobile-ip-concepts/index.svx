@@ -1,0 +1,69 @@
+---
+title: Mobile IP Concepts
+---
+
+## The Problem
+
+Your phone has an IP address. When you move from one network to another, you get a *new* IP address.
+
+But any ongoing connections (video call, download) **break**. The other side is still sending packets to your *old* address.
+
+---
+
+## The Solution: Two Addresses
+
+Mobile IP gives your device **two addresses**:
+
+::two-addresses
+
+---
+
+### Home Address (HA)
+
+Your **permanent** address. *Never changes.*
+
+This is what other devices use to reach you. Think of it like your permanent mailing address.
+
+---
+
+### Care-of Address (CoA)
+
+Your **temporary** address. *Changes every time you move.*
+
+This is where you *actually* are right now. Think of it like your hotel address when traveling.
+
+---
+
+## How It Works
+
+Someone sends a packet to your Home Address. But you're not home.
+
+Your **Home Agent** (a router at your home network) knows you've moved. It forwards the packet to your current Care-of Address.
+
+You receive it wherever you are.
+
+::packet-forwarding
+
+---
+
+## The Mail Analogy
+
+Imagine you're traveling but still want to receive mail:
+
+- **Home Address** is like your permanent home address, where people send letters
+- **Care-of Address** is like the hotel you're staying at right now
+- **Home Agent** is like a family member at home who forwards your mail to your hotel
+
+> The sender doesn't need to know you moved. They keep sending to your home address, and it gets forwarded to wherever you are.
+
+---
+
+## Why This Matters
+
+| Without Mobile IP | With Mobile IP |
+|-------------------|----------------|
+| Connection breaks when you move | Connection stays alive |
+| Apps need to reconnect | Seamless handover |
+| Downloads restart | Downloads continue |
+
+> **Mobile IP = Location transparency.** *Move anywhere, keep the same address.*
