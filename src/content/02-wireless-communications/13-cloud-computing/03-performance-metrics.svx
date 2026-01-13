@@ -1,0 +1,76 @@
+---
+title: Cloud Performance Metrics
+---
+
+## The Question
+
+*How do we measure if a cloud service is performing well?*
+
+Two different perspectives matter here:
+
+- **User-perceived metrics** - What end users experience
+- **Provider-centric metrics** - What cloud providers monitor internally
+
+---
+
+## User-Perceived Metrics
+
+These are what **end users notice**. If these are bad, users complain.
+
+- **Response Time** - How long until I see a result?
+- **Availability** - Is the service up when I need it?
+- **Throughput** - How much work gets done per second?
+- **Latency** - Delay before transfer starts
+- **Error Rate** - How often do requests fail?
+- **Reliability** - Does it work consistently?
+
+> *Users think: "Is it fast? Is it up? Does it work?"*
+
+---
+
+## Provider-Centric Metrics
+
+These are what **cloud providers monitor** internally. Users don't see these directly, but they affect everything.
+
+- **CPU Utilization** - How busy are the servers?
+- **Memory Usage** - How much RAM is being used?
+- **Network Bandwidth** - How much data is flowing?
+- **Storage I/O** - Disk read/write speed
+- **Power Consumption** - Energy efficiency
+- **VM Density** - How many VMs per physical server?
+
+> *Providers think: "Are resources being used efficiently? Can we handle more customers?"*
+
+---
+
+## How They Connect
+
+Provider metrics **directly affect** user metrics:
+
+- High CPU utilization → **Slow response time**
+- Low memory available → **Service crashes** (availability drops)
+- Network congestion → **Poor throughput**
+- Disk I/O bottleneck → **High latency**
+
+Providers constantly optimize their internal metrics to keep the user experience good.
+
+---
+
+## The Key Difference
+
+| | User-Perceived | Provider-Centric |
+|--|----------------|------------------|
+| **Who cares?** | End users | Cloud provider |
+| **Focus** | Experience | Resources |
+| **Goal** | Happy users | Efficient infrastructure |
+
+---
+
+## SLA (Service Level Agreement)
+
+Providers **promise** certain performance levels in their SLA.
+
+- **99.99% availability** - About 52 minutes downtime per year
+- **99.9% availability** - About 8.7 hours downtime per year
+
+That extra "9" makes a big difference! If providers fail to meet their SLA, customers typically get credits or refunds.
