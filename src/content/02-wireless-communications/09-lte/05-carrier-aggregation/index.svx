@@ -1,0 +1,80 @@
+---
+title: "LTE-Advanced: Carrier Aggregation"
+---
+
+LTE has a speed limit: each channel maxes out at **20 MHz**. Want to go faster? Use *more channels at once*.
+
+> **Carrier Aggregation** = using multiple channels simultaneously, like adding lanes to a highway.
+
+---
+
+## The Simple Idea
+
+Think of bandwidth like lanes on a highway:
+
+::carrier-aggregation-concept
+
+- **1 channel** = 1 lane = 20 MHz
+- **2 channels** = 2 lanes = 40 MHz
+- **5 channels** = 5 lanes = 100 MHz
+
+LTE-Advanced allows up to **5 channels** (called "component carriers"):
+
+$$5 \times 20 \text{ MHz} = 100 \text{ MHz}$$
+
+> **This is the exam answer.** Maximum bandwidth = 100 MHz.
+
+---
+
+## Two Ways to Combine Channels
+
+::intra-vs-inter-band
+
+### Intra-band
+
+All channels come from the **same frequency band**.
+
+*Like adding lanes to the same highway.*
+
+---
+
+### Inter-band
+
+Channels come from **different frequency bands**.
+
+*Like using lanes from multiple different highways at once.*
+
+> **Inter-band is more common** because operators usually own spectrum in multiple bands.
+
+---
+
+## Why Use Different Bands?
+
+| Band Type | Strength | Weakness |
+|-----------|----------|----------|
+| **Low frequency** | Better coverage, goes through walls | Less capacity |
+| **High frequency** | More capacity, faster speeds | Shorter range |
+
+With inter-band CA, your phone uses **both** at the same time. You get coverage *and* speed.
+
+---
+
+## Exam Question
+
+> What is the maximum achievable channel bandwidth with standardized 20 MHz channels in inter-band Carrier Aggregation?
+
+**Answer:**
+
+$$5 \times 20 \text{ MHz} = \boxed{100 \text{ MHz}}$$
+
+---
+
+## Key Takeaway
+
+| What | Value |
+|------|-------|
+| Max channels | **5** |
+| Max per channel | **20 MHz** |
+| Max total | **100 MHz** |
+
+> **Carrier Aggregation breaks the 20 MHz barrier.** Instead of one channel, use five.

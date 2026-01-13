@@ -1,0 +1,122 @@
+---
+title: Heterogeneous Networks
+---
+
+Traditional networks use only **big towers** spread far apart. This creates problems: coverage holes and capacity limits.
+
+> **HetNet** = Heterogeneous Network = mixing *different cell sizes* together.
+
+Instead of "one size fits all," use the **right size cell for each situation**.
+
+---
+
+## Cell Types
+
+::cell-types
+
+| Cell Type | Coverage | Where it's used |
+|-----------|----------|-----------------|
+| **Macro cell** | Kilometers | Wide area coverage |
+| **Micro cell** | Hundreds of meters | Urban streets |
+| **Pico cell** | Tens of meters | Offices, malls |
+| **Femto cell** | One room | Homes, small offices |
+
+*Smaller cells = more capacity in that area.*
+
+---
+
+## Why Mix Cell Sizes?
+
+**Big cells alone** can't handle crowded areas. Everyone shares the same tower.
+
+**Small cells alone** would need thousands of towers for coverage.
+
+> **Solution:** Big cells for *coverage*, small cells for *capacity* where needed.
+
+The macro cell is your *safety net*. Small cells are *speed boosters* in busy spots.
+
+---
+
+## Two Types of HetNets
+
+::intra-vs-inter-tech
+
+---
+
+### Intra-technology HetNets
+
+All cells use the **same technology**, just different sizes.
+
+**Example:** LTE macro tower + LTE picocells
+
+- Seamless handoff between cells
+- Same network, same technology
+- *Easier to manage*
+
+---
+
+### Inter-technology HetNets
+
+Cells use **different technologies** mixed together.
+
+**Example:** LTE macro cell + WiFi hotspots
+
+- Different networks working together
+- Requires switching between technologies
+- *More complex, but flexible*
+
+---
+
+## Relay Nodes
+
+What if you can't run fiber to a new small cell? **Relay nodes** solve this.
+
+::relay-node
+
+A relay node:
+- **Receives** signal from the macro cell *wirelessly*
+- **Retransmits** to users nearby
+- **No fiber needed!**
+
+> Think of it like a *signal repeater*. It grabs the signal and passes it along.
+
+---
+
+### Types of Relay Nodes
+
+| Type | Backhaul | User link | Complexity |
+|------|----------|-----------|------------|
+| **Out-band** | Different frequency | Different frequency | Simpler |
+| **In-band** | Same frequency | Same frequency | Trickier |
+
+**Out-band** is easier because backhaul and user traffic don't interfere with each other.
+
+**In-band** saves spectrum but requires careful timing to avoid interference.
+
+---
+
+### Why Use Relay Nodes?
+
+| Advantage | Why it matters |
+|-----------|----------------|
+| **Cheap** | No fiber installation costs |
+| **Fast to deploy** | Just mount and power on |
+| **Flexible** | Can be moved easily |
+| **Fills gaps** | Reaches hard-to-wire areas |
+
+> **Perfect for:** Temporary events, rural areas, coverage holes, construction zones.
+
+---
+
+## Summary
+
+| Concept | Key Point |
+|---------|-----------|
+| **HetNet** | Mix of different cell sizes |
+| **Macro cells** | Wide coverage |
+| **Small cells** | High capacity in busy areas |
+| **Intra-technology** | Same tech, different sizes |
+| **Inter-technology** | Different techs working together |
+| **Relay nodes** | Extend coverage without fiber |
+
+> **HetNets are about using the right tool for the job.** Big towers for coverage, small cells for capacity, relays to fill the gaps.

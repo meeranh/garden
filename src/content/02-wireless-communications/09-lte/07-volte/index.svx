@@ -1,0 +1,85 @@
+---
+title: VoLTE
+---
+
+LTE was designed for **data only**. *Everything* is IP packets.
+
+So how do you make **voice calls**?
+
+---
+
+## The Old Way: Fall Back to 3G
+
+When LTE first launched, phones had to **drop to 3G** to make calls.
+
+> This is called **CSFB** (Circuit-Switched Fallback).
+
+**Problems:**
+- Takes **5-7 seconds** to switch networks
+- You **lose LTE data** during the call
+- What happens when carriers *shut down 3G*?
+
+*CSFB was always a temporary fix.*
+
+---
+
+## The Solution: VoLTE
+
+> **VoLTE** = Voice over LTE = Send voice as data packets.
+
+Instead of falling back to 3G, just treat voice like *any other data*.
+
+Your voice becomes **IP packets**, sent over LTE, just like a web page or video.
+
+*No fallback. No switching. Just data.*
+
+---
+
+## Why VoLTE is Better
+
+| | CSFB (Old) | VoLTE |
+|--|-----------|-------|
+| **Call setup** | 5-7 seconds | *Under 1 second* |
+| **Voice quality** | Narrowband | *HD Voice* |
+| **Data during call** | No | *Yes* |
+| **Future-proof** | Dies with 3G | *Long-term* |
+
+---
+
+## QoS: Priority for Voice
+
+Voice packets can't wait behind someone's Netflix stream.
+
+LTE creates a **dedicated bearer** (*a priority lane*) for voice:
+- **Guaranteed bandwidth**
+- **Low latency**
+- **No waiting**
+
+> Voice gets **VIP treatment**.
+
+*Think of it like a fast lane on a highway.*
+
+---
+
+## HD Voice
+
+Old calls: **Narrowband** (300 - 3,400 Hz) - *sounds muffled*
+
+VoLTE: **Wideband** (50 - 7,000 Hz) - *clear and rich*
+
+> More frequencies = better sound quality.
+
+*Like upgrading from AM radio to FM.*
+
+---
+
+## Summary
+
+| Concept | Key Point |
+|---------|-----------|
+| **CSFB** | Fall back to 3G for calls (*old way*) |
+| **VoLTE** | Voice as IP packets over LTE |
+| **QoS** | Priority lane for voice packets |
+| **HD Voice** | Better audio with wideband codec |
+
+> **VoLTE = voice is just data, *with VIP treatment*.**
