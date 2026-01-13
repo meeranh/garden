@@ -1,0 +1,223 @@
+---
+title: LTE Data Rate Calculations
+---
+
+How fast can LTE *actually* send data? The answer comes down to **counting** and **multiplying**.
+
+> **Core idea:** Count how many symbols you send per second, then figure out how many bits each symbol carries.
+
+---
+
+## The Building Blocks
+
+These are **fixed constants** from the LTE specification:
+
+| Component | Value | Why |
+|-----------|-------|-----|
+| Subcarriers per RB | 12 | Defined by 3GPP |
+| Slots per subframe | 2 | Subframe = 1ms, Slot = 0.5ms |
+| Subframes per second | 1000 | Subframe = 1ms |
+| Symbols per slot | **7** (Normal CP) | *or 6 with Extended CP* |
+
+> **Note:** Symbols per slot depends on the Cyclic Prefix. Normal CP = 7 symbols, Extended CP = 6 symbols. *Exam questions usually specify which one to use.*
+
+And bandwidth determines how many Resource Blocks you have:
+
+| Bandwidth | Resource Blocks |
+|-----------|-----------------|
+| 5 MHz | 25 RBs |
+| 10 MHz | 50 RBs |
+| 15 MHz | 75 RBs |
+| 20 MHz | 100 RBs |
+
+---
+
+## Step 1: Count Symbols Per Second
+
+Every RB gives you 12 subcarriers × 7 symbols per slot. You get 2 slots per subframe, and 1000 subframes per second.
+
+> **Symbols/sec = RBs × 12 × 7 × 2 × 1000**
+
+**Example for 20 MHz:**
+
+$$\text{Symbols/sec} = 100 \times 12 \times 7 \times 2 \times 1000 = 16,800,000$$
+
+That's **16.8 million symbols** flying through the air every second.
+
+---
+
+## Step 2: Bits Per Symbol (Modulation)
+
+Each symbol carries a certain number of bits, depending on the **modulation scheme**:
+
+| Modulation | Bits/Symbol | When to Use |
+|------------|-------------|-------------|
+| QPSK | 2 | Poor signal, cell edge |
+| 16-QAM | 4 | Medium signal |
+| 32-QAM | 5 | Good signal |
+| 64-QAM | 6 | Excellent signal, close to tower |
+
+*Higher QAM packs more bits per symbol, but needs a cleaner signal to decode correctly.*
+
+---
+
+## Step 3: Raw Bit Rate
+
+Multiply symbols by bits per symbol:
+
+> **Raw bits/sec = Symbols/sec × bits/symbol**
+
+**Example:** 20 MHz with 16-QAM:
+
+$$\text{Raw rate} = 16,800,000 \times 4 = 67,200,000 \text{ bps} = 67.2 \text{ Mbps}$$
+
+But this is the *theoretical maximum*. Real systems have overhead.
+
+---
+
+## Step 4: Apply Real-World Factors
+
+Two things eat into your raw rate:
+
+### Coding Rate
+
+Error correction adds redundancy. A **2/3 coding rate** means for every 3 bits transmitted, only 2 are actual data.
+
+$$\text{After coding} = \text{Raw rate} \times \frac{2}{3}$$
+
+### Bandwidth Efficiency
+
+Not all spectrum carries user data. Guard bands, control channels, and reference signals take up space. Typical efficiency is **90%**.
+
+$$\text{Effective rate} = \text{After coding} \times 0.90$$
+
+---
+
+## Step 5: MIMO Multiplication
+
+**MIMO** (Multiple-Input Multiple-Output) sends multiple data streams *simultaneously* using multiple antennas.
+
+| MIMO Config | Spatial Layers | Multiplier |
+|-------------|----------------|------------|
+| 1×1 (SISO) | 1 | ×1 |
+| 2×2 | 2 | ×2 |
+| 4×4 | 4 | ×4 |
+| 8×8 | 8 | ×8 |
+
+> **Final throughput = Effective rate × MIMO layers**
+
+*This is why MIMO is so powerful. It literally multiplies your capacity.*
+
+---
+
+## The Complete Formula
+
+Putting it all together:
+
+$$\text{Throughput} = \underbrace{\text{RBs} \times 12 \times 7 \times 2 \times 1000}_{\text{symbols/sec}} \times \underbrace{\text{bits/symbol}}_{\text{modulation}} \times \underbrace{\text{coding rate}}_{\text{e.g. } \frac{2}{3}} \times \underbrace{\text{efficiency}}_{\text{e.g. } 0.9} \times \underbrace{\text{MIMO layers}}_{\text{e.g. } 4}$$
+
+---
+
+## Worked Example 1
+
+> Calculate the maximum achievable throughput of the FDD LTE system in downlink under the following assumptions:
+> - Normal Cyclic Prefix (CP), 10 MHz Bandwidth, 16-QAM Modulation, 4×4 MIMO
+>
+> *Hint: In Normal CP, there are 7 symbols and 12 subcarriers in a slot of 0.5 ms, 10 MHz contains 50 Resource Blocks, one modulation symbol carries 4 bits in 16-QAM.*
+
+**Step 1:** Resource Blocks for 10 MHz = **50 RBs**
+
+**Step 2:** Symbols per second:
+$$50 \times 12 \times 7 \times 2 \times 1000 = 8,400,000$$
+
+**Step 3:** Bits per symbol for 16-QAM = **4 bits**
+
+**Step 4:** Raw bit rate:
+$$8,400,000 \times 4 = 33,600,000 \text{ bps} = 33.6 \text{ Mbps}$$
+
+**Step 5:** With 4×4 MIMO:
+$$33.6 \times 4 = \boxed{134.4 \text{ Mbps}}$$
+
+*No coding rate or efficiency given, so we use raw throughput.*
+
+---
+
+## Worked Example 2
+
+> For an LTE release 8 system, consider an FDD system configured to use **20 MHz** of spectrum. Consider a Type 1 frame with normal Cyclic Prefix length of seven (7) symbols, and a transmission effective bandwidth of **90%**.
+>
+> (i) What is the effective downlink data rate using **16-QAM** and **2/3 encoding rate**? *(10 marks)*
+>
+> (ii) What is the impact on the system capacity when a **2×2 MIMO** antenna configuration is used? *(2 marks)*
+
+**Part (i):**
+
+**Step 1:** Resource Blocks for 20 MHz = **100 RBs**
+
+**Step 2:** Symbols per second:
+$$100 \times 12 \times 7 \times 2 \times 1000 = 16,800,000$$
+
+**Step 3:** Bits per symbol for 16-QAM = **4 bits**
+
+**Step 4:** Raw bit rate:
+$$16,800,000 \times 4 = 67,200,000 \text{ bps} = 67.2 \text{ Mbps}$$
+
+**Step 5:** Apply coding rate:
+$$67.2 \times \frac{2}{3} = 44.8 \text{ Mbps}$$
+
+**Step 6:** Apply bandwidth efficiency:
+$$44.8 \times 0.9 = \boxed{40.32 \text{ Mbps}}$$
+
+**Part (ii):**
+
+With 2×2 MIMO, we get 2 spatial layers, so capacity doubles:
+$$40.32 \times 2 = \boxed{80.64 \text{ Mbps}}$$
+
+---
+
+## Worked Example 3
+
+> For an LTE release 8 system, consider an FDD system configured to use **20 MHz** of spectrum. Consider a Type 1 frame with normal Cyclic Prefix length of seven (7) symbols, and a transmission effective bandwidth of **90%**.
+>
+> (i) What is the effective downlink data rate using **32-QAM** and **2/3 encoding rate**? *(10 marks)*
+>
+> (ii) What is the impact on the system capacity when an **8×8 MIMO** antenna configuration is used? *(2 marks)*
+
+**Part (i):**
+
+**Step 1:** Resource Blocks for 20 MHz = **100 RBs**
+
+**Step 2:** Symbols per second:
+$$100 \times 12 \times 7 \times 2 \times 1000 = 16,800,000$$
+
+**Step 3:** Bits per symbol for 32-QAM = **5 bits**
+
+**Step 4:** Raw bit rate:
+$$16,800,000 \times 5 = 84,000,000 \text{ bps} = 84 \text{ Mbps}$$
+
+**Step 5:** Apply coding rate:
+$$84 \times \frac{2}{3} = 56 \text{ Mbps}$$
+
+**Step 6:** Apply bandwidth efficiency:
+$$56 \times 0.9 = \boxed{50.4 \text{ Mbps}}$$
+
+**Part (ii):**
+
+With 8×8 MIMO, we get 8 spatial layers:
+$$50.4 \times 8 = \boxed{403.2 \text{ Mbps}}$$
+
+---
+
+## Quick Reference
+
+| Parameter | Values to Memorize |
+|-----------|-------------------|
+| 10 MHz | 50 RBs |
+| 20 MHz | 100 RBs |
+| QPSK | 2 bits/symbol |
+| 16-QAM | 4 bits/symbol |
+| 32-QAM | 5 bits/symbol |
+| 64-QAM | 6 bits/symbol |
+| Symbols formula | RBs × 12 × 7 × 2 × 1000 |
+
+> **The calculation is just multiplication.** Count symbols, convert to bits, apply penalties, multiply by MIMO. That's it.

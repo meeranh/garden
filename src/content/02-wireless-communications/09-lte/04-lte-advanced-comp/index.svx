@@ -1,0 +1,122 @@
+---
+title: "LTE-Advanced: CoMP"
+---
+
+At cell edges, you face a *double problem*: weak signal from your tower, strong interference from neighbors. **CoMP** turns those interfering neighbors into *allies*.
+
+> **CoMP** = Coordinated Multi-Point
+
+---
+
+## The Cell Edge Problem
+
+Imagine standing at the boundary between two cells. Your serving tower is *far away*, so its signal is weak. The neighboring tower is *close*, blasting interference.
+
+::cell-edge-problem
+
+This is the **worst spot** in any cellular network. Traditional systems treat each tower as independent, so they end up *fighting* each other.
+
+---
+
+## The CoMP Solution
+
+What if towers **coordinated** instead of competing?
+
+> **Key insight:** The "interfering" tower has a strong signal to you. Instead of treating that as noise, *use it*.
+
+CoMP enables multiple towers to work together, either by:
+1. **Transmitting the same data** (signals add up)
+2. **Coordinating their transmissions** (avoiding interference)
+
+---
+
+## Joint Transmission (JT)
+
+In **Joint Transmission**, multiple towers send the *exact same data* to you simultaneously.
+
+::joint-transmission
+
+Instead of signals interfering destructively, they **combine constructively**. The "interference" becomes *useful signal*.
+
+> Think of it like surround sound speakers. When coordinated, they create a *richer* experience. When uncoordinated, just noise.
+
+**Benefits:**
+- Dramatically improved signal strength at cell edges
+- Higher data rates where you need them most
+
+**Cost:**
+- Requires sharing user data between towers in real-time
+- Needs high-capacity backhaul (fiber)
+
+---
+
+## Coordinated Scheduling/Beamforming (CS/CB)
+
+Sometimes sharing data between towers isn't practical. **CS/CB** is a lighter approach.
+
+::coordinated-scheduling
+
+Towers don't transmit the *same* data, but they **coordinate** to avoid stepping on each other:
+
+- **Coordinated Scheduling:** "I'm serving a cell-edge user now, hold off for a moment"
+- **Coordinated Beamforming:** "Point your beam *away* from my user"
+
+> It's like a polite conversation. Instead of everyone talking at once, *take turns* or *direct your voice* away from others.
+
+**Benefits:**
+- Less backhaul needed (only coordination info, not user data)
+- Easier to deploy
+
+**Trade-off:**
+- Less gain than Joint Transmission
+- Still significant improvement over no coordination
+
+---
+
+## Uplink CoMP
+
+CoMP works for **reception** too. When you transmit, multiple towers can *listen*.
+
+::uplink-comp
+
+Each tower receives your signal with different strength and quality. By **combining** what they hear, the network gets a much better picture of what you sent.
+
+> Even if one tower barely hears you, another might hear you *clearly*. Together, they piece it together.
+
+---
+
+## Requirements for CoMP
+
+CoMP isn't free. It needs:
+
+| Requirement | Why |
+|-------------|-----|
+| **Fast backhaul** | Towers must share data/coordination in real-time |
+| **Tight synchronization** | Signals must align precisely |
+| **Channel state info** | Each tower needs to know channel conditions |
+| **Processing power** | Joint processing is computationally heavy |
+
+> **Reality check:** CoMP is mainly deployed in *dense urban areas* where fiber backhaul exists between towers. Rural deployments rarely use it.
+
+---
+
+## CoMP Scenarios Summary
+
+| Type | What's Shared | Gain | Complexity |
+|------|---------------|------|------------|
+| **Joint Transmission** | User data + scheduling | Highest | Highest |
+| **Coordinated Scheduling** | Scheduling decisions | Medium | Medium |
+| **Coordinated Beamforming** | Beam directions | Medium | Medium |
+| **Uplink CoMP** | Received signals | High | High |
+
+---
+
+## Why It Matters
+
+Traditional networks waste enormous capacity at cell edges. Users there get *terrible* service while creating interference for everyone else.
+
+CoMP **reclaims** that wasted capacity:
+
+> Instead of cell edges being *dead zones*, they become places where **multiple towers work together** to serve you.
+
+*This is what makes LTE-Advanced "advanced."* It's not just faster - it's *smarter* about using the infrastructure that already exists.
