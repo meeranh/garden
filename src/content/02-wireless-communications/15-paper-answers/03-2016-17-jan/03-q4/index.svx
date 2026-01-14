@@ -1,0 +1,135 @@
+---
+title: Question 4 - Mobility Management
+---
+
+## (4)(a) Home Address vs Care-of Address
+
+> What is the difference between Home Address (HA) and Care of Address (CoA)? *(5 marks)*
+
+---
+
+| Address | Description |
+|---------|-------------|
+| **Home Address (HoA)** | Permanent address assigned to mobile node, never changes |
+| **Care-of Address (CoA)** | Temporary address acquired in visited network |
+
+---
+
+**Home Address:**
+- Assigned by home network
+- Used by correspondent nodes to reach the mobile
+- Remains constant regardless of location
+- Identifies the mobile node globally
+
+**Care-of Address:**
+- Acquired when mobile enters foreign network
+- Changes each time mobile moves to new network
+- Used for actual packet delivery
+- Registered with Home Agent
+
+> **Key insight:** Correspondents always send to Home Address. The Home Agent redirects to the current Care-of Address.
+
+---
+
+## (4)(b) MIPv4 Home Agent and Foreign Agent
+
+> Describe the roles of the Mobile IPv4 (MIPv4) Home Agent (HA) and the MIPv4 Foreign Agent (FA) by the provision of a diagram. *(5 marks)*
+
+---
+
+::mipv4-flow
+
+---
+
+**Home Agent (HA):**
+- Router on the mobile's **home network**
+- Maintains binding table (HoA → CoA mappings)
+- Intercepts packets destined for mobile's home address
+- **Tunnels** packets to mobile's current location
+- Handles binding updates from mobile
+
+**Foreign Agent (FA):**
+- Router on the **visited network**
+- Advertises its presence (Agent Advertisement)
+- Provides Care-of Address to visiting mobiles
+- **De-tunnels** packets from Home Agent
+- Delivers packets to mobile node
+
+---
+
+## (4)(c) How CN Sends Packets to MT in MIPv4
+
+> Describe how the CN (Corresponding Node) sends packets to the MT (Mobile Terminal) in the case where Mobile IPv4 (MIPv4) is employed. *(5 marks)*
+
+---
+
+::triangle-routing
+
+---
+
+**Steps:**
+
+1. **CN sends to Home Address** - CN doesn't know mobile has moved, sends to HoA
+2. **HA intercepts** - Home Agent receives packet (mobile not on home network)
+3. **HA tunnels to CoA** - HA encapsulates packet, sends to Care-of Address
+4. **FA de-tunnels** - Foreign Agent removes outer header
+5. **FA delivers to MT** - Mobile Terminal receives original packet
+
+---
+
+**This creates "Triangle Routing":**
+- Packets go: CN → HA → FA → MT
+- Inefficient if CN and MT are close but HA is far
+- MIPv6 solves this with **route optimization**
+
+---
+
+## (4)(d) HMIPv6 vs Fast MIPv6 vs Proxy MIPv6
+
+> Discuss the similarities and differences of Hierarchical Mobile IPv6 (HMIPv6) as compared to Fast and Proxy MIPv6. *(5 marks)*
+
+---
+
+**HMIPv6 (Hierarchical):**
+
+::hmipv6
+
+- Introduces **MAP (Mobility Anchor Point)** for local mobility
+- Local moves only update MAP, not Home Agent
+- Reduces signaling to home network
+
+---
+
+**Fast MIPv6:**
+
+::fmipv6
+
+- Reduces **handover latency** by anticipating moves
+- Pre-configures new CoA before handover completes
+- Near-zero packet loss during handover
+
+---
+
+**Proxy MIPv6:**
+
+::pmipv6
+
+- **Network-based** mobility (mobile doesn't participate)
+- MAG (Mobile Access Gateway) handles mobility signaling
+- Simpler for mobile devices, no MIP stack needed
+
+---
+
+**Comparison:**
+
+| Aspect | HMIPv6 | FMIPv6 | PMIPv6 |
+|--------|--------|--------|--------|
+| **Goal** | Reduce signaling | Reduce latency | Simplify mobile |
+| **New Entity** | MAP | None | MAG, LMA |
+| **Mobile Involvement** | Yes | Yes | No |
+| **Best For** | Frequent local moves | Real-time apps | Simple devices |
+
+**Similarities:**
+- All extend/improve base Mobile IP
+- All maintain session continuity
+- All aim to improve handover performance

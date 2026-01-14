@@ -1,0 +1,140 @@
+---
+title: Question 3 - Cloud Computing
+---
+
+## (3)(a) Cloud Deployment Models
+
+> Describe the deployment models of Cloud Computing based on location and distribution. *(5 marks)*
+
+---
+
+| Model | Description | Use Case |
+|-------|-------------|----------|
+| **Public Cloud** | Resources shared among multiple organizations, owned by provider | Startups, web apps |
+| **Private Cloud** | Dedicated to single organization, on-premises or hosted | Banks, healthcare |
+| **Hybrid Cloud** | Combination of public and private | Burst capacity, sensitive data |
+| **Community Cloud** | Shared by organizations with common concerns | Government, research |
+
+---
+
+**Public Cloud:**
+- Lowest cost, pay-per-use
+- Managed by third party (AWS, Azure, Google)
+- Less control, shared resources
+
+**Private Cloud:**
+- Maximum control and security
+- Higher cost (own infrastructure)
+- Dedicated resources
+
+**Hybrid Cloud:**
+- Best of both worlds
+- Keep sensitive data private, burst to public for peaks
+
+---
+
+## (3)(b) Cloud Delivery Models
+
+> Provide the cloud delivery models and describe for each model one example using Amazon, Google or Microsoft products. *(5 marks)*
+
+---
+
+| Model | What You Get | Example |
+|-------|--------------|---------|
+| **IaaS** | Virtual machines, storage, networks | **AWS EC2** |
+| **PaaS** | Platform to build/deploy apps | **Google App Engine** |
+| **SaaS** | Ready-to-use applications | **Microsoft 365** |
+
+---
+
+**IaaS (Infrastructure as a Service):**
+- **AWS EC2** - rent virtual servers by the hour
+- You manage: OS, middleware, applications
+- Provider manages: hardware, virtualization, networking
+
+**PaaS (Platform as a Service):**
+- **Google App Engine** - deploy code, platform handles scaling
+- You manage: application code
+- Provider manages: runtime, OS, servers
+
+**SaaS (Software as a Service):**
+- **Microsoft 365** - use Word, Excel, Teams in browser
+- You manage: your data
+- Provider manages: everything else
+
+---
+
+## (3)(c) Performance Metrics
+
+> Give and compare at least three user-perceived and three provider-centric performance metrics. *(5 marks)*
+
+---
+
+**User-Perceived Metrics:**
+
+| Metric | Description |
+|--------|-------------|
+| **Response Time** | Time from request to response |
+| **Availability** | Uptime percentage (e.g., 99.9%) |
+| **Throughput** | Requests handled per second |
+
+---
+
+**Provider-Centric Metrics:**
+
+| Metric | Description |
+|--------|-------------|
+| **Resource Utilization** | CPU, memory, storage usage |
+| **Energy Efficiency** | Power consumption per workload |
+| **Cost per Transaction** | Operational cost to serve requests |
+
+---
+
+**Comparison:**
+
+| Aspect | User-Perceived | Provider-Centric |
+|--------|----------------|------------------|
+| **Focus** | Experience quality | Operational efficiency |
+| **Goal** | Minimize latency, maximize uptime | Minimize cost, maximize utilization |
+| **Conflict** | Users want dedicated resources | Providers want to share resources |
+
+> **Trade-off:** High resource utilization (good for provider) can hurt response time (bad for user).
+
+---
+
+## (3)(d) Emotion-Aware Mobile Cloud Computing
+
+> Explain what is the emotion-aware mobile cloud computing and its applicability by the way of one paradigm. *(5 marks)*
+
+---
+
+**Emotion-Aware Mobile Cloud Computing** detects user emotions via mobile sensors and adapts cloud services accordingly.
+
+::emotion-flow
+
+---
+
+**How It Works:**
+
+1. **Sensing** - mobile device captures facial expressions, voice tone, typing patterns
+2. **Analysis** - cloud processes data using ML to detect emotion (happy, stressed, tired)
+3. **Adaptation** - services adjust based on detected emotion
+
+---
+
+**Example Paradigm: Emotion-Aware Music Streaming**
+
+| Detected Emotion | Service Adaptation |
+|------------------|-------------------|
+| Stressed | Play calming music, reduce notifications |
+| Happy | Upbeat playlist, enable social features |
+| Tired | Soft music, suggest break reminders |
+
+---
+
+**Applications:**
+
+- **Healthcare** - detect depression, anxiety early
+- **Education** - adapt learning pace to student frustration
+- **Customer service** - route angry customers to senior agents
+- **Driving** - alert drowsy drivers, adjust navigation voice

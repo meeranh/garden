@@ -1,0 +1,106 @@
+---
+title: Question 4 - Mobility Management
+---
+
+## (4)(a) Mobile IPv6 Operation
+
+> Describe Mobile IPv6 operation by the provision of a diagram. Give its strengths as compared with past versions of the same protocol. *(10 marks)*
+
+---
+
+**Mobile IPv6 (MIPv6)** allows a mobile node to maintain connectivity while moving between networks.
+
+**Key Components:**
+
+| Component | Role |
+|-----------|------|
+| **Mobile Node (MN)** | The device that moves |
+| **Home Agent (HA)** | Router on home network, forwards packets |
+| **Correspondent Node (CN)** | Device MN communicates with |
+| **Home Address (HoA)** | Permanent address (never changes) |
+| **Care-of Address (CoA)** | Temporary address in visited network |
+
+---
+
+**How It Works:**
+
+::route-optimization
+
+**Steps:**
+
+1. MN moves to foreign network, gets a **CoA**
+2. MN sends **Binding Update** to HA (registers CoA)
+3. HA intercepts packets for MN's HoA, tunnels to CoA
+4. MN sends Binding Update to CN for **route optimization**
+5. CN can now send directly to MN (no triangle routing)
+
+---
+
+**Strengths vs Mobile IPv4:**
+
+| Feature | MIPv4 | MIPv6 |
+|---------|-------|-------|
+| **Foreign Agent** | Required | Not needed |
+| **Route Optimization** | Optional extension | Built-in |
+| **Security** | Weak | IPsec integrated |
+| **Triangle Routing** | Always (without RO) | Avoided via binding |
+| **Address Space** | Limited (32-bit) | Vast (128-bit) |
+
+---
+
+## (4)(b) HMIPv6 vs Fast MIPv6
+
+> Discuss the similarities and differences of Hierarchical Mobile IPv6 (HMIPv6) as compared to Fast MIPv6. *(10 marks)*
+
+---
+
+**HMIPv6 (Hierarchical Mobile IPv6):**
+
+Introduces a **MAP (Mobility Anchor Point)** to handle local mobility.
+
+::hmipv6
+
+- Local moves only update MAP, not HA
+- Reduces signaling to home network
+- MN has two addresses: RCoA (regional) and LCoA (local)
+
+---
+
+**Fast MIPv6 (FMIPv6):**
+
+Focuses on **reducing handover latency** by anticipating the move.
+
+::fmipv6
+
+- MN gets new CoA **before** handover completes
+- Old AR tunnels packets to new AR during transition
+- Near-zero packet loss during handover
+
+---
+
+**Comparison:**
+
+| Aspect | HMIPv6 | FMIPv6 |
+|--------|--------|--------|
+| **Goal** | Reduce signaling overhead | Reduce handover latency |
+| **Mechanism** | Local anchor (MAP) | Anticipatory handover |
+| **New Entity** | MAP | None (uses existing ARs) |
+| **Packet Loss** | Some during handover | Near-zero |
+| **Best For** | Frequent local moves | Latency-sensitive apps |
+
+---
+
+**Similarities:**
+
+- Both are **extensions** to base MIPv6
+- Both aim to **improve handover performance**
+- Both maintain **session continuity**
+
+**Differences:**
+
+- HMIPv6 adds **hierarchy** (MAP as local anchor)
+- FMIPv6 adds **speed** (pre-handover preparation)
+- HMIPv6 reduces **signaling load** on home network
+- FMIPv6 reduces **packet loss** during handover
+
+> **They can be combined:** Use HMIPv6 for local mobility + FMIPv6 for fast handovers within the MAP domain.

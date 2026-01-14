@@ -1,0 +1,98 @@
+---
+title: Question 3 - WiFi Networks
+---
+
+## (3) WiFi QoS and Link Budget
+
+> Design a WiFi system (e.g. IEEE802.11e) with the appropriate QoS framework and calculate its pathloss ($L_{dB}$) and the $E_b/N_0$.
+>
+> Given: $h_t$ = 0.5 m, $h_r$ = 1 m, 8 kbits/sample at 1000 samples/sec, $k$ = 1.3803 × 10⁻²³ J/K, BW = 30 MHz, T = 300 K *(20 marks)*
+
+---
+
+### Part 1: WiFi QoS Framework (IEEE 802.11e)
+
+IEEE 802.11e introduces **EDCA** (Enhanced Distributed Channel Access) with four **Access Categories (AC)**:
+
+| AC | Traffic Type | Priority | Example |
+|----|--------------|----------|---------|
+| AC_VO | Voice | Highest | VoIP calls |
+| AC_VI | Video | High | Video streaming |
+| AC_BE | Best Effort | Medium | Web browsing |
+| AC_BK | Background | Lowest | File downloads |
+
+**How QoS is achieved:**
+
+- **AIFS** (Arbitration Inter-Frame Space) - higher priority = shorter wait
+- **CW** (Contention Window) - higher priority = smaller window
+- **TXOP** (Transmission Opportunity) - higher priority = longer transmit time
+
+| AC | AIFS | CW_min | CW_max |
+|----|------|--------|--------|
+| AC_VO | 2 | 3 | 7 |
+| AC_VI | 2 | 7 | 15 |
+| AC_BE | 3 | 15 | 1023 |
+| AC_BK | 7 | 15 | 1023 |
+
+---
+
+### Part 2: Pathloss Calculation
+
+**Given:** $h_t = 0.5$ m, $h_r = 1$ m, assume $d = 100$ m
+
+Using the **two-ray ground reflection model**:
+
+$$L_{dB} = 40\log_{10}(d) - 20\log_{10}(h_t \cdot h_r)$$
+
+<div class="math-left">
+
+$$\begin{aligned}
+L_{dB} &= 40\log_{10}(100) - 20\log_{10}(0.5 \times 1) \\
+&= 40 \times 2 - 20\log_{10}(0.5) \\
+&= 80 - 20 \times (-0.301) \\
+&= 80 + 6.02 \\
+&= 86.02 \text{ dB}
+\end{aligned}$$
+
+</div>
+
+> **Pathloss: $L_{dB} = 86$ dB**
+
+---
+
+### Part 3: $E_b/N_0$ Calculation
+
+**Step 1: Calculate Data Rate ($R_b$)**
+
+$$R_b = 8 \text{ kbits/sample} \times 1000 \text{ samples/sec} = 8 \text{ Mbps}$$
+
+**Step 2: Calculate Received Power ($P_r$)**
+
+Assuming transmit power $P_t = 100$ mW (20 dBm, typical WiFi):
+
+<div class="math-left">
+
+$$\begin{aligned}
+P_r &= P_t - L_{dB} \\
+&= 20 - 86 \\
+&= -66 \text{ dBm} \\
+&= -96 \text{ dBW}
+\end{aligned}$$
+
+</div>
+
+**Step 3: Calculate $E_b/N_0$ (shortcut formula)**
+
+$$\frac{E_b}{N_0} (dB) = P_r (dBW) - 10\log_{10}(R_b) - 10\log_{10}(k) - 10\log_{10}(T)$$
+
+<div class="math-left">
+
+$$\begin{aligned}
+\frac{E_b}{N_0} &= -96 - 10\log_{10}(8 \times 10^6) - 10\log_{10}(1.38 \times 10^{-23}) - 10\log_{10}(300) \\
+&= -96 - 69.03 + 228.6 - 24.77 \\
+&= 38.8 \text{ dB}
+\end{aligned}$$
+
+</div>
+
+> **$E_b/N_0 = 38.8$ dB**

@@ -1,0 +1,119 @@
+---
+title: Question 2 - Cellular Networks (LTE)
+---
+
+## (2)(a) CoMP in LTE-Advanced
+
+> Explain the Coordinated Multi-Point transmission and reception (CoMP) concept in LTE-A. A diagram should be used to support your analysis. *(8 marks)*
+
+---
+
+**CoMP** allows multiple cells to coordinate their transmissions to improve performance at **cell edges** where interference is highest.
+
+**The Problem:** Users at cell edges receive weak signals and strong interference.
+
+::cell-edge-problem
+
+---
+
+**Two CoMP Techniques:**
+
+| Type | How It Works |
+|------|--------------|
+| **Joint Transmission (JT)** | Multiple cells transmit the same data to the user simultaneously |
+| **Coordinated Scheduling (CS/CB)** | Cells coordinate to avoid interfering with each other |
+
+---
+
+**Joint Transmission:**
+
+::joint-transmission
+
+- Both cells transmit to the user
+- Signals combine constructively
+- Dramatically improves cell-edge throughput
+
+---
+
+**Coordinated Scheduling/Beamforming:**
+
+::coordinated-scheduling
+
+- Cells share scheduling information
+- Each cell adjusts beamforming to minimize interference to neighboring users
+- Lower backhaul requirements than JT
+
+---
+
+**Benefits of CoMP:**
+
+- **Improved cell-edge performance** - up to 2-3x throughput increase
+- **Reduced interference** - cells cooperate instead of competing
+- **Better spectral efficiency** - same spectrum serves more users
+
+---
+
+## (2)(b) LTE Data Rate Calculation
+
+> For an LTE Release 8 FDD system with 20 MHz spectrum, Type 1 frame, normal CP (7 symbols), and 90% effective bandwidth.
+
+**LTE Data:**
+- Radio Frame = 10 Sub-frames
+- Sub-frame = 2 Time-slots = 1 ms
+- Time-slot = 7 OFDM symbols
+- Inter-carrier spacing = 15 kHz
+- 16 QAM = 4 bits/symbol
+
+---
+
+### (i) Effective Downlink Data Rate
+
+> Using 16 QAM and 2/3 encoding rate. *(10 marks)*
+
+**Step 1: Number of Subcarriers**
+
+<div class="math-left">
+
+$$\begin{aligned}
+\text{Effective BW} &= 20 \text{ MHz} \times 0.9 = 18 \text{ MHz} \\
+\text{Subcarriers} &= \frac{18 \text{ MHz}}{15 \text{ kHz}} = 1200
+\end{aligned}$$
+
+</div>
+
+**Step 2: Symbols per Second**
+
+<div class="math-left">
+
+$$\begin{aligned}
+\text{Symbols per subframe} &= 7 \times 2 = 14 \\
+\text{Subframes per second} &= 1000 \\
+\text{Total symbols/sec} &= 1200 \times 14 \times 1000 = 16,800,000
+\end{aligned}$$
+
+</div>
+
+**Step 3: Apply Modulation and Coding**
+
+<div class="math-left">
+
+$$\begin{aligned}
+\text{Raw bits/sec} &= 16,800,000 \times 4 = 67.2 \text{ Mbps} \\
+\text{With 2/3 coding} &= 67.2 \times \frac{2}{3} = 44.8 \text{ Mbps}
+\end{aligned}$$
+
+</div>
+
+> **Effective downlink data rate: 44.8 Mbps**
+
+---
+
+### (ii) Impact of 2x2 MIMO
+
+> What is the impact on system capacity when 2x2 MIMO is used? *(2 marks)*
+
+**2x2 MIMO** provides **2 spatial streams**, effectively **doubling** the capacity:
+
+$$\text{Capacity with MIMO} = 44.8 \times 2 = 89.6 \text{ Mbps}$$
+
+> **With 2x2 MIMO: 89.6 Mbps** (2x increase)

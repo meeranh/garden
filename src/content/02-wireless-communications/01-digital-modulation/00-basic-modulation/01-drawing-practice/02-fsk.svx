@@ -1,0 +1,36 @@
+---
+title: Drawing FSK
+prerequisites:
+  - wireless-communications/digital-modulation/basic-modulation
+---
+
+## FSK (Frequency Shift Keying)
+
+**Rule:** Change the **frequency** based on the bit value.
+
+- **1** = High frequency (more cycles per bit)
+- **0** = Low frequency (fewer cycles per bit)
+
+::fsk-drawing
+
+---
+
+## Steps to Draw
+
+1. Draw your bit sequence in boxes along the top
+2. Mark vertical lines at each bit boundary
+3. For each bit:
+   - If **1**: draw many cycles (squished waves)
+   - If **0**: draw fewer cycles (stretched waves)
+4. Keep the amplitude **constant** throughout
+
+---
+
+## Quick Reference
+
+| Bit | Frequency |
+|-----|-----------|
+| 0 | Low (fewer cycles) |
+| 1 | High (more cycles) |
+
+> **Key:** Only frequency changes. Amplitude stays the same.

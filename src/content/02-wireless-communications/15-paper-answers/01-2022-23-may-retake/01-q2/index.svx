@@ -1,0 +1,86 @@
+---
+title: Question 2 - Cellular Networks (GSM)
+---
+
+## (2)(a) Driving Factors for 2G to 4G Evolution
+
+> What are the major driving factors for the evolution of 2G to 4G technologies? *(6 marks)*
+
+---
+
+**1. Data Speed Demands**
+- 2G was designed for voice, but users wanted internet, email, video
+- Each generation increased speeds: 2G (64 kbps) → 3G (2 Mbps) → 4G (100+ Mbps)
+
+**2. Spectral Efficiency**
+- Limited spectrum is expensive, so each generation uses it more efficiently
+- Better modulation (GMSK → QPSK → 64-QAM) and multiple access (TDMA → CDMA → OFDMA)
+
+**3. Multimedia Applications**
+- Video calling, streaming, gaming require high bandwidth and low latency
+- 2G couldn't support these, driving upgrades
+
+**4. Capacity**
+- More users = more congestion
+- Each generation supports more simultaneous users per cell
+
+**5. Latency Reduction**
+- Real-time apps (VoIP, gaming) need low delay
+- 4G reduced latency to ~10 ms vs 2G's 300+ ms
+
+**6. Cost Per Bit**
+- Operators need to reduce cost of delivering data
+- More efficient networks = cheaper data for users
+
+---
+
+## (2)(b) GSM Capacity Calculation
+
+> The GSM Operator 'A' is allocated 2x6 MHz of spectrum. The technical parameters of the GSM air interface are:
+> - TDMA and FDD
+> - 8 Time Slots/TDMA Frame
+> - One full duplex carrier = two frequencies (uplink + downlink)
+> - Bandwidth of a carrier = 2x200 kHz
+
+---
+
+### (i) Number of Carriers per Cell
+
+> What is the number of carriers/cell for a 7-cell cluster? *(8 marks)*
+
+**Given:**
+- Total spectrum: 2 x 6 MHz (6 MHz uplink + 6 MHz downlink)
+- Carrier bandwidth: 200 kHz (per direction)
+- Cluster size: 7 cells
+
+**Step 1: Total carriers in system**
+
+$$\text{Total carriers} = \frac{6 \text{ MHz}}{200 \text{ kHz}} = \frac{6000}{200} = 30 \text{ carriers}$$
+
+**Step 2: Carriers per cell (frequency reuse)**
+
+$$\text{Carriers per cell} = \frac{\text{Total carriers}}{\text{Cluster size}} = \frac{30}{7} = 4.28$$
+
+> **Answer: 4 carriers per cell** (we round down since partial carriers aren't possible)
+
+---
+
+### (ii) Maximum Speech Calls per Cell
+
+> What is the maximum number of speech calls possible in a cell? *(6 marks)*
+
+**Given:**
+- 4 carriers per cell
+- 8 time slots per carrier
+
+**Step 1: Total time slots**
+
+$$\text{Total slots} = 4 \times 8 = 32 \text{ slots}$$
+
+**Step 2: Subtract control channels**
+
+In GSM, typically 2 slots on the first carrier are reserved for control (BCCH, SDCCH).
+
+$$\text{Traffic slots} = 32 - 2 = 30 \text{ slots}$$
+
+> **Answer: 30 speech calls** (each call uses one time slot)

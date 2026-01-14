@@ -1,7 +1,7 @@
 ---
 title: Drawing Constellations
 prerequisites:
-  - wireless-communications/digital-modulation/qam
+  - wireless-communications/digital-modulation/qam/how-qam-works
 ---
 
 ## Exam Skill: Drawing QAM Constellations

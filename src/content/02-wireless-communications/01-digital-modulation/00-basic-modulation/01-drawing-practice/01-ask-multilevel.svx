@@ -1,0 +1,50 @@
+---
+title: Drawing Multi-level ASK
+prerequisites:
+  - wireless-communications/digital-modulation/basic-modulation/drawing-practice/ask
+---
+
+## Multi-level ASK (M-ASK)
+
+Binary ASK has 2 levels: on or off.
+
+But what if we use **more bits per symbol**?
+
+---
+
+## 4-bit ASK (16 levels)
+
+With 4 bits per symbol, we get $2^4 = 16$ amplitude levels.
+
+**How to draw:**
+
+1. Group the bit sequence into chunks of 4
+2. Convert each chunk to decimal (0-15)
+3. Draw wave amplitude proportional to that level
+
+---
+
+## Example
+
+Sequence: `0100101101`
+
+| Group | Bits | Decimal | Amplitude |
+|-------|------|---------|-----------|
+| 1 | 0100 | 4 | 4/15 of max |
+| 2 | 1011 | 11 | 11/15 of max |
+| 3 | 01__ | 0100 (padded) | 4 | 4/15 of max |
+
+::ask-multilevel
+
+---
+
+## The Pattern
+
+| Bits per symbol | Levels | Name |
+|-----------------|--------|------|
+| 1 | 2 | Binary ASK (BASK) |
+| 2 | 4 | 4-ASK |
+| 3 | 8 | 8-ASK |
+| 4 | 16 | 16-ASK |
+
+> **Same concept, more levels.** Higher decimal value = taller wave.

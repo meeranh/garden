@@ -1,0 +1,102 @@
+---
+title: Question 5 - Cellular Networks
+---
+
+## (5)(a) Three Use Cases of 5G
+
+> Which are the three use cases of 5G? Explain each use case in detail using diagrams where possible. *(8 marks)*
+
+> *Learn more: [5G Requirements](/wireless-communications/5g/requirements)*
+
+---
+
+**1. eMBB (Enhanced Mobile Broadband)**
+
+High-speed data for bandwidth-hungry applications.
+
+- **Peak speed:** 20 Gbps
+- **Use cases:** 4K/8K video streaming, VR/AR, cloud gaming
+- **Key feature:** Massive capacity in crowded areas (stadiums, concerts)
+
+---
+
+**2. URLLC (Ultra-Reliable Low-Latency Communication)**
+
+Mission-critical applications where delay = danger.
+
+- **Latency:** under 1 ms
+- **Reliability:** 99.999%
+- **Use cases:** Remote surgery, autonomous vehicles, industrial robots
+- **Key feature:** Guaranteed delivery, no room for error
+
+---
+
+**3. mMTC (Massive Machine-Type Communication)**
+
+Connecting billions of IoT devices.
+
+- **Density:** 1 million devices per km²
+- **Use cases:** Smart cities, agriculture sensors, asset tracking
+- **Key feature:** Low power, long battery life (10+ years), small data packets
+
+---
+
+| Use Case | Speed | Latency | Devices | Example |
+|----------|-------|---------|---------|---------|
+| **eMBB** | 20 Gbps | ~10 ms | Few | VR streaming |
+| **URLLC** | Medium | 1 ms | Few | Remote surgery |
+| **mMTC** | Low | Relaxed | Millions | Smart meters |
+
+---
+
+## (5)(b) Vertical Market Case Study: Healthcare
+
+> Write a short case study explaining the business model to be applied in a vertical market of your choice. *(12 marks)*
+
+---
+
+**Why Healthcare Needs 5G**
+
+Healthcare is a prime vertical market for 5G because it requires both **URLLC** (for remote surgery) and **mMTC** (for patient monitoring devices).
+
+---
+
+**Case Study: Remote Surgery**
+
+**Problem:** Specialist surgeons are concentrated in major cities. Rural patients must travel long distances for complex procedures.
+
+**5G Solution:** A surgeon in London operates a robotic arm in a rural hospital 200 miles away, using real-time HD video and haptic feedback.
+
+**Technical Requirements:**
+- **Latency under 1 ms** - surgeon's hand movements must be instant
+- **Reliability 99.999%** - network failure during surgery is unacceptable
+- **Bandwidth over 1 Gbps** - multiple 4K video streams of the surgical site
+
+---
+
+**Business Model: Network Slicing**
+
+The hospital purchases a **dedicated network slice** from the operator:
+
+- **Guaranteed QoS** - URLLC slice with reserved resources
+- **SLA (Service Level Agreement)** - operator pays penalty if latency exceeds 1 ms
+- **Premium pricing** - hospital pays more than consumer plans, but saves on patient transport and specialist travel
+
+---
+
+**Real-World Example:**
+
+In 2019, a surgeon in China performed remote brain surgery on a patient 3,000 km away using 5G, with latency of just 2 ms. The procedure was successful.
+
+---
+
+**Revenue Model for Operators:**
+
+| Revenue Stream | Description |
+|----------------|-------------|
+| **Slice rental** | Monthly fee for dedicated URLLC slice |
+| **Per-procedure fee** | Charge per remote surgery performed |
+| **Equipment** | Sell/lease 5G-enabled surgical robots |
+| **Maintenance** | Ongoing support and SLA monitoring |
+
+> **Key insight:** Vertical markets like healthcare pay premium prices for guaranteed performance, making them more profitable than consumer mobile.

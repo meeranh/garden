@@ -1,0 +1,36 @@
+---
+title: Drawing BPSK
+prerequisites:
+  - wireless-communications/digital-modulation/basic-modulation
+---
+
+## BPSK (Binary Phase Shift Keying)
+
+**Rule:** Change the **phase** based on the bit value.
+
+- **0** = Reference phase (0°)
+- **1** = Inverted phase (180°)
+
+::psk-drawing
+
+---
+
+## Steps to Draw
+
+1. Draw your bit sequence in boxes along the top
+2. Mark vertical lines at each bit boundary
+3. For each bit:
+   - If **0**: continue the wave normally
+   - If **1**: flip the wave (invert it)
+4. Mark phase changes at boundaries where bit value changes
+
+---
+
+## Quick Reference
+
+| Bit | Phase |
+|-----|-------|
+| 0 | 0° (normal) |
+| 1 | 180° (inverted) |
+
+> **Key insight:** The wave "flips" whenever you transition between 0 and 1.

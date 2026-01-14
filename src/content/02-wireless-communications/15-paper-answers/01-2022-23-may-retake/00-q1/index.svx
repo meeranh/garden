@@ -1,0 +1,93 @@
+---
+title: Question 1 - WiFi and MANET
+---
+
+## (1)(a) IEEE Function and Standards
+
+> Explain the functions of the IEEE (Institute of Electrical and Electronics Engineers) and give two of its standards. *(4 marks)*
+
+---
+
+The **IEEE** is a professional organization that develops **technical standards** for electrical, electronic, and computing technologies.
+
+**Functions:**
+- Creates standards for networking, hardware, and communications
+- Develops the **802** family of LAN/MAN standards
+- Publishes technical papers and educational resources
+
+**Two IEEE Standards:**
+
+| Standard | Name | Description |
+|----------|------|-------------|
+| **IEEE 802.11** | WiFi | Wireless LAN |
+| **IEEE 802.16** | WiMAX | Wireless Metropolitan Area Network |
+
+---
+
+## (1)(b) AODV Protocol
+
+> Describe and give the diagram of the IETF AODV (Ad hoc On-Demand Distance Vector Routing) protocol used in MANETs. Discuss a deficiency of this protocol. *(10 marks)*
+
+---
+
+**AODV** is a **reactive** routing protocol for MANETs. It only discovers routes **when needed** (on-demand).
+
+**How it works:**
+
+1. **Route Discovery:** Source broadcasts a **RREQ** (Route Request)
+2. **RREQ Propagation:** Each node rebroadcasts until destination is reached
+3. **Route Reply:** Destination sends **RREP** back via reverse path
+4. **Data Transfer:** Source uses discovered route to send data
+
+::route-discovery
+
+---
+
+**Deficiency of AODV:**
+
+- **High latency for initial route discovery** - must wait for RREQ/RREP before sending data
+- **Flooding overhead** - RREQ broadcasts consume bandwidth in dense networks
+- **Not suitable for high-mobility** - frequent link breaks cause repeated route discoveries
+- **Single path** - only stores one route, no backup if it fails
+
+> AODV is reactive, so there's always a delay before first packet. Proactive protocols like OLSR have routes ready but use more overhead.
+
+---
+
+## (1)(c) IEEE 802.11i Security (WPA2)
+
+> Describe the IEEE 802.11i security mechanism(s) with the aid of diagrams, where possible. *(6 marks)*
+
+---
+
+**IEEE 802.11i** defines the security mechanisms for WiFi, implemented as **WPA2**.
+
+**Key Components:**
+
+- **AES-CCMP** encryption (replaces weak RC4/TKIP)
+- **802.1X authentication** for enterprise networks
+- **4-way handshake** for key establishment
+
+---
+
+**Two Modes:**
+
+| Mode | Authentication | Use Case |
+|------|----------------|----------|
+| **Personal (PSK)** | Pre-shared key (password) | Home networks |
+| **Enterprise** | 802.1X + RADIUS server | Corporate networks |
+
+---
+
+**4-Way Handshake:**
+
+Establishes the **PTK** (Pairwise Transient Key) for encryption:
+
+::four-way-handshake
+
+---
+
+**Security Features:**
+- **AES-128** encryption (strong, no known practical attacks)
+- **CCMP** provides confidentiality, integrity, and replay protection
+- **Per-packet keys** derived from PTK

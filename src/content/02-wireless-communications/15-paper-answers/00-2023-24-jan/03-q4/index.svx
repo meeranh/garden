@@ -1,0 +1,71 @@
+---
+title: Question 4 - Cellular Networks
+---
+
+## (4)(c) OFDM in LTE Networks
+
+> Discuss OFDM (Orthogonal Frequency Division Multiplexing) in LTE networks. *(8 marks)*
+
+> *Learn more: [OFDM](/wireless-communications/multiple-access/ofdm)*
+
+---
+
+**What is OFDM?**
+
+OFDM splits a wideband channel into many **narrow subcarriers** that transmit in parallel. Each subcarrier is spaced so they don't interfere (orthogonal).
+
+**Why LTE uses OFDM:**
+
+- **Fights multipath** - narrow subcarriers are less affected by frequency-selective fading
+- **Spectral efficiency** - subcarriers can overlap without interference
+- **Simple equalization** - each subcarrier sees flat fading
+- **Flexible bandwidth** - LTE can use 1.4, 3, 5, 10, 15, or 20 MHz
+
+---
+
+**Cyclic Prefix:**
+
+A copy of the end of each symbol is added to the beginning. This absorbs multipath delay and prevents **inter-symbol interference (ISI)**.
+
+**Downlink vs Uplink:**
+
+- **Downlink:** Uses **OFDMA** (base station can handle high PAPR)
+- **Uplink:** Uses **SC-FDMA** (lower PAPR, saves phone battery)
+
+> SC-FDMA is "OFDM with DFT precoding" to reduce peak-to-average power ratio.
+
+---
+
+## (4)(d) Friis Received Power Calculation
+
+> The transmit power is 20 Watts and the distance between the transmitter (Tx) and receiver (Rx) antennas is 2km. The communication link is designed at 1.5 GHz, where the transmit antenna gain is 4 while the receive antenna gain is 2. For the link to work successfully, the received power should be greater than 4mW. Will the communication link work? *(12 marks)*
+
+> *Learn more: [Link Budget](/wireless-communications/rf-fundamentals/link-budget/link-budget)*
+
+---
+
+**Given:** $P_t$ = 20 W, $d$ = 2 km, $f$ = 1.5 GHz, $G_t$ = 4, $G_r$ = 2, Required $P_r$ > 4 mW
+
+**Step 1: Convert to dB**
+
+- $P_t$ = 20 W = 20000 mW → $10\log_{10}(20000)$ = **43 dBm**
+- $G_t$ = 4 → $10\log_{10}(4)$ = **6 dB**
+- $G_r$ = 2 → $10\log_{10}(2)$ = **3 dB**
+- Required = 4 mW → $10\log_{10}(4)$ = **6 dBm**
+
+**Step 2: Calculate Path Loss**
+
+$$\lambda = \frac{c}{f} = \frac{3 \times 10^8}{1.5 \times 10^9} = 0.2 \text{ m}$$
+
+$$FSPL = 20\log_{10}\left(\frac{4\pi d}{\lambda}\right) = 20\log_{10}\left(\frac{4\pi \times 2000}{0.2}\right) = 20\log_{10}(125664) = 102 \text{ dB}$$
+
+**Step 3: Friis Equation (dB form)**
+
+$$P_r = P_t + G_t + G_r - FSPL = 43 + 6 + 3 - 102 = -50 \text{ dBm}$$
+
+**Step 4: Compare**
+
+- **Required:** 6 dBm
+- **Actual:** -50 dBm
+
+> **Answer: NO, the communication link will NOT work.** -50 dBm is far below the required 6 dBm.

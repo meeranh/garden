@@ -1,0 +1,62 @@
+---
+title: Drawing QPSK
+prerequisites:
+  - wireless-communications/digital-modulation/basic-modulation/drawing-practice/bpsk
+---
+
+## QPSK (Quadrature Phase Shift Keying)
+
+BPSK uses 2 phases (0° and 180°) for 1 bit per symbol.
+
+QPSK uses **4 phases** for **2 bits per symbol**.
+
+---
+
+## The Phase Mapping
+
+| Bit Pair | Phase |
+|----------|-------|
+| 00 | 0° |
+| 01 | 90° |
+| 10 | 180° |
+| 11 | 270° |
+
+---
+
+## Steps to Draw
+
+1. Group bit sequence into **pairs**: `01 00 10 11 01`
+2. For each pair, look up the phase
+3. Draw the carrier at that phase for the symbol duration
+4. Each symbol is **twice as wide** as a BPSK symbol (carries 2 bits)
+
+::qpsk-drawing
+
+---
+
+## Example
+
+Sequence: `0100101101`
+
+Grouped: `01` `00` `10` `11` `01`
+
+| Symbol | Bits | Phase | What to draw |
+|--------|------|-------|--------------|
+| 1 | 01 | 90° | Wave shifted 90° |
+| 2 | 00 | 0° | Normal wave |
+| 3 | 10 | 180° | Inverted wave |
+| 4 | 11 | 270° | Wave shifted 270° |
+| 5 | 01 | 90° | Wave shifted 90° |
+
+---
+
+## Visualizing Phase
+
+Think of it as starting the sine wave at different points:
+
+- **0°**: Start at zero, going up
+- **90°**: Start at peak
+- **180°**: Start at zero, going down (inverted)
+- **270°**: Start at trough
+
+> **Key:** 2 bits per symbol means only 5 symbols for 10 bits!

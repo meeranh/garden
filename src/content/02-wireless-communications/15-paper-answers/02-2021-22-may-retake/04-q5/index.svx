@@ -1,0 +1,114 @@
+---
+title: Question 5 - Cellular Networks (5G)
+---
+
+## (5)(a) ITU 5G Triangle
+
+> Draw and explain the ITU specified triangle of 5G. *(8 marks)*
+
+---
+
+The **ITU IMT-2020** framework defines 5G through three use case categories:
+
+::itu-triangle
+
+---
+
+**1. eMBB (Enhanced Mobile Broadband)**
+
+High-speed data for bandwidth-hungry applications.
+
+- **Peak speed:** 20 Gbps
+- **User experienced:** 100 Mbps
+- **Use cases:** 4K/8K streaming, VR/AR, cloud gaming
+
+---
+
+**2. URLLC (Ultra-Reliable Low-Latency Communication)**
+
+Mission-critical applications where delay = danger.
+
+- **Latency:** under 1 ms
+- **Reliability:** 99.999% (five nines)
+- **Use cases:** Remote surgery, autonomous vehicles, industrial robots
+
+---
+
+**3. mMTC (Massive Machine-Type Communication)**
+
+Connecting billions of IoT devices.
+
+- **Density:** 1 million devices per km²
+- **Battery life:** 10+ years
+- **Use cases:** Smart meters, agriculture sensors, asset tracking
+
+---
+
+| Use Case | Speed | Latency | Devices | Key Metric |
+|----------|-------|---------|---------|------------|
+| **eMBB** | 20 Gbps | ~10 ms | Few | Throughput |
+| **URLLC** | Medium | 1 ms | Few | Reliability |
+| **mMTC** | Low | Relaxed | Millions | Density |
+
+---
+
+## (5)(b) 5G Vertical Market Case Study
+
+> 5G technology will not be successful without penetrating the vertical markets. Write a short case study explaining how this penetration will be realised in a vertical market of your choice. *(12 marks)*
+
+---
+
+### Case Study: Smart Manufacturing (Industry 4.0)
+
+**Why Manufacturing Needs 5G:**
+
+Manufacturing is transforming into "Industry 4.0" with connected robots, digital twins, and automated quality control. This requires both **URLLC** (for robot control) and **mMTC** (for sensors).
+
+---
+
+**The Problem:**
+
+A car manufacturer wants to automate their assembly line with collaborative robots (cobots). Current solutions fail because:
+
+- **WiFi:** Too unreliable, interference from metal equipment
+- **4G:** Latency too high (50-100 ms) for real-time robot control
+- **Wired:** Limits robot mobility, expensive to reconfigure
+
+---
+
+**The 5G Solution:**
+
+Deploy a **private 5G network** in the factory:
+
+**1. Robot Control (URLLC)**
+- Latency under 1 ms for real-time motion control
+- Reliability 99.9999% for safety-critical operations
+
+**2. Sensor Network (mMTC)**
+- Thousands of sensors monitor temperature, vibration, quality
+- Predictive maintenance prevents downtime
+
+**3. AR for Workers (eMBB)**
+- Workers wear AR glasses showing assembly instructions
+- Remote expert assistance via live video
+
+---
+
+**Business Model: Private Network Slice**
+
+| Component | Revenue Model |
+|-----------|---------------|
+| **Spectrum** | Annual license fee |
+| **Infrastructure** | CAPEX + maintenance |
+| **Network Slice** | Monthly SLA-based fee |
+
+---
+
+**Real-World Example:**
+
+**Audi** deployed a private 5G network in their factory in Germany:
+- Connects 400+ autonomous transport robots
+- Latency under 1 ms for collision avoidance
+- **Result:** 30% productivity increase
+
+> **Key insight:** Manufacturers pay premium prices for guaranteed performance because factory downtime costs millions per hour.

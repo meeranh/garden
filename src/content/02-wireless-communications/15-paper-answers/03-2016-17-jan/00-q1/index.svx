@@ -1,0 +1,113 @@
+---
+title: Question 1 - WiMAX, WiFi and MANET
+---
+
+## (1)(a) IETF Function and Working Groups
+
+> Explain the function of the IETF (Internet Engineering Task Force) and name three of its working groups. *(2 marks)*
+
+---
+
+The **IETF** develops and promotes **Internet standards**, particularly the TCP/IP protocol suite. It publishes specifications as **RFCs** (Request for Comments).
+
+**Three IETF Working Groups:**
+
+| Working Group | Focus |
+|---------------|-------|
+| **MANET** | Mobile Ad-hoc Networks routing |
+| **6LoWPAN** | IPv6 over Low-Power Wireless |
+| **DMM** | Distributed Mobility Management |
+
+---
+
+## (1)(b) OLSR Protocol
+
+> Describe and give the diagram of the IETF OLSR (Optimised Link State Routing) protocol used in MANETs. Discuss a deficiency of this protocol. *(10 marks)*
+
+---
+
+**OLSR** is a **proactive** routing protocol for MANETs. It maintains routes to all destinations **continuously**, even before they're needed.
+
+**Key Concept: MPR (Multipoint Relay)**
+
+Instead of flooding, only selected **MPR nodes** forward messages. This dramatically reduces overhead.
+
+::mpr-selection
+
+---
+
+**How OLSR Works:**
+
+1. **HELLO messages** - nodes discover neighbors and select MPRs
+2. **TC (Topology Control) messages** - MPRs broadcast link state info
+3. **Route calculation** - each node builds routing table from TC messages
+
+::flooding-comparison
+
+---
+
+**Deficiency of OLSR:**
+
+- **High overhead in sparse networks** - proactive updates waste bandwidth when few routes are needed
+- **Slow convergence** - TC messages have periodic intervals, so route changes aren't instant
+- **Memory intensive** - every node stores routes to ALL destinations
+- **Not scalable** - overhead grows with network size
+
+> OLSR is best for **dense, stable networks** where routes are frequently used. For sparse or highly mobile networks, reactive protocols like AODV are better.
+
+---
+
+## (1)(c) WiMAX Scheduling
+
+> Describe the main scheduling proposals for WiMAX, by differentiating between channel-aware and channel-unaware schedulers. Draw the schedulers using detailed flow diagrams. *(8 marks)*
+
+---
+
+**Channel-Unaware Schedulers:**
+
+Don't consider current channel conditions. Simple but inefficient.
+
+**1. Round Robin (RR)**
+
+::round-robin
+
+- Serves each user in turn, equal time slots
+- **Pro:** Fair, simple
+- **Con:** Ignores channel quality, wastes slots on users with bad channels
+
+**2. Weighted Fair Queuing (WFQ)**
+
+- Like RR but weighted by subscription/priority
+- Higher-paying users get more slots
+
+---
+
+**Channel-Aware Schedulers:**
+
+Consider real-time channel conditions. More efficient but complex.
+
+**1. Max C/I (Maximum Carrier-to-Interference)**
+
+::max-ci
+
+- Always serves user with **best channel**
+- **Pro:** Maximum throughput
+- **Con:** Starves users with poor channels (unfair)
+
+**2. Proportional Fair (PF)**
+
+- Balances throughput and fairness
+- Serves user with best **relative** channel (current / average)
+- **Pro:** Good throughput AND fairness
+- **Con:** More complex to implement
+
+---
+
+**Comparison:**
+
+| Scheduler | Aware? | Throughput | Fairness |
+|-----------|--------|------------|----------|
+| Round Robin | No | Low | High |
+| WFQ | No | Low | Weighted |
+| Max C/I | Yes | Highest | Lowest |
+| Proportional Fair | Yes | High | Good |

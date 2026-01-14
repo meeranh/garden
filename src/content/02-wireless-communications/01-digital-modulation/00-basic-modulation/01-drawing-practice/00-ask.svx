@@ -1,0 +1,36 @@
+---
+title: Drawing ASK
+prerequisites:
+  - wireless-communications/digital-modulation/basic-modulation
+---
+
+## ASK (Amplitude Shift Keying)
+
+**Rule:** Change the **amplitude** based on the bit value.
+
+- **1** = High amplitude (full sine wave)
+- **0** = Low amplitude (small or no wave)
+
+::ask-drawing
+
+---
+
+## Steps to Draw
+
+1. Draw your bit sequence in boxes along the top
+2. Mark vertical lines at each bit boundary
+3. For each bit:
+   - If **1**: draw a full-height sine wave
+   - If **0**: draw a small (or flat) wave
+4. Keep the frequency **constant** throughout
+
+---
+
+## Quick Reference
+
+| Bit | Amplitude |
+|-----|-----------|
+| 0 | Low/none |
+| 1 | High |
+
+> **Key:** Only amplitude changes. Frequency stays the same.
