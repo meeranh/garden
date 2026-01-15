@@ -1,0 +1,109 @@
+---
+title: Bitcoin Architecture
+prerequisites:
+  - cryptography/blockchain/blockchain-basics
+---
+
+## The First Blockchain
+
+Bitcoin, created by **Satoshi Nakamoto** in 2008, was the first practical implementation of blockchain technology.
+
+It solved a fundamental problem: how can strangers agree on a shared transaction history *without trusting anyone*?
+
+> Bitcoin introduced **Proof of Work** to make the blockchain economically secure.
+
+---
+
+## Transactions
+
+A Bitcoin transaction is a signed message that says:
+
+> "I, owner of address X, send Y bitcoins to address Z."
+
+The owner proves ownership with a **digital signature** using their private key. Anyone can verify it with the public key.
+
+No banks. No middlemen. Just cryptography.
+
+---
+
+## The UTXO Model
+
+Bitcoin doesn't track *balances*. It tracks **unspent transaction outputs** (UTXOs).
+
+Think of it like cash. You don't have "a balance of $50". You have specific bills: a $20, two $10s, and two $5s.
+
+When you spend, you consume entire UTXOs and create new ones:
+
+| Input | Output |
+|-------|--------|
+| Your $20 bill | $15 to merchant |
+| | $5 back to you (change) |
+
+> Every transaction consumes old UTXOs and creates new ones.
+
+---
+
+## Block Structure
+
+Each Bitcoin block contains:
+
+| Field | Purpose |
+|-------|---------|
+| **Previous hash** | Links to the prior block |
+| **Merkle root** | Single hash of all transactions |
+| **Timestamp** | When the block was created |
+| **Nonce** | The mining puzzle solution |
+| **Transactions** | The actual payment data |
+
+The **Merkle root** is a hash tree that lets you verify any transaction belongs to the block without downloading all of them.
+
+---
+
+## Mining and Proof of Work
+
+Here's the clever part. To add a block, you must find a **nonce** such that:
+
+> hash(block + nonce) starts with N zeros
+
+This is *hard*. You have to try billions of random nonces until one works. It takes about **10 minutes** of global computing power to find one.
+
+::mining
+
+---
+
+## Why This Works
+
+Mining costs real money (electricity, hardware). An attacker trying to rewrite history would need to:
+
+1. Redo the proof of work for the tampered block
+2. Redo it for *every block after*
+3. Do this **faster** than the honest network adds new blocks
+
+> Unless you control 51%+ of the network's computing power, this is economically impossible.
+
+---
+
+## The 51% Attack
+
+If an attacker controls more than half the mining power, they *could* rewrite history.
+
+This is called a **51% attack**. It's theoretically possible but:
+
+- Bitcoin's network is massive
+- The attack costs billions in hardware and electricity
+- Success would crash Bitcoin's value, destroying the attacker's investment
+
+> The attack is possible but economically self-defeating.
+
+---
+
+## Decentralization
+
+There's no central Bitcoin server. Thousands of **nodes** worldwide each store the full blockchain.
+
+When a miner finds a valid block:
+1. They broadcast it to the network
+2. Every node independently verifies it
+3. If valid, they add it to their chain
+
+> No single point of failure. No authority to corrupt.

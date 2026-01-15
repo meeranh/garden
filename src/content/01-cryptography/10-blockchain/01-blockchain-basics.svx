@@ -1,0 +1,58 @@
+---
+title: Blockchain Basics
+prerequisites:
+  - cryptography/hash-functions/hash-functions
+---
+
+## The Problem
+
+How do you create a **shared record** that nobody can secretly alter?
+
+Traditional databases have administrators. They can change records. You have to *trust* them.
+
+> **Blockchain solves this:** a data structure where tampering is *mathematically detectable*.
+
+---
+
+## A Chain of Blocks
+
+A blockchain is a sequence of **blocks**, where each block contains:
+
+1. **Data** (like transactions)
+2. **A hash of the previous block**
+
+That second part is the key insight.
+
+::hash-chain
+
+---
+
+## Why This Works
+
+Each block's hash depends on *everything* in that block, including the previous block's hash.
+
+Change **anything** in Block 2? Its hash changes. But Block 3 stores the *old* hash of Block 2. Now they don't match.
+
+> **The chain is broken.** The tampering is obvious.
+
+To hide the change, the attacker must recalculate Block 3's hash. But then Block 4 breaks. And Block 5. They must redo *every block* after the tampered one.
+
+---
+
+## Blocks, Not Individual Records
+
+Why batch data into blocks instead of chaining individual records?
+
+**Efficiency.** Each hash operation has overhead. Batching hundreds of transactions into one block means fewer hashes, less storage, faster verification.
+
+> A block might contain **thousands** of transactions, all sealed with a single hash.
+
+---
+
+## Not Enough On Its Own
+
+A hash chain makes tampering *detectable*, but not *impossible*. A determined attacker with enough computing power could recalculate all the hashes.
+
+That's where **consensus mechanisms** come in. Bitcoin's solution: make each block *expensive* to create.
+
+> We'll see how in the next section.

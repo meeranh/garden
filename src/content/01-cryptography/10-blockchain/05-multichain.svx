@@ -1,0 +1,154 @@
+---
+title: MultiChain
+prerequisites:
+  - cryptography/blockchain/public-vs-private
+---
+
+## What is MultiChain?
+
+MultiChain is an **open-source platform** for creating private blockchains.
+
+Think of it as "Bitcoin for enterprises". Same technology, but designed for permissioned networks where participants are known.
+
+> MultiChain lets you deploy a private blockchain in *minutes*.
+
+---
+
+## Why MultiChain?
+
+Building blockchain from scratch is hard. MultiChain gives you:
+
+- **Ready-made consensus** - no need to implement your own
+- **Flexible permissions** - control who can do what
+- **Built-in assets** - create tokens without smart contracts
+- **Data streams** - store arbitrary data on-chain
+
+> It's a toolkit for building permissioned blockchain applications.
+
+---
+
+## The Permission Model
+
+MultiChain has **granular access control**. You can assign permissions per address:
+
+| Permission | What it allows |
+|------------|----------------|
+| **connect** | Join the network |
+| **send** | Send assets |
+| **receive** | Receive assets |
+| **issue** | Create new asset types |
+| **create** | Create data streams |
+| **mine** | Validate blocks |
+| **admin** | Grant permissions to others |
+
+---
+
+## How Permissions Work
+
+When you create a MultiChain network, you become the **admin**.
+
+You can then:
+1. **Grant** permissions to other addresses
+2. **Revoke** permissions at any time
+3. **Require** multiple admins to agree on changes
+
+> This is very different from Bitcoin, where anyone can participate.
+
+::permissions
+
+---
+
+## Streams
+
+Streams are MultiChain's way of storing **arbitrary data** on the blockchain.
+
+Think of a stream as a **database table** that lives on-chain:
+
+| Feature | Description |
+|---------|-------------|
+| **Key-value storage** | Store data by key |
+| **Append-only** | Data can't be deleted |
+| **Timestamps** | Every item is timestamped |
+| **Queries** | Search by key, publisher, or time range |
+
+---
+
+## Stream Use Cases
+
+| Use Case | How Streams Help |
+|----------|------------------|
+| **Audit logs** | Immutable record of events |
+| **Document registry** | Hash documents, prove existence |
+| **IoT data** | Sensor readings with timestamps |
+| **Supply chain** | Track items through their lifecycle |
+
+> Streams let you build applications without writing smart contracts.
+
+---
+
+## Creating and Using Streams
+
+A typical workflow:
+
+1. **Create a stream:** Define its name and permissions
+2. **Subscribe:** Nodes choose which streams to index
+3. **Publish:** Write key-value items to the stream
+4. **Query:** Read items by key, publisher, or time
+
+Each stream item contains:
+- **Key(s)** - for lookups
+- **Data** - the actual content (JSON, hex, text)
+- **Publisher** - who wrote it (signed)
+- **Timestamp** - when it was confirmed
+
+---
+
+## Stream Security
+
+Who can do what?
+
+| Action | Controlled by |
+|--------|---------------|
+| **Create stream** | `create` permission |
+| **Write to stream** | Stream's write permissions |
+| **Read from stream** | Anyone subscribed (or network-wide) |
+
+You can make streams:
+- **Open** - anyone on the network can write
+- **Restricted** - only specific addresses can write
+
+> All writes are **signed**, so you always know who published what.
+
+---
+
+## Consensus in MultiChain
+
+MultiChain uses a **round-robin mining** approach:
+
+1. A set of addresses have `mine` permission
+2. Miners take turns creating blocks
+3. The **mining diversity** parameter ensures rotation
+
+This is much simpler than proof of work:
+- No wasted energy
+- Fast block times (seconds)
+- Predictable throughput
+
+> With known validators, you don't need expensive puzzles.
+
+---
+
+## When to Use MultiChain
+
+**Good fit:**
+- Multiple organizations sharing data
+- Need audit trails and immutability
+- Want blockchain benefits without public exposure
+- Simple asset tracking or data timestamping
+
+**Not ideal for:**
+- Public, trustless systems
+- Complex smart contract logic (use Hyperledger or Ethereum instead)
+- Very high throughput (thousands of TPS)
+
+> MultiChain excels at *simple private blockchains* with minimal setup.

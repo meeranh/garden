@@ -1,0 +1,128 @@
+---
+title: Public vs Private Blockchains
+prerequisites:
+  - cryptography/blockchain/cryptographic-techniques
+---
+
+Not all blockchains are like Bitcoin. There's a spectrum from fully open to fully controlled.
+
+> The right choice depends on your **trust model** and **use case**.
+
+---
+
+## Public Blockchains
+
+**Anyone can participate.** No permission needed.
+
+| Property | Description |
+|----------|-------------|
+| **Join** | Anyone, anonymously |
+| **Read** | Fully transparent |
+| **Write** | Anyone can submit transactions |
+| **Validate** | Anyone can mine/stake |
+
+**Examples:** Bitcoin, Ethereum
+
+---
+
+## The Trade-offs
+
+Public blockchains are **trustless** but *slow*.
+
+Why slow? Because you can't trust participants:
+- Must wait for confirmations (Bitcoin: ~1 hour for high confidence)
+- Mining burns enormous energy
+- Every node stores *everything*
+
+> Bitcoin processes ~7 transactions per second. Visa does 24,000.
+
+---
+
+## Private (Permissioned) Blockchains
+
+**Participation is controlled.** You need permission to join.
+
+| Property | Description |
+|----------|-------------|
+| **Join** | Invitation only |
+| **Read** | Controlled (may be public or restricted) |
+| **Write** | Authorized members only |
+| **Validate** | Pre-selected validators |
+
+**Examples:** Hyperledger Fabric, MultiChain, R3 Corda
+
+---
+
+## Why Go Private?
+
+When you *already* have some trust:
+
+- **Consortium of banks** - they're regulated, identifiable
+- **Supply chain partners** - known business relationships
+- **Government agencies** - internal record keeping
+
+You don't need expensive proof of work. You just need agreement among known parties.
+
+> Private blockchains trade *decentralization* for *efficiency*.
+
+---
+
+## The Comparison
+
+| Feature | Public | Private |
+|---------|--------|---------|
+| **Trust model** | Trustless | Partial trust |
+| **Speed** | Slow (minutes to hours) | Fast (seconds) |
+| **Throughput** | Low (~7-30 TPS) | High (1000+ TPS) |
+| **Energy** | High (PoW) or Medium (PoS) | Low |
+| **Privacy** | Everything visible | Configurable |
+| **Censorship resistance** | High | Low (admins control) |
+
+---
+
+## Consensus Mechanisms
+
+Different trust levels need different consensus:
+
+**Public (no trust):**
+- **Proof of Work** - solve puzzles (Bitcoin)
+- **Proof of Stake** - stake coins as collateral (Ethereum 2.0)
+
+**Private (partial trust):**
+- **PBFT** (Practical Byzantine Fault Tolerance) - voting among known nodes
+- **Raft** - leader-based consensus for crash tolerance
+
+> Private blockchains can use *much simpler* consensus because validators are known.
+
+---
+
+## When to Use What?
+
+**Use public blockchain when:**
+- You need censorship resistance
+- Participants are anonymous or adversarial
+- Transparency is a feature, not a bug
+- You're building a cryptocurrency or open financial system
+
+**Use private blockchain when:**
+- Participants are known and somewhat trusted
+- You need high throughput
+- Regulatory compliance matters
+- Data privacy is required
+
+---
+
+## The "Blockchain or Database?" Question
+
+Private blockchains sometimes get criticized:
+
+> "If you trust the participants, why not just use a database?"
+
+Fair question. Private blockchains add value when:
+
+- Multiple organizations need a **shared record**
+- No single party should **control** the data
+- You need **audit trails** that no one can tamper with
+- Participants want **automated trust** via smart contracts
+
+> It's not about eliminating trust. It's about *distributing* it.

@@ -1,0 +1,109 @@
+---
+title: Cryptographic Techniques
+prerequisites:
+  - cryptography/blockchain/bitcoin-architecture
+  - cryptography/hash-functions/hash-functions
+---
+
+Blockchain security rests on three cryptographic pillars:
+
+1. **Hash functions** for integrity
+2. **Digital signatures** for authentication
+3. **Merkle trees** for efficient verification
+
+> These aren't new inventions. Blockchain combines *existing* cryptographic primitives in a clever way.
+
+---
+
+## Hash Functions (SHA-256)
+
+Bitcoin uses SHA-256 everywhere:
+
+| Use Case | Purpose |
+|----------|---------|
+| Block hashes | Link blocks together |
+| Transaction IDs | Identify transactions uniquely |
+| Mining puzzles | Proof of work |
+| Address generation | Derive addresses from public keys |
+
+The key properties:
+
+- **Deterministic** - same input always gives same output
+- **One-way** - can't reverse the hash to find the input
+- **Collision-resistant** - practically impossible to find two inputs with the same hash
+- **Avalanche effect** - tiny input change completely changes the output
+
+> Change one character in a block, and the entire hash changes. That's what makes tampering detectable.
+
+---
+
+## Digital Signatures (ECDSA)
+
+How do you prove you own bitcoins without revealing your private key?
+
+**Digital signatures.**
+
+Bitcoin uses ECDSA (Elliptic Curve Digital Signature Algorithm):
+
+1. You **sign** the transaction with your *private* key
+2. Anyone can **verify** the signature with your *public* key
+3. Only the private key holder could have created that signature
+
+::transaction-signing
+
+---
+
+## Why ECDSA?
+
+Bitcoin could use RSA, but ECDSA offers the same security with **much smaller keys**.
+
+| Algorithm | Key Size | Security Level |
+|-----------|----------|----------------|
+| RSA | 3072 bits | 128-bit |
+| ECDSA | 256 bits | 128-bit |
+
+Smaller keys mean smaller transactions, which means more transactions per block.
+
+> Efficiency matters when every byte is replicated across thousands of nodes.
+
+---
+
+## Merkle Trees
+
+A block might contain **thousands** of transactions. How do you verify one transaction belongs to the block without downloading all of them?
+
+**Merkle trees.**
+
+Hash transactions in pairs, then hash the hashes, until you get a single **Merkle root**:
+
+::merkle-tree
+
+---
+
+## Merkle Proofs
+
+To verify transaction C is in the block, you only need:
+
+1. Transaction C itself
+2. H(D) - the sibling hash
+3. H(AB) - the uncle hash
+4. The root hash (in the block header)
+
+Compute: H(C), then H(CD), then H(ABCD). Does it match the root?
+
+> With 1000 transactions, you only need ~10 hashes instead of all 1000.
+
+This is called a **Merkle proof** or **SPV proof** (Simplified Payment Verification).
+
+---
+
+## How They Work Together
+
+| Component | Cryptographic Tool | Security Property |
+|-----------|-------------------|-------------------|
+| Transaction authorization | Digital signatures | Only owner can spend |
+| Block integrity | Hash chain | Tampering is detectable |
+| Efficient verification | Merkle trees | Light clients possible |
+| Mining difficulty | Hash puzzles | Attacks are expensive |
+
+> Blockchain isn't one breakthrough. It's existing cryptography combined in a new way.
