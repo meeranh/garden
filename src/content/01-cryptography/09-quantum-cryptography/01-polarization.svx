@@ -1,0 +1,83 @@
+---
+title: Polarization
+---
+
+## Light is a Wave
+
+Light travels as a wave. But unlike water waves that move up and down, light waves can oscillate in **any direction** perpendicular to their travel.
+
+The direction of oscillation is called **polarization**.
+
+---
+
+## Visualizing Polarization
+
+Imagine light coming straight at you. The wave could be oscillating:
+
+- **Vertically** ↑ (up and down)
+- **Horizontally** → (left and right)
+- **Diagonally** ↗ or ↘
+
+*Regular light from the sun or a bulb oscillates in all directions randomly. This is called "unpolarized" light.*
+
+::polarization-types
+
+---
+
+## Polarizing Filters
+
+A polarizing filter only lets through light oscillating in one direction.
+
+- **Vertical filter**: only vertically polarized light gets through
+- **Horizontal filter**: only horizontally polarized light gets through
+
+> Sunglasses often use polarizing filters to block glare (which is mostly horizontally polarized).
+
+---
+
+## The Quantum Part
+
+Here's where it gets interesting.
+
+**What happens if vertically polarized light hits a horizontal filter?**
+
+You might think: it gets blocked completely. And classically, that's true.
+
+---
+
+**But what about a diagonal filter?**
+
+If vertically polarized light (↑) hits a 45° diagonal filter:
+
+- The photon has a **50% chance** of getting through
+- If it gets through, it's now **diagonally polarized**
+- The original vertical polarization is **gone**
+
+> Measuring polarization in the "wrong" orientation gives a random result and changes the photon.
+
+::polarization-filter
+
+---
+
+## Two Orientations
+
+We can group polarizations into two **orientations**:
+
+| Orientation | Polarizations |
+|-------------|---------------|
+| **+** (standard) | ↑ vertical, → horizontal |
+| **×** (diagonal) | ↗ diagonal, ↘ anti-diagonal |
+
+If you know the orientation, you can measure correctly. If you guess wrong, you get random results.
+
+---
+
+## Why This Matters
+
+This property is the foundation of **quantum key distribution**.
+
+- You can encode information in polarization (↑ = 0, → = 1)
+- Anyone measuring with the wrong orientation gets random garbage
+- And they **disturb** the photon in the process
+
+> You cannot measure an unknown polarization without risking changing it.

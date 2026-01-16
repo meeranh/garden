@@ -1,0 +1,137 @@
+---
+title: Zero-Knowledge Proofs
+prerequisites:
+  - cryptography/cryptographic-protocols/commitment-schemes
+---
+
+## The Problem
+
+You want to **prove** you know something, without revealing *what* you know.
+
+This sounds impossible. How can you convince someone you have a secret, while keeping the secret... *secret*?
+
+> A **zero-knowledge proof** lets you prove knowledge of information **without revealing the information itself**.
+
+---
+
+## A Real-World Scenario
+
+Imagine you can see colors, but your friend is **red-green colorblind**.
+
+You have two balls:
+- One **red**
+- One **green**
+
+To your friend, they look *identical*. You claim they're different colors. Your friend is skeptical.
+
+**How do you prove it** without just saying "trust me"?
+
+---
+
+## The Protocol
+
+1. Your friend holds **one ball in each hand**
+2. They put their hands **behind their back**
+3. They either **swap** the balls or **don't** *(their choice, hidden from you)*
+4. They show you both hands again
+5. You say **"swapped"** or **"not swapped"**
+
+---
+
+**If the balls are different colors:**
+
+You *see* the change (or lack of it) and answer correctly **every time**.
+
+**If the balls were the same color:**
+
+You'd be *guessing*. **50% chance** of being wrong each round.
+
+---
+
+## Why It Works
+
+After **20 correct answers**, the probability of lucky guessing is:
+
+$$\left(\frac{1}{2}\right)^{20} = \frac{1}{1,048,576}$$
+
+*Less than one in a million.* Your friend is now **convinced** the balls are different colors.
+
+**But they still don't know which is red and which is green.**
+
+> You proved *knowledge* without revealing *what* you know.
+
+---
+
+## Three Properties
+
+Every zero-knowledge proof must satisfy **three properties**:
+
+| Property | Meaning |
+|----------|---------|
+| **Completeness** | If the statement is *true*, an honest prover can convince the verifier |
+| **Soundness** | If the statement is *false*, a cheater can't convince the verifier *(except with tiny probability)* |
+| **Zero-Knowledge** | The verifier learns **nothing** except that the statement is true |
+
+> The third property is the magic. The proof contains *no information* about what the secret is.
+
+---
+
+## ZKP vs Commitment Schemes
+
+Both hide information, but they solve **different problems**:
+
+| | Commitment Scheme | Zero-Knowledge Proof |
+|--|-------------------|---------------------|
+| **What it proves** | "I've locked in an answer" | "I know a secret" |
+| **Revelation** | Value is **revealed later** | Value is **never revealed** |
+| **Structure** | Two phases: commit, then reveal | One goal: convince without leaking |
+| **Core idea** | Proves you *committed* to something | Proves you *know* something |
+
+---
+
+> **Commitment:** *"I'll tell you later what I chose."*
+
+> **ZKP:** *"I definitely know the answer, but I'll never tell you."*
+
+---
+
+## Applications
+
+**Blockchain (Zcash, zkSync):**
+
+*Normal* blockchain transactions are public:
+
+- "Alice sent **5 BTC** to Bob"
+- Everyone sees *sender*, *receiver*, and *amount*
+
+*With ZKP:*
+
+- "Someone sent some amount to someone"
+- Here's a **proof** it's valid
+
+---
+
+**What the proof shows:**
+- The sender has *enough funds*
+- Input equals output *(no money created from nothing)*
+- No *double-spending*
+
+**What the proof hides:**
+- *Who* sent it
+- *Who* received it
+- *How much* was sent
+
+---
+
+**Authentication:**
+
+*Normally* when you log in, you send your password. The server sees it.
+
+*With ZKP*, you prove:
+
+> "I know a password that hashes to this value"
+
+...without ever sending the password.
+
+Even if the server is **compromised mid-authentication**, the attacker learns *nothing*.
+

@@ -1,0 +1,146 @@
+---
+title: Quantum Key Exchange
+prerequisites:
+  - cryptography/quantum-cryptography/polarization
+---
+
+## The Problem
+
+Alice wants to share a **secret key** with Bob. But Eve might be listening on the channel.
+
+> How do you share a secret when someone could be eavesdropping?
+
+---
+
+## The Key Insight
+
+Remember from polarization: if you measure a photon with the **wrong filter orientation**, you get a random result **and disturb the photon**.
+
+This is the foundation of quantum key exchange.
+
+> You cannot measure an unknown polarization without risking detection.
+
+---
+
+## Two Filter Types
+
+Alice and Bob each have a filter they can set to one of two orientations:
+
+| Filter | Encodes 0 as | Encodes 1 as |
+|--------|--------------|--------------|
+| **Standard** | ↑ vertical | → horizontal |
+| **Diagonal** | ↗ diagonal | ↘ anti-diagonal |
+
+For each photon, Alice **randomly picks** which filter to use.
+
+---
+
+## The Protocol
+
+**Step 1: Alice sends photons**
+
+For each photon, Alice randomly chooses:
+- A **filter type** (standard or diagonal)
+- A **bit value** (0 or 1)
+
+She records both, then sends the polarized photon to Bob.
+
+---
+
+**Step 2: Bob measures**
+
+Bob doesn't know which filter Alice used. So he **guesses randomly** for each photon.
+
+- If he guesses **correctly**: he measures the right value
+- If he guesses **wrong**: he gets random garbage (50/50)
+
+*He gets about half right. That's expected.*
+
+---
+
+**Step 3: Compare filters**
+
+After all photons are sent, Alice and Bob talk **over a public channel**.
+
+They share which **filter type** they used for each photon. *Not the bit values, just the filter types.*
+
+They **throw away** every bit where they used different filters.
+
+The remaining bits become the **shared secret key**.
+
+---
+
+*In practice, Alice sends thousands of photons. After discarding mismatches, they have hundreds of shared bits.*
+
+::key-exchange
+
+---
+
+## What About Eve?
+
+Say Eve intercepts a photon. She has the same problem as Bob: she doesn't know which filter Alice used.
+
+So Eve guesses. And here's where it falls apart for her.
+
+---
+
+**When Eve guesses wrong:**
+
+1. She measures with the wrong filter
+2. The photon's polarization is **disturbed**
+3. She forwards the corrupted photon to Bob
+4. Even if Bob uses the **correct filter**, he might get the **wrong value**
+
+> Eve cannot intercept without introducing errors.
+
+---
+
+## Detecting Eve
+
+Alice and Bob **sacrifice** a few bits from their key.
+
+They publicly compare values: *"What did you get for bit 5?"*
+
+- **Values match**: No eavesdropper detected
+- **Values don't match**: Someone was listening. Abort and try again!
+
+---
+
+**The math:**
+
+- Eve guesses wrong **50%** of the time
+- When she's wrong, she disturbs the photon
+- A disturbed photon gives Bob a wrong value **50%** of the time
+- Overall: **25% error rate** if Eve intercepts everything
+
+> Any significant error rate means someone was listening.
+
+::eve-detection
+
+---
+
+## Why Can't Eve Just Copy?
+
+Eve might think: *"I'll copy the photon, measure my copy, forward the original."*
+
+**She can't.**
+
+The **no-cloning theorem**: you cannot perfectly copy an unknown quantum state.
+
+Eve must measure the original. Measuring disturbs it. Errors appear. Eve is caught.
+
+> Physics guarantees detection.
+
+---
+
+## The Result
+
+If the protocol completes without significant errors:
+
+- Alice and Bob share a **secret key**
+- The key was never transmitted in readable form
+- Any eavesdropper would have been detected
+
+They can now use this key for symmetric encryption (like AES).
+
+> BB84 doesn't encrypt messages directly. It securely distributes the *key* used for encryption.

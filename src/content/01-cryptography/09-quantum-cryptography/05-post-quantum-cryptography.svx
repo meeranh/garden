@@ -1,0 +1,83 @@
+---
+title: Post-Quantum Cryptography
+prerequisites:
+  - cryptography/quantum-cryptography/no-cloning-theorem
+---
+
+> **Note:** This is different from quantum key exchange. BB84 uses quantum physics to *distribute* keys. Post-quantum cryptography uses classical algorithms that *resist* quantum attacks.
+
+---
+
+## The Problem
+
+RSA, Diffie-Hellman, and ECC all rely on problems that classical computers can't solve efficiently.
+
+But in 1994, **Peter Shor** discovered a quantum algorithm that solves them *easily*. A powerful enough quantum computer could break **all** of today's public-key cryptography.
+
+> We don't know *when*, but estimates say **10-30 years**.
+
+---
+
+## Harvest Now, Decrypt Later
+
+Adversaries can collect encrypted data **today** and wait.
+
+When quantum computers arrive, they decrypt *everything*. Sensitive data with long-term value is already at risk:
+
+- Government secrets
+- Medical records
+- Financial data
+
+> Data encrypted today may be **readable in 20 years**.
+
+---
+
+## The Solution
+
+Find problems that are hard for **both** classical *and* quantum computers.
+
+These aren't quantum algorithms. They run on your laptop *today*. They're just resistant to quantum attacks.
+
+---
+
+## Lattice-Based Cryptography
+
+Imagine a grid of points in **500+ dimensions**.
+
+The hard problem: given a random point, find the **closest grid point**.
+
+*No known quantum algorithm helps with this.*
+
+**Used in:** CRYSTALS-Kyber (key exchange), CRYSTALS-Dilithium (signatures)
+
+---
+
+## Hash-Based Signatures
+
+Build signatures using only hash functions like SHA-256.
+
+Hash functions are *already* quantum-resistant. Combine them cleverly and you get secure signatures.
+
+**Used in:** SPHINCS+
+
+---
+
+## NIST Standards (2024)
+
+| Use Case | Algorithm | Approach |
+|----------|-----------|----------|
+| **Key exchange** | ML-KEM (Kyber) | Lattice |
+| **Signatures** | ML-DSA (Dilithium) | Lattice |
+| **Signatures** | SLH-DSA (SPHINCS+) | Hash-based |
+
+> These are now the **recommended choices** for quantum-resistant cryptography.
+
+---
+
+## Trade-offs
+
+Post-quantum algorithms have **larger keys** and **larger signatures**, and are generally *slower*.
+
+But they protect against future quantum attacks. The transition is happening *now*.
+
+> Major tech companies and governments are **already migrating**.

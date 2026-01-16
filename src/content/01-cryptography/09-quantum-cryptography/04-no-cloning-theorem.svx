@@ -1,0 +1,40 @@
+---
+title: No-Cloning Theorem
+prerequisites:
+  - cryptography/quantum-cryptography/uncertainty-principle
+---
+
+## The Eavesdropper's Dilemma
+
+Eve intercepts a photon. She wants to:
+
+1. **Copy** the photon
+2. **Measure** her copy to learn the bit
+3. **Forward** the original to Bob, undetected
+
+This would be a perfect attack. But physics says no.
+
+---
+
+## The No-Cloning Theorem
+
+> **You cannot perfectly copy an unknown quantum state.**
+
+This isn't a technology limitation. It's a fundamental law of quantum mechanics.
+
+If Eve doesn't know the photon's polarization, she cannot create a perfect copy of it.
+
+::no-cloning
+
+---
+
+## Why It Matters
+
+Eve has only two options:
+
+1. **Measure the photon** → disturbs it → Bob gets errors → Eve detected
+2. **Forward without measuring** → learns nothing
+
+There is no third option. She cannot copy-then-measure.
+
+> The no-cloning theorem makes quantum eavesdropping fundamentally detectable.

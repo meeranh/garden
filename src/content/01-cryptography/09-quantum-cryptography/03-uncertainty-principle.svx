@@ -1,0 +1,44 @@
+---
+title: Heisenberg's Uncertainty Principle
+prerequisites:
+  - cryptography/quantum-cryptography/quantum-key-exchange
+---
+
+## The Principle
+
+> You cannot precisely measure certain pairs of properties simultaneously. Measuring one **disturbs** the other.
+
+This isn't a technology limitation. It's a fundamental law of quantum mechanics.
+
+---
+
+## Applied to Polarization
+
+The two filter types (standard and diagonal) are **conjugate bases**.
+
+This means:
+
+- If a photon is *definitely* vertical (↑), its diagonal polarization is *completely uncertain*
+- If a photon is *definitely* diagonal (↗), its standard polarization is *completely uncertain*
+- You **cannot know both** at once
+
+> Measuring in one basis destroys information about the other.
+
+---
+
+## Why This Matters for BB84
+
+This is the physics behind quantum key exchange security.
+
+Eve faces an impossible choice:
+
+| If she measures with... | And Alice used... | Result |
+|-------------------------|-------------------|--------|
+| Standard filter | Standard | Correct value, no disturbance |
+| Standard filter | Diagonal | **Random result, photon disturbed** |
+| Diagonal filter | Diagonal | Correct value, no disturbance |
+| Diagonal filter | Standard | **Random result, photon disturbed** |
+
+Eve cannot measure in *both* bases. She must guess. When she guesses wrong, she disturbs the photon.
+
+> Heisenberg's uncertainty principle guarantees that eavesdropping is **physically detectable**.
