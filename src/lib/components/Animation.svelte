@@ -9,7 +9,7 @@
 		'/src/content/**/animations/*.svelte'
 	);
 	const sharedModules = import.meta.glob<{ default: typeof import('svelte').SvelteComponent }>(
-		'/src/lib/animations/shared/**/*.svelte'
+		'/src/lib/animations/**/*.svelte'
 	);
 
 	let Component: typeof import('svelte').SvelteComponent | null = $state(null);
@@ -20,9 +20,9 @@
 		let modules: typeof contentModules;
 
 		if (path.startsWith('@')) {
-			// Shared animation: @category/name → /src/lib/animations/shared/category/name.svelte
+			// Shared animation: @category/name → /src/lib/animations/category/name.svelte
 			const sharedPath = path.slice(1);
-			modulePath = `/src/lib/animations/shared/${sharedPath}.svelte`;
+			modulePath = `/src/lib/animations/${sharedPath}.svelte`;
 			modules = sharedModules;
 		} else {
 			// Local animation: dir/animations/name → /src/content/dir/animations/name.svelte

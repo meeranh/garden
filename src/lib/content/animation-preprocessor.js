@@ -9,7 +9,7 @@ import { resolve } from 'path';
  *
  * Supports two syntaxes:
  *   ::animation-name           → local ./animations/animation-name.svelte
- *   ::@category/path/name      → shared src/lib/animations/shared/category/path/name.svelte
+ *   ::@category/path/name      → shared src/lib/animations/category/path/name.svelte
  *
  * Runs BEFORE mdsvex, so we have access to the actual filename.
  */
@@ -37,10 +37,10 @@ export function animationPreprocessor() {
 				let fullPath;
 
 				if (path.startsWith('@')) {
-					// Shared animation: ::@category/name → src/lib/animations/shared/category/name.svelte
+					// Shared animation: ::@category/name → src/lib/animations/category/name.svelte
 					const sharedPath = path.slice(1); // Remove @
 					animationPath = `@${sharedPath}`;
-					fullPath = resolve('src/lib/animations/shared', sharedPath + '.svelte');
+					fullPath = resolve('src/lib/animations', sharedPath + '.svelte');
 				} else {
 					// Local animation: ::name → src/content/{dir}/animations/name.svelte
 					animationPath = `${contentDir}/animations/${path}`;
