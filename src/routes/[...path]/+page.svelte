@@ -179,6 +179,8 @@
 	}
 
 	.content :global(table) {
+		display: block;
+		overflow-x: auto;
 		width: 100%;
 		border-collapse: collapse;
 		margin: 1rem 0;
