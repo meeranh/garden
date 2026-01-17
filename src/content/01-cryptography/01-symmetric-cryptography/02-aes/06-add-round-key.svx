@@ -14,7 +14,7 @@ AddRoundKey simply XORs each byte of the state with the corresponding byte of th
 
 ## See It In Action
 
-::add-round-key
+::@crypto/symmetric/aes/add-round-key
 
 ---
 

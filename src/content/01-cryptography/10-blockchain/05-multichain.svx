@@ -54,7 +54,7 @@ You can then:
 
 > This is very different from Bitcoin, where anyone can participate.
 
-::permissions
+::@crypto/blockchain/permissions
 
 ---
 

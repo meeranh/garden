@@ -14,7 +14,7 @@ How? By using a clever trick with phase.
 
 ## Watch It Happen
 
-::qam-waves
+::@wireless/modulation/qam/qam-waves
 
 ---
 
@@ -62,7 +62,7 @@ Think of it like two lanes on the same road. At the receiver, you can separate t
 
 This is how engineers draw a QAM modulator:
 
-::qam-block-diagram
+::@wireless/modulation/qam/qam-block-diagram
 
 The circles with **×** are mixers (they multiply signals together).
 

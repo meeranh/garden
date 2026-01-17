@@ -25,7 +25,7 @@ To negate a quantified statement, you do **two things**:
 
 ---
 
-::negating-quantifiers
+::@math/foundations/logic/predicate/negating-quantifiers
 
 ---
 

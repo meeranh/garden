@@ -24,7 +24,7 @@ She can't send the key separately - Eve might intercept it.
 
 **The clever solution:**
 
-::three-pass
+::@crypto/protocols/three-pass
 
 ---
 

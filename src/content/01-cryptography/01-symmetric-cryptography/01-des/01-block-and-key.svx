@@ -59,7 +59,7 @@ What happened to the other 8 bits?
 
 Every 8th bit is a **parity bit** used for error checking, not encryption.
 
-::parity-bits
+::@crypto/symmetric/des/parity-bits
 
 ---
 
@@ -89,7 +89,7 @@ In 1977, trying all keys would take centuries.
 
 But computers get faster. *Exponentially* faster.
 
-::key-cracking
+::@crypto/symmetric/des/key-cracking
 
 ---
 

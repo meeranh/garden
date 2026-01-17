@@ -55,7 +55,7 @@ Where do these subkeys come from? That's the **key schedule**, which we'll cover
 
 ## The Full Flow
 
-::des-overview
+::@crypto/symmetric/des/des-overview
 
 ---
 
@@ -119,7 +119,7 @@ That's your subkey for this round.
 
 ---
 
-::key-schedule
+::@crypto/symmetric/des/key-schedule
 
 ---
 

@@ -18,7 +18,7 @@ That's a number with over 900 digits.
 
 Elliptic Curve Cryptography (ECC) achieves the same security with much smaller keys.
 
-::ecc-vs-rsa
+::@crypto/asymmetric/ecc/ecc-vs-rsa
 
 ---
 

@@ -12,7 +12,7 @@ Every function $f: A \to B$ has three important sets:
 - **Codomain** — the set of *possible* outputs
 - **Range** — the set of outputs that *actually get used*
 
-::domain-codomain-range
+::@math/foundations/sets/functions/domain-codomain-range
 
 ---
 

@@ -24,7 +24,7 @@ Drop a stone in a pond. **Ripples spread outward** in all directions.
 
 This is **exactly** what happens to radio signals.
 
-::signal-spreading
+::@wireless/rf/propagation/signal-spreading
 
 ---
 
@@ -42,7 +42,7 @@ Here's the key insight:
 
 As the sphere gets **bigger**, that *same* power is spread over a **larger surface area**.
 
-::sphere-spreading
+::@wireless/rf/propagation/sphere-spreading
 
 ---
 
@@ -124,7 +124,7 @@ Here's something that surprises people:
 
 **But wait.** The signal spreads out the *same way* regardless of frequency. So why does frequency matter?
 
-::frequency-aperture
+::@wireless/rf/propagation/frequency-aperture
 
 ---
 

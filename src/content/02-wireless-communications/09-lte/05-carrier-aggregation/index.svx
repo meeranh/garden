@@ -12,7 +12,7 @@ LTE has a speed limit: each channel maxes out at **20 MHz**. Want to go faster? 
 
 Think of bandwidth like lanes on a highway:
 
-::carrier-aggregation-concept
+::@wireless/lte/carrier-agg/carrier-aggregation-concept
 
 - **1 channel** = 1 lane = 20 MHz
 - **2 channels** = 2 lanes = 40 MHz
@@ -28,7 +28,7 @@ $$5 \times 20 \text{ MHz} = 100 \text{ MHz}$$
 
 ## Two Ways to Combine Channels
 
-::intra-vs-inter-band
+::@wireless/lte/carrier-agg/intra-vs-inter-band
 
 ### Intra-band
 

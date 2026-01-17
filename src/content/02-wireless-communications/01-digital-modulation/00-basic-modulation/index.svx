@@ -30,7 +30,7 @@ By itself, it carries no information. It's just a steady hum. Think of it as a b
 | **Frequency** | How fast it oscillates (*how high-pitched*) |
 | **Phase** | Where in the cycle it starts (*shifted left or right*) |
 
-::sine-wave-properties
+::@wireless/modulation/basic/sine-wave-properties
 
 ---
 
@@ -53,7 +53,7 @@ To encode bits, you **change one of these properties** based on whether you're s
 - **1** = full amplitude (*wave present*)
 - **0** = low/zero amplitude (*wave weak or absent*)
 
-::ask-modulation
+::@wireless/modulation/basic/ask-modulation
 
 ---
 
@@ -72,7 +72,7 @@ To encode bits, you **change one of these properties** based on whether you're s
 - **1** = higher frequency (*faster oscillation*)
 - **0** = lower frequency (*slower oscillation*)
 
-::fsk-modulation
+::@wireless/modulation/basic/fsk-modulation
 
 ---
 
@@ -93,7 +93,7 @@ Phase is where the wave "starts" in its cycle. Shifting the phase by 180° flips
 - **1** = normal phase (0°)
 - **0** = inverted phase (180°)
 
-::psk-modulation
+::@wireless/modulation/basic/psk-modulation
 
 ---
 

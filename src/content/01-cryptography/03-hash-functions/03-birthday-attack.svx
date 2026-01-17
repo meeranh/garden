@@ -76,7 +76,7 @@ Add them up: $(n-1) + (n-2) + \ldots + 1 = \frac{n(n-1)}{2}$
 
 For 23 people: $\frac{23 \times 22}{2} = 253$ comparisons.
 
-::birthday-paradox
+::@crypto/hash/birthday-paradox
 
 ---
 

@@ -18,7 +18,7 @@ This is called **NRZ-L** (Non-Return-to-Zero, Level).
 
 ## NRZ: Simple But Flawed
 
-::nrz-problem
+::@wireless/modulation/encoding/nrz-problem
 
 ---
 
@@ -52,7 +52,7 @@ The clever solution: instead of voltage *levels*, use **transitions**.
 - **$1$** = transition from low to high (in the middle of the bit)
 - **$0$** = transition from high to low (in the middle of the bit)
 
-::manchester-encoding
+::@wireless/modulation/encoding/manchester-encoding
 
 ---
 
@@ -111,7 +111,7 @@ The rules:
 
 So `1 0 1 1 0 1` becomes: +V, 0, -V, +V, 0, -V
 
-::ami-encoding
+::@wireless/modulation/encoding/ami-encoding
 
 ---
 
@@ -137,7 +137,7 @@ This led to variants like **B8ZS** and **HDB3** that insert artificial transitio
 
 ## Comparison
 
-::encoding-comparison
+::@wireless/modulation/encoding/encoding-comparison
 
 ---
 

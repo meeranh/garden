@@ -23,7 +23,7 @@ Raise to a power, take the remainder. That's it.
 
 ---
 
-::rsa-encrypt-decrypt
+::@crypto/asymmetric/rsa/rsa-encrypt-decrypt
 
 ---
 
@@ -65,7 +65,7 @@ This is **key generation**. Here's how we got 55, 3, and 27.
 
 ---
 
-::rsa-key-generation
+::@crypto/asymmetric/rsa/rsa-key-generation
 
 ---
 
@@ -117,7 +117,7 @@ In other words: when we multiply $d$ by 3 and divide by 40, the remainder should
 
 How do we find it? We search.
 
-::find-private-exponent
+::@crypto/asymmetric/rsa/find-private-exponent
 
 $d = 27$ works because $3 \times 27 = 81$, and $81 \div 40 = 2$ remainder $1$.
 

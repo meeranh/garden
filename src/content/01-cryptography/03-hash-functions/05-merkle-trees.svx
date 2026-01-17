@@ -38,7 +38,7 @@ You download a **4GB file**. How do you verify it's correct?
 
 A **tree of hashes**, built from the *bottom up*.
 
-::merkle-tree
+::@crypto/hash/merkle-tree
 
 ---
 

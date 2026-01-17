@@ -18,7 +18,7 @@ Everything - voice, video, messages - becomes *data packets*. No more circuit-sw
 
 LTE separates all traffic into two distinct paths:
 
-::two-planes
+::@wireless/lte/architecture/two-planes
 
 ---
 
@@ -53,7 +53,7 @@ LTE separates all traffic into two distinct paths:
 
 LTE has six key nodes. Let's meet them one by one.
 
-::network-nodes
+::@wireless/lte/architecture/network-nodes
 
 ---
 
@@ -118,7 +118,7 @@ Why two gateways? They have different jobs:
 | **S-GW** | Internal | Handles mobility *within* LTE |
 | **P-GW** | External | Handles connection *to outside* |
 
-::gateway-flow
+::@wireless/lte/architecture/gateway-flow
 
 ---
 
@@ -151,7 +151,7 @@ The **database** of all subscribers.
 
 ## How Everything Connects
 
-::full-architecture
+::@wireless/lte/architecture/full-architecture
 
 ---
 
@@ -186,7 +186,7 @@ When you first connect to LTE:
 
 ## Flat vs Hierarchical
 
-::flat-vs-hierarchical
+::@wireless/lte/architecture/flat-vs-hierarchical
 
 ---
 

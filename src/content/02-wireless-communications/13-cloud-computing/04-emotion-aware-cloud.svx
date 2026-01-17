@@ -27,7 +27,7 @@ Your phone can't do all this efficiently on its own.
 
 Offload the **heavy emotion processing to the cloud**.
 
-::emotion-flow
+::@wireless/cloud/emotion-flow
 
 ---
 

@@ -30,7 +30,7 @@ Use **separate frequencies** for each direction:
 - **Uplink**: phone → tower (lower frequency band)
 - **Downlink**: tower → phone (higher frequency band)
 
-::fdd-duplex
+::@wireless/access/duplexing/fdd-duplex
 
 ---
 
@@ -50,7 +50,7 @@ Use **one frequency**, but alternate between sending and receiving:
 - Switch to receive for a few milliseconds
 - Repeat
 
-::tdd-duplex
+::@wireless/access/duplexing/tdd-duplex
 
 ---
 

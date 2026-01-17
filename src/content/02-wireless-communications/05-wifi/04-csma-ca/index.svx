@@ -72,7 +72,7 @@ Sometimes two devices *still* collide. Maybe they picked the same random number,
 
 ## The Doubling Rule
 
-::backoff-animation
+::@wireless/wifi/csma/backoff-animation
 
 ---
 

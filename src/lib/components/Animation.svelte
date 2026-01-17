@@ -2,29 +2,43 @@
 	import { onMount } from 'svelte';
 	import AnimationWrapper, { type AnimationController } from './AnimationWrapper.svelte';
 
-	let { name, dir, ...props }: { name: string; dir: string; [key: string]: unknown } = $props();
+	let { path, ...props }: { path: string; [key: string]: unknown } = $props();
 
 	// Glob all animation components at build time
-	const modules = import.meta.glob<{ default: typeof import('svelte').SvelteComponent }>(
+	const contentModules = import.meta.glob<{ default: typeof import('svelte').SvelteComponent }>(
 		'/src/content/**/animations/*.svelte'
+	);
+	const sharedModules = import.meta.glob<{ default: typeof import('svelte').SvelteComponent }>(
+		'/src/lib/animations/shared/**/*.svelte'
 	);
 
 	let Component: typeof import('svelte').SvelteComponent | null = $state(null);
 	let error: string | null = $state(null);
 
 	onMount(async () => {
-		// Direct path lookup - no URL matching needed
-		const path = `/src/content/${dir}/animations/${name}.svelte`;
+		let modulePath: string;
+		let modules: typeof contentModules;
 
-		if (modules[path]) {
+		if (path.startsWith('@')) {
+			// Shared animation: @category/name → /src/lib/animations/shared/category/name.svelte
+			const sharedPath = path.slice(1);
+			modulePath = `/src/lib/animations/shared/${sharedPath}.svelte`;
+			modules = sharedModules;
+		} else {
+			// Local animation: dir/animations/name → /src/content/dir/animations/name.svelte
+			modulePath = `/src/content/${path}.svelte`;
+			modules = contentModules;
+		}
+
+		if (modules[modulePath]) {
 			try {
-				const module = await modules[path]();
+				const module = await modules[modulePath]();
 				Component = module.default;
 			} catch {
-				error = `Failed to load: ${name}`;
+				error = `Failed to load: ${path}`;
 			}
 		} else {
-			error = `Not found: ${name}`;
+			error = `Not found: ${path}`;
 		}
 	});
 </script>

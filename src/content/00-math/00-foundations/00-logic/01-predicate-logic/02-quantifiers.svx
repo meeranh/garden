@@ -76,7 +76,7 @@ What's the difference between these?
 - $\forall x \; \exists y \; L(x, y)$ — "For every person, there's a drink they like"
 - $\exists y \; \forall x \; L(x, y)$ — "There's a drink that everyone likes"
 
-::quantifier-order
+::@math/foundations/logic/predicate/quantifier-order
 
 ---
 

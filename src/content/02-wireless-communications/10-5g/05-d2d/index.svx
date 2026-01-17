@@ -12,7 +12,7 @@ What if the other person is *right next to you*?
 
 ## Device-to-Device (D2D)
 
-::d2d-concept
+::@wireless/5g/d2d/d2d-concept
 
 **D2D** lets devices talk *directly* to each other.
 
@@ -44,7 +44,7 @@ The key question: **what frequencies does D2D use?**
 
 D2D uses the **same frequencies as cellular**.
 
-::inband-d2d
+::@wireless/5g/d2d/inband-d2d
 
 Your phone talks to another phone using *LTE/5G spectrum*. The cellular network **controls** the D2D connection.
 
@@ -60,7 +60,7 @@ Your phone talks to another phone using *LTE/5G spectrum*. The cellular network 
 
 D2D uses **completely different frequencies** like WiFi or Bluetooth.
 
-::outband-d2d
+::@wireless/5g/d2d/outband-d2d
 
 Your phone talks to another phone using *WiFi or Bluetooth*. The cellular network **has nothing to do with it**.
 

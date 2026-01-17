@@ -14,7 +14,7 @@ OFB takes a different approach: encrypt the IV, then **encrypt that result**, th
 
 ## How OFB Works
 
-::ofb-encryption
+::@crypto/symmetric/modes/ofb-encryption
 
 ---
 

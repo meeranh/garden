@@ -16,7 +16,7 @@ $$A \setminus B$$
 
 This reads: "A minus B"
 
-::venn-difference
+::@math/foundations/sets/basics/operations/venn-difference
 
 ---
 

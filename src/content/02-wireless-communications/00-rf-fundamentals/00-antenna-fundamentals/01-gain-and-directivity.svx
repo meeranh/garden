@@ -43,7 +43,7 @@ Here's the thing:
 
 But it's incredibly useful as a *reference point* for comparing real antennas.
 
-::isotropic-vs-directional
+::@wireless/rf/antenna/isotropic-vs-directional
 
 ---
 

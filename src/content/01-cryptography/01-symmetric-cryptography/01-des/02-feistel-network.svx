@@ -39,7 +39,7 @@ Named after **Horst Feistel**, who designed it at IBM.
 
 ## One Round
 
-::feistel-round
+::@crypto/symmetric/des/feistel-round
 
 ---
 

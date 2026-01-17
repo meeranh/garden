@@ -87,7 +87,7 @@ The classical channel is *public* - Eve can listen. But it doesn't matter: she h
 
 *In practice, Alice sends thousands of photons. After discarding mismatches, they have hundreds of shared bits.*
 
-::key-exchange
+::@crypto/quantum/key-exchange/key-exchange
 
 ---
 
@@ -130,7 +130,7 @@ They publicly compare values: *"What did you get for bit 5?"*
 
 > Any significant error rate means someone was listening.
 
-::eve-detection
+::@crypto/quantum/key-exchange/eve-detection
 
 ---
 

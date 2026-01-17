@@ -18,7 +18,7 @@ Eve isn't just listening. She's sitting *between* Alice and Bob.
 
 When Alice sends a message to Bob, it goes through Eve first. Same for Bob's messages to Alice.
 
-::diffie-hellman-mitm
+::@crypto/asymmetric/diffie-hellman/diffie-hellman-mitm
 
 ---
 

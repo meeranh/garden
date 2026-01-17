@@ -49,7 +49,7 @@ Bitcoin uses ECDSA (Elliptic Curve Digital Signature Algorithm):
 2. Anyone can **verify** the signature with your *public* key
 3. Only the private key holder could have created that signature
 
-::transaction-signing
+::@crypto/blockchain/transaction-signing
 
 ---
 
@@ -76,7 +76,7 @@ A block might contain **thousands** of transactions. How do you verify one trans
 
 Hash transactions in pairs, then hash the hashes, until you get a single **Merkle root**:
 
-::merkle-tree
+::@crypto/blockchain/merkle-tree
 
 ---
 

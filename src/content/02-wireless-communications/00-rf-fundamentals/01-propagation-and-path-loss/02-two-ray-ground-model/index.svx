@@ -21,7 +21,7 @@ When you transmit a signal near the ground, your receiver actually gets **two co
 1. **Direct ray**: straight line from transmitter to receiver
 2. **Reflected ray**: bounces off the ground first
 
-::two-ray-model
+::@wireless/rf/propagation/two-ray/two-ray-model
 
 ---
 
@@ -37,7 +37,7 @@ When two waves meet, they **combine**.
 
 **If they're in sync** (peaks align with peaks):
 
-::constructive-interference
+::@wireless/rf/propagation/two-ray/constructive-interference
 
 > They **add together**, and the signal gets *stronger*. This is **constructive interference**.
 
@@ -45,7 +45,7 @@ When two waves meet, they **combine**.
 
 **If they're out of sync** (peaks align with troughs):
 
-::destructive-interference
+::@wireless/rf/propagation/two-ray/destructive-interference
 
 > They **cancel out**, and the signal gets *weaker* or disappears entirely. This is **destructive interference**.
 

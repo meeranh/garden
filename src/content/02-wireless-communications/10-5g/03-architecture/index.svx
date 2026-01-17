@@ -20,7 +20,7 @@ Each component had *fixed* connections to *specific* other components. Want to a
 
 Instead of fixed connections, components **offer services** on a common bus. *Anyone* who needs a service can request it.
 
-::service-based-architecture
+::@wireless/5g/architecture/service-based-architecture
 
 ---
 
@@ -47,7 +47,7 @@ The 5G core has many components, but **three do the heavy lifting**:
 | **SMF** | Session Management Function | *"Set up your data connection"* |
 | **UPF** | User Plane Function | *"Actually move your data"* |
 
-::data-flow
+::@wireless/5g/architecture/data-flow
 
 ---
 
@@ -211,4 +211,4 @@ The *same* physical network can be **divided into virtual networks**, each optim
 
 > Each slice gets its own AMF, SMF, UPF instances. *Same hardware, different virtual networks.*
 
-::network-slicing
+::@wireless/5g/architecture/network-slicing

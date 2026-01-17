@@ -31,7 +31,7 @@ With asymmetric encryption:
 3. Alice encrypts her message with Bob's public key
 4. Only Bob can decrypt it (he has the private key)
 
-::asymmetric-flow
+::@crypto/asymmetric/asymmetric-flow
 
 > Eve can see the public key. It doesn't help her. She can't decrypt anything.
 

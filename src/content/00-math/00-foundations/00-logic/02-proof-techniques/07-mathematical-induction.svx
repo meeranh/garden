@@ -10,7 +10,7 @@ A technique for proving something is true for **all natural numbers**.
 
 Think of it like dominos.
 
-::domino-induction
+::@math/foundations/logic/proofs/domino-induction
 
 ---
 

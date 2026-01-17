@@ -65,7 +65,7 @@ Each frame contains:
 - **Downlink (DL) subframe**: base station → users
 - **Uplink (UL) subframe**: users → base station
 
-::frame-structure
+::@wireless/wimax/physical/frame-structure
 
 The frame is a **2D grid**:
 - **Horizontal axis:** Time (OFDM symbols)

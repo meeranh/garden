@@ -12,7 +12,7 @@ Collect them all into one set — that's the power set.
 
 **Symbol:** $\mathcal{P}(A)$ or $2^A$
 
-::power-set
+::@math/foundations/sets/basics/power-set
 
 ---
 

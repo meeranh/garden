@@ -4,7 +4,7 @@ prerequisites:
   - cryptography/asymmetric-cryptography/diffie-hellman/key-exchange
 ---
 
-::diffie-hellman-calc
+::@crypto/asymmetric/diffie-hellman/diffie-hellman-calc
 
 ---
 

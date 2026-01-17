@@ -32,7 +32,7 @@ If the point $(x, y)$ is on the curve, then $(x, -y)$ is also on the curve.
 
 This symmetry is important for how we "add" points.
 
-::ecc-curve
+::@crypto/asymmetric/ecc/ecc-curve
 
 ---
 

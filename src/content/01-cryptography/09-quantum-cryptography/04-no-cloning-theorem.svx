@@ -24,7 +24,7 @@ This isn't a technology limitation. It's a fundamental law of quantum mechanics.
 
 If Eve doesn't know the photon's polarization, she cannot create a perfect copy of it.
 
-::no-cloning
+::@crypto/quantum/no-cloning
 
 ---
 

@@ -22,7 +22,7 @@ $$f(a) = f(b) \implies a = b$$
 
 > No two inputs share the same output.
 
-::injective
+::@math/foundations/sets/functions/injective
 
 ---
 
@@ -34,7 +34,7 @@ $$\text{Range} = \text{Codomain}$$
 
 > Nothing in the codomain is left unused.
 
-::surjective
+::@math/foundations/sets/functions/surjective
 
 ---
 
@@ -47,7 +47,7 @@ A function is **bijective** if it is both injective and surjective.
 
 > Perfect pairing — each input matches exactly one output, and vice versa.
 
-::bijective
+::@math/foundations/sets/functions/bijective
 
 ---
 

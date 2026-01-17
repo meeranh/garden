@@ -22,7 +22,7 @@ Pick an input. Follow its arrow. Where does it land?
 
 That's the **image**.
 
-::image
+::@math/foundations/sets/functions/image
 
 ---
 
@@ -52,7 +52,7 @@ Pick an output. Trace all arrows pointing to it. Where did they come from?
 
 Those inputs are the **preimage**.
 
-::preimage
+::@math/foundations/sets/functions/preimage
 
 ---
 

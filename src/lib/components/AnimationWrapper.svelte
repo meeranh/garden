@@ -76,7 +76,7 @@
 		{@render children({ register })}
 	</div>
 
-	{#if controller}
+	{#if controller && totalSteps > 0}
 		<div class="controls">
 			<!-- Left: Step navigation -->
 			<div class="controls-left">

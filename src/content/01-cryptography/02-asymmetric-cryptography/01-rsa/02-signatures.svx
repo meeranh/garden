@@ -44,7 +44,7 @@ RSA math works both ways:
 
 ## How It Works
 
-::rsa-signature
+::@crypto/asymmetric/rsa/rsa-signature
 
 ---
 

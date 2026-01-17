@@ -47,7 +47,7 @@ Go through each number:
 
 > φ(10) = **4**
 
-::phi-counting
+::@crypto/prerequisites/number-theory/phi-counting
 
 ---
 
@@ -61,7 +61,7 @@ $$\phi(p \times q) = (p - 1) \times (q - 1)$$
 
 Subtract 1 from each prime, multiply.
 
-::phi-shortcut
+::@crypto/prerequisites/number-theory/phi-shortcut
 
 ---
 

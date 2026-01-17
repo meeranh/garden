@@ -14,7 +14,7 @@ OFDMA works great for the **downlink** (tower to phone).
 
 When you add many sine waves together, sometimes they all **peak at the same moment**.
 
-::wave-peaks
+::@wireless/access/ofdma/sc-fdma/wave-peaks
 
 ---
 
@@ -62,7 +62,7 @@ Your phone's amplifier must handle the **highest peaks** without distorting.
 
 Before transmitting, we **spread** each data symbol across all your assigned subcarriers.
 
-::spreading
+::@wireless/access/ofdma/sc-fdma/spreading
 
 ---
 
@@ -89,7 +89,7 @@ Before transmitting, we **spread** each data symbol across all your assigned sub
 | **Downlink** (tower → phone) | OFDMA | Tower has power. *Maximize efficiency.* |
 | **Uplink** (phone → tower) | SC-FDMA | Phone has battery. *Minimize power waste.* |
 
-::uplink-downlink
+::@wireless/access/ofdma/sc-fdma/uplink-downlink
 
 ---
 

@@ -11,7 +11,7 @@ ECDH is Diffie-Hellman, but using elliptic curves instead of modular exponentiat
 
 The goal is the same: create a shared secret over a public channel.
 
-::ecdh
+::@crypto/asymmetric/ecc/ecdh
 
 ---
 

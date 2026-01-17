@@ -57,7 +57,7 @@ $$27 \mod 12 = 3$$
 
 Still **3 o'clock**. It wrapped around *twice*, but landed in the same spot.
 
-::mod-clock
+::@crypto/prerequisites/modular/mod-clock
 
 ---
 

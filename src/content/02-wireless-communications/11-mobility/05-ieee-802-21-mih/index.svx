@@ -18,7 +18,7 @@ But each network speaks a **different language**. How do the upper layers unders
 
 It provides a **common interface** that works the same way regardless of which network you're using.
 
-::mih-architecture
+::@wireless/mobility/mih/mih-architecture
 
 ---
 

@@ -23,7 +23,7 @@ Instead of one user taking all subcarriers, we **divide them among users**:
 - User C gets subcarriers 7-8
 - *...and so on*
 
-::user-allocation
+::@wireless/access/ofdma/ofdma-basic/user-allocation
 
 ---
 
@@ -43,7 +43,7 @@ Not all frequencies work equally well for every user.
 - *User B might have strong signal on high frequencies*
 - *It varies based on location, obstacles, reflections*
 
-::channel-aware
+::@wireless/access/ofdma/ofdma-basic/channel-aware
 
 ---
 

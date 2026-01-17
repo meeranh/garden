@@ -108,7 +108,7 @@ In practice, root CAs **don't sign certificates directly**.
 
 They sign **intermediate CAs**, who sign end-user certificates.
 
-::cert-chain
+::@crypto/protocols/cert-chain
 
 ---
 
@@ -131,7 +131,7 @@ When your browser connects to a website:
 
 *If any step fails, you see a security warning.*
 
-::cert-verify
+::@crypto/protocols/cert-verify
 
 ---
 

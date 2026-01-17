@@ -16,7 +16,7 @@ CBC fixes this by **chaining** blocks together. Each block's encryption depends 
 
 Before encrypting each block, XOR it with the previous ciphertext block.
 
-::cbc-encryption
+::@crypto/symmetric/modes/cbc-encryption
 
 ---
 

@@ -41,7 +41,7 @@ Think of it like lanes on a highway:
 
 ---
 
-::highway-lanes
+::@wireless/access/ofdm/highway-lanes
 
 ---
 

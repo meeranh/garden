@@ -38,7 +38,7 @@ Instead of trusting a central authority, you trust *people*.
 
 > Trust flows through **human relationships**, not corporate hierarchies.
 
-::web-of-trust
+::@crypto/pgp/web-of-trust
 
 ---
 

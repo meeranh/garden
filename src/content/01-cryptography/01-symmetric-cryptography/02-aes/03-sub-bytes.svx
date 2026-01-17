@@ -48,7 +48,7 @@ The value at that intersection is the output: **0xED**
 
 ## The S-box Lookup
 
-::sub-bytes
+::@crypto/symmetric/aes/sub-bytes
 
 ---
 

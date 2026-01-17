@@ -16,7 +16,7 @@ CTR takes a completely different approach.
 
 Instead of encrypting the plaintext, CTR encrypts a **counter** and XORs the result with plaintext.
 
-::ctr-encryption
+::@crypto/symmetric/modes/ctr-encryption
 
 ---
 

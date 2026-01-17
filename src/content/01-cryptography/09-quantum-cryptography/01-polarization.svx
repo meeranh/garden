@@ -20,7 +20,7 @@ Imagine light coming straight at you. The wave could be oscillating:
 
 *Regular light from the sun or a bulb oscillates in all directions randomly. This is called "unpolarized" light.*
 
-::polarization-types
+::@crypto/quantum/polarization-types
 
 ---
 
@@ -55,7 +55,7 @@ If vertically polarized light (↑) hits a 45° diagonal filter:
 
 > Measuring polarization in the "wrong" orientation gives a random result and changes the photon.
 
-::polarization-filter
+::@crypto/quantum/polarization-filter
 
 ---
 
