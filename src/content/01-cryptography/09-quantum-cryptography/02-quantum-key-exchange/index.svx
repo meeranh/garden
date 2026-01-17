@@ -70,6 +70,21 @@ The remaining bits become the **shared secret key**.
 
 ---
 
+## Two Channels
+
+BB84 uses **two separate channels**:
+
+| Channel | What's sent | Security needed |
+|---------|-------------|-----------------|
+| **Quantum** | Polarized photons | Physics protects it |
+| **Classical** | Filter choices | Just needs authentication |
+
+The classical channel is *public* - Eve can listen. But it doesn't matter: she hears the filter choices **after** she's already disturbed the photons. Too late.
+
+> The classical channel must be **authenticated** (Eve can't pretend to be Alice), but doesn't need to be secret.
+
+---
+
 *In practice, Alice sends thousands of photons. After discarding mismatches, they have hundreds of shared bits.*
 
 ::key-exchange
