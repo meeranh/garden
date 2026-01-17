@@ -14,7 +14,7 @@ But any ongoing connections (video call, download) **break**. The other side is 
 
 Mobile IP gives your device **two addresses**:
 
-::@wireless/mobility/concepts/two-addresses
+::wireless/mobility/concepts/two-addresses
 
 ---
 
@@ -42,7 +42,7 @@ Your **Home Agent** (a router at your home network) knows you've moved. It forwa
 
 You receive it wherever you are.
 
-::@wireless/mobility/concepts/packet-forwarding
+::wireless/mobility/concepts/packet-forwarding
 
 ---
 

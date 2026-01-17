@@ -26,7 +26,7 @@ A **Key Distribution Center** is a trusted server that everyone shares a key wit
 
 When Alice wants to talk to Bob, the KDC generates a fresh **session key** just for them.
 
-::@crypto/protocols/kdc
+::crypto/protocols/kdc
 
 ---
 

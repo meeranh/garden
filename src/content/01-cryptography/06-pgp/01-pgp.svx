@@ -49,7 +49,7 @@ PGP combines *all three*.
 
 **PGP's solution:** Hybrid encryption. *Best of both worlds.*
 
-::@crypto/pgp/hybrid-encryption
+::crypto/pgp/hybrid-encryption
 
 ---
 

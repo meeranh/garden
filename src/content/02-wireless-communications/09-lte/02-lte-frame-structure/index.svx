@@ -12,7 +12,7 @@ Think of it like a train schedule. Every train (data packet) needs a specific ti
 
 LTE divides time into a **nested hierarchy**. Each level zooms in *further*.
 
-::@wireless/lte/frame/frame-hierarchy
+::wireless/lte/frame/frame-hierarchy
 
 ---
 
@@ -74,7 +74,7 @@ Why 7? It comes from the math:
 
 LTE offers **two options**:
 
-::@wireless/lte/frame/cyclic-prefix
+::wireless/lte/frame/cyclic-prefix
 
 ---
 
@@ -121,7 +121,7 @@ The total bandwidth determines how many subcarriers you get:
 
 Here's the *crucial* concept. LTE allocates resources in 2D chunks called **Resource Blocks (RB)**.
 
-::@wireless/lte/frame/resource-block
+::wireless/lte/frame/resource-block
 
 ---
 
@@ -167,7 +167,7 @@ The scheduler assigns RBs to users *each subframe*. **More RBs = more capacity.*
 
 LTE supports two **duplexing modes** that determine how uplink and downlink share the spectrum.
 
-::@wireless/lte/frame/fdd-vs-tdd
+::wireless/lte/frame/fdd-vs-tdd
 
 ---
 

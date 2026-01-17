@@ -4,11 +4,7 @@
 
 	let { path, ...props }: { path: string; [key: string]: unknown } = $props();
 
-	// Glob all animation components at build time
-	const contentModules = import.meta.glob<{ default: typeof import('svelte').SvelteComponent }>(
-		'/src/content/**/animations/*.svelte'
-	);
-	const sharedModules = import.meta.glob<{ default: typeof import('svelte').SvelteComponent }>(
+	const modules = import.meta.glob<{ default: typeof import('svelte').SvelteComponent }>(
 		'/src/lib/animations/**/*.svelte'
 	);
 
@@ -16,19 +12,7 @@
 	let error: string | null = $state(null);
 
 	onMount(async () => {
-		let modulePath: string;
-		let modules: typeof contentModules;
-
-		if (path.startsWith('@')) {
-			// Shared animation: @category/name → /src/lib/animations/category/name.svelte
-			const sharedPath = path.slice(1);
-			modulePath = `/src/lib/animations/${sharedPath}.svelte`;
-			modules = sharedModules;
-		} else {
-			// Local animation: dir/animations/name → /src/content/dir/animations/name.svelte
-			modulePath = `/src/content/${path}.svelte`;
-			modules = contentModules;
-		}
+		const modulePath = `/src/lib/animations/${path}.svelte`;
 
 		if (modules[modulePath]) {
 			try {

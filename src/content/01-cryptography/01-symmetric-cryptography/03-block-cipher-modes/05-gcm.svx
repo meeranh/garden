@@ -21,7 +21,7 @@ GCM does two things at once:
 1. **Encrypt** using CTR mode (you already know this)
 2. **Authenticate** by computing a tag from the ciphertext
 
-::@crypto/symmetric/modes/gcm-encryption
+::crypto/symmetric/modes/gcm-encryption
 
 ---
 

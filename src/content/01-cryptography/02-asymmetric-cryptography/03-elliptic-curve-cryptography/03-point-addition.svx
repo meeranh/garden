@@ -22,7 +22,7 @@ To add two different points $P$ and $Q$:
 
 **Step 3:** Reflect $R'$ across the x-axis. This is $R = P + Q$.
 
-::@crypto/asymmetric/ecc/ecc-point-addition
+::crypto/asymmetric/ecc/ecc-point-addition
 
 ---
 
@@ -42,7 +42,7 @@ What if we want to add a point to itself?
 
 We can't draw a line through just one point. So we use the **tangent line** instead.
 
-::@crypto/asymmetric/ecc/ecc-point-doubling
+::crypto/asymmetric/ecc/ecc-point-doubling
 
 ---
 

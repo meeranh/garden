@@ -28,7 +28,7 @@ Instead, they exchange **random numbers** and use math to derive the keys indepe
 
 ## The Four Messages
 
-::@wireless/wifi/handshake/four-way-handshake
+::wireless/wifi/handshake/four-way-handshake
 
 ---
 

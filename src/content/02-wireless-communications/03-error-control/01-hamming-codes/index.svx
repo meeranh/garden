@@ -22,7 +22,7 @@ Here's all you need to know:
 
 That's it. For an 11-bit message, you need 4 check bits, giving you 15 bits total.
 
-::@wireless/error/hamming/position-layout
+::wireless/error/hamming/position-layout
 
 | Position | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
 |----------|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|
@@ -50,7 +50,7 @@ The data bits `1-0-0-1-1-0-1-1-0-1-1` go into positions 3, 5, 6, 7, 9, 10, 11, 1
 
 Each check bit covers specific positions. You count the 1s in those positions. If the count is odd, the check bit = 1. If even, check bit = 0.
 
-::@wireless/error/hamming/check-coverage
+::wireless/error/hamming/check-coverage
 
 **Which positions does each check bit cover?**
 
@@ -69,7 +69,7 @@ Each check bit covers specific positions. You count the 1s in those positions. I
 
 Look at the positions each check bit covers, count the 1s, and set the check bit to make the total even.
 
-::@wireless/error/hamming/calculate-checks
+::wireless/error/hamming/calculate-checks
 
 **P1** covers 1, 3, 5, 7, 9, 11, 13, 15:
 - Values: ?, 1, 0, 1, 1, 1, 0, 1 → five 1s
@@ -121,7 +121,7 @@ Now imagine the receiver gets `110001110**1**10111` (bit 10 flipped from 0 to 1)
 
 **Step 3:** Flip bit 10 to correct it!
 
-::@wireless/error/hamming/error-syndrome
+::wireless/error/hamming/error-syndrome
 
 ---
 

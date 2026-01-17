@@ -23,7 +23,7 @@ When you're on a call, you need to **send** and **receive** simultaneously. You 
 
 **FDD (Frequency Division Duplex)** solves this by using *two different frequencies*:
 
-::@wireless/gsm/air-interface/fdd-duplex
+::wireless/gsm/air-interface/fdd-duplex
 
 ---
 
@@ -61,7 +61,7 @@ GSM divides each band into **carriers** (individual channels).
 
 Each carrier is **200 kHz wide**.
 
-::@wireless/gsm/air-interface/carrier-bandwidth
+::wireless/gsm/air-interface/carrier-bandwidth
 
 ---
 
@@ -98,7 +98,7 @@ One 200 kHz carrier could handle one call. But that's *wasteful*.
 
 **TDMA (Time Division Multiple Access)** lets **8 users share** one carrier by *taking turns*.
 
-::@wireless/gsm/air-interface/tdma-slots
+::wireless/gsm/air-interface/tdma-slots
 
 ---
 
@@ -152,7 +152,7 @@ Each 577 μs slot contains a **burst** of data:
 
 ## Putting It All Together
 
-::@wireless/gsm/air-interface/gsm-complete
+::wireless/gsm/air-interface/gsm-complete
 
 ---
 

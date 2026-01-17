@@ -54,7 +54,7 @@ $$3^{-1} \equiv 5 \pmod{7}$$
 
 Check: $3 \times 5 = 15$, and $15 \mod 7 = 1$. ✓
 
-::@crypto/prerequisites/modular/inverse-search
+::crypto/prerequisites/modular/inverse-search
 
 ---
 

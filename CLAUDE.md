@@ -205,7 +205,9 @@ Set-builder: \{x \mid x > 0\}
 ## Animations
 
 ### Usage
-`::animation-name` loads `animations/animation-name.svelte` from same directory.
+`::category/path/name` loads from `src/lib/animations/category/path/name.svelte`
+
+Build fails if animation is missing. For static diagrams, set `maxStep = 0` to hide controls.
 
 ### Template
 
@@ -321,18 +323,8 @@ onMount(() => {
 | Key insight | `> Blockquote text` |
 | Inline math | `$x^2$` |
 | Display math | `$$\frac{a}{b}$$` |
-| Include animation | `::animation-name` |
+| Animation | `::category/path/name` |
 | Link prerequisite | Add to `prerequisites:` in frontmatter |
-
----
-
-## Build & Dev
-
-```bash
-bun dev      # Development server
-bun build    # Static build to /build
-bun check    # TypeScript checking
-```
 
 ---
 

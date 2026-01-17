@@ -46,7 +46,7 @@ These schedulers don't know (or don't care) about channel conditions.
 
 The simplest approach: **take turns**.
 
-::@wireless/wimax/scheduling/round-robin
+::wireless/wimax/scheduling/round-robin
 
 **How it works:**
 - User 1 gets a slot, then User 2, then User 3...
@@ -69,7 +69,7 @@ The simplest approach: **take turns**.
 
 Like Round Robin, but **weighted by priority**.
 
-::@wireless/wimax/scheduling/wfq
+::wireless/wimax/scheduling/wfq
 
 **How it works:**
 - Each connection has a weight based on its QoS class
@@ -102,7 +102,7 @@ This is called **multiuser diversity**.
 
 Always pick the user with the **best signal**.
 
-::@wireless/wimax/scheduling/max-ci
+::wireless/wimax/scheduling/max-ci
 
 **How it works:**
 - Measure each user's channel quality (C/I ratio)
@@ -125,7 +125,7 @@ Always pick the user with the **best signal**.
 
 The **best of both worlds**: throughput AND fairness.
 
-::@wireless/wimax/scheduling/proportional-fair
+::wireless/wimax/scheduling/proportional-fair
 
 **How it works:**
 - Track each user's *average* throughput over time

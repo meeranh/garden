@@ -30,7 +30,7 @@ This reads: "A cross B"
 
 It means: pair each element of A with each element of B.
 
-::@math/foundations/sets/basics/cartesian-product
+::math/foundations/sets/basics/cartesian-product
 
 ---
 

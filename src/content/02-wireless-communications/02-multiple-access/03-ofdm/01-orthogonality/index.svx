@@ -12,13 +12,13 @@ We have multiple subcarriers transmitting in parallel. But how *close* can we pa
 
 **Traditional approach:** Leave gaps between channels.
 
-::@wireless/access/ofdm/orthogonality/traditional-gaps
+::wireless/access/ofdm/orthogonality/traditional-gaps
 
 ---
 
 **OFDM approach:** Overlap the channels, but make them **orthogonal**.
 
-::@wireless/access/ofdm/orthogonality/ofdm-overlap
+::wireless/access/ofdm/orthogonality/ofdm-overlap
 
 The subcarriers *overlap*, but they don't interfere. How?
 
@@ -52,7 +52,7 @@ When you do this:
 
 ---
 
-::@wireless/access/ofdm/orthogonality/orthogonal-subcarriers
+::wireless/access/ofdm/orthogonality/orthogonal-subcarriers
 
 ---
 

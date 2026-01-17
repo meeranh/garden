@@ -37,7 +37,7 @@ Like a chameleon changes color to match its environment, CML changes its **routi
 
 CML operates in three distinct phases:
 
-::@wireless/manet/cml/phase-switching
+::wireless/manet/cml/phase-switching
 
 ---
 

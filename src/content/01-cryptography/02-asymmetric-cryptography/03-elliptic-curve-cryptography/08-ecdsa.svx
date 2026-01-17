@@ -27,7 +27,7 @@ Alice has her ECC key pair:
 
 She wants to sign a message so anyone can verify it came from her.
 
-::@crypto/asymmetric/ecc/ecdsa
+::crypto/asymmetric/ecc/ecdsa
 
 ---
 

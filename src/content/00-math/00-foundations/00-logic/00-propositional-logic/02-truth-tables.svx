@@ -75,7 +75,7 @@ There's a shortcut. Start from the **rightmost column** and work left.
 
 That's it. The pattern is: **1, 2, 4, 8, 16...**
 
-::@math/foundations/logic/propositional/truth-table-pattern
+::math/foundations/logic/propositional/truth-table-pattern
 
 > Start with blocks of 1, then double each time you move left.
 

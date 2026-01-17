@@ -52,7 +52,7 @@ A **constellation diagram** shows all possible symbols as points on a 2D plane.
 - The angle from center is the **phase**
 - The label shows which **bits** that symbol represents
 
-::@wireless/modulation/qpsk/qpsk-constellation
+::wireless/modulation/qpsk/qpsk-constellation
 
 ---
 
@@ -60,7 +60,7 @@ A **constellation diagram** shows all possible symbols as points on a 2D plane.
 
 When we transmit QPSK, the wave shifts between 4 different phases based on the bit pairs:
 
-::@wireless/modulation/qpsk/qpsk-waveform
+::wireless/modulation/qpsk/qpsk-waveform
 
 ---
 

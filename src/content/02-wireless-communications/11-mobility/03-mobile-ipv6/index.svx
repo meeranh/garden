@@ -14,7 +14,7 @@ Three big changes:
 
 ## Change 1: No Foreign Agent
 
-::@wireless/mobility/ipv6/no-foreign-agent
+::wireless/mobility/ipv6/no-foreign-agent
 
 In MIPv4, the Foreign Agent helped you get a Care-of Address.
 
@@ -34,7 +34,7 @@ Remember the triangle problem? Packets always detoured through Home Agent.
 
 **MIPv6 fixes this.**
 
-::@wireless/mobility/ipv6/route-optimization
+::wireless/mobility/ipv6/route-optimization
 
 ---
 

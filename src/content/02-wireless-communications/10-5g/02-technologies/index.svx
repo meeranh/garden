@@ -14,7 +14,7 @@ Frequencies between **24 GHz and 100 GHz**.
 
 The wavelength at these frequencies is only **1-10 millimeters**. *Hence the name.*
 
-::@wireless/5g/technologies/mmwave-comparison
+::wireless/5g/technologies/mmwave-comparison
 
 ---
 

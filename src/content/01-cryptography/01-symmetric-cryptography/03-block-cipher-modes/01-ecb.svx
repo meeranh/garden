@@ -16,7 +16,7 @@ AES encrypts 16 bytes at a time. But what if your message is longer?
 
 Each block is encrypted independently with the same key.
 
-::@crypto/symmetric/modes/ecb-encryption
+::crypto/symmetric/modes/ecb-encryption
 
 ---
 
@@ -49,7 +49,7 @@ See the pattern? An attacker can too.
 
 This is ECB's famous failure. Encrypt an image with ECB mode:
 
-::@crypto/symmetric/modes/ecb-penguin
+::crypto/symmetric/modes/ecb-penguin
 
 The penguin is still visible. Same-colored regions encrypt to the same ciphertext.
 

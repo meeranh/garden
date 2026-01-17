@@ -16,7 +16,7 @@ $$A \cap B$$
 
 This reads: "A intersect B"
 
-::@math/foundations/sets/basics/operations/venn-intersection
+::math/foundations/sets/basics/operations/venn-intersection
 
 ---
 

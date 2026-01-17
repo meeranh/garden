@@ -23,7 +23,7 @@ Each new round key is built from the previous one using:
 3. **XOR with Rcon** — add the round constant
 4. **XOR with previous columns**
 
-::@crypto/symmetric/aes/key-expansion
+::crypto/symmetric/aes/key-expansion
 
 ---
 

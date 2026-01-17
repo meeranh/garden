@@ -10,7 +10,7 @@ In **QPSK**, we used 4 phases to get 4 symbols = 2 bits per symbol.
 
 But notice: all 4 symbols are the **same distance from the center**. We're only changing phase, not amplitude.
 
-::@wireless/modulation/qam/qpsk-limitation
+::wireless/modulation/qam/qpsk-limitation
 
 ---
 
@@ -32,7 +32,7 @@ More symbols = more bits per symbol.
 
 **16-QAM** arranges symbols in a 4×4 grid:
 
-::@wireless/modulation/qam/qam16-constellation
+::wireless/modulation/qam/qam16-constellation
 
 ---
 
@@ -53,7 +53,7 @@ We use **two carrier waves** that are 90° apart:
 
 By setting the amplitude of each wave independently, we can place the signal at any point on the grid.
 
-::@wireless/modulation/qam/iq-components
+::wireless/modulation/qam/iq-components
 
 ---
 
@@ -69,7 +69,7 @@ That gives us 4 × 4 = **16 possible combinations** = 16 grid points.
 
 Want even more efficiency? Use an 8×8 grid:
 
-::@wireless/modulation/qam/qam64-constellation
+::wireless/modulation/qam/qam64-constellation
 
 ---
 
@@ -83,7 +83,7 @@ $$\text{bits per symbol} = \log_2(64) = 6$$
 
 ## The Efficiency Comparison
 
-::@wireless/modulation/qam/modulation-comparison
+::wireless/modulation/qam/modulation-comparison
 
 ---
 
@@ -97,7 +97,7 @@ With more symbols packed into the same space, they get **closer together**.
 
 If noise shifts a received signal slightly, it might land on the **wrong symbol**.
 
-::@wireless/modulation/qam/noise-tradeoff
+::wireless/modulation/qam/noise-tradeoff
 
 ---
 

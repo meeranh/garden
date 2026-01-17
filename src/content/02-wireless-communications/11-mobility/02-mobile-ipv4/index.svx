@@ -6,7 +6,7 @@ title: Mobile IPv4
 
 There are **4 entities** in Mobile IPv4:
 
-::@wireless/mobility/ipv4/mipv4-players
+::wireless/mobility/ipv4/mipv4-players
 
 
 
@@ -22,7 +22,7 @@ There are **4 entities** in Mobile IPv4:
 
 ## The Process
 
-::@wireless/mobility/ipv4/mipv4-flow
+::wireless/mobility/ipv4/mipv4-flow
 
 ---
 
@@ -79,7 +79,7 @@ Two reasons:
 
 Notice the inefficiency?
 
-::@wireless/mobility/ipv4/triangle-routing
+::wireless/mobility/ipv4/triangle-routing
 
 Packets **to you** take a detour through Home Agent. Packets **from you** go direct.
 

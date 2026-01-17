@@ -21,7 +21,7 @@ OLSR worked, but it had problems:
 
 OLSR was *one big protocol*. OLSRv2 splits into **two separate protocols**:
 
-::@wireless/manet/olsrv2/modular-architecture
+::wireless/manet/olsrv2/modular-architecture
 
 ---
 
@@ -67,7 +67,7 @@ OLSR only counted **hops**. Shortest path = fewest hops.
 
 **Problem:** A 2-hop path through *strong* links might be better than a 1-hop path through a *weak* link.
 
-::@wireless/manet/olsrv2/link-metrics
+::wireless/manet/olsrv2/link-metrics
 
 ---
 
@@ -92,7 +92,7 @@ OLSR had fixed message formats. Adding new features meant *breaking compatibilit
 
 OLSRv2 uses **TLV (Type-Length-Value)** encoding:
 
-::@wireless/manet/olsrv2/tlv-encoding
+::wireless/manet/olsrv2/tlv-encoding
 
 > TLV makes OLSRv2 **future-proof**. New features can be added without breaking old implementations.
 

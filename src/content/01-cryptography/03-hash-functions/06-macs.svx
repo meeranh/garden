@@ -62,7 +62,7 @@ The result:
 
 $$\text{HMAC} = \text{Hash}(K \oplus \text{opad} \| \text{Hash}(K \oplus \text{ipad} \| m))$$
 
-::@crypto/hash/hmac
+::crypto/hash/hmac
 
 ---
 
@@ -94,7 +94,7 @@ Given **blocks** B1, B2, B3 and a **key**:
 4. $C_3$ = Encrypt(B3 XOR $C_2$)
 5. The **final block $C_3$** is the MAC
 
-::@crypto/hash/cbc-mac
+::crypto/hash/cbc-mac
 
 ---
 

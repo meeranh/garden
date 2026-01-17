@@ -47,7 +47,7 @@ Use **multiple antennas** at different physical locations.
 
 If two antennas are far enough apart (typically half a wavelength), the fading at each antenna is **independent**. When one antenna is in a deep fade, the other probably isn't.
 
-::@wireless/rf/diversity/spatial-diversity
+::wireless/rf/diversity/spatial-diversity
 
 ---
 
@@ -66,7 +66,7 @@ Send the same information on **multiple frequencies**.
 
 Different frequencies fade independently. A signal at 2.4 GHz might hit destructive interference while 2.5 GHz is fine, because their wavelengths are different.
 
-::@wireless/rf/diversity/frequency-diversity
+::wireless/rf/diversity/frequency-diversity
 
 ---
 
@@ -83,7 +83,7 @@ Send the same information at **different times**.
 
 The channel changes over time. If you're moving (or things around you are moving), a fade now might clear up in a few milliseconds.
 
-::@wireless/rf/diversity/time-diversity
+::wireless/rf/diversity/time-diversity
 
 ---
 

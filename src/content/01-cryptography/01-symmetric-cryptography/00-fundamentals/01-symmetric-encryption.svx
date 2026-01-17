@@ -16,7 +16,7 @@ The same key that encrypts the message also decrypts it.
 2. Encrypt it with a key → get unreadable ciphertext
 3. Decrypt the ciphertext with the *same key* → get the message back
 
-::@crypto/symmetric/fundamentals/symmetric-flow
+::crypto/symmetric/fundamentals/symmetric-flow
 
 ---
 
@@ -38,7 +38,7 @@ You can't just send the key over the internet. Anyone watching would see it.
 
 And if they have the key, they can decrypt everything.
 
-::@crypto/symmetric/fundamentals/key-distribution
+::crypto/symmetric/fundamentals/key-distribution
 
 > This is called the **key distribution problem**.
 

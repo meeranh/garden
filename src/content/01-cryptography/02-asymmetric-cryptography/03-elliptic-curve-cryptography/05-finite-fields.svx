@@ -58,7 +58,7 @@ $13 = 13$, so **yes**!
 
 The curve is no longer smooth. It becomes a **scattered set of points**.
 
-::@crypto/asymmetric/ecc/finite-field-curve
+::crypto/asymmetric/ecc/finite-field-curve
 
 But the key insight: **point addition still works**.
 

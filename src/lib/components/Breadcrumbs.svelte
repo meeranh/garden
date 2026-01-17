@@ -57,7 +57,6 @@
 		color: #83a598;
 		transition: color 0.1s ease;
 		flex: 0 1 auto;
-		min-width: 30px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;

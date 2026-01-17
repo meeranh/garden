@@ -35,7 +35,7 @@ When you send data wirelessly, **bits can get corrupted**.
 4. If wrong → send **NACK** *(negative acknowledgment)*
 5. Sender retransmits on NACK
 
-::@wireless/error/schemes/arq-flow
+::wireless/error/schemes/arq-flow
 
 ---
 
@@ -89,7 +89,7 @@ Only **two patterns** are valid: `000` and `111`.
 
 **What if one bit flips?**
 
-::@wireless/error/schemes/fec-correction
+::wireless/error/schemes/fec-correction
 
 ---
 
@@ -165,7 +165,7 @@ There are **three types** of HARQ, differing in *what* gets retransmitted:
 
 > **Retransmit the exact same data.** Combine both copies.
 
-::@wireless/error/schemes/harq-type1
+::wireless/error/schemes/harq-type1
 
 ---
 
@@ -186,7 +186,7 @@ There are **three types** of HARQ, differing in *what* gets retransmitted:
 
 > **Retransmit *different* parity bits.** Each transmission adds *new* information.
 
-::@wireless/error/schemes/harq-type2
+::wireless/error/schemes/harq-type2
 
 ---
 
@@ -208,7 +208,7 @@ There are **three types** of HARQ, differing in *what* gets retransmitted:
 
 > **Each transmission can be decoded on its own** if conditions are good enough.
 
-::@wireless/error/schemes/harq-type3
+::wireless/error/schemes/harq-type3
 
 ---
 

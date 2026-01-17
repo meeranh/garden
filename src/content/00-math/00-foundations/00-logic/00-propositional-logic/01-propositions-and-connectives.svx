@@ -209,7 +209,7 @@ The rule: **"If user selects 'Other', they must fill the specify box."**
 
 > The form is **only invalid** when someone picks "Other" but *doesn't specify*.
 
-::@math/foundations/logic/propositional/if-then
+::math/foundations/logic/propositional/if-then
 
 ---
 

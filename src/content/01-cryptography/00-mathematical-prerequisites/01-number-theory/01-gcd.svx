@@ -34,7 +34,7 @@ What's common? One 2 and one 3. Multiply them:
 
 $$\gcd = 2 \times 3 = 6$$
 
-::@crypto/prerequisites/number-theory/gcd-factors
+::crypto/prerequisites/number-theory/gcd-factors
 
 ---
 
@@ -85,7 +85,7 @@ The idea is simple: **repeatedly divide and keep the remainder**.
 
 **Example:** GCD(48, 18)
 
-::@crypto/prerequisites/number-theory/gcd-euclidean
+::crypto/prerequisites/number-theory/gcd-euclidean
 
 Let's walk through it step by step.
 

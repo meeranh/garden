@@ -38,7 +38,7 @@ This is a set containing 1, 2, and 3.
 
 ## Two Important Rules
 
-::@math/foundations/sets/basics/set-basics
+::math/foundations/sets/basics/set-basics
 
 ---
 

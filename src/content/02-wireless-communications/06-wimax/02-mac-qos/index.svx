@@ -36,7 +36,7 @@ It means giving **different treatment** to different types of traffic based on t
 
 WiMAX defines **5 service classes**, from most demanding to least:
 
-::@wireless/wimax/mac/service-classes
+::wireless/wimax/mac/service-classes
 
 ---
 

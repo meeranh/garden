@@ -82,7 +82,7 @@ The **last bit** (highlighted) contributes almost nothing to the color. Changing
 
 *Invisible to the human eye.*
 
-::@crypto/steganography/lsb-steganography
+::crypto/steganography/lsb-steganography
 
 ---
 

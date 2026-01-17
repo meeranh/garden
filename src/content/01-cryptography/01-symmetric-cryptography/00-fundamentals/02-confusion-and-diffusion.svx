@@ -36,7 +36,7 @@ What happens to the output?
 - The two ciphertexts look completely different
 - *Patterns are destroyed*
 
-::@crypto/symmetric/fundamentals/diffusion
+::crypto/symmetric/fundamentals/diffusion
 
 ---
 
@@ -92,7 +92,7 @@ If an attacker has your ciphertext, can they figure out the key?
 - Every part of the key influences *every* part of the output
 - Impossible to untangle
 
-::@crypto/symmetric/fundamentals/confusion
+::crypto/symmetric/fundamentals/confusion
 
 ---
 

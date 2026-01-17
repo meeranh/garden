@@ -20,7 +20,7 @@ Your VoIP call? Same priority as someone downloading a movie. Your video stream?
 
 The key idea: **different traffic types get different priority**.
 
-::@wireless/wifi/qos/access-categories
+::wireless/wifi/qos/access-categories
 
 ---
 
@@ -57,7 +57,7 @@ After the channel becomes free, every station must wait before transmitting.
 
 **Higher priority = shorter wait time.**
 
-::@wireless/wifi/qos/channel-contention
+::wireless/wifi/qos/channel-contention
 
 ---
 

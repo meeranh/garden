@@ -31,7 +31,7 @@ The magic: with multiple antennas on both ends, you can send **separate data str
 
 This is called **spatial multiplexing**.
 
-::@wireless/mimo/concept/spatial-multiplexing
+::wireless/mimo/concept/spatial-multiplexing
 
 > **Each stream takes a different path through space.** The receiver can separate them because they arrive with *different characteristics*.
 

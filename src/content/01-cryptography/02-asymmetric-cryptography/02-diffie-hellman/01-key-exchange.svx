@@ -42,7 +42,7 @@ This was the birth of public-key cryptography.
 
 Think of it like mixing paint.
 
-::@crypto/asymmetric/diffie-hellman/diffie-hellman-paint
+::crypto/asymmetric/diffie-hellman/diffie-hellman-paint
 
 ---
 

@@ -10,7 +10,7 @@ What should 5G actually *do*? The ITU defined three main goals.
 
 ## The 5G Triangle
 
-::@wireless/5g/requirements/itu-triangle
+::wireless/5g/requirements/itu-triangle
 
 The ITU created a **triangle diagram** with three corners. Each corner represents a *different type* of application with *different needs*.
 

@@ -23,7 +23,7 @@ The following protocols try to fix this in different ways.
 
 **Solution:** Add a **local anchor** called **MAP** (Mobility Anchor Point).
 
-::@wireless/mobility/advanced/hmipv6
+::wireless/mobility/advanced/hmipv6
 
 ---
 
@@ -54,7 +54,7 @@ When you move within the same region, only LCoA changes. The Home Agent never ne
 
 **Solution:** **Predict** the handover and prepare *before* you move.
 
-::@wireless/mobility/advanced/fmipv6
+::wireless/mobility/advanced/fmipv6
 
 ---
 
@@ -83,7 +83,7 @@ When you move within the same region, only LCoA changes. The Home Agent never ne
 
 **Solution:** **The network does everything.** The phone doesn't even know mobility is happening.
 
-::@wireless/mobility/advanced/pmipv6
+::wireless/mobility/advanced/pmipv6
 
 ---
 

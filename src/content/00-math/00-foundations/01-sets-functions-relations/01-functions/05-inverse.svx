@@ -47,17 +47,17 @@ Only when $f$ is **bijective**.
 
 Two inputs map to the same output — you can't reverse it.
 
-::@math/foundations/sets/functions/no-inverse-injective
+::math/foundations/sets/functions/no-inverse-injective
 
 **Why not surjective?**
 
 Some output is never hit — $f^{-1}$ has nowhere to send it.
 
-::@math/foundations/sets/functions/no-inverse-surjective
+::math/foundations/sets/functions/no-inverse-surjective
 
 > **Bijective = invertible.**
 
-::@math/foundations/sets/functions/bijective-inverse
+::math/foundations/sets/functions/bijective-inverse
 
 ---
 

@@ -28,7 +28,7 @@ Think of it as a machine with a few memory slots. When you feed in a bit:
 2. The old bits shift over to make room
 3. The encoder looks at what's in the slots and produces output
 
-::@wireless/error/convolutional/shift-register
+::wireless/error/convolutional/shift-register
 
 > **The animation shows bits shifting through memory slots.** As each new bit enters, the previous bits move over. The encoder uses all the bits currently in memory to create output.
 
@@ -96,7 +96,7 @@ So $G_0 = 1101$ means: **look at slots 0, 2, and 3. XOR those values together.**
 
 > **Now watch the animation.** It will highlight which slots each polynomial looks at, then XOR those values to produce output.
 
-::@wireless/error/convolutional/encoding-process
+::wireless/error/convolutional/encoding-process
 
 **Step 1:** Input bit $1$ arrives
 

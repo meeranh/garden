@@ -16,7 +16,7 @@ You can't just use one frequency for everyone. Too many people would interfere w
 
 A **cell** is a geographic area served by one base station (tower).
 
-::@wireless/gsm/fundamentals/cell-layout
+::wireless/gsm/fundamentals/cell-layout
 
 Instead of one giant tower trying to cover everything, you use *many smaller cells*. Each cell handles users in its area.
 
@@ -33,7 +33,7 @@ You can't use the same frequency in **neighboring** cells. They'd interfere.
 
 So you group cells into a **cluster**. Within a cluster, *every cell uses different frequencies*.
 
-::@wireless/gsm/fundamentals/frequency-reuse
+::wireless/gsm/fundamentals/frequency-reuse
 
 Once you finish one cluster, you **repeat the pattern**. Cells using the same frequency are now *far apart*.
 
@@ -62,7 +62,7 @@ Common cluster sizes: **3, 4, 7, 12**
 
 When two cells use the **same frequency**, their signals can overlap. This is **co-channel interference**.
 
-::@wireless/gsm/fundamentals/co-channel-interference
+::wireless/gsm/fundamentals/co-channel-interference
 
 The *closer* the cells, the *worse* the interference. Users hear noise, calls drop, data slows down.
 
@@ -72,7 +72,7 @@ The *closer* the cells, the *worse* the interference. Users hear noise, calls dr
 
 ## The Trade-off
 
-::@wireless/gsm/fundamentals/cluster-tradeoff
+::wireless/gsm/fundamentals/cluster-tradeoff
 
 You want the **smallest cluster** that still gives *acceptable* call quality.
 

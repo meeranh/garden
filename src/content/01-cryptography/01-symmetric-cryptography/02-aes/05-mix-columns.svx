@@ -14,7 +14,7 @@ Each column has 4 bytes. After MixColumns, every output byte is influenced by al
 
 ## See It In Action
 
-::@crypto/symmetric/aes/mix-columns
+::crypto/symmetric/aes/mix-columns
 
 ---
 

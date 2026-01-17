@@ -12,7 +12,7 @@ At cell edges, you face a *double problem*: weak signal from your tower, strong 
 
 Imagine standing at the boundary between two cells. Your serving tower is *far away*, so its signal is weak. The neighboring tower is *close*, blasting interference.
 
-::@wireless/lte/comp/cell-edge-problem
+::wireless/lte/comp/cell-edge-problem
 
 This is the **worst spot** in any cellular network. Traditional systems treat each tower as independent, so they end up *fighting* each other.
 
@@ -34,7 +34,7 @@ CoMP enables multiple towers to work together, either by:
 
 In **Joint Transmission**, multiple towers send the *exact same data* to you simultaneously.
 
-::@wireless/lte/comp/joint-transmission
+::wireless/lte/comp/joint-transmission
 
 Instead of signals interfering destructively, they **combine constructively**. The "interference" becomes *useful signal*.
 
@@ -54,7 +54,7 @@ Instead of signals interfering destructively, they **combine constructively**. T
 
 Sometimes sharing data between towers isn't practical. **CS/CB** is a lighter approach.
 
-::@wireless/lte/comp/coordinated-scheduling
+::wireless/lte/comp/coordinated-scheduling
 
 Towers don't transmit the *same* data, but they **coordinate** to avoid stepping on each other:
 
@@ -77,7 +77,7 @@ Towers don't transmit the *same* data, but they **coordinate** to avoid stepping
 
 CoMP works for **reception** too. When you transmit, multiple towers can *listen*.
 
-::@wireless/lte/comp/uplink-comp
+::wireless/lte/comp/uplink-comp
 
 Each tower receives your signal with different strength and quality. By **combining** what they hear, the network gets a much better picture of what you sent.
 

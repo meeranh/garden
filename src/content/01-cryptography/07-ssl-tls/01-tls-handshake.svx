@@ -49,7 +49,7 @@ Before any HTTP data flows, client and server perform a **handshake**.
 
 The goal: *securely agree on encryption keys*.
 
-::@crypto/tls/tls-handshake
+::crypto/tls/tls-handshake
 
 ---
 

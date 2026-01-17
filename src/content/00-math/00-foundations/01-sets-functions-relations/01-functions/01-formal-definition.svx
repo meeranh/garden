@@ -33,7 +33,7 @@ A function picks specific pairs from $A \times B$, following one rule:
 
 > **Each input appears exactly once.**
 
-::@math/foundations/sets/functions/function-mapping
+::math/foundations/sets/functions/function-mapping
 
 ---
 

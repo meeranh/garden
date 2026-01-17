@@ -47,7 +47,7 @@ The **complement** of A is everything in the universal set that's **not** in A.
 
 **Symbol:** $A^c$ (also written $\overline{A}$ or $A'$)
 
-::@math/foundations/sets/basics/operations/venn-complement
+::math/foundations/sets/basics/operations/venn-complement
 
 ---
 

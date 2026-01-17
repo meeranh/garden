@@ -47,7 +47,7 @@ Prove your identity while exchanging keys. Three protocols do this:
 
 The simplest fix: **sign your DH public value**.
 
-::@crypto/protocols/signed-dh
+::crypto/protocols/signed-dh
 
 ---
 
@@ -78,7 +78,7 @@ The signatures are sent in the clear.
 
 A more robust protocol: **encrypt the signatures**.
 
-::@crypto/protocols/sts
+::crypto/protocols/sts
 
 ---
 
@@ -109,7 +109,7 @@ Used in real-world protocols like IKE (IPsec key exchange).
 
 Adds a **MAC** to bind identity to the session.
 
-::@crypto/protocols/sigma
+::crypto/protocols/sigma
 
 > **ID** is the party's public key or certificate. It's encrypted so eavesdroppers can't see who's communicating.
 

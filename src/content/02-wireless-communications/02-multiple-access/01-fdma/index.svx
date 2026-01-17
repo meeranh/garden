@@ -29,7 +29,7 @@ FDMA works the same way for phone calls.
 
 ## How It Works
 
-::@wireless/access/fdma/fdma-spectrum
+::wireless/access/fdma/fdma-spectrum
 
 ---
 

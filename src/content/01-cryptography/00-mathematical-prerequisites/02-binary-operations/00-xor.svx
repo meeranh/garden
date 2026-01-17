@@ -33,7 +33,7 @@ One of each? Different → **1**
 
 To XOR two binary numbers, compare each column:
 
-::@crypto/prerequisites/binary/xor-bits
+::crypto/prerequisites/binary/xor-bits
 
 ---
 
@@ -71,6 +71,6 @@ That third property makes XOR perfect for encryption.
 - XOR it with a key → get ciphertext
 - XOR ciphertext with the same key → get message back
 
-::@crypto/prerequisites/binary/xor-encrypt
+::crypto/prerequisites/binary/xor-encrypt
 
 > Same operation encrypts *and* decrypts.

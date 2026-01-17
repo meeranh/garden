@@ -16,7 +16,7 @@ $$A \cup B$$
 
 This reads: "A union B"
 
-::@math/foundations/sets/basics/operations/venn-union
+::math/foundations/sets/basics/operations/venn-union
 
 ---
 

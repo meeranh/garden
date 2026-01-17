@@ -25,7 +25,7 @@ The shifts are **circular**. Bytes that fall off the left side wrap around to th
 
 ## See It In Action
 
-::@crypto/symmetric/aes/shift-rows
+::crypto/symmetric/aes/shift-rows
 
 ---
 

@@ -14,7 +14,7 @@ For AES-128 (the most common version), there are **10 rounds**.
 
 ## The Encryption Flow
 
-::@crypto/symmetric/aes/aes-structure
+::crypto/symmetric/aes/aes-structure
 
 ---
 

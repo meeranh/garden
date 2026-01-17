@@ -14,7 +14,7 @@ Imagine you need to send 12 bits: `101100111010`
 
 Send all 12 bits one after another on a **single frequency**.
 
-::@wireless/access/ofdm/subcarriers/serial-bits
+::wireless/access/ofdm/subcarriers/serial-bits
 
 Each bit has *very little time*. Reflections from bit 1 can easily smear into bit 2.
 
@@ -24,7 +24,7 @@ Each bit has *very little time*. Reflections from bit 1 can easily smear into bi
 
 Split the bits across **multiple frequencies** and send them **at the same time**.
 
-::@wireless/access/ofdm/subcarriers/parallel-bits
+::wireless/access/ofdm/subcarriers/parallel-bits
 
 Now each bit gets **4x more time**. Reflections settle down *before* the next bit arrives.
 

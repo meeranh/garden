@@ -73,7 +73,7 @@ If the TGS is compromised, passwords are still safe.
 
 Kerberos authentication happens in three steps.
 
-::@crypto/protocols/kerberos
+::crypto/protocols/kerberos
 
 ---
 

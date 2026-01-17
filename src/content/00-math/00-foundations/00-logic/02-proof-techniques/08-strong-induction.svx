@@ -10,7 +10,7 @@ In regular induction, to prove step 5, you can only use step 4.
 
 In strong induction, to prove step 5, you can use **all previous steps**: 1, 2, 3, and 4.
 
-::@math/foundations/logic/proofs/strong-vs-regular
+::math/foundations/logic/proofs/strong-vs-regular
 
 ---
 
@@ -42,7 +42,7 @@ Each break splits one piece into two pieces.
 | 4 | 3 |
 | 5 | 4 |
 
-::@math/foundations/logic/proofs/chocolate-bar
+::math/foundations/logic/proofs/chocolate-bar
 
 ---
 
@@ -167,7 +167,7 @@ Each move, you can go up **1 step** or **2 steps**.
 
 **Question:** How many different ways can you reach the top?
 
-::@math/foundations/logic/proofs/staircase
+::math/foundations/logic/proofs/staircase
 
 ---
 

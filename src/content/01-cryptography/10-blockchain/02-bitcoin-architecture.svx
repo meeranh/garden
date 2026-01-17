@@ -67,7 +67,7 @@ Here's the clever part. To add a block, you must find a **nonce** such that:
 
 This is *hard*. You have to try billions of random nonces until one works. It takes about **10 minutes** of global computing power to find one.
 
-::@crypto/blockchain/mining
+::crypto/blockchain/mining
 
 ---
 

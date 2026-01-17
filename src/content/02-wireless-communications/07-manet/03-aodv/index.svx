@@ -18,7 +18,7 @@ That's the idea behind **AODV**.
 
 ## Proactive vs Reactive
 
-::@wireless/manet/aodv/reactive-vs-proactive
+::wireless/manet/aodv/reactive-vs-proactive
 
 ---
 
@@ -56,7 +56,7 @@ Here's the clever part.
 
 As the RREQ floods outward, each node remembers *where it came from*. This creates a **reverse path** back to the source.
 
-::@wireless/manet/aodv/route-discovery
+::wireless/manet/aodv/route-discovery
 
 > By the time RREQ reaches D, every node along the way knows how to get back to A.
 
@@ -92,7 +92,7 @@ Nodes are mobile. Links break.
 
 When a node detects a **link failure** (neighbor disappeared), it sends a **RERR (Route Error)** back to the source.
 
-::@wireless/manet/aodv/route-maintenance
+::wireless/manet/aodv/route-maintenance
 
 The source can then:
 - Start a new route discovery

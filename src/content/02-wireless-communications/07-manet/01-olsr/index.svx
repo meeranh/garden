@@ -22,7 +22,7 @@ If Soldier A wants to reach Soldier T (who's 500m away, *out of direct range*), 
 
 Simplest approach: A broadcasts the message. Everyone who hears it rebroadcasts. Eventually it reaches T.
 
-::@wireless/manet/olsr/flooding-problem
+::wireless/manet/olsr/flooding-problem
 
 **The problem:** If 20 nodes all rebroadcast, you get **20 transmissions** for *one message*.
 
@@ -45,7 +45,7 @@ The idea:
 2. *Only* MPRs forward messages
 3. Everyone else stays quiet
 
-::@wireless/manet/olsr/mpr-selection
+::wireless/manet/olsr/mpr-selection
 
 > A selects the **minimum set** of 1-hop neighbors (B and D) that cover all 2-hop neighbors. C is redundant because F and G are already covered by B and D.
 
@@ -81,7 +81,7 @@ Every node **periodically** broadcasts HELLO messages.
 - Link status for each (symmetric or asymmetric)
 - Who selected me as their MPR
 
-::@wireless/manet/olsr/hello-messages
+::wireless/manet/olsr/hello-messages
 
 ---
 
@@ -138,7 +138,7 @@ Traditional link-state routing (like OSPF) has **everyone** flood topology updat
 
 OLSR's optimization: **Only MPRs flood TC messages.**
 
-::@wireless/manet/olsr/flooding-comparison
+::wireless/manet/olsr/flooding-comparison
 
 This *dramatically* reduces overhead.
 

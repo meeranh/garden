@@ -12,7 +12,7 @@ Instead of "one size fits all," use the **right size cell for each situation**.
 
 ## Cell Types
 
-::@wireless/lte/hetnet/cell-types
+::wireless/lte/hetnet/cell-types
 
 | Cell Type | Coverage | Where it's used |
 |-----------|----------|-----------------|
@@ -39,7 +39,7 @@ The macro cell is your *safety net*. Small cells are *speed boosters* in busy sp
 
 ## Two Types of HetNets
 
-::@wireless/lte/hetnet/intra-vs-inter-tech
+::wireless/lte/hetnet/intra-vs-inter-tech
 
 ---
 
@@ -71,7 +71,7 @@ Cells use **different technologies** mixed together.
 
 What if you can't run fiber to a new small cell? **Relay nodes** solve this.
 
-::@wireless/lte/hetnet/relay-node
+::wireless/lte/hetnet/relay-node
 
 A relay node:
 - **Receives** signal from the macro cell *wirelessly*
