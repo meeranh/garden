@@ -19,7 +19,7 @@ These are **fixed constants** from the LTE specification:
 | Subframes per second | 1000 | Subframe = 1ms |
 | Symbols per slot | **7** (Normal CP) | *or 6 with Extended CP* |
 
-> **Note:** Symbols per slot depends on the Cyclic Prefix. Normal CP = 7 symbols, Extended CP = 6 symbols. *Exam questions usually specify which one to use.*
+> **Note:** Symbols per slot depends on the Cyclic Prefix. Normal CP = 7 symbols, Extended CP = 6 symbols.
 
 And bandwidth determines how many Resource Blocks you have:
 

@@ -163,17 +163,6 @@ How does 6G compare to 5G?
 
 ---
 
-## Why This Matters for Exams
-
-Exam questions often ask:
-
-1. **"Describe the 6G standardization process"** - Explain the three phases
-2. **"What is IMT-2030?"** - ITU-R's framework defining 6G requirements
-3. **"When will 6G be available?"** - Specs around 2030, deployment 2030-2035
-4. **"What are the 6G targets?"** - Know the key metrics (1 Tbps, 0.1 ms latency)
-
----
-
 ## Key Takeaways
 
 1. **Standardization takes ~10 years** per generation

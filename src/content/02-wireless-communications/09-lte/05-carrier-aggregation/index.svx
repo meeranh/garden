@@ -22,7 +22,7 @@ LTE-Advanced allows up to **5 channels** (called "component carriers"):
 
 $$5 \times 20 \text{ MHz} = 100 \text{ MHz}$$
 
-> **This is the exam answer.** Maximum bandwidth = 100 MHz.
+> Maximum bandwidth = **100 MHz**.
 
 ---
 
@@ -59,11 +59,9 @@ With inter-band CA, your phone uses **both** at the same time. You get coverage 
 
 ---
 
-## Exam Question
+## Maximum Bandwidth
 
 > What is the maximum achievable channel bandwidth with standardized 20 MHz channels in inter-band Carrier Aggregation?
-
-**Answer:**
 
 $$5 \times 20 \text{ MHz} = \boxed{100 \text{ MHz}}$$
 

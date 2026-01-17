@@ -181,7 +181,7 @@ $$P_{\text{watts}} = 10^{(P_{\text{dBm}} - 30) / 10}$$
 
 ---
 
-**Exam-Style Problem:**
+**Example:**
 
 > A 5G signal has received power **$P_r = -72$ dBm**. What is this in Watts?
 
