@@ -1,0 +1,74 @@
+---
+title: Partial Orders
+prerequisites:
+  - math/foundations/sets-functions-relations/relations/properties-of-relations
+---
+
+## What is a Partial Order?
+
+A **partial order** is a relation that satisfies three properties:
+
+1. **Reflexive** - every element relates to itself
+2. **Antisymmetric** - if a ≤ b and b ≤ a, then a = b
+3. **Transitive** - if a ≤ b and b ≤ c, then a ≤ c
+
+> Compare to equivalence relations: swap **symmetric** for **antisymmetric**.
+
+---
+
+## Why "Partial"?
+
+Because **not every pair can be compared**.
+
+Consider $\subseteq$ on sets $\{1, 2\}$ and $\{2, 3\}$:
+
+- Is $\{1, 2\} \subseteq \{2, 3\}$? **No**
+- Is $\{2, 3\} \subseteq \{1, 2\}$? **No**
+
+Neither is a subset of the other. They are **incomparable**.
+
+> In a partial order, some elements simply can't be ranked against each other.
+
+---
+
+## Visualizing with Hasse Diagrams
+
+A **Hasse diagram** shows a partial order as a graph:
+
+- Elements are nodes
+- Lines go up from smaller to larger
+- **No line** between incomparable elements
+
+::math/foundations/sets/relations/partial-order-hasse
+
+The gap between $\{a\}$ and $\{b\}$ shows they're incomparable.
+
+---
+
+## Examples
+
+**"Less than or equal" ($\leq$) on numbers:**
+
+- Reflexive: $5 \leq 5$ ✓
+- Antisymmetric: if $x \leq y$ and $y \leq x$, then $x = y$ ✓
+- Transitive: if $2 \leq 5$ and $5 \leq 9$, then $2 \leq 9$ ✓
+
+This is the classic partial order. Every pair of numbers is comparable, so it's also a **total order**.
+
+---
+
+**"Subset of" ($\subseteq$) on sets:**
+
+- Reflexive: $A \subseteq A$ ✓
+- Antisymmetric: if $A \subseteq B$ and $B \subseteq A$, then $A = B$ ✓
+- Transitive: if $A \subseteq B$ and $B \subseteq C$, then $A \subseteq C$ ✓
+
+This is a partial order, but **not** a total order. Some sets can't be compared.
+
+---
+
+## Summary
+
+> A partial order is **reflexive**, **antisymmetric**, and **transitive**.
+
+It gives a way to order elements, but not every pair needs to be comparable.

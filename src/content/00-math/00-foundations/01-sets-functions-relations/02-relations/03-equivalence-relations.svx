@@ -1,0 +1,111 @@
+---
+title: Equivalence Relations
+prerequisites:
+  - math/foundations/sets-functions-relations/relations/properties-of-relations
+---
+
+## What Makes a Relation "Equivalence"?
+
+An **equivalence relation** is a relation that satisfies three properties:
+
+1. **Reflexive** - everything is equivalent to itself
+2. **Symmetric** - if a is equivalent to b, then b is equivalent to a
+3. **Transitive** - if a ~ b and b ~ c, then a ~ c
+
+> If a relation has all three, it's an equivalence relation.
+
+---
+
+## The Symbol ~
+
+We often use **~** (tilde) for equivalence relations.
+
+$a \sim b$ reads as "a is equivalent to b."
+
+---
+
+## Equivalence Relations Partition Sets
+
+The key idea: an equivalence relation **divides a set into groups** where everything in a group is equivalent.
+
+::math/foundations/sets/relations/equivalence-partition
+
+These groups are called **equivalence classes**. No overlaps, nothing left out.
+
+---
+
+## Examples
+
+**"Same remainder when divided by 3"** on integers:
+
+- $7 \sim 10$ because both have remainder 1
+- $6 \sim 12$ because both have remainder 0
+- $7 \not\sim 8$ because 7 has remainder 1, but 8 has remainder 2
+
+Is it an equivalence relation?
+
+| Property | Check |
+|----------|-------|
+| Reflexive | $5 \sim 5$? Yes, 5 has the same remainder as itself |
+| Symmetric | $7 \sim 10$ implies $10 \sim 7$? Yes |
+| Transitive | $7 \sim 10$ and $10 \sim 4$ implies $7 \sim 4$? Yes, all have remainder 1 |
+
+All three hold, so it's an equivalence relation.
+
+---
+
+**"Same length"** on line segments:
+
+Two segments are equivalent if they have the same length.
+
+| Property | Check |
+|----------|-------|
+| Reflexive | A segment has the same length as itself |
+| Symmetric | If A has same length as B, then B has same length as A |
+| Transitive | If A = B in length, and B = C in length, then A = C |
+
+All three hold. It's an equivalence relation.
+
+---
+
+## Equivalence Classes
+
+An equivalence relation **groups** elements that are equivalent to each other.
+
+> The **equivalence class** of $a$ is the set of all elements equivalent to $a$.
+
+Written as $[a]$.
+
+---
+
+**Example:** "Same remainder mod 3" on integers.
+
+$$[0] = \{\ldots, -6, -3, 0, 3, 6, 9, \ldots\}$$
+
+$$[1] = \{\ldots, -5, -2, 1, 4, 7, 10, \ldots\}$$
+
+$$[2] = \{\ldots, -4, -1, 2, 5, 8, 11, \ldots\}$$
+
+Every integer belongs to exactly one class.
+
+---
+
+## Key Properties of Equivalence Classes
+
+1. **Every element is in some class** - nothing is left out
+2. **Classes don't overlap** - an element can't be in two different classes
+3. **Elements in the same class are equivalent** - that's the whole point
+
+> Equivalence classes **partition** the set into non-overlapping groups.
+
+---
+
+**Why is $[1] = [4] = [7]$?**
+
+Because 1, 4, and 7 are all equivalent (same remainder mod 3).
+
+The class is the same no matter which representative you pick.
+
+---
+
+> Equivalence relations formalize the idea of "same in some respect."

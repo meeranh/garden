@@ -1,0 +1,61 @@
+---
+title: Total Orders
+prerequisites:
+  - math/foundations/sets-functions-relations/relations/partial-orders
+---
+
+## What is a Total Order?
+
+A **total order** is a partial order where **every pair is comparable**.
+
+> For any $a$ and $b$: either $a \leq b$ or $b \leq a$ (or both, if $a = b$).
+
+No incomparable elements allowed.
+
+---
+
+## Visualizing a Total Order
+
+In a total order, everything forms a **single chain**. No branches, no side-by-side elements.
+
+::math/foundations/sets/relations/total-order-chain
+
+Compare this to the Hasse diagram for partial orders, which had branches.
+
+---
+
+## Example: $\leq$ on Numbers
+
+Pick any two numbers. One is always less than or equal to the other.
+
+| Pair | Comparable? |
+|------|-------------|
+| $3$ and $7$ | Yes: $3 \leq 7$ |
+| $-2$ and $5$ | Yes: $-2 \leq 5$ |
+| $4$ and $4$ | Yes: $4 \leq 4$ |
+
+Every pair is comparable. So $\leq$ is a **total order**.
+
+---
+
+## Non-Example: $\subseteq$ on Sets
+
+Consider $\{1, 2\}$ and $\{2, 3\}$:
+
+- Is $\{1, 2\} \subseteq \{2, 3\}$? **No**
+- Is $\{2, 3\} \subseteq \{1, 2\}$? **No**
+
+These sets are incomparable.
+
+$\subseteq$ is a partial order, but **not** a total order.
+
+---
+
+## Summary
+
+| Type | Properties | Every pair comparable? |
+|------|------------|------------------------|
+| Partial order | Reflexive, antisymmetric, transitive | No |
+| Total order | Reflexive, antisymmetric, transitive | Yes |
+
+> A total order is a partial order with no incomparable pairs.

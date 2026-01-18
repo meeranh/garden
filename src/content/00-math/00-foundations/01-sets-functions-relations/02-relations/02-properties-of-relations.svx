@@ -1,0 +1,136 @@
+---
+title: Properties of Relations
+prerequisites:
+  - math/foundations/sets-functions-relations/relations/what-is-a-relation
+---
+
+## Four Key Properties
+
+Relations can have special properties that describe their behavior.
+
+There are **four** you need to know:
+
+1. **Reflexive** - everything relates to itself
+2. **Symmetric** - relationships go both ways
+3. **Antisymmetric** - two-way relationships only for equals
+4. **Transitive** - relationships chain together
+
+---
+
+## Reflexive
+
+> A relation is **reflexive** if every element is related to **itself**.
+
+For all $a$ in $A$: $a \mathrel{R} a$.
+
+::math/foundations/sets/relations/reflexive
+
+---
+
+**Examples:**
+
+| Relation | Reflexive? | Why? |
+|----------|------------|------|
+| $=$ (equals) | Yes | $5 = 5$ |
+| $\leq$ (less than or equal) | Yes | $5 \leq 5$ |
+| $\mid$ (evenly divides) | Yes | $5 \mid 5$ |
+| $<$ (less than) | No | $5 < 5$ is false |
+| "is a parent of" | No | Nobody is their own parent |
+
+---
+
+## Symmetric
+
+> A relation is **symmetric** if $a \mathrel{R} b$ implies $b \mathrel{R} a$.
+
+If one direction holds, the other direction holds too.
+
+::math/foundations/sets/relations/symmetric
+
+---
+
+**Examples:**
+
+| Relation | Symmetric? | Why? |
+|----------|------------|------|
+| $=$ (equals) | Yes | If $x = y$, then $y = x$ |
+| "is friends with" | Yes | If Alice is friends with Bob, Bob is friends with Alice |
+| "is a sibling of" | Yes | Works both ways |
+| $<$ (less than) | No | $3 < 5$, but $5 < 3$ is false |
+| $\mid$ (evenly divides) | No | $2 \mid 6$, but $6 \mid 2$ is false |
+
+---
+
+## Antisymmetric
+
+> A relation is **antisymmetric** if $a \mathrel{R} b$ and $b \mathrel{R} a$ implies $a = b$.
+
+Two *different* elements can't both be related to each other.
+
+::math/foundations/sets/relations/antisymmetric
+
+---
+
+**Examples:**
+
+| Relation | Antisymmetric? | Why? |
+|----------|----------------|------|
+| $\leq$ | Yes | If $x \leq y$ and $y \leq x$, then $x = y$ |
+| $\mid$ (evenly divides) | Yes | If $a \mid b$ and $b \mid a$, then $a = b$ |
+| $\subseteq$ (subset) | Yes | If $A \subseteq B$ and $B \subseteq A$, then $A = B$ |
+| "is friends with" | No | Alice and Bob can be mutual friends without being the same person |
+
+---
+
+**Note:** Symmetric and antisymmetric are **not** opposites.
+
+- A relation can be *both* (like $=$)
+- A relation can be *neither* (like "is a parent of a sibling of")
+
+---
+
+## Transitive
+
+> A relation is **transitive** if $a \mathrel{R} b$ and $b \mathrel{R} c$ implies $a \mathrel{R} c$.
+
+Relationships *chain together*.
+
+::math/foundations/sets/relations/transitive
+
+---
+
+**Examples:**
+
+| Relation | Transitive? | Why? |
+|----------|-------------|------|
+| $<$ | Yes | If $2 < 5$ and $5 < 9$, then $2 < 9$ |
+| $=$ | Yes | If $x = y$ and $y = z$, then $x = z$ |
+| $\mid$ (evenly divides) | Yes | If $2 \mid 6$ and $6 \mid 18$, then $2 \mid 18$ |
+| "is an ancestor of" | Yes | Your ancestor's ancestor is your ancestor |
+| "is a parent of" | No | Your parent's parent is not your parent |
+| "is friends with" | No | Your friend's friend might not be your friend |
+
+---
+
+## Summary
+
+| Property | Meaning | Test |
+|----------|---------|------|
+| Reflexive | Everything relates to itself | Check: $a \mathrel{R} a$ for all $a$ |
+| Symmetric | Goes both ways | Check: $a \mathrel{R} b \Rightarrow b \mathrel{R} a$ |
+| Antisymmetric | Mutual only if equal | Check: $a \mathrel{R} b$ and $b \mathrel{R} a \Rightarrow a = b$ |
+| Transitive | Chains together | Check: $a \mathrel{R} b$ and $b \mathrel{R} c \Rightarrow a \mathrel{R} c$ |
+
+---
+
+## Common Relations
+
+| Relation | Reflexive | Symmetric | Antisymmetric | Transitive |
+|----------|-----------|-----------|---------------|------------|
+| $=$ | Yes | Yes | Yes | Yes |
+| $<$ | No | No | Yes | Yes |
+| $\leq$ | Yes | No | Yes | Yes |
+| $\mid$ (evenly divides) | Yes | No | Yes | Yes |
+| "is friends with" | ? | Yes | No | No |
+
+> Notice the patterns? These combinations define special types of relations.
