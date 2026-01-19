@@ -1,0 +1,98 @@
+---
+title: Properties of Real Numbers
+---
+
+## Why Do These Matter?
+
+Every time you simplify an expression or solve an equation, you're using certain rules.
+
+These rules aren't arbitrary. They're the **properties** that make algebra work.
+
+---
+
+## Closure
+
+When you add or multiply two real numbers, you always get a real number.
+
+::math/foundations/algebra/properties/closure
+
+You can't "escape" the real numbers through addition or multiplication. The result is always real.
+
+---
+
+## Commutative Property
+
+**Order doesn't matter.**
+
+$$a + b = b + a$$
+$$a \times b = b \times a$$
+
+::math/foundations/algebra/properties/commutative
+
+> *Commute* means to travel. The numbers can swap places.
+
+---
+
+## Associative Property
+
+**Grouping doesn't matter.**
+
+$$(a + b) + c = a + (b + c)$$
+$$(a \times b) \times c = a \times (b \times c)$$
+
+::math/foundations/algebra/properties/associative
+
+> *Associate* means to group. You can regroup however you like.
+
+---
+
+## Identity Property
+
+There's a **"do nothing"** number for each operation.
+
+- **Additive identity:** $a + 0 = a$
+- **Multiplicative identity:** $a \times 1 = a$
+
+::math/foundations/algebra/properties/identity
+
+Adding zero or multiplying by one leaves the number unchanged.
+
+---
+
+## Inverse Property
+
+Every number has an **"undo"** number.
+
+- **Additive inverse:** $a + (-a) = 0$
+- **Multiplicative inverse:** $a \times \frac{1}{a} = 1$ (where $a \neq 0$)
+
+::math/foundations/algebra/properties/inverse
+
+> The inverse brings you back to the identity.
+
+---
+
+## Distributive Property
+
+Multiplication **distributes** over addition.
+
+$$a \times (b + c) = (a \times b) + (a \times c)$$
+
+::math/foundations/algebra/properties/distributive
+
+This is the bridge between multiplication and addition. It's why you can expand brackets.
+
+---
+
+## Using These Properties
+
+Why can you rewrite $2x + 3x$ as $5x$?
+
+**Distributive property:** $(2 + 3) \times x = 5x$
+
+Why can you rearrange $3 + x + 7$ to $x + 10$?
+
+**Commutative:** $3 + x + 7 = x + 3 + 7$
+**Associative:** $x + (3 + 7) = x + 10$
+
+Every algebraic manipulation uses these six properties.

@@ -1,0 +1,124 @@
+---
+title: Types of Numbers
+---
+
+## Why Different Types?
+
+Not all numbers are the same.
+
+Some numbers count things. Some measure things. Some can't even be written as fractions.
+
+Understanding the **types** of numbers helps us know what we're working with.
+
+---
+
+## The Number Hierarchy
+
+Numbers form a hierarchy. Each type contains the previous one.
+
+::math/foundations/algebra/number-system
+
+---
+
+## Natural Numbers (ℕ)
+
+The **counting numbers**: 1, 2, 3, 4, 5, ...
+
+> These are the first numbers humans ever used. Counting sheep, counting days.
+
+- No zero
+- No negatives
+- No fractions
+
+---
+
+## Integers (ℤ)
+
+Take the natural numbers. Add **zero** and **negatives**.
+
+$$\mathbb{Z} = \{\ldots, -3, -2, -1, 0, 1, 2, 3, \ldots\}$$
+
+> The "Z" comes from German "Zahlen" (numbers).
+
+Now we can represent debts, temperatures below zero, floors below ground.
+
+---
+
+## Rational Numbers (ℚ)
+
+Any number that can be written as a **fraction** $\frac{a}{b}$ where $a$ and $b$ are integers and $b \neq 0$.
+
+> The "Q" stands for "quotient" (the result of division).
+
+**Examples:**
+
+| Number | As a fraction |
+|--------|---------------|
+| $\frac{1}{2}$ | Already a fraction |
+| $0.75$ | $\frac{3}{4}$ |
+| $5$ | $\frac{5}{1}$ |
+| $-2$ | $\frac{-2}{1}$ |
+| $0.333...$ | $\frac{1}{3}$ |
+
+---
+
+**Key property:** A decimal is rational if and only if it **terminates** or **repeats**.
+
+| Decimal | Pattern | Rational? |
+|---------|---------|-----------|
+| $0.5$ | Terminates | Yes |
+| $0.333...$ | Repeats (3) | Yes |
+| $0.142857142857...$ | Repeats (142857) | Yes |
+| $3.14159265...$ | No pattern | No |
+
+---
+
+## Irrational Numbers
+
+Numbers that **cannot** be written as a fraction.
+
+> "Irrational" literally means "not a ratio."
+
+**Famous examples:**
+
+- $\sqrt{2} \approx 1.41421356...$
+- $\pi \approx 3.14159265...$
+- $e \approx 2.71828182...$
+
+Their decimals go on **forever** without repeating.
+
+---
+
+**Why can't $\sqrt{2}$ be a fraction?**
+
+This was proven by the ancient Greeks. If $\sqrt{2} = \frac{a}{b}$ for some integers, you reach a contradiction.
+
+The proof shocked mathematicians. Numbers exist that *cannot* be written as ratios.
+
+---
+
+## Real Numbers (ℝ)
+
+**All** numbers on the number line.
+
+$$\mathbb{R} = \text{Rationals} \cup \text{Irrationals}$$
+
+Every point on the number line is either rational or irrational. Never both, never neither.
+
+> The real numbers "fill in" the number line completely. No gaps.
+
+---
+
+## Summary
+
+| Set | Symbol | Contains | Examples |
+|-----|--------|----------|----------|
+| Natural | $\mathbb{N}$ | Counting numbers | 1, 2, 3, 100 |
+| Integer | $\mathbb{Z}$ | ℕ + zero + negatives | -5, 0, 42 |
+| Rational | $\mathbb{Q}$ | Fractions | $\frac{1}{2}$, $0.75$, $-3$ |
+| Irrational | — | Non-fractions | $\sqrt{2}$, $\pi$, $e$ |
+| Real | $\mathbb{R}$ | ℚ + Irrationals | Everything above |
+
+---
+
+> **Key insight:** Every real number is either rational (can be a fraction) or irrational (cannot). There's no in-between.
