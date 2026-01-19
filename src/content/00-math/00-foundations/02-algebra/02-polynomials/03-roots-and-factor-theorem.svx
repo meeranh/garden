@@ -1,0 +1,103 @@
+---
+title: Roots and Factor Theorem
+prerequisites:
+  - math/foundations/algebra/polynomials/factoring
+---
+
+## What is a Root?
+
+A **root** (or **zero**) of a polynomial is a value that makes the polynomial equal to zero.
+
+For $p(x) = x^2 - 5x + 6$, the roots are the solutions to:
+
+$$x^2 - 5x + 6 = 0$$
+
+We can factor this: $(x - 2)(x - 3) = 0$
+
+So the roots are $x = 2$ and $x = 3$.
+
+---
+
+**Check:** Plug them back in:
+
+| $x$ | $p(x) = x^2 - 5x + 6$ |
+|-----|----------------------|
+| $2$ | $4 - 10 + 6 = 0$ ✓ |
+| $3$ | $9 - 15 + 6 = 0$ ✓ |
+
+---
+
+## The Factor Theorem
+
+This is the key insight connecting roots and factors:
+
+> If $r$ is a root of $p(x)$, then $(x - r)$ is a factor of $p(x)$.
+
+And vice versa:
+
+> If $(x - r)$ is a factor of $p(x)$, then $r$ is a root.
+
+---
+
+**Example:**
+
+- If $x = 4$ is a root of $p(x)$, then $(x - 4)$ is a factor.
+- If $(x + 2)$ is a factor of $p(x)$, then $x = -2$ is a root.
+
+---
+
+## Why is This Useful?
+
+**Finding factors from roots:**
+
+If you can find a root, you've found a factor.
+
+**Finding roots from factors:**
+
+Once factored, roots are obvious.
+
+**Reducing polynomials:**
+
+Once you find one root $r$, divide out $(x - r)$ and work with a smaller polynomial.
+
+---
+
+## Example: Factoring a Cubic
+
+**Factor:** $x^3 - 6x^2 + 11x - 6$
+
+---
+
+**Step 1: Find a root**
+
+Try small integers: $\pm 1, \pm 2, \pm 3, \ldots$
+
+Try $x = 1$:
+
+$1 - 6 + 11 - 6 = 0$ ✓
+
+So $x = 1$ is a root, which means $(x - 1)$ is a factor.
+
+---
+
+**Step 2: Divide out the factor**
+
+Divide $x^3 - 6x^2 + 11x - 6$ by $(x - 1)$.
+
+Result: $x^2 - 5x + 6$
+
+So: $x^3 - 6x^2 + 11x - 6 = (x - 1)(x^2 - 5x + 6)$
+
+---
+
+**Step 3: Factor the remaining quadratic**
+
+$x^2 - 5x + 6 = (x - 2)(x - 3)$
+
+---
+
+**Final answer:**
+
+$$x^3 - 6x^2 + 11x - 6 = (x - 1)(x - 2)(x - 3)$$
+
+Roots: $x = 1, 2, 3$

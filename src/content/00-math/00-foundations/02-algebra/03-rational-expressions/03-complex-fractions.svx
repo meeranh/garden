@@ -1,0 +1,63 @@
+---
+title: Complex Fractions
+prerequisites:
+  - math/foundations/algebra/rational-expressions/operations
+---
+
+## What's a Complex Fraction?
+
+A fraction that has fractions in its numerator, denominator, or both.
+
+$$\cfrac{\cfrac{1}{x+1}}{\cfrac{2}{x-1}}$$
+
+---
+
+## How to Simplify
+
+Rewrite as division, then flip and multiply.
+
+::math/foundations/algebra/rational-expressions/complex-fractions
+
+---
+
+**Example:** Simplify the complex fraction above
+
+---
+
+**Step 1: Rewrite as division**
+
+$$\frac{1}{x+1} \div \frac{2}{x-1}$$
+
+---
+
+**Step 2: Flip and multiply**
+
+$$\frac{1}{x+1} \times \frac{x-1}{2}$$
+
+---
+
+**Step 3: Multiply across**
+
+$$= \frac{x-1}{2(x+1)}$$
+
+---
+
+## Another Example
+
+$$\cfrac{\cfrac{x}{2}}{\cfrac{x^2}{4}}$$
+
+Rewrite as division:
+
+$$\frac{x}{2} \div \frac{x^2}{4} = \frac{x}{2} \times \frac{4}{x^2} = \frac{4x}{2x^2} = \frac{2}{x}$$
+
+---
+
+## Alternative Method: Multiply by LCD
+
+Instead of rewriting as division, multiply numerator and denominator by the LCD.
+
+**Example:** Simplify $\cfrac{\frac{1}{x} + 1}{2}$
+
+The LCD of all fractions is $x$. Multiply top and bottom by $x$:
+
+$$\frac{\left(\dfrac{1}{x} + 1\right) \cdot x}{2 \cdot x} = \frac{1 + x}{2x}$$

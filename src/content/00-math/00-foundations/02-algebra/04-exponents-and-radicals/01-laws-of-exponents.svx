@@ -1,0 +1,139 @@
+---
+title: Laws of Exponents
+---
+
+## What is an Exponent?
+
+An exponent is shorthand for repeated multiplication.
+
+$$x^3 = x \times x \times x$$
+
+The exponent tells you how many times to multiply the base by itself.
+
+---
+
+## The Six Laws
+
+| Law | Rule | Example |
+|-----|------|---------|
+| Product | $x^a \cdot x^b = x^{a+b}$ | $x^2 \cdot x^3 = x^5$ |
+| Quotient | $\dfrac{x^a}{x^b} = x^{a-b}$ | $\dfrac{x^5}{x^2} = x^3$ |
+| Power | $(x^a)^b = x^{ab}$ | $(x^2)^3 = x^6$ |
+| Zero | $x^0 = 1$ | $5^0 = 1$ |
+| Negative | $x^{-a} = \dfrac{1}{x^a}$ | $x^{-2} = \dfrac{1}{x^2}$ |
+| Distributive | $(xy)^a = x^a y^a$ | $(2x)^3 = 8x^3$ |
+
+---
+
+## Product Rule
+
+> **Same base? Add the exponents.**
+
+$$x^a \cdot x^b = x^{a+b}$$
+
+**Why it works:** Count the factors.
+
+$$x^2 \cdot x^3 = \underbrace{(x \cdot x)}_{2} \cdot \underbrace{(x \cdot x \cdot x)}_{3} = x^5$$
+
+**Examples:**
+
+- $x^4 \cdot x^2 = x^6$
+- $y \cdot y^4 = y^5$ (remember: $y = y^1$)
+- $2^3 \cdot 2^5 = 2^8 = 256$
+
+---
+
+## Quotient Rule
+
+> **Same base? Subtract the exponents.**
+
+$$\frac{x^a}{x^b} = x^{a-b}$$
+
+**Why it works:** Cancel the factors.
+
+$$\frac{x^5}{x^2} = \frac{x \cdot x \cdot x \cdot x \cdot x}{x \cdot x} = x \cdot x \cdot x = x^3$$
+
+**Examples:**
+
+- $\dfrac{x^7}{x^3} = x^4$
+- $\dfrac{2^{10}}{2^6} = 2^4 = 16$
+
+---
+
+## Power Rule
+
+> **Power of a power? Multiply the exponents.**
+
+$$(x^a)^b = x^{ab}$$
+
+**Why it works:** You're repeating the multiplication.
+
+$$(x^2)^3 = x^2 \cdot x^2 \cdot x^2 = x^{2+2+2} = x^6$$
+
+**Examples:**
+
+- $(x^3)^4 = x^{12}$
+- $(2^2)^5 = 2^{10} = 1024$
+
+---
+
+## Zero Exponent
+
+> **Anything to the power of 0 is 1.**
+
+$$x^0 = 1 \quad \text{(for } x \neq 0 \text{)}$$
+
+**Why it works:** Use the quotient rule.
+
+$$\frac{x^3}{x^3} = x^{3-3} = x^0$$
+
+But also $\dfrac{x^3}{x^3} = 1$, so $x^0 = 1$.
+
+---
+
+## Negative Exponent
+
+> **Negative exponent means reciprocal.**
+
+$$x^{-a} = \frac{1}{x^a}$$
+
+**Why it works:** Use the quotient rule.
+
+$$\frac{x^2}{x^5} = x^{2-5} = x^{-3}$$
+
+But also:
+
+$$\frac{x^2}{x^5} = \frac{1}{x^3}$$
+
+So $x^{-3} = \dfrac{1}{x^3}$.
+
+**Examples:**
+
+- $2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}$
+- $x^{-1} = \dfrac{1}{x}$
+
+---
+
+## Distributive Over Products
+
+> **Power of a product? Distribute to each factor.**
+
+$$(xy)^a = x^a \cdot y^a$$
+
+**Why it works:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+(xy)^3 &= (xy)(xy)(xy) \\
+       &= (x \cdot x \cdot x)(y \cdot y \cdot y) \\
+       &= x^3 y^3
+\end{aligned}$$
+
+</div>
+
+**Examples:**
+
+- $(2x)^3 = 2^3 \cdot x^3 = 8x^3$
+- $(3y^2)^2 = 9y^4$
+- $\left(\dfrac{x}{y}\right)^2 = \dfrac{x^2}{y^2}$

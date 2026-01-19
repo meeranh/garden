@@ -1,0 +1,148 @@
+---
+title: Logarithm Properties
+prerequisites:
+  - math/foundations/algebra/logarithms-and-exponentials/introduction-to-logarithms
+---
+
+## The Three Main Properties
+
+These come directly from exponent laws.
+
+---
+
+## Product Rule
+
+$$\log_b(xy) = \log_b(x) + \log_b(y)$$
+
+> Log of a product = sum of the logs.
+
+---
+
+**Why it works:**
+
+If $b^m = x$ and $b^n = y$, then:
+
+$$xy = b^m \cdot b^n = b^{m+n}$$
+
+So $\log_b(xy) = m + n = \log_b(x) + \log_b(y)$.
+
+---
+
+**Example:**
+
+$$\log(6) = \log(2 \times 3) = \log(2) + \log(3)$$
+
+---
+
+## Quotient Rule
+
+$$\log_b\left(\frac{x}{y}\right) = \log_b(x) - \log_b(y)$$
+
+> Log of a quotient = difference of the logs.
+
+---
+
+**Why it works:**
+
+If $b^m = x$ and $b^n = y$, then:
+
+$$\frac{x}{y} = \frac{b^m}{b^n} = b^{m-n}$$
+
+So $\log_b\left(\frac{x}{y}\right) = m - n = \log_b(x) - \log_b(y)$.
+
+---
+
+**Example:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+\log(5) &= \log\left(\frac{10}{2}\right) \\
+        &= \log(10) - \log(2) \\
+        &= 1 - \log(2)
+\end{aligned}$$
+
+</div>
+
+---
+
+## Power Rule
+
+$$\log_b(x^n) = n \cdot \log_b(x)$$
+
+> Log of a power = exponent times the log.
+
+---
+
+**Why it works:**
+
+If $b^m = x$, then $m = \log_b(x)$, and:
+
+<div class="math-left">
+
+$$\begin{aligned}
+x^n &= (b^m)^n \\
+    &= b^{mn}
+\end{aligned}$$
+
+</div>
+
+So $\log_b(x^n) = mn$.
+
+Substitute $m = \log_b(x)$:
+
+$$\log_b(x^n) = n \cdot \log_b(x)$$
+
+---
+
+**Example:**
+
+$$\log(8) = \log(2^3) = 3 \cdot \log(2)$$
+
+---
+
+## Summary
+
+| Property | Rule |
+|----------|------|
+| Product | $\log_b(xy) = \log_b(x) + \log_b(y)$ |
+| Quotient | $\log_b\left(\frac{x}{y}\right) = \log_b(x) - \log_b(y)$ |
+| Power | $\log_b(x^n) = n \cdot \log_b(x)$ |
+
+---
+
+## Special Values
+
+$$\log_b(1) = 0$$
+
+Because $b^0 = 1$.
+
+$$\log_b(b) = 1$$
+
+Because $b^1 = b$.
+
+---
+
+## Change of Base Formula
+
+To convert between bases:
+
+$$\log_b(x) = \frac{\log_a(x)}{\log_a(b)}$$
+
+Most useful form:
+
+$$\log_b(x) = \frac{\log(x)}{\log(b)} = \frac{\ln(x)}{\ln(b)}$$
+
+---
+
+**Example:** Calculate $\log_2(10)$
+
+<div class="math-left">
+
+$$\begin{aligned}
+\log_2(10) &= \frac{\log(10)}{\log(2)} \\[0.5em]
+           &= \frac{1}{0.301} \\[0.5em]
+           &\approx 3.32
+\end{aligned}$$
+
+</div>

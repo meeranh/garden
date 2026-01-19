@@ -1,0 +1,177 @@
+---
+title: Simplifying Radicals
+prerequisites:
+  - math/foundations/algebra/exponents-and-radicals/laws-of-exponents
+---
+
+## What is a Radical?
+
+A radical (square root) asks: "what number, multiplied by itself, gives this?"
+
+$$\sqrt{9} = 3 \quad \text{because} \quad 3 \times 3 = 9$$
+
+$$\sqrt{25} = 5 \quad \text{because} \quad 5 \times 5 = 25$$
+
+---
+
+## The Key Rule
+
+> $$\sqrt{ab} = \sqrt{a} \times \sqrt{b}$$
+
+You can split a radical into a product of radicals.
+
+This lets us **pull out perfect squares**.
+
+---
+
+## Simplifying: The Process
+
+1. Find the largest perfect square factor
+2. Split the radical
+3. Simplify the perfect square part
+
+---
+
+**Example:** Simplify $\sqrt{12}$
+
+12 isn't a perfect square. But $12 = 4 \times 3$, and 4 is.
+
+<div class="math-left">
+
+$$\begin{aligned}
+\sqrt{12} &= \sqrt{4 \times 3} \\
+          &= \sqrt{4} \times \sqrt{3} \\
+          &= 2\sqrt{3}
+\end{aligned}$$
+
+</div>
+
+---
+
+**Example:** Simplify $\sqrt{50}$
+
+$50 = 25 \times 2$
+
+<div class="math-left">
+
+$$\begin{aligned}
+\sqrt{50} &= \sqrt{25 \times 2} \\
+          &= 5\sqrt{2}
+\end{aligned}$$
+
+</div>
+
+---
+
+**Example:** Simplify $\sqrt{72}$
+
+$72 = 36 \times 2$
+
+<div class="math-left">
+
+$$\begin{aligned}
+\sqrt{72} &= \sqrt{36 \times 2} \\
+          &= 6\sqrt{2}
+\end{aligned}$$
+
+</div>
+
+---
+
+## What if You Miss the Largest?
+
+You can simplify in steps. Same answer, just longer.
+
+<div class="math-left">
+
+$$\begin{aligned}
+\sqrt{72} &= \sqrt{4 \times 18} \\
+          &= 2\sqrt{18} \\
+          &= 2\sqrt{9 \times 2} \\
+          &= 2 \times 3\sqrt{2} \\
+          &= 6\sqrt{2}
+\end{aligned}$$
+
+</div>
+
+---
+
+## Radicals with Variables
+
+Same rules. Pull out pairs.
+
+$$\sqrt{x^2} = x$$
+
+$$\sqrt{x^4} = x^2$$
+
+$$\sqrt{x^3} = \sqrt{x^2 \times x} = x\sqrt{x}$$
+
+---
+
+**Example:** Simplify $\sqrt{18x^3}$
+
+<div class="math-left">
+
+$$\begin{aligned}
+\sqrt{18x^3} &= \sqrt{9 \times 2 \times x^2 \times x} \\
+             &= 3x\sqrt{2x}
+\end{aligned}$$
+
+</div>
+
+---
+
+## Adding and Subtracting Radicals
+
+> Only combine **like radicals** (same number under the root).
+
+$$2\sqrt{3} + 5\sqrt{3} = 7\sqrt{3}$$
+
+$$2\sqrt{3} + 5\sqrt{2} = \text{can't simplify}$$
+
+---
+
+**Sometimes you need to simplify first:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+\sqrt{12} + \sqrt{27} &= 2\sqrt{3} + 3\sqrt{3} \\
+                      &= 5\sqrt{3}
+\end{aligned}$$
+
+</div>
+
+---
+
+## Rationalizing the Denominator
+
+> No radicals in the denominator.
+
+Multiply top and bottom by the radical to clear it.
+
+---
+
+**Example:** Rationalize $\dfrac{1}{\sqrt{2}}$
+
+<div class="math-left">
+
+$$\begin{aligned}
+\frac{1}{\sqrt{2}} &= \frac{1}{\sqrt{2}} \times \frac{\sqrt{2}}{\sqrt{2}} \\[0.5em]
+                   &= \frac{\sqrt{2}}{2}
+\end{aligned}$$
+
+</div>
+
+---
+
+**Example:** Rationalize $\dfrac{3}{\sqrt{5}}$
+
+<div class="math-left">
+
+$$\begin{aligned}
+\frac{3}{\sqrt{5}} &= \frac{3}{\sqrt{5}} \times \frac{\sqrt{5}}{\sqrt{5}} \\[0.5em]
+                   &= \frac{3\sqrt{5}}{5}
+\end{aligned}$$
+
+</div>

@@ -1,0 +1,158 @@
+---
+title: Factoring and Completing the Square
+prerequisites:
+  - math/foundations/algebra/polynomials/factoring
+---
+
+## What's a Quadratic?
+
+A polynomial of degree 2:
+
+$$ax^2 + bx + c$$
+
+We want to find where it equals zero.
+
+---
+
+## Method 1: Factoring
+
+Find two numbers that multiply to $c$ and add to $b$.
+
+---
+
+**Example:** Solve $x^2 + 5x + 6 = 0$
+
+Numbers that multiply to 6 and add to 5: **2 and 3**
+
+<div class="math-left">
+
+$$\begin{aligned}
+x^2 + 5x + 6 &= 0 \\
+(x + 2)(x + 3) &= 0
+\end{aligned}$$
+
+</div>
+
+So $x = -2$ or $x = -3$.
+
+---
+
+**Factoring is fast, but only works when the quadratic factors nicely.**
+
+What about $x^2 + 6x + 5 = 0$? Or $x^2 - 4x - 1 = 0$?
+
+We need a method that always works.
+
+---
+
+## Method 2: Completing the Square
+
+> Turn the left side into a perfect square, then solve.
+
+---
+
+## The Key Insight
+
+Recall the perfect square pattern:
+
+$$(x + k)^2 = x^2 + 2kx + k^2$$
+
+If you have $x^2 + bx$, you can complete it by adding $\left(\dfrac{b}{2}\right)^2$.
+
+$$x^2 + bx + \left(\frac{b}{2}\right)^2 = \left(x + \frac{b}{2}\right)^2$$
+
+---
+
+## The Process
+
+1. Move the constant to the right side
+2. Add $\left(\dfrac{b}{2}\right)^2$ to both sides
+3. Factor the left side as a perfect square
+4. Take the square root of both sides
+5. Solve for $x$
+
+---
+
+**Example:** Solve $x^2 + 6x + 5 = 0$
+
+**Step 1:** Move the constant.
+
+$$x^2 + 6x = -5$$
+
+**Step 2:** Half of 6 is 3. Square it: 9. Add to both sides.
+
+$$x^2 + 6x + 9 = -5 + 9$$
+
+$$x^2 + 6x + 9 = 4$$
+
+**Step 3:** Left side is a perfect square.
+
+$$(x + 3)^2 = 4$$
+
+**Step 4:** Take square root.
+
+$$x + 3 = \pm 2$$
+
+**Step 5:** Solve.
+
+$$x = -3 + 2 = -1 \quad \text{or} \quad x = -3 - 2 = -5$$
+
+---
+
+**Example:** Solve $x^2 - 4x - 1 = 0$
+
+**Step 1:** Move the constant.
+
+$$x^2 - 4x = 1$$
+
+**Step 2:** Half of $-4$ is $-2$. Square it: 4. Add to both sides.
+
+$$x^2 - 4x + 4 = 1 + 4$$
+
+$$(x - 2)^2 = 5$$
+
+**Step 3:** Take square root.
+
+$$x - 2 = \pm\sqrt{5}$$
+
+**Step 4:** Solve.
+
+$$x = 2 + \sqrt{5} \quad \text{or} \quad x = 2 - \sqrt{5}$$
+
+---
+
+## When $a \neq 1$
+
+If the coefficient of $x^2$ isn't 1, divide everything by it first.
+
+---
+
+**Example:** Solve $2x^2 + 8x + 6 = 0$
+
+Divide by 2:
+
+$$x^2 + 4x + 3 = 0$$
+
+Now complete the square:
+
+<div class="math-left">
+
+$$\begin{aligned}
+x^2 + 4x &= -3 \\
+x^2 + 4x + 4 &= -3 + 4 \\
+(x + 2)^2 &= 1 \\
+x + 2 &= \pm 1
+\end{aligned}$$
+
+</div>
+
+So $x = -1$ or $x = -3$.
+
+---
+
+## Factoring vs Completing the Square
+
+| Method | When to use |
+|--------|-------------|
+| Factoring | Quick, but only when numbers work out nicely |
+| Completing the square | Always works, even with irrational solutions |

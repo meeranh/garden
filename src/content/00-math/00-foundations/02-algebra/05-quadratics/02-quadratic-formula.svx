@@ -1,0 +1,118 @@
+---
+title: Quadratic Formula
+prerequisites:
+  - math/foundations/algebra/quadratics/factoring-and-completing-the-square
+---
+
+## The Formula
+
+For any quadratic $ax^2 + bx + c = 0$:
+
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+
+Plug in $a$, $b$, $c$. Get the answers.
+
+---
+
+## Where Does It Come From?
+
+It's completing the square on the general form, done once for all quadratics.
+
+Start with the general quadratic:
+
+$$ax^2 + bx + c = 0$$
+
+Divide everything by $a$:
+
+$$x^2 + \frac{b}{a}x + \frac{c}{a} = 0$$
+
+Move the constant to the right:
+
+$$x^2 + \frac{b}{a}x = -\frac{c}{a}$$
+
+Add $\left(\dfrac{b}{2a}\right)^2$ to both sides to complete the square:
+
+$$x^2 + \frac{b}{a}x + \frac{b^2}{4a^2} = -\frac{c}{a} + \frac{b^2}{4a^2}$$
+
+Left side is now a perfect square:
+
+$$\left(x + \frac{b}{2a}\right)^2 = \frac{b^2 - 4ac}{4a^2}$$
+
+Take the square root:
+
+$$x + \frac{b}{2a} = \pm\frac{\sqrt{b^2 - 4ac}}{2a}$$
+
+Solve for $x$:
+
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+
+---
+
+## Example 1
+
+**Solve:** $x^2 + 5x + 6 = 0$
+
+Here $a = 1$, $b = 5$, $c = 6$.
+
+<div class="math-left">
+
+$$\begin{aligned}
+x &= \frac{-5 \pm \sqrt{25 - 24}}{2} \\[0.5em]
+  &= \frac{-5 \pm 1}{2}
+\end{aligned}$$
+
+</div>
+
+So $x = \dfrac{-5 + 1}{2} = -2$ or $x = \dfrac{-5 - 1}{2} = -3$.
+
+---
+
+## Example 2
+
+**Solve:** $2x^2 - 4x - 6 = 0$
+
+Here $a = 2$, $b = -4$, $c = -6$.
+
+<div class="math-left">
+
+$$\begin{aligned}
+x &= \frac{4 \pm \sqrt{16 + 48}}{4} \\[0.5em]
+  &= \frac{4 \pm \sqrt{64}}{4} \\[0.5em]
+  &= \frac{4 \pm 8}{4}
+\end{aligned}$$
+
+</div>
+
+So $x = \dfrac{12}{4} = 3$ or $x = \dfrac{-4}{4} = -1$.
+
+---
+
+## Example 3: Irrational Roots
+
+**Solve:** $x^2 - 2x - 1 = 0$
+
+Here $a = 1$, $b = -2$, $c = -1$.
+
+<div class="math-left">
+
+$$\begin{aligned}
+x &= \frac{2 \pm \sqrt{4 + 4}}{2} \\[0.5em]
+  &= \frac{2 \pm \sqrt{8}}{2} \\[0.5em]
+  &= \frac{2 \pm 2\sqrt{2}}{2} \\[0.5em]
+  &= 1 \pm \sqrt{2}
+\end{aligned}$$
+
+</div>
+
+---
+
+## When to Use It
+
+The quadratic formula **always works**.
+
+| Situation | Best method |
+|-----------|-------------|
+| Simple, obvious factors | Factoring |
+| Need exact irrational answers | Quadratic formula |
+| Coefficients are messy | Quadratic formula |
+| Just want a quick answer | Quadratic formula |

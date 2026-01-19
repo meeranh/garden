@@ -1,0 +1,128 @@
+---
+title: Discriminant and Nature of Roots
+prerequisites:
+  - math/foundations/algebra/quadratics/quadratic-formula
+---
+
+## The Discriminant
+
+In the quadratic formula:
+
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+
+The expression under the square root is called the **discriminant**:
+
+$$D = b^2 - 4ac$$
+
+---
+
+## Why Does It Matter?
+
+The discriminant tells you what kind of roots you'll get, without solving.
+
+> **The sign of D determines the nature of the roots.**
+
+---
+
+## Three Cases
+
+**Case 1:** $D > 0$
+
+Square root of a positive → **Two distinct real roots**
+
+---
+
+**Case 2:** $D = 0$
+
+Square root of zero → **One repeated real root**
+
+The quadratic is a perfect square.
+
+---
+
+**Case 3:** $D < 0$
+
+Square root of a negative → **No real roots**
+
+The roots are complex numbers.
+
+---
+
+## Summary
+
+| Discriminant | Nature of roots |
+|--------------|-----------------|
+| $D > 0$ | Two distinct real roots |
+| $D = 0$ | One repeated real root |
+| $D < 0$ | No real roots |
+
+---
+
+## Example 1: Two Distinct Roots
+
+**Equation:** $x^2 + 5x + 6 = 0$
+
+<div class="math-left">
+
+$$\begin{aligned}
+D &= b^2 - 4ac \\
+  &= 25 - 24 \\
+  &= 1
+\end{aligned}$$
+
+</div>
+
+$D > 0$ → Two distinct real roots.
+
+Solving gives $x = -2$ and $x = -3$.
+
+---
+
+## Example 2: One Repeated Root
+
+**Equation:** $x^2 - 6x + 9 = 0$
+
+<div class="math-left">
+
+$$\begin{aligned}
+D &= 36 - 36 \\
+  &= 0
+\end{aligned}$$
+
+</div>
+
+$D = 0$ → One repeated root.
+
+This is a perfect square: $(x - 3)^2 = 0$, so $x = 3$.
+
+---
+
+## Example 3: No Real Roots
+
+**Equation:** $x^2 + x + 1 = 0$
+
+<div class="math-left">
+
+$$\begin{aligned}
+D &= 1 - 4 \\
+  &= -3
+\end{aligned}$$
+
+</div>
+
+$D < 0$ → No real roots.
+
+---
+
+## Bonus: Rational vs Irrational Roots
+
+When $D > 0$:
+
+- If $D$ is a **perfect square** (1, 4, 9, 16, ...) → roots are **rational**
+- If $D$ is **not** a perfect square → roots are **irrational**
+
+**Example:** $x^2 - 2x - 1 = 0$
+
+$D = 4 + 4 = 8$
+
+$D > 0$ but 8 is not a perfect square → roots are irrational ($1 \pm \sqrt{2}$).

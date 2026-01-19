@@ -1,0 +1,154 @@
+---
+title: Solving Exponential and Logarithmic Equations
+prerequisites:
+  - math/foundations/algebra/logarithms-and-exponentials/logarithm-properties
+---
+
+## Exponential Equations
+
+The variable is in the exponent:
+
+$$2^x = 8 \qquad 3^x = 20 \qquad e^x = 5$$
+
+---
+
+## Easy Case: Same Base
+
+If both sides have the same base, match the exponents.
+
+---
+
+**Example:** Solve $2^x = 8$
+
+Rewrite 8 as a power of 2:
+
+$$2^x = 2^3$$
+
+Same base, so exponents are equal:
+
+$$x = 3$$
+
+---
+
+**Example:** Solve $3^{2x} = 81$
+
+Rewrite 81 as a power of 3:
+
+$$3^{2x} = 3^4$$
+
+Match exponents:
+
+$$2x = 4 \quad \Rightarrow \quad x = 2$$
+
+---
+
+## Hard Case: Use Logarithms
+
+When you can't match bases, take the log of both sides.
+
+> **Key property:** $\log(a^n) = n \cdot \log(a)$
+
+---
+
+**Example:** Solve $2^x = 10$
+
+Can't write 10 as a power of 2. Take log of both sides:
+
+<div class="math-left">
+
+$$\begin{aligned}
+\log(2^x) &= \log(10) \\
+x \cdot \log(2) &= 1 \\
+x &= \frac{1}{\log(2)} \\
+x &\approx 3.32
+\end{aligned}$$
+
+</div>
+
+---
+
+**Example:** Solve $e^x = 7$
+
+Take ln of both sides (natural log pairs with base $e$):
+
+<div class="math-left">
+
+$$\begin{aligned}
+\ln(e^x) &= \ln(7) \\
+x &= \ln(7) \\
+x &\approx 1.95
+\end{aligned}$$
+
+</div>
+
+---
+
+**Example:** Solve $5^{x+1} = 30$
+
+<div class="math-left">
+
+$$\begin{aligned}
+\log(5^{x+1}) &= \log(30) \\
+(x+1) \cdot \log(5) &= \log(30) \\
+x + 1 &= \frac{\log(30)}{\log(5)} \\
+x &= \frac{\log(30)}{\log(5)} - 1 \\
+x &\approx 1.11
+\end{aligned}$$
+
+</div>
+
+---
+
+## Logarithmic Equations
+
+The variable is inside the log:
+
+$$\log(x) = 2 \qquad \ln(x + 1) = 3$$
+
+> **Strategy:** Convert to exponential form.
+
+---
+
+**Example:** Solve $\log(x) = 2$
+
+Convert to exponential form:
+
+$$10^2 = x$$
+
+$$x = 100$$
+
+---
+
+**Example:** Solve $\ln(x) = 4$
+
+Convert to exponential form:
+
+$$e^4 = x$$
+
+$$x \approx 54.6$$
+
+---
+
+**Example:** Solve $\log_2(x - 1) = 5$
+
+Convert to exponential form:
+
+<div class="math-left">
+
+$$\begin{aligned}
+2^5 &= x - 1 \\
+32 &= x - 1 \\
+x &= 33
+\end{aligned}$$
+
+</div>
+
+---
+
+## Summary
+
+| Equation type | Strategy |
+|---------------|----------|
+| $b^x = b^y$ | Match exponents: $x = y$ |
+| $b^x = c$ | Take log: $x = \dfrac{\log(c)}{\log(b)}$ |
+| $\log_b(x) = c$ | Convert to exponential: $x = b^c$ |

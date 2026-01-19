@@ -7,6 +7,7 @@ A learning platform built with SvelteKit, featuring interactive animations and L
 When explaining things in the terminal:
 - **Use simple language** - Same style as the content. Clear, direct, no jargon.
 - **No LaTeX in terminal** - My terminal doesn't render it. Write `x^2` not `$x^2$`, use words like "for all" instead of `\forall`.
+- **Don't run build/dev/check** - I'll handle these myself. Just write the code.
 
 ---
 

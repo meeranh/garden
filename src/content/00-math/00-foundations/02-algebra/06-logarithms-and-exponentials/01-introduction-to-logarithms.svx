@@ -1,0 +1,124 @@
+---
+title: Introduction to Logarithms
+prerequisites:
+  - math/foundations/algebra/exponents-and-radicals/laws-of-exponents
+---
+
+## What is a Logarithm?
+
+A logarithm answers the question: **"What exponent do I need?"**
+
+---
+
+You know that $2^3 = 8$.
+
+But what if I ask: "2 to *what power* gives 8?"
+
+The answer is 3. A logarithm is how we write that question:
+
+$$\log_2(8) = 3$$
+
+> **The logarithm finds the exponent.**
+
+---
+
+## Converting Between Forms
+
+These say the same thing:
+
+| Exponential form | Logarithm form |
+|------------------|----------------|
+| $2^3 = 8$ | $\log_2(8) = 3$ |
+| $10^2 = 100$ | $\log_{10}(100) = 2$ |
+| $5^1 = 5$ | $\log_5(5) = 1$ |
+| $3^0 = 1$ | $\log_3(1) = 0$ |
+
+---
+
+## How to Read It
+
+$\log_2(8) = \text{ ?}$
+
+Ask yourself: "2 to what power gives 8?"
+
+$2^? = 8$ → $2^3 = 8$ → Answer: 3
+
+---
+
+**More examples:**
+
+- $\log_3(9) = 2$ because $3^2 = 9$
+- $\log_{10}(1000) = 3$ because $10^3 = 1000$
+- $\log_5(1) = 0$ because $5^0 = 1$
+
+---
+
+## Two Special Bases
+
+Two bases are so common they get their own notation:
+
+**Common logarithm (base 10):**
+
+$$\log(x) = \log_{10}(x)$$
+
+**Natural logarithm (base e):**
+
+$$\ln(x) = \log_e(x)$$
+
+---
+
+## What is e?
+
+$e \approx 2.71828...$ is called **Euler's number**.
+
+It appears whenever you have **continuous growth**.
+
+---
+
+## Where e Comes From
+
+Imagine you put $1 in a bank with 100% interest per year.
+
+::math/foundations/algebra/logarithms/what-is-e
+
+---
+
+The more frequently you compound, the more you earn.
+
+But there's a limit. No matter how often you compound, you never exceed $e$.
+
+$$e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n$$
+
+---
+
+## Why e Matters
+
+$e$ isn't arbitrary. It emerges naturally whenever growth is proportional to size:
+
+- Population growth
+- Radioactive decay
+- Compound interest
+- Cooling and heating
+
+> **That's why $\ln$ is called the "natural" logarithm.**
+
+---
+
+## The Inverse Relationship
+
+Logarithms and exponentials **undo each other**.
+
+$$\log_b(b^x) = x$$
+
+$$b^{\log_b(x)} = x$$
+
+Just like $\sqrt{x^2} = x$, or how $+5$ and $-5$ cancel.
+
+---
+
+**Examples:**
+
+- $\log_2(2^5) = 5$
+- $10^{\log_{10}(100)} = 100$
+- $\ln(e^3) = 3$
+- $e^{\ln(7)} = 7$

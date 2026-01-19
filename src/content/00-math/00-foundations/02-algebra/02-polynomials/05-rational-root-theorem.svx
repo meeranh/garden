@@ -1,0 +1,87 @@
+---
+title: Rational Root Theorem
+prerequisites:
+  - math/foundations/algebra/polynomials/polynomial-division
+---
+
+## The Problem
+
+You have a polynomial and want to find its roots.
+
+For quadratics, you have the quadratic formula. But for higher degrees, there's no simple formula.
+
+The **Rational Root Theorem** helps by telling you which rational numbers to try.
+
+---
+
+## The Theorem
+
+For a polynomial with **integer coefficients**:
+
+$$a_n x^n + a_{n-1} x^{n-1} + \ldots + a_1 x + a_0$$
+
+If $\frac{p}{q}$ is a rational root (in lowest terms), then:
+
+- $p$ divides the constant term $a_0$
+- $q$ divides the leading coefficient $a_n$
+
+---
+
+> **Possible rational roots** = $\pm \frac{\text{factors of constant}}{\text{factors of leading coefficient}}$
+
+---
+
+## Example
+
+::math/foundations/algebra/polynomials/rational-root
+
+**Find rational roots of:** $2x^3 - 3x^2 - 8x + 12$
+
+---
+
+**Step 1: Identify the key coefficients**
+
+- Leading coefficient = $2$
+- Constant term = $12$
+
+---
+
+**Step 2: List factors**
+
+- Factors of $12$: $1, 2, 3, 4, 6, 12$
+- Factors of $2$: $1, 2$
+
+---
+
+**Step 3: Form all possible rational roots**
+
+$$\pm \frac{1, 2, 3, 4, 6, 12}{1, 2}$$
+
+This gives: $\pm 1, \pm 2, \pm 3, \pm 4, \pm 6, \pm 12, \pm \frac{1}{2}, \pm \frac{3}{2}$
+
+---
+
+**Step 4: Test candidates**
+
+Try $x = 2$:
+
+<div class="math-left">
+
+$$\begin{aligned}
+2(2)^3 - 3(2)^2 - 8(2) + 12 &= 16 - 12 - 16 + 12 \\
+&= 0
+\end{aligned}$$
+
+</div>
+
+So $x = 2$ is a root.
+
+---
+
+## Important Note
+
+The theorem gives you **candidates**, not guaranteed roots.
+
+- If a rational root exists, it's in this list
+- But many candidates won't actually be roots
+- Some polynomials have **no** rational roots (like $x^2 - 2$, whose roots are $\pm\sqrt{2}$)

@@ -1,0 +1,89 @@
+---
+title: Polynomial Division
+prerequisites:
+  - math/foundations/algebra/polynomials/roots-and-factor-theorem
+---
+
+## Why Divide Polynomials?
+
+From the factor theorem: if $x = 1$ is a root of $x^3 - 6x^2 + 11x - 6$, then $(x - 1)$ is a factor.
+
+But what's the *other* factor? We divide to find out:
+
+$$(x^3 - 6x^2 + 11x - 6) \div (x - 1) = \text{ ?}$$
+
+---
+
+## Long Division
+
+Works just like long division with numbers.
+
+::math/foundations/algebra/polynomials/long-division
+
+---
+
+**The process:**
+
+1. Divide the leading terms: $x^3 \div x = x^2$
+2. Multiply: $x^2 \times (x - 1) = x^3 - x^2$
+3. Subtract and bring down
+4. Repeat until done
+
+---
+
+**Result:**
+
+$$x^3 - 6x^2 + 11x - 6 = (x - 1)(x^2 - 5x + 6)$$
+
+---
+
+## Synthetic Division
+
+A shortcut when dividing by $(x - r)$.
+
+For $(x - 1)$, we use $r = 1$.
+
+::math/foundations/algebra/polynomials/synthetic-division
+
+---
+
+**Setup:** Write the coefficients of the dividend.
+
+$$x^3 - 6x^2 + 11x - 6 \quad \rightarrow \quad 1, -6, 11, -6$$
+
+---
+
+**Process:**
+
+| | $1$ | $-6$ | $11$ | $-6$ |
+|---|---|---|---|---|
+| $r = 1$ | | $1$ | $-5$ | $6$ |
+| | $1$ | $-5$ | $6$ | $0$ |
+
+---
+
+**How it works:**
+
+1. Bring down the first coefficient: $1$
+2. Multiply by $r$, add to next: $-6 + 1 = -5$
+3. Multiply by $r$, add to next: $11 + (-5) = 6$
+4. Multiply by $r$, add to next: $-6 + 6 = 0$ (remainder)
+
+---
+
+**Reading the result:**
+
+Coefficients $1, -5, 6$ with remainder $0$
+
+$$\rightarrow \quad x^2 - 5x + 6 \quad \text{remainder } 0$$
+
+---
+
+## When to Use Each Method
+
+| Method | When to use |
+|--------|-------------|
+| Long division | Any divisor |
+| Synthetic division | Only for $(x - r)$ |
+
+Synthetic division is faster, but only works for linear divisors.

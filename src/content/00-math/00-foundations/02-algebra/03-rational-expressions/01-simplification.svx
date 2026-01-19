@@ -1,0 +1,69 @@
+---
+title: Simplification
+prerequisites:
+  - math/foundations/algebra/polynomials/factoring
+---
+
+## What's a Rational Expression?
+
+A fraction where the numerator and denominator are polynomials.
+
+$$\frac{x + 1}{x - 2} \qquad \frac{x^2 - 4}{x + 2} \qquad \frac{2x}{x^2 + 1}$$
+
+---
+
+## Simplifying Rational Expressions
+
+Same idea as simplifying $\frac{6}{8}$ to $\frac{3}{4}$: cancel common **factors**.
+
+::math/foundations/algebra/rational-expressions/simplify
+
+---
+
+**Example:** Simplify $\dfrac{x^2 - 4}{x + 2}$
+
+---
+
+**Step 1: Factor**
+
+The numerator is a difference of squares:
+
+$$x^2 - 4 = (x + 2)(x - 2)$$
+
+---
+
+**Step 2: Cancel common factors**
+
+$$\frac{(x + 2)(x - 2)}{x + 2} = x - 2$$
+
+The $(x + 2)$ cancels.
+
+---
+
+## The Key Rule
+
+> You can only cancel **factors**, not **terms**.
+
+**Wrong:**
+
+$$\frac{x + 1}{x + 2} \neq \frac{1}{2}$$
+
+You cannot cancel the $x$ because it's a term, not a factor.
+
+---
+
+**Right:**
+
+$$\frac{x(x + 1)}{x(x + 2)} = \frac{x + 1}{x + 2}$$
+
+Here $x$ is a factor of both numerator and denominator.
+
+---
+
+## More Examples
+
+$$\frac{x^2 - 9}{x + 3} = \frac{(x+3)(x-3)}{x+3} = x - 3$$
+
+$$\frac{x^2 + 5x + 6}{x + 2} = \frac{(x+2)(x+3)}{x+2} = x + 3$$
+
+$$\frac{2x^2 + 4x}{2x} = \frac{2x(x + 2)}{2x} = x + 2$$
