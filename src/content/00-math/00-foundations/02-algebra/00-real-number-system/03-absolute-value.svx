@@ -1,0 +1,40 @@
+---
+title: Absolute Value
+---
+
+## Distance From Zero
+
+Absolute value answers one question: **how far is this number from zero?**
+
+We write it with vertical bars: $|x|$
+
+---
+
+## Examples
+
+| Number | Absolute Value | Why? |
+|--------|----------------|------|
+| $\|5\|$ | $5$ | 5 is 5 units from zero |
+| $\|-5\|$ | $5$ | -5 is also 5 units from zero |
+| $\|0\|$ | $0$ | 0 is 0 units from zero |
+
+> Absolute value strips away the sign. It tells you *how far*, not *which direction*.
+
+---
+
+## Definition
+
+$$|x| = \begin{cases} x & \text{if } x \geq 0 \\ -x & \text{if } x < 0 \end{cases}$$
+
+The second line might look strange. But if $x$ is negative, then $-x$ is positive.
+
+**Example:** $|-7| = -(-7) = 7$
+
+---
+
+## Key Properties
+
+- $|x| \geq 0$ — always non-negative
+- $|x| = 0$ only when $x = 0$
+- $|xy| = |x| \cdot |y|$ — absolute value of a product
+- $|x + y| \leq |x| + |y|$ — the **triangle inequality**

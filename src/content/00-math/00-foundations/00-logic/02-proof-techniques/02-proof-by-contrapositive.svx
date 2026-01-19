@@ -81,7 +81,17 @@ But $n^2 = 2k$ doesn't easily tell you what $n$ is. Square roots get messy.
 - Assume $n$ is odd
 - So $n = 2k + 1$ for some integer $k$
 
-$$n^2 = (2k + 1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1$$
+Square it:
+
+<div class="math-left">
+
+$$\begin{aligned}
+n^2 &= (2k + 1)^2 \\
+    &= 4k^2 + 4k + 1 \\
+    &= 2(2k^2 + 2k) + 1
+\end{aligned}$$
+
+</div>
 
 - That's $2(\text{something}) + 1$ — which is **odd**
 
@@ -114,7 +124,16 @@ Starting with "product is odd" doesn't easily tell you about $a$ alone.
 - Assume $a$ is even
 - So $a = 2k$ for some integer $k$
 
-$$a \times b = 2k \times b = 2(kb)$$
+Multiply:
+
+<div class="math-left">
+
+$$\begin{aligned}
+a \times b &= 2k \times b \\
+           &= 2(kb)
+\end{aligned}$$
+
+</div>
 
 - That's $2 \times (\text{something})$ — which is **even**
 
@@ -149,7 +168,17 @@ Now what? Dividing by 3 is messy. The variable $n$ is "trapped."
 - Assume $n$ is even
 - So $n = 2k$ for some integer $k$
 
-$$3n + 2 = 3(2k) + 2 = 6k + 2 = 2(3k + 1)$$
+Substitute:
+
+<div class="math-left">
+
+$$\begin{aligned}
+3n + 2 &= 3(2k) + 2 \\
+       &= 6k + 2 \\
+       &= 2(3k + 1)
+\end{aligned}$$
+
+</div>
 
 - That's $2 \times (\text{something})$ — which is **even**
 

@@ -83,13 +83,15 @@ By our assumption:
 
 **Total breaks:**
 
-$$1 + (a - 1) + (b - 1)$$
+<div class="math-left">
 
-$$= 1 + a - 1 + b - 1$$
+$$\begin{aligned}
+1 + (a - 1) + (b - 1) &= 1 + a - 1 + b - 1 \\
+                      &= a + b - 1 \\
+                      &= n - 1
+\end{aligned}$$
 
-$$= a + b - 1$$
-
-$$= n - 1$$
+</div>
 
 Exactly what the formula predicts.
 

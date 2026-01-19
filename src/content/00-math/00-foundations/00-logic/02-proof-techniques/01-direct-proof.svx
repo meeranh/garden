@@ -35,7 +35,15 @@ $$P \to Q$$
 - Assume $n$ is even
 - By definition, $n = 2k$ for some integer $k$
 
-$$n^2 = (2k)^2 = 4k^2 = 2(2k^2)$$
+<div class="math-left">
+
+$$\begin{aligned}
+n^2 &= (2k)^2 \\
+    &= 4k^2 \\
+    &= 2(2k^2)
+\end{aligned}$$
+
+</div>
 
 - This is $2 \times (\text{something})$, so $n^2$ is even
 
@@ -56,7 +64,17 @@ $$n^2 = (2k)^2 = 4k^2 = 2(2k^2)$$
   - $a = 2m + 1$ for some integer $m$
   - $b = 2n + 1$ for some integer $n$
 
-$$a + b = (2m + 1) + (2n + 1) = 2m + 2n + 2 = 2(m + n + 1)$$
+Add them together:
+
+<div class="math-left">
+
+$$\begin{aligned}
+a + b &= (2m + 1) + (2n + 1) \\
+      &= 2m + 2n + 2 \\
+      &= 2(m + n + 1)
+\end{aligned}$$
+
+</div>
 
 - This is $2 \times (\text{something})$, so the sum is even
 

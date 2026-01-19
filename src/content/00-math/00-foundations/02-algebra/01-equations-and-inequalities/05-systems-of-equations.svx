@@ -1,0 +1,52 @@
+---
+title: Systems of Linear Equations
+prerequisites:
+  - math/foundations/algebra/equations-and-inequalities/linear-equations
+---
+
+## What is a System?
+
+Multiple equations, multiple variables. Find values that satisfy **all** equations at once.
+
+Each equation alone has infinite solutions. Together, they narrow it down.
+
+---
+
+## Example
+
+$x + y = 10$ has many solutions: (5,5), (6,4), (7,3), ...
+
+$x - y = 2$ also has many solutions: (3,1), (4,2), (6,4), ...
+
+But only **(6, 4)** satisfies both.
+
+---
+
+## Solving by Elimination
+
+Add or subtract equations to cancel out a variable.
+
+::math/foundations/algebra/equations/system-elimination
+
+$x + y = 10$
+$x - y = 2$ → add them
+
+$2x = 12$ → $x = 6$
+
+Plug back: $6 + y = 10$ → $y = 4$
+
+---
+
+## Solving by Substitution
+
+Solve one equation for one variable, then plug into the other.
+
+::math/foundations/algebra/equations/system-substitution
+
+From $x + y = 10$, get $y = 10 - x$
+
+Substitute into $x - y = 2$:
+
+$x - (10 - x) = 2$ → $2x - 10 = 2$ → $x = 6$
+
+Plug back: $y = 10 - 6 = 4$

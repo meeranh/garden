@@ -1,0 +1,42 @@
+---
+title: Absolute Value Equations
+prerequisites:
+  - math/foundations/algebra/real-number-system/absolute-value
+  - math/foundations/algebra/equations-and-inequalities/linear-equations
+---
+
+## The Key Insight
+
+If $|x| = 5$, then $x$ could be **5** or **-5**.
+
+Why? Both are 5 units away from zero.
+
+> Absolute value equations usually have **two solutions**.
+
+---
+
+## The Pattern
+
+For $|A| = B$ where $B \geq 0$:
+
+Split into two cases:
+- $A = B$
+- $A = -B$
+
+Solve each case separately.
+
+---
+
+## Example
+
+::math/foundations/algebra/equations/abs-eq
+
+---
+
+## When There's No Solution
+
+$|x| = -3$ has **no solution**.
+
+Absolute value is always non-negative. It can never equal a negative number.
+
+> If $|A| = B$ and $B < 0$, there is no solution.

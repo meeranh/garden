@@ -90,9 +90,15 @@ $$a^2 = 2b^2$$
 
 **Substitute back:**
 
-$$(2k)^2 = 2b^2$$
-$$4k^2 = 2b^2$$
-$$b^2 = 2k^2$$
+<div class="math-left">
+
+$$\begin{aligned}
+(2k)^2 &= 2b^2 \\
+4k^2 &= 2b^2 \\
+b^2 &= 2k^2
+\end{aligned}$$
+
+</div>
 
 - So $b^2$ is even, which means $b$ is even
 

@@ -142,6 +142,7 @@ $$p \to q \equiv \neg q \to \neg p$$
 ### 5. Commutative Laws
 
 $$p \land q \equiv q \land p$$
+
 $$p \lor q \equiv q \lor p$$
 
 - $p$ = "I have a dog"
@@ -156,6 +157,7 @@ $$p \lor q \equiv q \lor p$$
 ### 6. Associative Laws
 
 $$(p \land q) \land r \equiv p \land (q \land r)$$
+
 $$(p \lor q) \lor r \equiv p \lor (q \lor r)$$
 
 - $p$ = "I'm tired"

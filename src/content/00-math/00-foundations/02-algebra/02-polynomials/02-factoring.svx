@@ -1,0 +1,111 @@
+---
+title: Factoring
+prerequisites:
+  - math/foundations/algebra/polynomials/polynomial-operations
+---
+
+## What is Factoring?
+
+**Factoring** is the reverse of multiplying.
+
+When you expand $(x + 2)(x + 3)$, you get $x^2 + 5x + 6$.
+
+Factoring asks: given $x^2 + 5x + 6$, can we get back to $(x + 2)(x + 3)$?
+
+---
+
+## Why Factor?
+
+Factored form makes some things easy:
+
+- **Solving equations:** if $(x + 2)(x + 3) = 0$
+  - Then either $x = -2$ or $x = -3$
+- **Finding roots:** the factors tell you where the polynomial equals zero
+
+---
+
+## Common Factor
+
+The simplest technique. Look for something that **divides every term**.
+
+::math/foundations/algebra/polynomials/factoring/common-factor
+
+$6x^2$ has factors: $2, 3, 6, x, 2x, 3x, 6x, \ldots$
+
+$9x$ has factors: $3, 9, x, 3x, 9x, \ldots$
+
+The **greatest common factor** is $3x$. Pull it out:
+
+$6x^2 + 9x = 3x(2x + 3)$
+
+---
+
+## Difference of Squares
+
+When you see $a^2 - b^2$, it factors to $(a + b)(a - b)$.
+
+::math/foundations/algebra/polynomials/factoring/difference-of-squares
+
+**Why does this work?**
+
+Multiply it back:
+
+<div class="math-left">
+
+$$\begin{aligned}
+(a + b)(a - b) &= a^2 - ab + ab - b^2 \\
+               &= a^2 - b^2
+\end{aligned}$$
+
+</div>
+
+The middle terms cancel out.
+
+---
+
+## Trinomial Factoring
+
+This is the trickiest pattern. For $x^2 + bx + c$, find two numbers that:
+
+- **Multiply** to $c$
+- **Add** to $b$
+
+::math/foundations/algebra/polynomials/factoring/trinomial
+
+**Example:** $x^2 + 5x + 6$
+
+We need numbers that multiply to $6$ and add to $5$.
+
+Try factors of $6$: $(1, 6)$, $(2, 3)$
+
+- $1 + 6 = 7$ — no
+- $2 + 3 = 5$ — yes!
+
+So: $x^2 + 5x + 6 = (x + 2)(x + 3)$
+
+---
+
+## Perfect Square Trinomial
+
+Some trinomials are perfect squares in disguise.
+
+::math/foundations/algebra/polynomials/factoring/perfect-square
+
+**The patterns:**
+
+$a^2 + 2ab + b^2 = (a + b)^2$
+
+$a^2 - 2ab + b^2 = (a - b)^2$
+
+**How to spot it:**
+
+1. First and last terms are perfect squares
+2. Middle term is $2 \times \sqrt{\text{first}} \times \sqrt{\text{last}}$
+
+**Example:** $x^2 + 6x + 9$
+
+- $x^2$ is a perfect square ($x$)
+- $9$ is a perfect square ($3$)
+- $6x = 2 \cdot x \cdot 3$ — yes!
+
+So: $x^2 + 6x + 9 = (x + 3)^2$

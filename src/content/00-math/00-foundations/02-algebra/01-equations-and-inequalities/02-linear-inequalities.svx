@@ -1,0 +1,53 @@
+---
+title: Linear Inequalities
+prerequisites:
+  - math/foundations/algebra/equations-and-inequalities/linear-equations
+---
+
+## Equations vs Inequalities
+
+Equations use $=$. Inequalities use: $<$, $>$, $\leq$, $\geq$
+
+| Symbol | Meaning |
+|--------|---------|
+| $<$ | less than |
+| $>$ | greater than |
+| $\leq$ | less than or equal to |
+| $\geq$ | greater than or equal to |
+
+---
+
+## Solving Inequalities
+
+Solve them **exactly like equations**. Same steps, same logic.
+
+But there's one important difference...
+
+---
+
+## The Flip Rule
+
+When you **multiply or divide by a negative number**, you must **flip the inequality sign**.
+
+> $<$ becomes $>$, and $>$ becomes $<$
+
+**Why?** Think about it: $2 > 1$
+
+Multiply both sides by $-1$: $-2 \text{ ? } -1$
+
+The answer is $-2 < -1$. The direction reversed.
+
+---
+
+## Example
+
+::math/foundations/algebra/equations/linear-ineq-1
+
+---
+
+## Solutions Are Different
+
+- **Equation:** One answer ($x = 4$)
+- **Inequality:** A range of answers ($x < 4$)
+
+An inequality tells you all values that work, not just one.

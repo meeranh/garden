@@ -200,6 +200,19 @@ Formatting: \frac{a}{b}  x^2  a_{ij}  \ldots  \text{words}
 Set-builder: \{x \mid x > 0\}
 ```
 
+### Aligned Equations
+For multi-step equations (lhs = rhs = rhs = ...), use `\begin{aligned}` wrapped in `<div class="math-left">`:
+```markdown
+<div class="math-left">
+
+$$\begin{aligned}
+x &= 2 + 3 \\
+  &= 5
+\end{aligned}$$
+
+</div>
+```
+
 ---
 
 ## Animations

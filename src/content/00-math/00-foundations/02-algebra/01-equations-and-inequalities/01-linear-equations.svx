@@ -1,0 +1,52 @@
+---
+title: Linear Equations
+---
+
+## What is a Linear Equation?
+
+An equation where the variable has no exponents. Just $x$, not $x^2$ or $x^3$.
+
+The simplest form: $ax + b = c$
+
+---
+
+## What Does "Solving" Mean?
+
+Finding the value of $x$ that makes the equation true.
+
+If $2x + 3 = 7$, we want to find what $x$ equals.
+
+---
+
+## The Key Idea
+
+Think of an equation like a **balance scale**.
+
+Whatever you do to one side, you must do to the other. This keeps it balanced.
+
+---
+
+## Solving Step by Step
+
+**Goal:** Get $x$ alone on one side.
+
+**Method:** Undo operations by doing the opposite.
+
+- Addition? Subtract.
+- Subtraction? Add.
+- Multiplication? Divide.
+- Division? Multiply.
+
+---
+
+## Example
+
+::math/foundations/algebra/equations/linear-eq-1
+
+---
+
+## The Pattern
+
+1. **Undo addition/subtraction** — get the term with $x$ alone
+2. **Undo multiplication/division** — get $x$ by itself
+3. **Check** — plug your answer back in to verify

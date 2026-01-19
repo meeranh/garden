@@ -1,0 +1,53 @@
+---
+title: Absolute Value Inequalities
+prerequisites:
+  - math/foundations/algebra/equations-and-inequalities/linear-inequalities
+  - math/foundations/algebra/equations-and-inequalities/absolute-value-equations
+---
+
+## Two Types
+
+Absolute value inequalities come in two forms, each with a different approach.
+
+---
+
+## Type 1: Less Than
+
+$|x| < 3$ means $x$ is **less than 3 units from zero**.
+
+So $x$ is between $-3$ and $3$.
+
+> $|A| < B$ becomes $-B < A < B$
+
+This is an **"and"** situation. Both conditions must be true.
+
+---
+
+## Example
+
+::math/foundations/algebra/equations/abs-ineq
+
+---
+
+## Type 2: Greater Than
+
+$|x| > 3$ means $x$ is **more than 3 units from zero**.
+
+So $x < -3$ **or** $x > 3$.
+
+> $|A| > B$ becomes $A < -B$ **or** $A > B$
+
+This is an **"or"** situation. Either condition works.
+
+---
+
+## Summary
+
+| Inequality | Keyword | Solution |
+|------------|---------|----------|
+| $\|A\| < B$ | Between | $-B < A < B$ |
+| $\|A\| > B$ | Or | $A < -B$ or $A > B$ |
+
+**Less than** → trapped between two values
+
+**Greater than** → escaped to the outer regions

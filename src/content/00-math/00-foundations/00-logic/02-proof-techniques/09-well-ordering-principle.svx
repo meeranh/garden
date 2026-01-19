@@ -123,13 +123,16 @@ So $b_0 = 2m$ for some integer $m$.
 
 **Now we have:**
 
-$$b_0^2 = 2k^2$$
+<div class="math-left">
 
-$$(2m)^2 = 2k^2$$
+$$\begin{aligned}
+b_0^2 &= 2k^2 \\
+(2m)^2 &= 2k^2 \\
+4m^2 &= 2k^2 \\
+2m^2 &= k^2
+\end{aligned}$$
 
-$$4m^2 = 2k^2$$
-
-$$2m^2 = k^2$$
+</div>
 
 So $k^2 = 2m^2$.
 
