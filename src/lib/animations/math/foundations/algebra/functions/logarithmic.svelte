@@ -45,7 +45,7 @@
 
     svgEl = d3.select(svg).attr('viewBox', `0 0 ${width} ${height}`);
 
-    const xScale = d3.scaleLinear().domain([-1, 8]).range([margin.left, width - margin.right]);
+    const xScale = d3.scaleLinear().domain([-0.5, 8]).range([margin.left, width - margin.right]);
     const yScale = d3.scaleLinear().domain([-3, 3]).range([height - margin.bottom, margin.top]);
 
     const lineGenerator = d3.line<[number, number]>()
@@ -57,15 +57,6 @@
       const data: [number, number][] = [];
       for (let x = 0.1; x <= 8; x += 0.05) {
         data.push([x, Math.log2(x)]);
-      }
-      return data;
-    }
-
-    function getExpData(): [number, number][] {
-      const data: [number, number][] = [];
-      for (let y = -3; y <= 3; y += 0.05) {
-        const x = Math.pow(2, y);
-        if (x <= 8) data.push([x, y]);
       }
       return data;
     }
@@ -85,38 +76,31 @@
     svgEl.append('line')
       .attr('x1', xScale(0)).attr('y1', height - margin.bottom)
       .attr('x2', xScale(0)).attr('y2', margin.top)
-      .attr('stroke', colors.yellow).attr('stroke-width', 1)
+      .attr('stroke', colors.yellow).attr('stroke-width', 1.5)
       .attr('stroke-dasharray', '4,4');
 
     svgEl.append('text')
-      .attr('x', xScale(0) + 5)
-      .attr('y', margin.top + 15)
+      .attr('x', xScale(0) + 8)
+      .attr('y', height - margin.bottom - 10)
       .attr('fill', colors.yellow)
       .attr('font-size', '10px')
       .text('x = 0');
 
-    // Reference point (1, 0)
+    // Key points
+    // (1, 0) - log(1) = 0
     svgEl.append('circle')
       .attr('cx', xScale(1)).attr('cy', yScale(0))
       .attr('r', 4).attr('fill', colors.muted);
 
-    // y = x line for reflection reference (hidden initially)
-    const reflectionLine = svgEl.append('line')
-      .attr('x1', xScale(0)).attr('y1', yScale(0))
-      .attr('x2', xScale(3)).attr('y2', yScale(3))
-      .attr('stroke', colors.muted).attr('stroke-width', 1)
-      .attr('stroke-dasharray', '3,3')
-      .attr('opacity', 0);
+    // (2, 1) - log₂(2) = 1
+    svgEl.append('circle')
+      .attr('cx', xScale(2)).attr('cy', yScale(1))
+      .attr('r', 4).attr('fill', colors.muted);
 
-    // Exponential curve (for comparison)
-    const expCurve = svgEl.append('path')
-      .datum(getExpData())
-      .attr('d', lineGenerator)
-      .attr('fill', 'none')
-      .attr('stroke', colors.muted)
-      .attr('stroke-width', 1.5)
-      .attr('stroke-dasharray', '4,4')
-      .attr('opacity', 0);
+    // (4, 2) - log₂(4) = 2
+    svgEl.append('circle')
+      .attr('cx', xScale(4)).attr('cy', yScale(2))
+      .attr('r', 4).attr('fill', colors.muted);
 
     // Log curve
     const logCurve = svgEl.append('path')
@@ -128,7 +112,7 @@
 
     // Tracing dot
     const dot = svgEl.append('circle')
-      .attr('r', 5)
+      .attr('r', 6)
       .attr('fill', colors.accent)
       .attr('opacity', 0);
 
@@ -141,55 +125,44 @@
       .attr('font-weight', 'bold')
       .text('log₂(x)');
 
-    const expLabel = svgEl.append('text')
+    // Value label
+    const valueLabel = svgEl.append('text')
       .attr('x', width - margin.right + 10)
       .attr('y', yScale(0.5))
-      .attr('fill', colors.muted)
+      .attr('fill', colors.accent)
       .attr('font-size', '11px')
-      .attr('opacity', 0)
-      .text('2ˣ (inverse)');
+      .attr('opacity', 0);
 
     // Infinite animation loop
     async function animate() {
       while (animationRunning) {
-        // Trace log curve
         dot.attr('opacity', 1);
-        for (let x = 0.2; x <= 7; x += 0.1) {
+        valueLabel.attr('opacity', 1);
+
+        // Trace the curve, showing key values
+        for (let x = 0.25; x <= 7; x += 0.08) {
           if (!animationRunning) return;
-          dot.attr('cx', xScale(x)).attr('cy', yScale(Math.log2(x))).attr('fill', colors.accent);
-          await sleep(40);
+          const y = Math.log2(x);
+          dot.attr('cx', xScale(x)).attr('cy', yScale(y));
+
+          // Show value at key points
+          if (Math.abs(x - 1) < 0.1) {
+            valueLabel.text('log₂(1) = 0');
+          } else if (Math.abs(x - 2) < 0.1) {
+            valueLabel.text('log₂(2) = 1');
+          } else if (Math.abs(x - 4) < 0.15) {
+            valueLabel.text('log₂(4) = 2');
+          } else {
+            valueLabel.text(`log₂(${x.toFixed(1)}) = ${y.toFixed(1)}`);
+          }
+          await sleep(50);
         }
 
-        await sleep(600);
+        await sleep(1000);
         if (!animationRunning) return;
 
-        // Show exponential as inverse
-        expCurve.attr('opacity', 1);
-        expLabel.attr('opacity', 1);
-        reflectionLine.attr('opacity', 1);
-
-        await sleep(1500);
-        if (!animationRunning) return;
-
-        // Trace both showing reflection
-        for (let t = -2; t <= 2.5; t += 0.05) {
-          if (!animationRunning) return;
-          // Point on exponential: (2^t, t)
-          const expX = Math.pow(2, t);
-          const expY = t;
-          // Same point reflected to log: (t, 2^t) -> but we show log₂
-          dot.attr('cx', xScale(expX)).attr('cy', yScale(expY));
-          await sleep(30);
-        }
-
-        await sleep(800);
-        if (!animationRunning) return;
-
-        // Hide comparison
-        expCurve.attr('opacity', 0);
-        expLabel.attr('opacity', 0);
-        reflectionLine.attr('opacity', 0);
         dot.attr('opacity', 0);
+        valueLabel.attr('opacity', 0);
 
         await sleep(500);
       }

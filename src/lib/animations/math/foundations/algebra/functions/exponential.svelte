@@ -82,7 +82,7 @@
 
     svgEl.append('text')
       .attr('x', margin.left + 5)
-      .attr('y', yScale(0) - 8)
+      .attr('y', yScale(0) + 15)
       .attr('fill', colors.yellow)
       .attr('font-size', '10px')
       .text('asymptote y = 0');

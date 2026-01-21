@@ -307,6 +307,7 @@ Build fails if animation is missing. For static diagrams, set `maxStep = 0` to h
 3. **`applyStep(n)`** - Shows/hides elements for step n (makes next/prev work)
 4. **Early exit** - Check `if (!isPlaying) return` after every `await sleep()`
 5. **Elements start hidden** - Create with `.attr('opacity', 0)`
+6. **Center the SVG** - Always use `margin: 0 auto` in CSS to center the SVG when it's smaller than its container
 
 ### Colors (fetch from CSS variables in onMount)
 ```javascript
