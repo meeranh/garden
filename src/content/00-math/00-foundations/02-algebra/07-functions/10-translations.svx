@@ -1,0 +1,100 @@
+---
+title: Translations
+prerequisites:
+  - math/foundations/algebra/functions/function-notation
+---
+
+## What is a Translation?
+
+A **translation** shifts a graph without changing its shape or size.
+
+Think of sliding a piece of paper across a table.
+
+---
+
+## Vertical Shifts
+
+$$f(x) + k$$
+
+Add a constant **outside** the function to shift vertically.
+
+- $k > 0$ → shift **up**
+- $k < 0$ → shift **down**
+
+---
+
+**Example:** Start with $f(x) = x^2$
+
+- $f(x) + 3 = x^2 + 3$ → shift up 3
+- $f(x) - 2 = x^2 - 2$ → shift down 2
+
+> Every point moves up or down by the same amount.
+
+::math/foundations/algebra/functions/vertical-shift
+
+---
+
+## Horizontal Shifts
+
+$$f(x - h)$$
+
+Subtract a constant **inside** the function to shift horizontally.
+
+- $h > 0$ → shift **right**
+- $h < 0$ → shift **left**
+
+---
+
+**Warning:** This is backwards from what you might expect!
+
+$f(x - 3)$ shifts **right** 3, not left.
+
+$f(x + 2)$ shifts **left** 2, not right.
+
+---
+
+**Why is it backwards?**
+
+Think about when the output equals zero.
+
+For $f(x) = x^2$, we get $f(0) = 0$ at $x = 0$.
+
+For $g(x) = (x - 3)^2$, we get $g(3) = 0$ at $x = 3$.
+
+The vertex moved from $x = 0$ to $x = 3$. That's a shift **right**.
+
+---
+
+**Example:** Start with $f(x) = x^2$
+
+- $f(x - 4) = (x - 4)^2$ → shift right 4
+- $f(x + 1) = (x + 1)^2$ → shift left 1
+
+::math/foundations/algebra/functions/horizontal-shift
+
+---
+
+## Combining Shifts
+
+You can shift both horizontally and vertically:
+
+$$f(x - h) + k$$
+
+**Example:** $g(x) = (x - 2)^2 + 3$
+
+This takes $f(x) = x^2$ and:
+- Shifts right 2
+- Shifts up 3
+
+The vertex moves from $(0, 0)$ to $(2, 3)$.
+
+---
+
+## Quick Reference
+
+| Transformation | Effect |
+|----------------|--------|
+| $f(x) + k$ | Shift up by $k$ |
+| $f(x) - k$ | Shift down by $k$ |
+| $f(x - h)$ | Shift right by $h$ |
+| $f(x + h)$ | Shift left by $h$ |

@@ -1,0 +1,130 @@
+---
+title: Piecewise Functions
+prerequisites:
+  - math/foundations/algebra/functions/function-notation
+---
+
+## What is a Piecewise Function?
+
+A **piecewise function** uses different rules for different parts of its domain.
+
+$$f(x) = \begin{cases} x^2 & \text{if } x < 0 \\ 2x + 1 & \text{if } x \geq 0 \end{cases}$$
+
+This says:
+
+- For **negative** inputs → square them
+- For **zero or positive** inputs → use $2x + 1$
+
+---
+
+## Evaluating Piecewise Functions
+
+**Step 1:** Check which condition the input satisfies
+
+**Step 2:** Use that rule
+
+---
+
+**Example:** Using the function above, find $f(-3)$
+
+- Is $-3 < 0$? Yes
+- Use the first rule: $f(-3) = (-3)^2 = 9$
+
+---
+
+**Example:** Find $f(2)$
+
+- Is $2 < 0$? No
+- Is $2 \geq 0$? Yes
+- Use the second rule: $f(2) = 2(2) + 1 = 5$
+
+---
+
+**Example:** Find $f(0)$
+
+- Is $0 < 0$? No
+- Is $0 \geq 0$? Yes
+- Use the second rule: $f(0) = 2(0) + 1 = 1$
+
+> **Note:** At boundaries, check carefully which condition includes the equals sign.
+
+---
+
+## Do the Pieces Connect?
+
+At the boundary point, do the two rules give the same output?
+
+For our function at $x = 0$:
+
+- Left piece: $0^2 = 0$
+- Right piece: $2(0) + 1 = 1$
+
+They **don't match**. There's a **jump** at $x = 0$.
+
+---
+
+## Continuous vs. Discontinuous
+
+**Continuous:** The pieces connect smoothly (no jumps or gaps)
+
+**Discontinuous:** There's a break at one or more points
+
+---
+
+**Example of a continuous piecewise function:**
+
+$$g(x) = \begin{cases} x^2 & \text{if } x \leq 1 \\ 2x - 1 & \text{if } x > 1 \end{cases}$$
+
+At $x = 1$:
+
+- Left piece: $1^2 = 1$
+- Right piece: $2(1) - 1 = 1$
+
+They match! This function is continuous.
+
+---
+
+## The Absolute Value Function
+
+The most common piecewise function:
+
+$$|x| = \begin{cases} x & \text{if } x \geq 0 \\ -x & \text{if } x < 0 \end{cases}$$
+
+- **Positive numbers:** stay the same
+- **Negative numbers:** sign gets flipped
+
+---
+
+**Examples:**
+
+- $|5| = 5$
+- $|-3| = -(-3) = 3$
+- $|0| = 0$
+
+> **Key idea:** Absolute value gives the *distance* from zero, which is always non-negative.
+
+---
+
+## Writing Piecewise Functions
+
+Sometimes you need to write your own.
+
+**Example:** Write a function that outputs 0 for negative inputs and equals the input for non-negative inputs.
+
+$$f(x) = \begin{cases} 0 & \text{if } x < 0 \\ x & \text{if } x \geq 0 \end{cases}$$
+
+---
+
+## Common Patterns
+
+**Step function:**
+
+$$f(x) = \begin{cases} -1 & \text{if } x < 0 \\ 0 & \text{if } x = 0 \\ 1 & \text{if } x > 0 \end{cases}$$
+
+This is the **sign function** (also written $\text{sgn}(x)$).
+
+---
+
+**Tax brackets, shipping costs, and grading scales** are all real-world piecewise functions.
+
+Different rules apply depending on which "bracket" you fall into.

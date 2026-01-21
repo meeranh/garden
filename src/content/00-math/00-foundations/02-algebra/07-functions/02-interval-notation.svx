@@ -1,0 +1,52 @@
+---
+title: Interval Notation
+prerequisites:
+  - math/foundations/algebra/equations-and-inequalities/solving-linear-equations
+---
+
+## Writing Sets of Numbers
+
+When we describe a range of numbers, we use **interval notation**.
+
+It's a compact way to write "all numbers between A and B."
+
+---
+
+## The Key Idea
+
+- **Square bracket** `[` or `]` means the endpoint is **included**
+- **Parenthesis** `(` or `)` means the endpoint is **excluded**
+
+On a number line:
+- **Filled dot** = included
+- **Hollow dot** = excluded
+
+---
+
+::math/foundations/algebra/functions/interval-notation
+
+---
+
+## Why Parentheses for Infinity?
+
+Infinity isn't a real number. You can't actually reach it.
+
+So we always use a parenthesis: $(- \infty, 5]$ or $[0, \infty)$
+
+> **Never write** $[\infty$ or $-\infty]$
+
+---
+
+## Common Intervals
+
+**All real numbers:**
+
+$$(-\infty, \infty)$$
+
+**All non-negative numbers:**
+
+$$[0, \infty)$$
+
+**All positive numbers:**
+
+$$(0, \infty)$$

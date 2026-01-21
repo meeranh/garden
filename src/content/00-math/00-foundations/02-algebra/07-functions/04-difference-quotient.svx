@@ -1,0 +1,138 @@
+---
+title: The Difference Quotient
+prerequisites:
+  - math/foundations/algebra/functions/function-notation
+---
+
+## What Problem Are We Solving?
+
+Imagine you're driving. Your speedometer shows your speed *right now*.
+
+But what if you only had the odometer (total distance)?
+
+You could calculate your **average speed**:
+
+$$\text{Average speed} = \frac{\text{change in distance}}{\text{change in time}}$$
+
+The shorter the time interval, the closer this gets to your *actual* speed.
+
+---
+
+## The Same Idea for Functions
+
+For any function $f(x)$, we can measure how fast it's changing.
+
+The **difference quotient** gives the average rate of change between two points:
+
+$$\frac{f(x + h) - f(x)}{h}$$
+
+---
+
+**Breaking it down:**
+
+- $f(x)$ — output at point $x$
+- $f(x + h)$ — output at a nearby point, $h$ units to the right
+- $f(x + h) - f(x)$ — how much the output changed
+- Divide by $h$ — change per unit of input
+
+> **In short:** change in output ÷ change in input
+
+---
+
+## Example: $f(x) = x^2$
+
+**Step 1: Find $f(x + h)$**
+
+Replace every $x$ with $(x + h)$:
+
+<div class="math-left">
+
+$$\begin{aligned}
+f(x + h) &= (x + h)^2 \\
+         &= x^2 + 2xh + h^2
+\end{aligned}$$
+
+</div>
+
+---
+
+**Step 2: Subtract $f(x)$**
+
+<div class="math-left">
+
+$$\begin{aligned}
+f(x + h) - f(x) &= (x^2 + 2xh + h^2) - x^2 \\
+                &= 2xh + h^2
+\end{aligned}$$
+
+</div>
+
+---
+
+**Step 3: Divide by $h$**
+
+<div class="math-left">
+
+$$\begin{aligned}
+\frac{f(x + h) - f(x)}{h} &= \frac{2xh + h^2}{h} \\[0.5em]
+                          &= \frac{h(2x + h)}{h} \\[0.5em]
+                          &= 2x + h
+\end{aligned}$$
+
+</div>
+
+---
+
+**Result:** The difference quotient for $f(x) = x^2$ is $2x + h$.
+
+This tells us the **average rate of change** between $x$ and $x + h$.
+
+---
+
+## The Connection to Calculus
+
+What happens as $h$ gets smaller?
+
+- When $h = 1$: difference quotient $= 2x + 1$
+- When $h = 0.1$: difference quotient $= 2x + 0.1$
+- When $h = 0.01$: difference quotient $= 2x + 0.01$
+
+As $h \to 0$, the difference quotient approaches $2x$.
+
+> This limit is called the **derivative**. It measures the *instantaneous* rate of change.
+
+---
+
+## Simpler Example: $f(x) = 3x + 1$
+
+**Step 1:** $f(x + h) = 3(x + h) + 1 = 3x + 3h + 1$
+
+**Step 2:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+f(x + h) - f(x) &= (3x + 3h + 1) - (3x + 1) \\
+                &= 3h
+\end{aligned}$$
+
+</div>
+
+**Step 3:** $\dfrac{3h}{h} = 3$
+
+---
+
+**Result:** The difference quotient is just $3$.
+
+This makes sense — a line has a **constant slope**, so the rate of change is the same everywhere.
+
+---
+
+## Why This Matters
+
+The difference quotient is the foundation of calculus.
+
+- **Now:** Practice the algebra of computing it
+- **Later:** Take the limit as $h \to 0$ to find derivatives
+
+Master this, and derivatives become straightforward.

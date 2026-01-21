@@ -1,0 +1,137 @@
+---
+title: Arithmetic Operations on Functions
+prerequisites:
+  - math/foundations/algebra/functions/function-notation
+---
+
+## Combining Functions
+
+Just like numbers, functions can be added, subtracted, multiplied, and divided.
+
+Given two functions $f(x)$ and $g(x)$, we can create new functions:
+
+---
+
+## The Four Operations
+
+**Addition:**
+
+$$(f + g)(x) = f(x) + g(x)$$
+
+**Subtraction:**
+
+$$(f - g)(x) = f(x) - g(x)$$
+
+**Multiplication:**
+
+$$(f \cdot g)(x) = f(x) \cdot g(x)$$
+
+**Division:**
+
+$$\left(\frac{f}{g}\right)(x) = \frac{f(x)}{g(x)}, \quad g(x) \neq 0$$
+
+---
+
+## Example
+
+Let $f(x) = x^2$ and $g(x) = x + 1$.
+
+**Addition:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+(f + g)(x) &= x^2 + (x + 1) \\
+           &= x^2 + x + 1
+\end{aligned}$$
+
+</div>
+
+**Subtraction:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+(f - g)(x) &= x^2 - (x + 1) \\
+           &= x^2 - x - 1
+\end{aligned}$$
+
+</div>
+
+**Multiplication:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+(f \cdot g)(x) &= x^2(x + 1) \\
+               &= x^3 + x^2
+\end{aligned}$$
+
+</div>
+
+**Division:**
+
+<div class="math-left">
+
+$$\left(\frac{f}{g}\right)(x) = \frac{x^2}{x + 1}$$
+
+</div>
+
+---
+
+## Evaluating at a Point
+
+To find $(f + g)(3)$, you can either:
+
+**Method 1:** Combine first, then evaluate
+
+<div class="math-left">
+
+$$\begin{aligned}
+(f + g)(x) &= x^2 + x + 1 \\
+(f + g)(3) &= 9 + 3 + 1 = 13
+\end{aligned}$$
+
+</div>
+
+**Method 2:** Evaluate each, then combine
+
+<div class="math-left">
+
+$$\begin{aligned}
+f(3) &= 9 \\
+g(3) &= 4 \\
+(f + g)(3) &= 9 + 4 = 13
+\end{aligned}$$
+
+</div>
+
+Both give the same result.
+
+---
+
+## Domain of Combined Functions
+
+The domain of a combined function is where **both** original functions are defined.
+
+**Example:** $f(x) = \sqrt{x}$ and $g(x) = \sqrt{4 - x}$
+
+- Domain of $f$: $x \geq 0$
+- Domain of $g$: $x \leq 4$
+- Domain of $f + g$: $0 \leq x \leq 4$
+
+> The combined domain is the **intersection** of the individual domains.
+
+---
+
+## Division Requires Extra Care
+
+For $\dfrac{f}{g}$, we must also exclude where $g(x) = 0$.
+
+**Example:** $f(x) = x$ and $g(x) = x - 2$
+
+- Domain of $f$: all real numbers
+- Domain of $g$: all real numbers
+- Domain of $\dfrac{f}{g}$: all real numbers **except** $x = 2$
+
+We exclude $x = 2$ because $g(2) = 0$ would make us divide by zero.

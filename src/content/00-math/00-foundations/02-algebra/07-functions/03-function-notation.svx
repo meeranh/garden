@@ -1,0 +1,141 @@
+---
+title: Function Notation
+prerequisites:
+  - math/foundations/algebra/functions/definition-domain-range
+---
+
+## What Does f(x) Mean?
+
+When we write $f(x) = x^2 + 3x$, we're defining a rule:
+
+- $f$ is the **name** of the function
+- $x$ is the **input** (a placeholder)
+- $x^2 + 3x$ is what we **do** to the input
+
+> **Important:** $f(x)$ is *not* multiplication. It means "the output of $f$ when the input is $x$."
+
+---
+
+## Evaluating Functions
+
+To evaluate a function, replace every $x$ with the input value.
+
+**Example:** For $f(x) = x^2 + 3x$, find $f(2)$
+
+<div class="math-left">
+
+$$\begin{aligned}
+f(2) &= (2)^2 + 3(2) \\
+     &= 4 + 6 \\
+     &= 10
+\end{aligned}$$
+
+</div>
+
+---
+
+**Example:** Find $f(-1)$
+
+<div class="math-left">
+
+$$\begin{aligned}
+f(-1) &= (-1)^2 + 3(-1) \\
+      &= 1 - 3 \\
+      &= -2
+\end{aligned}$$
+
+</div>
+
+---
+
+## Plugging in Variables
+
+You can plug in variables, not just numbers.
+
+**Example:** Find $f(a)$
+
+<div class="math-left">
+
+$$\begin{aligned}
+f(a) &= (a)^2 + 3(a) \\
+     &= a^2 + 3a
+\end{aligned}$$
+
+</div>
+
+---
+
+## Plugging in Expressions
+
+This is where it gets powerful. You can plug in *entire expressions*.
+
+**Example:** Find $f(x + 1)$
+
+Replace every $x$ with $(x + 1)$:
+
+<div class="math-left">
+
+$$\begin{aligned}
+f(x + 1) &= (x + 1)^2 + 3(x + 1) \\
+         &= x^2 + 2x + 1 + 3x + 3 \\
+         &= x^2 + 5x + 4
+\end{aligned}$$
+
+</div>
+
+---
+
+**Example:** Find $f(2x)$
+
+<div class="math-left">
+
+$$\begin{aligned}
+f(2x) &= (2x)^2 + 3(2x) \\
+      &= 4x^2 + 6x
+\end{aligned}$$
+
+</div>
+
+---
+
+## Different Names
+
+Functions can have any name, and inputs can be any variable:
+
+- $g(x), h(x)$ — different function names
+- $f(t)$ — using $t$ (often for time)
+- $A(r)$ — area as a function of radius
+
+The letters are just labels.
+
+---
+
+## Operations on Functions
+
+You can combine functions with arithmetic:
+
+<div class="math-left">
+
+$$\begin{aligned}
+(f + g)(x) &= f(x) + g(x) \\
+(f - g)(x) &= f(x) - g(x) \\
+(f \cdot g)(x) &= f(x) \cdot g(x) \\
+\left(\frac{f}{g}\right)(x) &= \frac{f(x)}{g(x)}
+\end{aligned}$$
+
+</div>
+
+---
+
+**Example:** If $f(x) = x^2$ and $g(x) = x + 1$
+
+<div class="math-left">
+
+$$\begin{aligned}
+(f + g)(3) &= f(3) + g(3) \\
+           &= 9 + 4 \\
+           &= 13
+\end{aligned}$$
+
+</div>
+

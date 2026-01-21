@@ -1,0 +1,154 @@
+---
+title: Common Functions
+prerequisites:
+  - math/foundations/algebra/functions/function-notation
+---
+
+## The Function Families
+
+Certain functions appear everywhere in mathematics. Each has a distinctive shape and behavior.
+
+Learning to recognize them helps you understand more complex functions built from these pieces.
+
+---
+
+## Linear Functions
+
+$$f(x) = mx + b$$
+
+The simplest functions - straight lines.
+
+- **m** = slope (steepness and direction)
+- **b** = y-intercept (where the line crosses the y-axis)
+
+::math/foundations/algebra/functions/linear
+
+---
+
+**Key properties:**
+
+- Constant rate of change (the slope)
+- Graph is always a straight line
+- Domain and range are all real numbers
+
+> **Special case:** When $m = 0$, you get a horizontal line $f(x) = b$.
+
+---
+
+## Quadratic Functions
+
+$$f(x) = ax^2 + bx + c$$
+
+Parabolas - smooth U-shaped curves.
+
+- $a > 0$: opens **upward**
+- $a < 0$: opens **downward**
+- The **vertex** is the highest or lowest point
+
+::math/foundations/algebra/functions/quadratic
+
+---
+
+**Key properties:**
+
+- One turning point (the vertex)
+- Symmetric about a vertical line through the vertex
+- Domain is all real numbers
+- Range depends on whether it opens up or down
+
+---
+
+## Polynomial Functions
+
+$$f(x) = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0$$
+
+Linear and quadratic are special cases. The **degree** (highest power) determines the shape.
+
+| Degree | Name | Max turning points |
+|--------|------|-------------------|
+| 1 | Linear | 0 |
+| 2 | Quadratic | 1 |
+| 3 | Cubic | 2 |
+| 4 | Quartic | 3 |
+
+::math/foundations/algebra/functions/cubic
+
+---
+
+**Key properties:**
+
+- Smooth, continuous curves
+- No breaks, holes, or asymptotes
+- End behavior depends on the leading term
+
+> Higher degree means more possible "wiggles" in the graph.
+
+---
+
+## Rational Functions
+
+$$f(x) = \frac{p(x)}{q(x)}$$
+
+One polynomial divided by another.
+
+The simplest example: $f(x) = \frac{1}{x}$
+
+::math/foundations/algebra/functions/rational
+
+---
+
+**Asymptotes** are lines the graph approaches but never touches:
+
+- **Vertical asymptote:** where the denominator equals zero
+- **Horizontal asymptote:** the value approached as $x \to \pm\infty$
+
+> Rational functions can have gaps in their domain where they're undefined.
+
+---
+
+## Exponential Functions
+
+$$f(x) = a^x$$
+
+The variable is in the **exponent**.
+
+- Base $a > 1$: exponential **growth**
+- Base $0 < a < 1$: exponential **decay**
+
+::math/foundations/algebra/functions/exponential
+
+---
+
+**Key properties:**
+
+- Always positive (never touches the x-axis)
+- Horizontal asymptote at $y = 0$
+- Grows (or decays) faster and faster
+
+> The natural exponential $e^x$ (where $e \approx 2.718$) appears throughout calculus and science.
+
+---
+
+## Logarithmic Functions
+
+$$f(x) = \log_a(x)$$
+
+The **inverse** of exponential functions.
+
+$\log_a(x)$ asks: "What power of $a$ gives $x$?"
+
+::math/foundations/algebra/functions/logarithmic
+
+---
+
+**Key properties:**
+
+- Only defined for $x > 0$
+- Vertical asymptote at $x = 0$
+- Grows slowly - very slowly for large $x$
+
+> Logarithms turn multiplication into addition, making them useful for very large or very small numbers.
+
+---
+
+These are the building blocks. Most functions you encounter are combinations or transformations of these families.

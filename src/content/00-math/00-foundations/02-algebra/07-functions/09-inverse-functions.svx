@@ -1,0 +1,162 @@
+---
+title: Inverse Functions
+prerequisites:
+  - math/foundations/algebra/functions/composition
+---
+
+## What is an Inverse?
+
+An **inverse function** undoes what the original function does.
+
+If $f$ takes $a$ to $b$, then $f^{-1}$ takes $b$ back to $a$.
+
+$$f(a) = b \quad \Longleftrightarrow \quad f^{-1}(b) = a$$
+
+---
+
+## The Defining Property
+
+A function $f^{-1}$ is the inverse of $f$ if:
+
+$$f(f^{-1}(x)) = x \quad \text{and} \quad f^{-1}(f(x)) = x$$
+
+> Applying a function and its inverse (in either order) gets you back where you started.
+
+---
+
+## Example
+
+Let $f(x) = 2x + 3$.
+
+If we claim $f^{-1}(x) = \dfrac{x - 3}{2}$, let's verify:
+
+**Check $f(f^{-1}(x))$:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+f(f^{-1}(x)) &= f\left(\frac{x - 3}{2}\right) \\[0.5em]
+             &= 2 \cdot \frac{x - 3}{2} + 3 \\[0.5em]
+             &= (x - 3) + 3 = x \quad \checkmark
+\end{aligned}$$
+
+</div>
+
+**Check $f^{-1}(f(x))$:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+f^{-1}(f(x)) &= f^{-1}(2x + 3) \\[0.5em]
+             &= \frac{(2x + 3) - 3}{2} \\[0.5em]
+             &= \frac{2x}{2} = x \quad \checkmark
+\end{aligned}$$
+
+</div>
+
+---
+
+## Finding an Inverse
+
+**Steps:**
+
+1. Write $y = f(x)$
+2. Swap $x$ and $y$
+3. Solve for $y$
+4. The result is $f^{-1}(x)$
+
+---
+
+**Example:** Find the inverse of $f(x) = 3x - 5$.
+
+**Step 1:** $y = 3x - 5$
+
+**Step 2:** $x = 3y - 5$
+
+**Step 3:** Solve for $y$
+
+<div class="math-left">
+
+$$\begin{aligned}
+x + 5 &= 3y \\
+y &= \frac{x + 5}{3}
+\end{aligned}$$
+
+</div>
+
+**Result:** $f^{-1}(x) = \dfrac{x + 5}{3}$
+
+---
+
+**Example:** Find the inverse of $f(x) = x^3 + 2$.
+
+**Step 1:** $y = x^3 + 2$
+
+**Step 2:** $x = y^3 + 2$
+
+**Step 3:** Solve for $y$
+
+<div class="math-left">
+
+$$\begin{aligned}
+x - 2 &= y^3 \\
+y &= \sqrt[3]{x - 2}
+\end{aligned}$$
+
+</div>
+
+**Result:** $f^{-1}(x) = \sqrt[3]{x - 2}$
+
+---
+
+## Not All Functions Have Inverses
+
+For a function to have an inverse, it must be **one-to-one**: each output comes from exactly one input.
+
+**One-to-one:** $f(x) = 2x + 1$ ✓ (every y-value comes from one x-value)
+
+**Not one-to-one:** $f(x) = x^2$ ✗ (both $x = 2$ and $x = -2$ give $y = 4$)
+
+---
+
+## The Horizontal Line Test
+
+> A function has an inverse if and only if **every horizontal line** crosses its graph **at most once**.
+
+- $f(x) = x^3$ passes → has an inverse
+- $f(x) = x^2$ fails → no inverse (unless we restrict the domain)
+
+---
+
+## Restricting the Domain
+
+We can create an inverse by limiting the domain.
+
+$f(x) = x^2$ has no inverse on all real numbers.
+
+But $f(x) = x^2$ for $x \geq 0$ does have an inverse: $f^{-1}(x) = \sqrt{x}$
+
+We restricted to the right half of the parabola, making it one-to-one.
+
+---
+
+## Graphs of Inverse Functions
+
+The graph of $f^{-1}$ is the **reflection** of the graph of $f$ across the line $y = x$.
+
+This makes sense: if $(a, b)$ is on the graph of $f$, then $(b, a)$ is on the graph of $f^{-1}$.
+
+::math/foundations/algebra/functions/inverse-reflection
+
+---
+
+## Domain and Range Swap
+
+For $f$ and $f^{-1}$:
+
+- Domain of $f$ = Range of $f^{-1}$
+- Range of $f$ = Domain of $f^{-1}$
+
+**Example:** $f(x) = \sqrt{x}$ has domain $[0, \infty)$ and range $[0, \infty)$.
+
+Its inverse $f^{-1}(x) = x^2$ (for $x \geq 0$) has domain $[0, \infty)$ and range $[0, \infty)$.

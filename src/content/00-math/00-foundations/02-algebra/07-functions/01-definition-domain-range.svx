@@ -1,0 +1,149 @@
+---
+title: Definition, Domain, Range
+prerequisites:
+  - math/foundations/algebra/equations-and-inequalities/solving-linear-equations
+---
+
+## What is a Function?
+
+A function is a rule that takes an input and produces exactly **one** output.
+
+Think of it like a machine: you put something in, something comes out.
+
+::math/foundations/algebra/functions/function-machine
+
+---
+
+The key rule: **one input, one output**.
+
+You *can* have different inputs giving the same output (like 3 and -3 both giving 9 when squared).
+
+But you *cannot* have one input giving multiple outputs.
+
+---
+
+## Function vs. Not a Function
+
+::math/foundations/algebra/functions/function-test
+
+---
+
+In Relation A, each input maps to exactly one output. That's a function.
+
+In Relation B, input 1 maps to *both* a and b. That violates the rule.
+
+> **A function gives each input exactly one output.**
+
+---
+
+## Function Notation
+
+We write $f(x)$ to mean "the output of function $f$ when the input is $x$."
+
+$$f(x) = x^2$$
+
+This says: "take the input, square it."
+
+- $f(3) = 3^2 = 9$
+- $f(-2) = (-2)^2 = 4$
+- $f(a+1) = (a+1)^2$
+
+---
+
+The letter doesn't have to be $f$. You'll also see $g(x)$, $h(x)$, or even $P(t)$ for population as a function of time.
+
+The variable doesn't have to be $x$ either. It's just a placeholder for "the input."
+
+---
+
+## Domain
+
+The **domain** is the set of all inputs that work.
+
+For $f(x) = x^2$, any real number works.
+
+> Domain = all real numbers
+
+---
+
+But some functions have restrictions. There are three common ones:
+
+**1. Division by zero**
+
+$$f(x) = \frac{1}{x}$$
+
+Can't divide by zero, so $x \neq 0$.
+
+Domain: all reals except 0
+
+---
+
+**2. Square roots of negatives**
+
+$$f(x) = \sqrt{x}$$
+
+Can't take the square root of a negative (in real numbers).
+
+Domain: $x \geq 0$
+
+---
+
+**3. Logarithms of non-positives**
+
+$$f(x) = \log(x)$$
+
+Logarithms only work for positive numbers.
+
+Domain: $x > 0$
+
+---
+
+## Finding Domain
+
+When given a function, ask yourself:
+
+1. Are there any denominators? → Set them $\neq 0$
+2. Are there square roots? → Set the inside $\geq 0$
+3. Are there logarithms? → Set the argument $> 0$
+
+---
+
+**Example:** Find the domain of $f(x) = \dfrac{\sqrt{x-3}}{x-5}$
+
+Two restrictions:
+
+- Square root: $x - 3 \geq 0 \implies x \geq 3$
+- Denominator: $x - 5 \neq 0 \implies x \neq 5$
+
+Combine them: $x \geq 3$ and $x \neq 5$
+
+> Domain: $[3, 5) \cup (5, \infty)$
+
+---
+
+## Range
+
+The **range** is the set of all possible outputs.
+
+::math/foundations/algebra/functions/domain-range
+
+---
+
+For $f(x) = x^2$:
+
+- Squaring always gives a non-negative result
+- The smallest output is 0 (when $x = 0$)
+- There's no largest output
+
+> Range: $[0, \infty)$
+
+---
+
+**Another example:** $f(x) = \dfrac{1}{x}$
+
+- As $x$ gets very large, $\frac{1}{x}$ approaches 0 (but never reaches it)
+- As $x$ gets very small (negative), same thing
+- The output can be any number *except* 0
+
+> Range: all reals except 0
+

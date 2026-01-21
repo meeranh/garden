@@ -1,0 +1,126 @@
+---
+title: Function Composition
+prerequisites:
+  - math/foundations/algebra/functions/function-notation
+---
+
+## What is Composition?
+
+**Composition** is feeding the output of one function into another.
+
+$$f(g(x))$$
+
+First evaluate $g(x)$, then feed that result into $f$.
+
+---
+
+## Notation
+
+$$(f \circ g)(x) = f(g(x))$$
+
+Read as "f composed with g" or "f of g of x".
+
+> **Think of it as a chain:** input → $g$ → output → $f$ → final output
+
+---
+
+## Example
+
+Let $f(x) = x^2$ and $g(x) = x + 3$.
+
+**Find $(f \circ g)(x)$:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+(f \circ g)(x) &= f(g(x)) \\
+               &= f(x + 3) \\
+               &= (x + 3)^2
+\end{aligned}$$
+
+</div>
+
+**Find $(g \circ f)(x)$:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+(g \circ f)(x) &= g(f(x)) \\
+               &= g(x^2) \\
+               &= x^2 + 3
+\end{aligned}$$
+
+</div>
+
+---
+
+## Order Matters!
+
+Notice that $(x + 3)^2 \neq x^2 + 3$.
+
+> **Composition is not commutative.** In general, $f \circ g \neq g \circ f$.
+
+---
+
+## Evaluating at a Point
+
+**Find $(f \circ g)(2)$ where $f(x) = x^2$ and $g(x) = x + 3$:**
+
+**Method 1:** Work from the inside out
+
+<div class="math-left">
+
+$$\begin{aligned}
+g(2) &= 2 + 3 = 5 \\
+f(g(2)) &= f(5) = 25
+\end{aligned}$$
+
+</div>
+
+**Method 2:** Find the composed function first
+
+<div class="math-left">
+
+$$\begin{aligned}
+(f \circ g)(x) &= (x + 3)^2 \\
+(f \circ g)(2) &= (2 + 3)^2 = 25
+\end{aligned}$$
+
+</div>
+
+---
+
+## Decomposing Functions
+
+Sometimes you need to work backwards: express a function as a composition.
+
+**Example:** Write $h(x) = \sqrt{x^2 + 1}$ as $f(g(x))$.
+
+Think: what's the "outer" operation and what's the "inner" operation?
+
+- Outer: taking a square root
+- Inner: $x^2 + 1$
+
+So: $f(x) = \sqrt{x}$ and $g(x) = x^2 + 1$
+
+Check: $f(g(x)) = f(x^2 + 1) = \sqrt{x^2 + 1}$ ✓
+
+---
+
+## Domain of Composed Functions
+
+For $(f \circ g)(x) = f(g(x))$:
+
+1. $x$ must be in the domain of $g$
+2. $g(x)$ must be in the domain of $f$
+
+**Example:** $f(x) = \sqrt{x}$ and $g(x) = x - 4$
+
+- Domain of $g$: all real numbers
+- Domain of $f$: $x \geq 0$
+
+For $f(g(x)) = \sqrt{x - 4}$:
+- We need $g(x) \geq 0$
+- So $x - 4 \geq 0$, meaning $x \geq 4$
+
+Domain of $f \circ g$: $x \geq 4$

@@ -1,0 +1,75 @@
+---
+title: Stretches and Compressions
+prerequisites:
+  - math/foundations/algebra/functions/function-notation
+---
+
+## Changing the Shape
+
+Unlike translations, **stretches** and **compressions** change the shape of a graph.
+
+They make it taller, shorter, wider, or narrower.
+
+---
+
+## Vertical Stretch and Compression
+
+$$a \cdot f(x)$$
+
+Multiply the **output** by a constant.
+
+- $|a| > 1$ → **stretch** vertically (taller)
+- $|a| < 1$ → **compress** vertically (shorter)
+
+---
+
+**Example:** $f(x) = x^2$
+
+- $2f(x) = 2x^2$ → twice as tall
+- $\frac{1}{2}f(x) = \frac{1}{2}x^2$ → half as tall
+
+> Every y-value gets multiplied by $a$.
+
+::math/foundations/algebra/functions/vertical-stretch
+
+---
+
+## Horizontal Stretch and Compression
+
+$$f(bx)$$
+
+Multiply the **input** by a constant.
+
+- $|b| > 1$ → **compress** horizontally (narrower)
+- $|b| < 1$ → **stretch** horizontally (wider)
+
+---
+
+**Warning:** This is backwards again!
+
+$f(2x)$ makes the graph **narrower**, not wider.
+
+$f(\frac{1}{2}x)$ makes the graph **wider**, not narrower.
+
+---
+
+**Why is it backwards?**
+
+For $f(x) = x^2$, the point $(2, 4)$ is on the graph.
+
+For $g(x) = (2x)^2$, we need $g(1) = (2 \cdot 1)^2 = 4$.
+
+The point moved from $x = 2$ to $x = 1$. The graph got **narrower**.
+
+::math/foundations/algebra/functions/horizontal-stretch
+
+---
+
+## Combining with Reflections
+
+If $a$ or $b$ is negative, you also get a reflection:
+
+- $a < 0$ → vertical stretch/compress **and** reflect across x-axis
+- $b < 0$ → horizontal stretch/compress **and** reflect across y-axis
+
+**Example:** $-2f(x)$ stretches vertically by 2 and flips upside down.

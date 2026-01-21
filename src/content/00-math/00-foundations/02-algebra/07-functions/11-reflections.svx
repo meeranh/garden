@@ -1,0 +1,86 @@
+---
+title: Reflections
+prerequisites:
+  - math/foundations/algebra/functions/function-notation
+---
+
+## What is a Reflection?
+
+A **reflection** flips a graph across a line, like a mirror image.
+
+---
+
+## Reflection Across the x-axis
+
+$$-f(x)$$
+
+Negate the **output** to flip vertically.
+
+Every point $(x, y)$ becomes $(x, -y)$.
+
+---
+
+**Example:** $f(x) = x^2$ becomes $-f(x) = -x^2$
+
+- The original opens upward
+- The reflection opens downward
+
+> Points above the x-axis go below, and vice versa.
+
+::math/foundations/algebra/functions/reflection-x-axis
+
+---
+
+## Reflection Across the y-axis
+
+$$f(-x)$$
+
+Negate the **input** to flip horizontally.
+
+Every point $(x, y)$ becomes $(-x, y)$.
+
+---
+
+**Example:** $f(x) = \sqrt{x}$ becomes $f(-x) = \sqrt{-x}$
+
+- The original extends to the right
+- The reflection extends to the left
+
+> Points on the right side go to the left, and vice versa.
+
+::math/foundations/algebra/functions/reflection-y-axis
+
+---
+
+## How to Remember
+
+| Transformation | Where the negative goes | What flips |
+|----------------|------------------------|------------|
+| $-f(x)$ | Outside (affects output) | Vertical flip |
+| $f(-x)$ | Inside (affects input) | Horizontal flip |
+
+> **Outside = vertical, Inside = horizontal**
+
+This pattern applies to all transformations.
+
+---
+
+## Both Reflections
+
+$$-f(-x)$$
+
+Negate both input and output to flip across **both** axes.
+
+This is the same as rotating 180° around the origin.
+
+---
+
+## Connection to Even and Odd Functions
+
+Remember:
+- **Even functions:** $f(-x) = f(x)$ → symmetric about y-axis
+- **Odd functions:** $f(-x) = -f(x)$ → symmetric about origin
+
+Even functions look the same when reflected across the y-axis.
+
+Odd functions look the same when reflected across both axes.
