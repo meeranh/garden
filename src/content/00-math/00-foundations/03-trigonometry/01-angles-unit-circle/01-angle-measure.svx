@@ -1,0 +1,145 @@
+---
+title: Angle Measure
+---
+
+## What is an Angle?
+
+An angle measures **rotation**.
+
+Start with a ray called the **initial side**. Rotate it around a fixed point. Where it lands is the **terminal side**.
+
+The amount of rotation is the angle.
+
+::math/foundations/trigonometry/angles-unit-circle/angle-formation
+
+---
+
+## Direction Matters
+
+- **Positive angles**: counterclockwise rotation
+- **Negative angles**: clockwise rotation
+
+The same position can be reached by rotating either direction.
+
+::math/foundations/trigonometry/angles-unit-circle/positive-negative-angles
+
+---
+
+## Degrees
+
+One way to measure angles.
+
+A full rotation = **360°**
+
+| Fraction of circle | Degrees |
+|-------------------|---------|
+| Full | 360° |
+| Half | 180° |
+| Quarter | 90° |
+| Sixth | 60° |
+| Eighth | 45° |
+| Twelfth | 30° |
+
+> Why 360? The Babylonians chose it because 360 has many divisors: 2, 3, 4, 5, 6, 8, 9, 10, 12...
+
+---
+
+## Radians
+
+A more natural way to measure angles.
+
+One **radian** is the angle where the arc length equals the radius.
+
+::math/foundations/trigonometry/angles-unit-circle/radian-measure
+
+---
+
+Since circumference = $2\pi r$, a full circle has arc length $2\pi r$.
+
+Dividing by the radius $r$: a full rotation = $2\pi$ **radians**.
+
+| Degrees | Radians |
+|---------|---------|
+| 360° | $2\pi$ |
+| 180° | $\pi$ |
+| 90° | $\frac{\pi}{2}$ |
+| 60° | $\frac{\pi}{3}$ |
+| 45° | $\frac{\pi}{4}$ |
+| 30° | $\frac{\pi}{6}$ |
+
+---
+
+## Converting Between Degrees and Radians
+
+The key relationship:
+
+$$\pi \text{ radians} = 180°$$
+
+**Degrees to radians:** multiply by $\frac{\pi}{180}$
+
+**Radians to degrees:** multiply by $\frac{180}{\pi}$
+
+---
+
+**Examples:**
+
+<div class="math-left">
+
+$$\begin{aligned}
+45° &= 45 \times \frac{\pi}{180} = \frac{\pi}{4} \text{ rad}
+\end{aligned}$$
+
+</div>
+
+<div class="math-left">
+
+$$\begin{aligned}
+\frac{2\pi}{3} \text{ rad} &= \frac{2\pi}{3} \times \frac{180}{\pi} = 120°
+\end{aligned}$$
+
+</div>
+
+::math/foundations/trigonometry/angles-unit-circle/degree-radian-conversion
+
+---
+
+## Standard Position
+
+An angle is in **standard position** when:
+- The vertex is at the origin
+- The initial side lies on the positive x-axis
+
+This gives us a consistent way to talk about angles.
+
+::math/foundations/trigonometry/angles-unit-circle/standard-position
+
+---
+
+## Coterminal Angles
+
+**Coterminal angles** share the same terminal side.
+
+They differ by full rotations: add or subtract $360°$ (or $2\pi$).
+
+::math/foundations/trigonometry/angles-unit-circle/coterminal-angles
+
+---
+
+**Examples of coterminal angles:**
+
+- $30°$, $390°$, $-330°$ are all coterminal
+- $\frac{\pi}{4}$, $\frac{9\pi}{4}$, $-\frac{7\pi}{4}$ are all coterminal
+
+> To find a coterminal angle between $0°$ and $360°$, keep adding or subtracting $360°$ until you're in range.
+
+---
+
+## Why Radians?
+
+Radians make calculus formulas simple.
+
+The derivative of $\sin(x)$ is $\cos(x)$ **only if** $x$ is in radians.
+
+In degrees, you'd get an ugly constant: $\frac{d}{dx}\sin(x°) = \frac{\pi}{180}\cos(x°)$
+
+> When no unit is specified, assume **radians**.

@@ -1,0 +1,101 @@
+---
+title: The Unit Circle
+prerequisites:
+  - math/foundations/trigonometry/angles-unit-circle/angle-measure
+---
+
+## A Special Circle
+
+The **unit circle** is a circle with:
+
+- **Radius = 1**
+- **Center at the origin** (0, 0)
+
+That's it. Nothing more.
+
+::math/foundations/trigonometry/angles-unit-circle/unit-circle-definition
+
+---
+
+## Why Radius 1?
+
+Because it makes *everything* simpler.
+
+When the radius is 1, the coordinates of any point on the circle give us the values of **cosine** and **sine** directly.
+
+No division. No extra steps. Just read off the coordinates.
+
+---
+
+## The Key Insight
+
+Take any point P on the unit circle. Call the angle θ.
+
+The coordinates of P are:
+
+> **P = (cos θ, sin θ)**
+
+The x-coordinate *is* the cosine. The y-coordinate *is* the sine.
+
+::math/foundations/trigonometry/angles-unit-circle/unit-circle-coordinates
+
+---
+
+## Why Does This Work?
+
+For now, take this as a **definition**: cosine and sine are the x and y coordinates of a point on the unit circle.
+
+Later, when we study right triangles, we'll see *why* this definition makes sense and connects to triangle ratios.
+
+::math/foundations/trigonometry/angles-unit-circle/unit-circle-triangle
+
+---
+
+## Beyond Right Triangles
+
+With right triangles alone, angles are limited to between 0° and 90°.
+
+The unit circle removes that limitation.
+
+**Any angle works:**
+- Negative angles? Just go clockwise.
+- Angles over 360°? Keep wrapping around.
+- Angles like 150° or 240°? The circle handles them all.
+
+The terminal side hits the circle *somewhere*, and that point's coordinates give you cosine and sine.
+
+---
+
+## Key Points
+
+Some angles give especially clean values:
+
+::math/foundations/trigonometry/angles-unit-circle/unit-circle-key-points
+
+---
+
+| Angle | Point | cos θ | sin θ |
+|-------|-------|-------|-------|
+| 0° | (1, 0) | 1 | 0 |
+| 90° | (0, 1) | 0 | 1 |
+| 180° | (-1, 0) | -1 | 0 |
+| 270° | (0, -1) | 0 | -1 |
+
+These four points are easy to remember: they're where the circle crosses the axes.
+
+---
+
+## The Pythagorean Identity
+
+Every point on the unit circle satisfies:
+
+$$x^2 + y^2 = 1$$
+
+Since $x = \cos \theta$ and $y = \sin \theta$:
+
+> $$\cos^2 \theta + \sin^2 \theta = 1$$
+
+This is the **Pythagorean identity**, and it's one of the most important equations in trigonometry.
+
+It's just the equation of the unit circle, written in terms of sine and cosine.
+

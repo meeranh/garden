@@ -125,12 +125,13 @@
       .attr('font-weight', 'bold')
       .text('log₂(x)');
 
-    // Value label
+    // Value label (top of graph)
     const valueLabel = svgEl.append('text')
-      .attr('x', width - margin.right + 10)
-      .attr('y', yScale(0.5))
+      .attr('x', margin.left + 50)
+      .attr('y', margin.top + 20)
       .attr('fill', colors.accent)
-      .attr('font-size', '11px')
+      .attr('font-size', '12px')
+      .attr('font-weight', 'bold')
       .attr('opacity', 0);
 
     // Infinite animation loop
