@@ -1,0 +1,70 @@
+---
+title: Structure
+prerequisites:
+  - quran/foundations/origins
+---
+
+## Surahs and Ayahs
+
+The Quran is divided into **114 surahs** (chapters).
+
+Each surah is made up of **ayahs** (verses). The word "ayah" literally means **"sign"**.
+
+Surahs vary *wildly* in length:
+
+| Surah | Ayahs |
+|-------|-------|
+| **Al-Kawthar** (108) | 3 verses, *the shortest* |
+| **Al-Fatiha** (1) | 7 verses |
+| **Al-Baqarah** (2) | 286 verses, *the longest* |
+
+---
+
+## The Ordering
+
+The surahs are **not in chronological order**. They don't follow the sequence in which they were revealed.
+
+Instead, they're arranged roughly from **longest to shortest**, with a notable exception: **Al-Fatiha** (only 7 verses) comes first because it serves as *the opening prayer*.
+
+> Muslims believe this ordering was instructed by Muhammad himself, guided by revelation.
+
+---
+
+## Juz
+
+The Quran is also divided into **30 equal parts** called **juz**.
+
+This division is *practical*, not thematic. It allows Muslims to read the entire Quran over **30 days**, which is the tradition during **Ramadan** (the month of fasting).
+
+A juz doesn't line up neatly with surahs. A single juz might contain parts of *multiple* surahs, or a long surah might span *several* juz.
+
+---
+
+## Bismillah
+
+Every surah except one begins with:
+
+> **Bismillah ir-Rahman ir-Raheem**
+> *In the name of God, the Most Gracious, the Most Merciful.*
+
+The exception is **Surah At-Tawbah** (surah 9), which opens without it. Scholars have debated why. The most common explanation is that it deals with a declaration of war against treaty-breakers, and the tone of mercy didn't fit the opening.
+
+---
+
+## Meccan vs Medinan
+
+Knowing *when* a surah was revealed helps you understand *why* it says what it says.
+
+**Meccan surahs** (roughly 86):
+
+- *Shorter*, more poetic
+- Vivid, powerful imagery
+- Themes: God, afterlife, judgment, stories of prophets
+- Addressing *individuals*: wake up, believe, reflect
+
+**Medinan surahs** (roughly 28):
+
+- *Longer*, more detailed
+- Legal and social content
+- Themes: law, community, governance, interfaith relations
+- Addressing a *community*: here's how to live together
