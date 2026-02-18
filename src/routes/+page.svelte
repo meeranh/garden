@@ -19,7 +19,7 @@
 	</header>
 
 	<nav class="subjects">
-		{#each tree.children as subject}
+		{#each tree.children.filter((s) => !s.ignored) as subject}
 			<a href="/{subject.path}" class="subject">
 				<span class="title">{subject.title}</span>
 			</a>
