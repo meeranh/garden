@@ -4,14 +4,16 @@
 
 	let { nodes, depth = 0, parentNum = '' }: { nodes: TreeNode[]; depth?: number; parentNum?: string } = $props();
 
+	const visibleNodes = $derived(nodes.filter((n) => !n.ignored));
+
 	function getNum(index: number): string {
 		return parentNum ? `${parentNum}.${index + 1}` : `${index + 1}`;
 	}
 </script>
 
-{#if nodes.length > 0}
+{#if visibleNodes.length > 0}
 	<div class="tree depth-{depth}">
-		{#each nodes as node, i}
+		{#each visibleNodes as node, i}
 			{@const num = getNum(i)}
 			<div class="item">
 				<a href="/{node.path}" class="link">

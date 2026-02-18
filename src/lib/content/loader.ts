@@ -31,6 +31,7 @@ export interface ContentData {
 	metadata: {
 		title?: string;
 		prerequisites?: string[];
+		ignore?: boolean;
 	};
 	hasBodyContent: boolean;
 }
@@ -65,7 +66,7 @@ const contentMap = new Map<string, ContentData>();
 
 for (const [file, module] of Object.entries(modules)) {
 	const urlPath = fileToUrl(file);
-	const meta = (metadata[file] as { title?: string; prerequisites?: string[] }) || {};
+	const meta = (metadata[file] as { title?: string; prerequisites?: string[]; ignore?: boolean }) || {};
 	const raw = rawFiles[file] as string;
 
 	contentMap.set(urlPath, {

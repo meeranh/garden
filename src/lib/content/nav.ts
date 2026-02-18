@@ -47,7 +47,7 @@ export function getSiblings(path: string): { prev?: TreeNode; next?: TreeNode } 
 	if (!parent) return {};
 
 	const currentSlug = segments[segments.length - 1];
-	const siblings = parent.children;
+	const siblings = parent.children.filter((s) => !s.ignored);
 	const currentIndex = siblings.findIndex((s) => s.slug === currentSlug);
 
 	if (currentIndex === -1) return {};
@@ -57,9 +57,12 @@ export function getSiblings(path: string): { prev?: TreeNode; next?: TreeNode } 
 	let next: TreeNode | undefined =
 		currentIndex < siblings.length - 1 ? siblings[currentIndex + 1] : undefined;
 
-	// If node has content AND children, "next" should be first child
+	// If node has content AND children, "next" should be first non-ignored child
 	if (node.hasContent && node.children.length > 0) {
-		next = node.children[0];
+		const visibleChildren = node.children.filter((c) => !c.ignored);
+		if (visibleChildren.length > 0) {
+			next = visibleChildren[0];
+		}
 	}
 
 	// If no prev sibling and parent has content, "prev" should be parent

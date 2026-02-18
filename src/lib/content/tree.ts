@@ -8,6 +8,7 @@ export interface TreeNode {
 	hasContent: boolean;
 	children: TreeNode[];
 	prerequisites: string[];
+	ignored: boolean;
 }
 
 // Build tree from globbed files
@@ -19,7 +20,8 @@ function buildTree(): TreeNode {
 		order: 0,
 		hasContent: false,
 		children: [],
-		prerequisites: []
+		prerequisites: [],
+		ignored: false
 	};
 
 	const files = getAllFiles();
@@ -27,7 +29,7 @@ function buildTree(): TreeNode {
 	for (const file of files) {
 		const urlPath = fileToUrl(file);
 		const segments = urlPath.split('/').filter(Boolean);
-		const fileMeta = (metadata[file] as { title?: string; prerequisites?: string[] }) || {};
+		const fileMeta = (metadata[file] as { title?: string; prerequisites?: string[]; ignore?: boolean }) || {};
 
 		// Get order from original file path
 		const fileSegments = file
@@ -53,7 +55,8 @@ function buildTree(): TreeNode {
 					order,
 					hasContent: false,
 					children: [],
-					prerequisites: []
+					prerequisites: [],
+					ignored: false
 				};
 				current.children.push(child);
 			}
@@ -68,6 +71,9 @@ function buildTree(): TreeNode {
 				}
 				if (fileMeta.prerequisites) {
 					child.prerequisites = fileMeta.prerequisites;
+				}
+				if (fileMeta.ignore) {
+					child.ignored = true;
 				}
 			}
 
